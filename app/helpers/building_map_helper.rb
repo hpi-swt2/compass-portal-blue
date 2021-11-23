@@ -1,0 +1,2 @@
+module BuildingMapHelper
+end

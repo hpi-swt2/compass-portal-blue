@@ -1,0 +1,2 @@
+class BuildingMapController < ApplicationController
+end
