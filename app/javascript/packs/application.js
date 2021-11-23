@@ -13,7 +13,7 @@ import 'bootstrap';
 // Fontawesome: https://fontawesome.com/
 import "@fortawesome/fontawesome-free/js/all";
 
-// = require leaflet
+import * as L from "leaflet"
 
 Rails.start()
 Turbolinks.start()
