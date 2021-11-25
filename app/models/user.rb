@@ -5,6 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[openid_connect]
+  
+  validates :phone_number, phone: true, allow_blank: true
+  before_save :normalize_phone_number
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
@@ -18,12 +21,18 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.username = auth.info.name
       # `first_name` & `last_name` are also available
-      # user.first_name = auth.info.first_name
-      # user.last_name = auth.info.last_name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
+  end
+  
+  def formatted_phone_number
+    parsed_phone = Phonelib.parse(phone_number)
+    return phone_number if parsed_phone.invalid?
+    parsed_phone.full_international 
   end
 
   # https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview
@@ -36,4 +45,10 @@ class User < ApplicationRecord
   #     end
   #   end
   # end
+  
+  private
+
+  def normalize_phone_number
+    self.phone_number = Phonelib.parse(phone_number).full_e164.presence
+  end
 end
