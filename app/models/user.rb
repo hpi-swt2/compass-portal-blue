@@ -8,6 +8,7 @@ class User < ApplicationRecord
   
   validates :phone_number, phone: true, allow_blank: true
   before_save :normalize_phone_number
+  has_one_attached :profile_picture
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
@@ -26,6 +27,7 @@ class User < ApplicationRecord
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
+      user.profile_picture.attach(io: File.open('app/assets/images/default-profile-picture.png'), filename: 'default-profile-picture.png', content_type: 'image/png')
     end
   end
   
@@ -34,7 +36,7 @@ class User < ApplicationRecord
     return phone_number if parsed_phone.invalid?
     parsed_phone.full_international 
   end
-
+  
   # https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview
   # Implement the following if you want to enable copying over data from an
   # OmniAuth provider after a user alsready has a session, i.e. is already logged in
