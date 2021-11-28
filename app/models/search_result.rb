@@ -1,3 +1,4 @@
+# One singular item for display in a list of search results
 class SearchResult
   include ActiveModel::Validations
   include ActiveModel::Conversion
