@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "search_results/index", type: :view do
   let(:number_of_results) {5}
-  before(:each) do
+
+  before do
     FactoryBot.rewind_sequences
     assign(:search_results, FactoryBot.build_list(:search_result, number_of_results))
   end

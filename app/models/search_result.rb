@@ -5,7 +5,7 @@ class SearchResult
 
   attr_accessor :id, :title, :description, :link, :resource
 
-  validates_presence_of :id, :title, :link
+  validates :id, :title, :link, presence: true
 
   def initialize(attributes = {})
     attributes.each do |name, value|
