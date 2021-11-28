@@ -10,7 +10,3 @@ require 'rails_helper'
 #     end
 #   end
 # end
-
-RSpec.describe SearchResultsHelper, type: :helper do
-  # Implement when needed
-end

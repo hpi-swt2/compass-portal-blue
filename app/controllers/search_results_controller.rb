@@ -6,13 +6,11 @@ class SearchResultsController < ApplicationController
     @search_results ||= []
 
     10.times do |number|
-      @search_results.append(
-        SearchResult.new(
-          id: number,
-          title: format("Search Result %d", number),
-          link: search_results_path
-        )
-      )
+      @search_results.append(SearchResult.new(
+        id: number,
+        title: format("Search Result %d", number),
+        link: search_results_path
+      ))
     end
     @search_results = @search_results.uniq(&:id)
   end
