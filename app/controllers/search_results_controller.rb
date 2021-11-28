@@ -24,15 +24,15 @@ class SearchResultsController < ApplicationController
   def show
     # There is no need to display one singular SearchResult.
   end
-  
+
   def edit
     # SearchResults are currently not stored a database so no need to edit one.
   end
-  
+
   def update
     # SearchResults are currently not stored a database so no need to update one.
-  end 
-  
+  end
+
   def destroy
     # All SearchResult objects will be destroyed after they are no longer used.
   end
