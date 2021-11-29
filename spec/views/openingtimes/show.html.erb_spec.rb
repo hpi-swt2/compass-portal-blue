@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "openingtimes/show", type: :view do
-  before(:each) do
+  before do
     @building = create :building
     @openingtime = assign(:openingtime, Openingtime.create!(
-      day: 2,
-      timeable: @building
-    ))
+                                          day: 2,
+                                          timeable: @building
+                                        ))
   end
 
   it "renders attributes in <p>" do

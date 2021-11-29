@@ -1,5 +1,5 @@
 class OpeningtimesController < ApplicationController
-  before_action :set_openingtime, only: %i[ show edit update destroy ]
+  before_action :set_openingtime, only: %i[show edit update destroy]
 
   # GET /openingtimes or /openingtimes.json
   def index
@@ -7,8 +7,7 @@ class OpeningtimesController < ApplicationController
   end
 
   # GET /openingtimes/1 or /openingtimes/1.json
-  def show
-  end
+  def show; end
 
   # GET /openingtimes/new
   def new
@@ -16,8 +15,7 @@ class OpeningtimesController < ApplicationController
   end
 
   # GET /openingtimes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /openingtimes or /openingtimes.json
   def create
@@ -57,13 +55,14 @@ class OpeningtimesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_openingtime
-      @openingtime = Openingtime.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def openingtime_params
-      params.require(:openingtime).permit(:opens, :closes, :day)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_openingtime
+    @openingtime = Openingtime.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def openingtime_params
+    params.require(:openingtime).permit(:opens, :closes, :day)
+  end
 end

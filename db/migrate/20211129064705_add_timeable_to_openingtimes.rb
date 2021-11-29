@@ -1,5 +1,5 @@
 class AddTimeableToOpeningtimes < ActiveRecord::Migration[6.1]
   def change
-    add_reference :openingtimes, :timeable, polymorphic: true, null: false, index:true
+    add_reference :openingtimes, :timeable, polymorphic: true, null: false, index: true
   end
 end

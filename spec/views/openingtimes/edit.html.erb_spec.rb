@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "openingtimes/edit", type: :view do
-  before(:each) do
+  before do
     @building = create :building
     @openingtime = assign(:openingtime, Openingtime.create!(
-      day: 1,
-      timeable: @building
-    ))
+                                          day: 1,
+                                          timeable: @building
+                                        ))
   end
 
   it "renders the edit openingtime form" do

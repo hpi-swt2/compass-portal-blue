@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "buildings/show", type: :view do
-  before(:each) do
+  before do
     @building = assign(:building, Building.create!(
-      name: "Name",
-      location_latitude: 2.5,
-      location_longitude: 3.5
-    ))
+                                    name: "Name",
+                                    location_latitude: 2.5,
+                                    location_longitude: 3.5
+                                  ))
   end
 
   it "renders attributes in <p>" do

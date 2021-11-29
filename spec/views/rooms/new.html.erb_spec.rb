@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "rooms/new", type: :view do
-  before(:each) do
+  before do
     assign(:room, Room.new(
-      name: "MyString",
-      floor: "MyString",
-      room_type: "MyString",
-      contact_person: "MyString"
-    ))
+                    name: "MyString",
+                    floor: "MyString",
+                    room_type: "MyString",
+                    contact_person: "MyString"
+                  ))
   end
 
   it "renders new room form" do

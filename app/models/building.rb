@@ -1,3 +1,3 @@
 class Building < ApplicationRecord
-    include Timeable
+  include Timeable
 end

@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "rooms/show", type: :view do
-  before(:each) do
+  before do
     @building = create :building
     @room = assign(:room, Room.create!(
-      name: "Name",
-      floor: "Floor",
-      room_type: "Room Type",
-      contact_person: "Contact Person",
-      building: @building
-    ))
+                            name: "Name",
+                            floor: "Floor",
+                            room_type: "Room Type",
+                            contact_person: "Contact Person",
+                            building: @building
+                          ))
   end
 
   it "renders attributes in <p>" do

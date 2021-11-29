@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "rooms/edit", type: :view do
-  before(:each) do
+  before do
     @building = create :building
     @room = assign(:room, Room.create!(
-      name: "MyString",
-      floor: "MyString",
-      room_type: "MyString",
-      contact_person: "MyString",
-      building: @building
-    ))
+                            name: "MyString",
+                            floor: "MyString",
+                            room_type: "MyString",
+                            contact_person: "MyString",
+                            building: @building
+                          ))
   end
 
   it "renders the edit room form" do

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "openingtimes/new", type: :view do
-  before(:each) do
+  before do
     assign(:openingtime, Openingtime.new(
-      day: 1
-    ))
+                           day: 1
+                         ))
   end
 
   it "renders new openingtime form" do

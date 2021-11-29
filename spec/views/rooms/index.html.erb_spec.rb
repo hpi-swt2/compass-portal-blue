@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe "rooms/index", type: :view do
-  before(:each) do
+  before do
     @building = create :building
     assign(:rooms, [
-      Room.create!(
-        name: "Name",
-        floor: "Floor",
-        room_type: "Room Type",
-        contact_person: "Contact Person",
-        building: @building
-      ),
-      Room.create!(
-        name: "Name",
-        floor: "Floor",
-        room_type: "Room Type",
-        contact_person: "Contact Person",
-        building: @building
-      )
-    ])
+             Room.create!(
+               name: "Name",
+               floor: "Floor",
+               room_type: "Room Type",
+               contact_person: "Contact Person",
+               building: @building
+             ),
+             Room.create!(
+               name: "Name",
+               floor: "Floor",
+               room_type: "Room Type",
+               contact_person: "Contact Person",
+               building: @building
+             )
+           ])
   end
 
   it "renders a list of rooms" do

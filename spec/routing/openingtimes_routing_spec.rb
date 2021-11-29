@@ -18,7 +18,6 @@ RSpec.describe OpeningtimesController, type: :routing do
       expect(get: "/openingtimes/1/edit").to route_to("openingtimes#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/openingtimes").to route_to("openingtimes#create")
     end
