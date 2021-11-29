@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_105448) do
+ActiveRecord::Schema.define(version: 2021_11_29_064705) do
+
+  create_table "buildings", force: :cascade do |t|
+    t.string "name"
+    t.float "location_latitude"
+    t.float "location_longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "openingtimes", force: :cascade do |t|
+    t.time "opens"
+    t.time "closes"
+    t.integer "day"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "timeable_type", null: false
+    t.integer "timeable_id", null: false
+    t.index ["timeable_type", "timeable_id"], name: "index_openingtimes_on_timeable"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
