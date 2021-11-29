@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_064705) do
+ActiveRecord::Schema.define(version: 2021_11_29_160951) do
 
   create_table "buildings", force: :cascade do |t|
     t.string "name"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 2021_11_29_064705) do
     t.index ["timeable_type", "timeable_id"], name: "index_openingtimes_on_timeable"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.string "floor"
+    t.string "room_type"
+    t.string "contact_person"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "building_id", null: false
+    t.index ["building_id"], name: "index_rooms_on_building_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -46,4 +57,5 @@ ActiveRecord::Schema.define(version: 2021_11_29_064705) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "rooms", "buildings"
 end
