@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "openingtimes/show", type: :view do
   before(:each) do
+    @building = create :building
     @openingtime = assign(:openingtime, Openingtime.create!(
-      day: 2
+      day: 2,
+      timeable: @building
     ))
   end
 
