@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :phone_number, phone: true, allow_blank: true
   before_save :normalize_phone_number
   has_one_attached :profile_picture
+  has_and_belongs_to_many :rooms
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
