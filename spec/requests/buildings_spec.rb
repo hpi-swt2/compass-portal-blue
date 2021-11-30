@@ -16,13 +16,13 @@ RSpec.describe "/buildings", type: :request do
 
   # Building. As you add validations to Building, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     skip("Add a hash of attributes valid for your model")
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     skip("Add a hash of attributes invalid for your model")
-  }
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -58,9 +58,9 @@ RSpec.describe "/buildings", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Building" do
-        expect {
+        expect do
           post buildings_url, params: { building: valid_attributes }
-        }.to change(Building, :count).by(1)
+        end.to change(Building, :count).by(1)
       end
 
       it "redirects to the created building" do
@@ -71,9 +71,9 @@ RSpec.describe "/buildings", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Building" do
-        expect {
+        expect do
           post buildings_url, params: { building: invalid_attributes }
-        }.to change(Building, :count).by(0)
+        end.to change(Building, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -85,9 +85,9 @@ RSpec.describe "/buildings", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
+      let(:new_attributes) do
         skip("Add a hash of attributes valid for your model")
-      }
+      end
 
       it "updates the requested building" do
         building = Building.create! valid_attributes
@@ -116,9 +116,9 @@ RSpec.describe "/buildings", type: :request do
   describe "DELETE /destroy" do
     it "destroys the requested building" do
       building = Building.create! valid_attributes
-      expect {
+      expect do
         delete building_url(building)
-      }.to change(Building, :count).by(-1)
+      end.to change(Building, :count).by(-1)
     end
 
     it "redirects to the buildings list" do

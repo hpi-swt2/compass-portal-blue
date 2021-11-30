@@ -13,7 +13,7 @@ RSpec.describe Room, type: :model do
   end
 
   it "has a building" do
-    subject {described_class.new}
+    subject { described_class.new }
     room = described_class.reflect_on_association(:building)
     expect(room.macro).to eq :belongs_to
   end

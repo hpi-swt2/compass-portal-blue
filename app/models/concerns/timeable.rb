@@ -4,4 +4,4 @@ module Timeable
   included do
     has_many :openingtimes, as: :timeable
   end
-  end
+end
