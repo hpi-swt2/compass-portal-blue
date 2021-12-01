@@ -11,10 +11,4 @@ RSpec.describe Room, type: :model do
     expect(room.room_type).to eq('Bachelorproject office')
     expect(room.contact_person).to eq('Jonas Cremerius')
   end
-
-  it "has a building" do
-    subject { described_class.new }
-    room = described_class.reflect_on_association(:building)
-    expect(room.macro).to eq :belongs_to
-  end
 end
