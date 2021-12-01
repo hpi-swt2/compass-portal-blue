@@ -4,12 +4,6 @@
     zoom: 18,},
     polygons: Buildings.getBuildings(Buildings::UNIPOTSDAM_POLYONGS, Buildings::UNIPOTSDAM_STYLING)+
     (Buildings.getBuildings(Buildings::HPI_POLYGONS, Buildings::HPI_STYLING)),
-    markers: [{
-      latlng: [52.39339, 13.13208],
-      div_icon: {
-        html: "C",
-        class_name: "building-icon"
-      }
-    }]
+    markers: Buildings.getLetters(Buildings::HPI_LETTERS)
     )
 %>
