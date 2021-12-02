@@ -1,10 +1,10 @@
 module Buildings
   UNIPOTSDAM_STYLING = {
     color: "#dea93e"
-  }
+  }.freeze
   HPI_STYLING = {
     color: "#eb34de"
-  }
+  }.freeze
   UNIPOTSDAM_POLYONGS = [
     [
       [52.3936124, 13.1279245],
@@ -61,7 +61,7 @@ module Buildings
       [52.3938913, 13.1297723],
       [52.394079, 13.1297517]
     ]
-  ]
+  ].freeze
   HPI_POLYGONS = [
     [
       [52.39364, 13.1300582],
@@ -127,7 +127,7 @@ module Buildings
       [52.3933617, 13.1311703],
       [52.3934031, 13.131166],
       [52.3934502, 13.1311611]
-  
+
     ],
     [
       [52.3923204, 13.1235078],
@@ -270,15 +270,15 @@ module Buildings
       [52.3921988, 13.12489],
       [52.3921974, 13.1248406]
     ]
-  ]
+  ].freeze
 
   def self.getBuildings(geometries, options)
     polygons = []
     geometries.each do |polygon|
       polygons.push({
-        latlngs: polygon,
-        options: options
-      })
+                      latlngs: polygon,
+                      options: options
+                    })
     end
     polygons
   end
