@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ModuleLength
 module Buildings
   UNIPOTSDAM_STYLING = {
     color: "#dea93e"
@@ -342,14 +343,14 @@ module Buildings
     div_icons
   end
 
-  def self.getBuildings(geometries, options)
-    polygons = []
-    geometries.each do |polygon|
-      polygons.push({
-                      latlngs: polygon,
-                      options: options
-                    })
+  def self.get_buildings(geometries, options)
+    geometries.map do |polygon|
+      {
+        latlngs: polygon,
+        options: options
+      }
     end
-    polygons
   end
 end
+
+# rubocop:enable Metrics/ModuleLength
