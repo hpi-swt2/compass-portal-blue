@@ -275,13 +275,13 @@ module Buildings
   ].freeze
 
   def self.get_buildings(geometries, options)
-    polygons = []
-    geometries.each do |polygon|
-      polygons.push({
-                      latlngs: polygon,
-                      options: options
-                    })
+    geometries.map do |polygon|
+      {
+        latlngs: polygon,
+        options: options
+      }
     end
-    polygons
   end
 end
+
+# rubocop:enable Metrics/ModuleLength
