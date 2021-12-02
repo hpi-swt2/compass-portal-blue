@@ -7,13 +7,13 @@ describe "Building Map page", type: :feature do
     Capybara.ignore_hidden_elements = false
   end
 
-  it "contains a map" do
+  it "should contain a map" do
     visit building_map_path
     expect(page).to have_css("#map")
     expect(page).to have_css(".leaflet-container")
   end
 
-  it "should highlight builings on the map", js: true do
+  it "should highlight builings on the map" do
     visit building_map_path
     expect(page).to have_css(".leaflet-interactive")
     expect(page).to have_selector("path.leaflet-interactive", count: 15)
