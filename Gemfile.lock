@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Finn-HPI/leaflet-rails.git
+  revision: a6221f995de4fdd16c5a27508737484b7c78b0d6
+  specs:
+    leaflet-rails (1.7.1)
+      rails (>= 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -352,6 +359,7 @@ DEPENDENCIES
   devise-i18n-bootstrap
   factory_bot_rails
   jbuilder (~> 2.7)
+  leaflet-rails!
   listen (~> 3.3)
   omniauth
   omniauth_openid_connect

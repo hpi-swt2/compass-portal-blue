@@ -45,6 +45,13 @@ gem 'omniauth' # https://github.com/omniauth/omniauth
 gem 'omniauth_openid_connect' # https://github.com/m0n9oose/omniauth_openid_connect
 
 #
+# Libraries
+#
+
+# Leaflet for map functionality
+gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
+
+#
 # Gems that are loaded depending on the environment (development/test/production)
 #
 
