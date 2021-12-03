@@ -16,7 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    set_flash_message(:alert, :failure, kind: 'OpenID Connect', reason: 'HPI OIDC login') 
+    set_flash_message(:alert, :failure, kind: 'OpenID Connect', reason: 'HPI OIDC login')
     redirect_to root_path
   end
 end
