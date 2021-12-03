@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe "rooms/show", type: :view do
   before do
     @building = create :building
-    @user = create :user
+    @users = [(create :user)]
     @room = assign(:room, Room.create!(
                             name: "Name",
                             floor: "Floor",
                             room_type: "Room Type",
-                            user: @user,
+                            users: @users,
                             building: @building
                           ))
   end
