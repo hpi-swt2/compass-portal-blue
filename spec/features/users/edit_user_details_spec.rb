@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "User details page", type: :feature do
-  before :each do
+  before do
     @user = FactoryBot.create(:user)
     @user.profile_picture.attach(
       io: File.open('app/assets/images/default-profile-picture.png'),
@@ -41,7 +41,7 @@ RSpec.describe "User details page", type: :feature do
 
     sign_in @user
     visit edit_user_registration_path
-    expect(page).to_not have_css "img[alt='#{filename}']"
+    expect(page).not_to have_css "img[alt='#{filename}']"
 
     page.attach_file('user[profile_picture]', 'app/assets/images/default-profile-picture.png')
     page.find('input[type=submit][name=commit]').click
