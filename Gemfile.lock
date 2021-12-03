@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/Finn-HPI/leaflet-rails.git
-  revision: a6221f995de4fdd16c5a27508737484b7c78b0d6
+  revision: 340f65cbc163dcc3523c43592831d43a65381296
   specs:
-    leaflet-rails (1.7.1)
+    leaflet-rails (1.7.4)
       rails (>= 4.2.0)
 
 GEM

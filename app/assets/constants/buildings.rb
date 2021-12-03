@@ -1,5 +1,4 @@
 # rubocop:disable Metrics/ModuleLength
-
 module Buildings
   UNIPOTSDAM_STYLING = {
     color: "#dea93e"
@@ -274,7 +273,75 @@ module Buildings
     ]
   ].freeze
 
-  def self.get_buildings(geometries, options)
+  HPI_LETTERS = [
+    {
+      coordinate: [52.39364, 13.1300582],
+      letter: 'I'
+    },
+    {
+      coordinate: [52.394252, 13.1319832],
+      letter: 'HS'
+    },
+    {
+      coordinate: [52.3934502, 13.1311611],
+      letter: 'A'
+    },
+    {
+      coordinate: [52.3936223, 13.1317085],
+      letter: 'B'
+    },
+    {
+      coordinate: [52.3934892, 13.132123],
+      letter: 'C'
+    },
+    {
+      coordinate: [52.3923204, 13.1235078],
+      letter: 'V'
+    },
+    {
+      coordinate: [52.3941746, 13.1330726],
+      letter: 'H'
+    },
+    {
+      coordinate: [52.3918618, 13.1237636],
+      letter: 'D'
+    },
+    {
+      coordinate: [52.3948646, 13.1245168],
+      letter: 'G'
+    },
+    {
+      coordinate: [52.3922193, 13.1239371],
+      letter: 'E'
+    },
+    {
+      coordinate: [52.3925689, 13.1239734],
+      letter: 'F'
+    },
+    {
+      coordinate: [52.3847794, 13.1190556],
+      letter: 'J'
+    },
+    {
+      coordinate: [52.3924289, 13.1248221],
+      letter: 'L'
+    }
+
+  ].freeze
+
+  def self.transform_leaflet_letters(hpi_letters)
+    hpi_letters.map do |hpi_letter|
+      {
+        latlng: hpi_letter[:coordinate],
+        div_icon: {
+          html: hpi_letter[:letter],
+          class_name: "building-icon"
+        }
+      }
+    end
+  end
+
+  def self.transform_leaflet_buildings(geometries, options)
     geometries.map do |polygon|
       {
         latlngs: polygon,
