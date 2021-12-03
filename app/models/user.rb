@@ -59,7 +59,7 @@ class User < ApplicationRecord
 
   private
 
-  def self.read_auth_data_into_user(user, auth)
+  private_class_method def self.read_auth_data_into_user(user, auth)
     user.email = auth.info.email
     user.username = auth.info.name
     user.first_name = auth.info.first_name
