@@ -10,18 +10,16 @@ RSpec.describe Room, type: :model do
     expect(room.floor).to eq("2")
     expect(room.building.name).to eq(building.name)
     expect(room.room_type).to eq('Bachelorproject office')
-    expect(room.user.name).to eq(user.name)
+    expect(room.user.username).to eq(user.username)
   end
 
   it "has a building" do
-    subject {described_class.new}
     room = described_class.reflect_on_association(:building)
     expect(room.macro).to eq :belongs_to
   end
 
   it "has a user" do
-    subject {described_class.new}
-    user = described_class.reflect_on_association(:user)
+    room = described_class.reflect_on_association(:user)
     expect(room.macro).to eq :belongs_to
   end
 end
