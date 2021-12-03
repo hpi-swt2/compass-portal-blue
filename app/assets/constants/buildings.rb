@@ -329,10 +329,9 @@ module Buildings
 
   ].freeze
 
-  def self.getLetters(hpi_letters)
-    div_icons = []
-    hpi_letters.each do |hpi_letter|
-      div_icons << {
+  def self.get_letters(hpi_letters)
+    hpi_letters.map do |hpi_letter|
+      {
         latlng: hpi_letter[:coordinate],
         div_icon: {
           html: hpi_letter[:letter],
@@ -340,7 +339,6 @@ module Buildings
         }
       }
     end
-    div_icons
   end
 
   def self.get_buildings(geometries, options)

@@ -17,4 +17,8 @@ describe "Building Map page", type: :feature do
     expect(page).to have_css(".leaflet-interactive")
     expect(page).to have_selector("path.leaflet-interactive", count: 15)
   end
+
+  after do
+    Capybara.current_driver = :default
+  end
 end
