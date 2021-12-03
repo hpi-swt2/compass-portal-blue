@@ -27,7 +27,7 @@ class User < ApplicationRecord
       # https://www.rubydoc.info/github/plataformatec/devise/Devise.friendly_token
       user.password = Devise.friendly_token[0, 20]
 
-      set_auth_data(auth.info.first_name, auth.info.last_name)
+      read_auth_data_into_user(user, auth)
 
       # Uncomment, if you are using confirmable and the provider(s) you use validate emails:
       # user.skip_confirmation!
@@ -59,11 +59,11 @@ class User < ApplicationRecord
 
   private
 
-  def read_auth_data(auth)
-    self.email = auth.info.email
-    self.username = auth.info.name
-    self.first_name = auth.info.first_name
-    self.last_name = auth.info.last_name
+  def self.read_auth_data_into_user(user, auth)
+    user.email = auth.info.email
+    user.username = auth.info.name
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
   end
 
   def normalize_phone_number
