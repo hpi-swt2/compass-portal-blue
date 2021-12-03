@@ -1,7 +1,7 @@
 class SearchResultsController < ApplicationController
   before_action :set_search_result, only: %i[show edit update destroy]
 
-  # GET /search_results or /search_results.json
+  # GET /search_results
   def index
     @search_results ||= []
 
@@ -19,21 +19,17 @@ class SearchResultsController < ApplicationController
     @search_result = SearchResult.new(search_result_params)
   end
 
-  def show
-    # There is no need to display one singular SearchResult.
-  end
+  # There is no need to display one singular SearchResult.
+  def show; end
 
-  def edit
-    # SearchResults are currently not stored a database so no need to edit one.
-  end
+  # SearchResults are currently not stored a database so no need to edit one.
+  def edit; end
 
-  def update
-    # SearchResults are currently not stored a database so no need to update one.
-  end
+  # SearchResults are currently not stored a database so no need to update one.
+  def update; end
 
-  def destroy
-    # All SearchResult objects will be destroyed after they are no longer used.
-  end
+  # All SearchResult objects will be destroyed after they are no longer used.
+  def destroy; end
 
   private
 
