@@ -6,6 +6,10 @@ describe "Building Map page", type: :feature do
     Capybara.ignore_hidden_elements = false
   end
 
+  after do
+    Capybara.current_driver = :default
+  end
+
   it "contains a map", js: true do
     visit building_map_path
     expect(page).to have_css("#map")
@@ -25,7 +29,4 @@ describe "Building Map page", type: :feature do
     expect(page).to have_selector("div.leaflet-marker-icon", minimum: 13)
   end
 
-  after do
-    Capybara.current_driver = :default
-  end
 end
