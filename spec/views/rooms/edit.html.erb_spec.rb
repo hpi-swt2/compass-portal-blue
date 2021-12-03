@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe "rooms/edit", type: :view do
   before do
     @building = create :building
+    @user = create :user
     @room = assign(:room, Room.create!(
                             name: "MyString",
                             floor: "MyString",
                             room_type: "MyString",
-                            contact_person: "MyString",
+                            user: @user,
                             building: @building
                           ))
   end
@@ -22,8 +23,6 @@ RSpec.describe "rooms/edit", type: :view do
       assert_select "input[name=?]", "room[floor]"
 
       assert_select "input[name=?]", "room[room_type]"
-
-      assert_select "input[name=?]", "room[contact_person]"
     end
   end
 end

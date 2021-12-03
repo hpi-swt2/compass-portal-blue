@@ -8,7 +8,6 @@
       <th>Name</th>
       <th>Floor</th>
       <th>Room type</th>
-      <th>Contact person</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= room.name %></td>
         <td><%= room.floor %></td>
         <td><%= room.room_type %></td>
-        <td><%= room.contact_person %></td>
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
