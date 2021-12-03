@@ -359,7 +359,7 @@ DEPENDENCIES
   devise-i18n-bootstrap
   factory_bot_rails
   jbuilder (~> 2.7)
-  leaflet-rails (~> 1.7.4)!
+  leaflet-rails!
   listen (~> 3.3)
   omniauth
   omniauth_openid_connect
