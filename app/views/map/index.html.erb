@@ -1,2 +1,102 @@
-<h1><i class="fas fa-map"></i> Map#index</h1>
-<p>Find me in app/views/map/index.html.erb</p>
+<div id='map' class="map container"> 
+</div>
+<div id="info" style="display: none;"></div>
+<label for="track">
+      track position
+      <input id="track" type="checkbox"/>
+    </label>
+<link href="https://unpkg.com/openlayers-indoorequal@latest/openlayers-indoorequal.css" rel="stylesheet" />
+<script src="https://unpkg.com/openlayers-indoorequal@latest/dist/openlayers-indoorequal.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
+<script src="https://unpkg.com/elm-pep"></script>
+<style>
+    .map {
+        height: 1000px;
+        width: 1500px;
+    }
+    .level-control {
+        height: 400px;
+        width: 40px;
+    }
+</style>
+
+<script>
+
+const key = 'iek_VpPLmIcjE8vIQ7dVhFr3zw3lqTHj';
+
+const view = new ol.View({
+  center: ol.proj.fromLonLat([13.125999496, 52.389498442]),
+  zoom: 18,
+});
+
+const map = new ol.Map({
+  layers: [
+    new ol.layer.Tile({
+      source: new ol.source.OSM(),
+    }),
+  ],
+  target: 'map',
+  view: view,
+});
+const indoorEqual = new IndoorEqual.default(map, { apiKey: key, spriteBaseUrl: 'sprite/indoorequal' });
+const control = new IndoorEqual.LevelControl(indoorEqual);
+map.addControl(control);
+
+const geolocation = new ol.Geolocation({
+  // enableHighAccuracy must be set to true to have the heading value.
+  trackingOptions: {
+    enableHighAccuracy: true,
+  },
+  projection: view.getProjection(),
+});
+
+function el(id) {
+  return document.getElementById(id);
+}
+
+el('track').addEventListener('change', function () {
+  geolocation.setTracking(this.checked);
+});
+
+
+// handle geolocation error.
+geolocation.on('error', function (error) {
+  const info = document.getElementById('info');
+  info.innerHTML = error.message;
+  info.style.display = '';
+});
+
+const accuracyFeature = new ol.Feature();
+geolocation.on('change:accuracyGeometry', function () {
+  accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+});
+
+const positionFeature = new ol.Feature();
+positionFeature.setStyle(
+  new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 6,
+      fill: new ol.style.Fill({
+        color: '#3399CC',
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#fff',
+        width: 2,
+      }),
+    }),
+  })
+);
+
+geolocation.on('change:position', function () {
+  const coordinates = geolocation.getPosition();
+  positionFeature.setGeometry(coordinates ? new ol.geom.Point(coordinates) : null);
+});
+
+new ol.layer.Vector({
+  map: map,
+  source: new ol.source.Vector({
+    features: [accuracyFeature, positionFeature],
+  }),
+});
+
+</script>
