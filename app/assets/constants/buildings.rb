@@ -329,7 +329,7 @@ module Buildings
 
   ].freeze
 
-  def self.get_letters(hpi_letters)
+  def self.transform_leaflet_letters(hpi_letters)
     hpi_letters.map do |hpi_letter|
       {
         latlng: hpi_letter[:coordinate],
@@ -341,7 +341,7 @@ module Buildings
     end
   end
 
-  def self.get_buildings(geometries, options)
+  def self.transform_leaflet_buildings(geometries, options)
     geometries.map do |polygon|
       {
         latlngs: polygon,
