@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Search Results</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @search_results.each do |search_result| %>
+      <tr>
+        <td>
+          <%= link_to search_result.title, search_result.link %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
