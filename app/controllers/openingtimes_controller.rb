@@ -63,6 +63,6 @@ class OpeningtimesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def openingtime_params
-    params.require(:openingtime).permit(:opens, :closes, :day)
+    params.require(:openingtime).permit(:opens, :closes, :day, :timeable_id, :timeable_type)
   end
 end

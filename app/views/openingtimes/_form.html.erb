@@ -26,6 +26,16 @@
     <%= form.number_field :day %>
   </div>
 
+          <div>
+    <%= form.label :timeable_id %>
+            <%= form.select 'timeable_id',
+              options_from_collection_for_select(User.all, :id, :username),
+              {},
+              multiple: false, size: 10 %>
+            </div>
+    <% openingtime.timeable_type = 'User' %>
+    <%= form.hidden_field :timeable_type%>
+
   <div class="actions">
     <%= form.submit %>
   </div>

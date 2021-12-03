@@ -14,9 +14,36 @@
       </div>
 
       <div class="field mb-3">
+        <%= f.label :first_name, class: 'form-label' %>
+        <%= f.text_field :first_name, class: 'form-control', autocomplete: "first_name" %>
+      </div>
+
+       <div class="field mb-3">
+         <%= f.label :last_name, class: 'form-label' %>
+         <%= f.text_field :last_name, class: 'form-control', autocomplete: "last_name" %>
+       </div>
+
+      <div class="field mb-3">
         <%= f.label :email, class: 'form-label' %>
         <%= f.text_field :email, class: 'form-control', autocomplete: "email" %>
       </div>
+
+      <div class="field mb-3">
+        <%= f.label :phone_number, class: 'form-label' %>
+        <%= f.text_field :phone_number, class: 'form-control', autocomplete: "phone_number" %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :openingtimes, class: 'form-label' %>
+        <% resource.openingtimes.each do |openingtime| %>
+            <div class="field">
+                <%= f.time_select openingtime.:opens %>
+                <span>-</span>
+                <%= f.time_select openingtime.:opens %>
+              </div>
+        <% end %>
+      </div>
+
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
