@@ -1,0 +1,32 @@
+<%= form_with(model: building) do |form| %>
+  <% if building.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(building.errors.count, "error") %> prohibited this building from being saved:</h2>
+
+      <ul>
+        <% building.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_latitude %>
+    <%= form.text_field :location_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_longitude %>
+    <%= form.text_field :location_longitude %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

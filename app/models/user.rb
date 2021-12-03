@@ -1,5 +1,6 @@
 # The model representing a user who can log in
 class User < ApplicationRecord
+  include Timeable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

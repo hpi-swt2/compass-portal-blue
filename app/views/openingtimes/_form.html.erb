@@ -1,0 +1,32 @@
+<%= form_with(model: openingtime) do |form| %>
+  <% if openingtime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(openingtime.errors.count, "error") %> prohibited this openingtime from being saved:</h2>
+
+      <ul>
+        <% openingtime.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :opens %>
+    <%= form.time_select :opens %>
+  </div>
+
+  <div class="field">
+    <%= form.label :closes %>
+    <%= form.time_select :closes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :day %>
+    <%= form.number_field :day %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

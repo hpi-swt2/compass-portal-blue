@@ -305,6 +305,7 @@ GEM
       httpclient (>= 2.4)
     thor (1.1.0)
     tilt (2.0.10)
+    tod (3.0.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -379,6 +380,7 @@ DEPENDENCIES
   simplecov
   spring
   sqlite3 (~> 1.4)
+  tod
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
