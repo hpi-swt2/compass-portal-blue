@@ -33,15 +33,28 @@
         <%= f.text_field :phone_number, class: 'form-control', autocomplete: "phone_number" %>
       </div>
 
-      <div class="field mb-3">
+      <div>
+        <%= f.select 'rooms',
+          options_from_collection_for_select(Room.all, :id, :name, resource.rooms),
+          {},
+          multiple: true %>
+      </div>
+
+      <div class="field mb-3 opening-times-container">
         <%= f.label :openingtimes, class: 'form-label' %>
-        <% resource.openingtimes.each do |openingtime| %>
-            <div class="field">
-                <%= f.time_select openingtime.:opens %>
+        <%= f.fields_for :openingtimes do |o| %>
+            <div class="field" id="opening-time-field-<%= o.object.id %>">
+                <%= o.number_field :day %>
+                <%= o.time_select :opens %>
                 <span>-</span>
-                <%= f.time_select openingtime.:opens %>
+                <%= o.time_select :closes %>
+                <%= link_to(openingtime_path(o.object.id), :method => :delete, :class => 'btn btn-mini',
+                    :remote => true, :onclick => "$('#opening-time-field-#{o.object.id}')[0].remove()") do %>
+                <i class="fas fa-trash"></i>
+              <% end %>
               </div>
         <% end %>
+        <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add opening time</button>
       </div>
 
 
@@ -89,3 +102,29 @@
 
   </div> <%# col-lg-6 col-md-6 mx-auto %>
 </div> <%# row %>
+
+<script defer>
+    const addNewOpeningTime = (target) => {
+        $(`<div class="field">
+           <input type="number" name="user[openingtimes_attributes][-1][day]">
+           <select name="user[openingtimes_attributes][-1][opens(4i)]">
+           ${Array(24).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
+           </select>
+           :
+           <select name="user[openingtimes_attributes][-1][opens(5i)]">
+           ${Array(60).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
+           </select>
+           <span>-</span>
+           <select name="user[openingtimes_attributes][-1][closes(4i)]">
+           ${Array(24).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
+           </select>
+           :
+           <select name="user[openingtimes_attributes][-1][closes(5i)]">
+           ${Array(60).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
+           </select>
+           <a class="btn btn-mini" onclick="$('#opening-time-field-17')[-1].remove()" data-remote="true" rel="nofollow" href="/openingtimes/17">
+           <svg class="svg-inline--fa fa-trash fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
+           </a></div>`).insertBefore(target);
+    }
+
+</script>
