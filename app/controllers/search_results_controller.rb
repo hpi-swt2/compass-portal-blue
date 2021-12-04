@@ -40,6 +40,6 @@ class SearchResultsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def search_result_params
-    params.fetch(:search_result, {})
+    params.require(:title, :link).permit(:description, :resource)
   end
 end
