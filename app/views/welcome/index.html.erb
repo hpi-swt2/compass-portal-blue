@@ -23,12 +23,18 @@
         <i class="fas fa-user-plus"></i> Local Sign Up
       <% end %>
     </p>
-    <div class="search-container">
-    <form action="protected.html.erb">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-  </div>
+    <%= form_with url: search_results_path,
+        method: :get do |form| %>
+      <div class="row  mb-6">
+        <div class="col">
+        <%= form.text_field :query, class: "form-control"%> 
+        </div>
+        <div class="col-auto">
+        
+        <button type="submit" class = "btn btn-primary"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    <% end %>
   </div>
 
 </div>
