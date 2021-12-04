@@ -81,3 +81,11 @@ Ensure you have access to a Unix-like environment through:
 * An OpenID Connect client for `localhost:3000` is set up for local development. Additional clients registrable at [oidc.hpi.de](https://oidc.hpi.de/)
 * For deployment `OPENID_CONNECT_CLIENT_ID`, `OPENID_CONNECT_CLIENT_SECRET` & `OPENID_CONNECT_REDIRECT_URI` need to be provided
 * `app/controllers/users/omniauth_callbacks_controller.rb` handles data returned by the OIDC service
+
+### Branch Name Conventions
+* Branch names have the following structure: `<type>/<team>_<issue-number>_<issue-name>`
+* `<type>` gets replaced with `feature` or `fix`, depending on the type of changes introduced by the branch
+* `<team>` gets replaced with the abbreviation of the team that mostly develops on the branch
+* `<issue-number>` gets replaced with the number of the issue the branch aims to close
+* `<issue-name>` gets replaced with the name of the issue the branch aims to close, or a shortened form of it
+* Experimental branches may use the structure `experimental/<anything>`
