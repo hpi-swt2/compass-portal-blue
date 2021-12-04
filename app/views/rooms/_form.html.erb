@@ -31,7 +31,7 @@
         <%= form.select 'building_id',
             options_from_collection_for_select(Building.all, :id, :name),
             {},
-            multiple: false, size: 10 %>
+            multiple: false %>
     </div>
 
     <div>
@@ -39,7 +39,7 @@
         <%= form.select 'user_id',
             options_from_collection_for_select(User.all, :id, :username),
             {},
-            multiple: false, size: 10 %>
+            multiple: true %>
     </div>
 
 
