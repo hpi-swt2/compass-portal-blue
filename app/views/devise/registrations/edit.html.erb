@@ -33,7 +33,8 @@
         <%= f.text_field :phone_number, class: 'form-control', autocomplete: "phone_number" %>
       </div>
 
-      <div>
+      <div class="field mb-3">
+        <%= f.label :rooms, class: 'form-label' %><br/>
         <%= f.select 'rooms',
           options_from_collection_for_select(Room.all, :id, :name, resource.rooms),
           {},
