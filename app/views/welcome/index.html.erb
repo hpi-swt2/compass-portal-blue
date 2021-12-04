@@ -27,7 +27,8 @@
         method: :get do |form| %>
       <div class="row  mb-6">
         <div class="col">
-        <%= form.text_field :query, class: "form-control"%> 
+        
+        <%= form.text_field :query, class: "form-control", :placeholder=>"Search...", id: "search"%> 
         </div>
         <div class="col-auto">
         
