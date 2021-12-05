@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get '/search_results', to: 'search_results#index'
+  resources :rooms
+  resources :openingtimes
+  resources :buildings
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # '/users/...'
@@ -12,6 +14,11 @@ Rails.application.routes.draw do
 
   # '/protected'
   get '/protected', to: 'welcome#protected'
+
+  get '/building_map', to: 'building_map#index'
+
+  # '/search_results'
+  get '/search_results', to: 'search_results#index'
 
   # '/'
   # Sets `root_url`, devise gem requires this to be set
