@@ -23,5 +23,16 @@
         <i class="fas fa-user-plus"></i> Local Sign Up
       <% end %>
     </p>
+    <%= form_with url: search_results_path, method: :get do |form| %>
+      <div class="row  mb-6">
+        <div class="col">
+          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search" %>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    <% end %>
   </div>
+
 </div>

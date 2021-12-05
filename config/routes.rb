@@ -17,6 +17,9 @@ Rails.application.routes.draw do
 
   get '/building_map', to: 'building_map#index'
 
+  # '/search_results'
+  get '/search_results', to: 'search_results#index'
+
   # '/'
   # Sets `root_url`, devise gem requires this to be set
   root to: "welcome#index"
