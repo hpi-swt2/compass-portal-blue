@@ -5,8 +5,23 @@
 
     <h5 class="fw-light mt-3">User Details</h5>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field mb-3 edit-profile-picture">
+        <%= f.label :profile_picture, class: 'form-label' %>
+        <div class='profile-picture-wrapper'>
+          <div class='profile-picture-container'>
+            <% if resource.profile_picture.attached? %>
+                <img src="<%=(url_for(resource.profile_picture))%>" alt="<%= resource.profile_picture.filename %>"/>
+            <% else %>
+                <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
+            <% end %>
+          </div>
+          <button class='edit-btn' onclick="event.preventDefault(); $('input[type=file]').click()"><i class="fa fa-pen" aria-hidden="true"></i></button>
+        </div>
+        <%= f.file_field :profile_picture, class: 'form-control', accept: 'image/png,image/jpeg' %>
+      </div>
 
       <div class="field mb-3">
         <%= f.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
@@ -103,3 +118,12 @@
   </div> <%# col-lg-6 col-md-6 mx-auto %>
 </div> <%# row %>
 
+<script defer>
+    $('input[name="user[profile_picture]"]').change(function () {
+        const file = $(this).prop('files')[0] || null;
+        if (!file) {return; }
+        const url = URL.createObjectURL(file);
+        $('.profile-picture-container img').prop('src', url);
+        $('.profile-picture-container img').prop('alt', file.name);
+    })
+</script>

@@ -14,7 +14,7 @@ global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
 // Import Bootstrap in the webpack entry point file
-import 'bootstrap'; 
+import 'bootstrap';
 // Fontawesome: https://fontawesome.com/
 import "@fortawesome/fontawesome-free/js/all";
 
