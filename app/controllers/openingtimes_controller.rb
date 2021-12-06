@@ -17,6 +17,9 @@ class OpeningtimesController < ApplicationController
   # GET /openingtimes/1/edit
   def edit; end
 
+  # GET /openingtimes/editForUser/:userid
+  def edit_for_user; end
+
   # POST /openingtimes or /openingtimes.json
   def create
     @openingtime = Openingtime.new(openingtime_params)
@@ -48,10 +51,6 @@ class OpeningtimesController < ApplicationController
   # DELETE /openingtimes/1 or /openingtimes/1.json
   def destroy
     @openingtime.destroy
-    respond_to do |format|
-      format.html { redirect_to openingtimes_url, notice: "Openingtime was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -63,6 +62,6 @@ class OpeningtimesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def openingtime_params
-    params.require(:openingtime).permit(:opens, :closes, :day)
+    params.require(:openingtime).permit(:opens, :closes, :day, :timeable_id, :timeable_type)
   end
 end
