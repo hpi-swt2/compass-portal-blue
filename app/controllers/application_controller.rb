@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
     # 'username' is an attribute not known to devise by default
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name, :phone_number])
     devise_parameter_sanitizer.permit(
-        :account_update, keys: [:username, :first_name, :last_name, :phone_number, :rooms,
-            { openingtimes_attributes: [:id, :day, :opens, :closes] }])
+      :account_update, keys: [:username, :first_name, :last_name, :phone_number, :rooms,
+                              { openingtimes_attributes: [:id, :day, :opens, :closes] }]
+    )
   end
 end
