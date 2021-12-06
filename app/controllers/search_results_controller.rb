@@ -4,14 +4,35 @@ class SearchResultsController < ApplicationController
   # GET /search_results
   def index
     @search_results ||= []
-
-    10.times do |number|
-      @search_results.append(SearchResult.new(
-                               id: number,
-                               title: format("Search Result %d", number),
-                               link: search_results_path
-                             ))
+    result_id = 0
+    Building.all.each do |
+    building|
+    	@search_results.append(SearchResult.new(
+    	
+    	id: result_id,
+    	
+    	title: building.name,
+    	
+    	link: building_path(building)
+    	))
+    result_id += 1
     end
+    
+    Room.all.each do |
+    room|
+    	@search_results.append(SearchResult.new(
+    	
+    	id: result_id,
+    	
+    	title: room.name,
+    	
+    	link: room_path(room)
+    	))
+    result_id += 1
+    end
+    
+   
+    	
     @search_results = @search_results.uniq(&:id)
   end
 
