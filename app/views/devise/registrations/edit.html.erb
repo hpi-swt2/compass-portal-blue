@@ -11,14 +11,14 @@
       <div class="field mb-3 edit-profile-picture">
         <%= f.label :profile_picture, class: 'form-label' %>
         <div class='profile-picture-wrapper'>
-            <div class='profile-picture-container'>
-                <% if resource.profile_picture.attached? %>
-                    <img src="<%=(url_for(resource.profile_picture))%>" alt="<%= resource.profile_picture.filename %>"/>
-                <% else %>
-                    <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="<%= resource.profile_picture.filename %>">
-                <% end %>
-            </div>
-            <button class='edit-btn' onclick="event.preventDefault(); $('input[type=file]').click()"><i class="fa fa-pen" aria-hidden="true"></i></button>
+          <div class='profile-picture-container'>
+            <% if resource.profile_picture.attached? %>
+                <img src="<%=(url_for(resource.profile_picture))%>" alt="<%= resource.profile_picture.filename %>"/>
+            <% else %>
+                <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
+            <% end %>
+          </div>
+          <button class='edit-btn' onclick="event.preventDefault(); $('input[type=file]').click()"><i class="fa fa-pen" aria-hidden="true"></i></button>
         </div>
         <%= f.file_field :profile_picture, class: 'form-control', accept: 'image/png,image/jpeg' %>
       </div>
