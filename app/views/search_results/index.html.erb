@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Search Results</h1>
+
+<table class="search_result_table">
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @search_results.each do |search_result| %>
+      <tr>
+        <td class="search_result_item">
+          <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
+          <% if !search_result.description.nil? %>
+            <p class="search_result_description"><%= search_result.description %></p>
+          <% else %>
+            <p class="search_result_description">
+              This is a dummy-description meant to be removed.
+              It shows that this text has to be very short.
+              [ remove me at 'app/views/search_results/index.html.erb' ]
+            </p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

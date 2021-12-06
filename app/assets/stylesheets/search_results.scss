@@ -1,0 +1,40 @@
+// Place all the styles related to the SearchResults controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "colors";
+
+.search_result_table {
+    width: inherit;
+    border-collapse: separate; 
+    border-spacing: 1em;
+}
+
+.search_result_item {
+    background-color: $mediumgray;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.search_result_title {
+    display: block;
+    margin-bottom: 10px;
+    font-size: large;
+}
+
+.search_result_title:link {
+    text-decoration: none;
+}
+
+.search_result_title:hover {
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.search_result_description {
+    padding-left: 5px;
+    margin-bottom: 0px;
+    border-left-style: solid;
+    border-color: $hpi-orange;
+}

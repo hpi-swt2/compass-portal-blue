@@ -44,6 +44,15 @@ gem 'devise-i18n-bootstrap' # https://github.com/maximalink/devise-i18n-bootstra
 gem 'omniauth' # https://github.com/omniauth/omniauth
 gem 'omniauth_openid_connect' # https://github.com/m0n9oose/omniauth_openid_connect
 
+gem 'tod'
+
+#
+# Libraries
+#
+
+# Leaflet for map functionality
+gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
+
 #
 # Gems that are loaded depending on the environment (development/test/production)
 #
@@ -106,3 +115,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "phonelib"
