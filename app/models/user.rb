@@ -22,19 +22,14 @@ class User < ApplicationRecord
     # Check if user with provider ('openid_connect') and uid is in db, otherwise create it
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       # All information returned by OpenID Connect is passed in `auth` param
-      user.email = auth.info.email
 
       # Generate random password, default length is 20
       # https://www.rubydoc.info/github/plataformatec/devise/Devise.friendly_token
       user.password = Devise.friendly_token[0, 20]
-      user.username = auth.info.name
 
-      # `first_name` & `last_name` are also available
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
+      read_auth_data_into_user(user, auth)
 
-      # If you are using confirmable and the provider(s) you use validate emails,
-      # uncomment the line below to skip the confirmation emails.
+      # Uncomment, if you are using confirmable and the provider(s) you use validate emails:
       # user.skip_confirmation!
       user.profile_picture.attach(
         io: File.open('app/assets/images/default-profile-picture.png'),
@@ -63,6 +58,13 @@ class User < ApplicationRecord
   # end
 
   private
+
+  private_class_method def self.read_auth_data_into_user(user, auth)
+    user.email = auth.info.email
+    user.username = auth.info.name
+    user.first_name = auth.info.first_name
+    user.last_name = auth.info.last_name
+  end
 
   def normalize_phone_number
     self.phone_number = Phonelib.parse(phone_number).full_e164.presence
