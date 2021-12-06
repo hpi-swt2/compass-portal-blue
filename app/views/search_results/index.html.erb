@@ -13,7 +13,7 @@
     <% @search_results.each do |search_result| %>
       <tr>
         <td class="search_result_item">
-          <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
+          <%= link_to search_result.title, search_result.link, class: "search_result_title", :onclick => "addToLocalStorage(this);"%>
           <% if !search_result.description.nil? %>
             <p class="search_result_description"><%= search_result.description %></p>
           <% else %>
@@ -30,3 +30,48 @@
 </table>
 
 <br>
+
+<script> function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+</script>
+
+<!-- <script>function getLocalHistory() {alert("hi");));}</script> -->
+<script> function addToLocalStorage(element) {
+    title = element.text;
+    link = element.href;
+    // prev = window.localStorage.getItem("compassHistory"); 
+    //
+    // current = JSON.parse(prev); 
+    prev = getCookie("compassHistory");
+    if(prev == ""){
+      prev = "{}";
+    } 
+    current = JSON.parse(prev);
+    current[title] = link;
+    alert(JSON.stringify(current));
+    document.cookie = "compassHistory=" + JSON.stringify(current);
+    alert(getCookie("compassHistory"));
+    /*current[title] = link;
+    alert(JSON.stringify(current));
+    window.localStorage.addItem("compassHistory", JSON.stringify(current));
+    alert("test");
+    alert(window.localStorage.getItem("compassHistory"));
+    getLocalHistory();
+    */ 
+  } 
+</script>
+
+
