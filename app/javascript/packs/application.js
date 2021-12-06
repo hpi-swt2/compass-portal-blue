@@ -8,6 +8,11 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+// See https://rubyyagi.com/how-to-use-bootstrap-and-jquery-in-rails-6-with-webpacker/
+import 'jquery';
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
 // Import Bootstrap in the webpack entry point file
 import 'bootstrap'; 
 // Fontawesome: https://fontawesome.com/

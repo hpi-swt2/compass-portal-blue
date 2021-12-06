@@ -26,6 +26,23 @@
     <%= form.text_field :room_type %>
   </div>
 
+    <div>
+      <%= form.label :building_id %>
+        <%= form.select 'building_id',
+            options_from_collection_for_select(Building.all, :id, :name),
+            {},
+            multiple: false %>
+    </div>
+
+    <div>
+      <%= form.label :user_id %>
+        <%= form.select 'user_id',
+            options_from_collection_for_select(User.all, :id, :username),
+            {},
+            multiple: true %>
+    </div>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_one_attached :profile_picture
   has_and_belongs_to_many :rooms
 
+  accepts_nested_attributes_for :openingtimes, allow_destroy: true
+
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
   def self.from_omniauth(auth)
