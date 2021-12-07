@@ -6,8 +6,8 @@ class SearchResultsController < ApplicationController
     @search_results ||= []
     @result_id = 1
 
-    searchForBuildings
-    searchForRooms
+    search_for_buildings
+    search_for_rooms
 
     @search_results = @search_results.uniq(&:id)
   end
