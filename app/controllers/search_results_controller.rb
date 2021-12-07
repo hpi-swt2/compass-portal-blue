@@ -5,34 +5,28 @@ class SearchResultsController < ApplicationController
   def index
     @search_results ||= []
     result_id = 0
-    Building.all.each do |
-    building|
-    	@search_results.append(SearchResult.new(
-    	
-    	id: result_id,
-    	
-    	title: building.name,
-    	
-    	link: building_path(building)
-    	))
-    result_id += 1
+    Building.all.each do |building|
+      @search_results.append(SearchResult.new(
+                               id: result_id,
+
+                               title: building.name,
+
+                               link: building_path(building)
+                             ))
+      result_id += 1
     end
-    
-    Room.all.each do |
-    room|
-    	@search_results.append(SearchResult.new(
-    	
-    	id: result_id,
-    	
-    	title: room.name,
-    	
-    	link: room_path(room)
-    	))
-    result_id += 1
+
+    Room.all.each do |room|
+      @search_results.append(SearchResult.new(
+                               id: result_id,
+
+                               title: room.name,
+
+                               link: room_path(room)
+                             ))
+      result_id += 1
     end
-    
-   
-    	
+
     @search_results = @search_results.uniq(&:id)
   end
 
