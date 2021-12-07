@@ -4,28 +4,10 @@ class SearchResultsController < ApplicationController
   # GET /search_results
   def index
     @search_results ||= []
-    result_id = 0
-    Building.all.each do |building|
-      @search_results.append(SearchResult.new(
-                               id: result_id,
+    @result_id = 1
 
-                               title: building.name,
-
-                               link: building_path(building)
-                             ))
-      result_id += 1
-    end
-
-    Room.all.each do |room|
-      @search_results.append(SearchResult.new(
-                               id: result_id,
-
-                               title: room.name,
-
-                               link: room_path(room)
-                             ))
-      result_id += 1
-    end
+    searchForBuildings
+    searchForRooms
 
     @search_results = @search_results.uniq(&:id)
   end
@@ -56,5 +38,27 @@ class SearchResultsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def search_result_params
     params.require(:title, :link).permit(:description, :resource)
+  end
+
+  def searchForBuildings
+    Building.all.each do |building|
+      @search_results.append(SearchResult.new(
+                               id: @result_id,
+                               title: building.name,
+                               link: building_path(building)
+                             ))
+      @result_id += 1
+    end
+  end
+
+  def searchForRooms
+    Room.all.each do |room|
+      @search_results.append(SearchResult.new(
+                               id: @result_id,
+                               title: room.name,
+                               link: room_path(room)
+                             ))
+      @result_id += 1
+    end
   end
 end
