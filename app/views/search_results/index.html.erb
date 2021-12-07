@@ -52,25 +52,24 @@
 <script> function addToLocalStorage(element) {
     title = element.text;
     link = element.href;
-    // prev = window.localStorage.getItem("compassHistory"); 
-    //
-    // current = JSON.parse(prev); 
     prev = getCookie("compassHistory");
     if(prev == ""){
       prev = "{}";
     } 
     current = JSON.parse(prev);
-    current[title] = link;
-    alert(JSON.stringify(current));
-    document.cookie = "compassHistory=" + JSON.stringify(current);
-    alert(getCookie("compassHistory"));
-    /*current[title] = link;
-    alert(JSON.stringify(current));
-    window.localStorage.addItem("compassHistory", JSON.stringify(current));
-    alert("test");
-    alert(window.localStorage.getItem("compassHistory"));
-    getLocalHistory();
-    */ 
+    current_2 = {};
+    current_2[title] = link;
+
+    var i = 0;
+      for(var j in current){
+        i = i + 1;
+        if(i > 4){
+          break;
+        }
+        current_2[j] = current[j];
+      }
+    
+    document.cookie = "compassHistory=" + JSON.stringify(current_2);
   } 
 </script>
 

@@ -1,3 +1,22 @@
+<script> function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+</script>
+
+
+
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
     <h1 class="fw-light">
@@ -26,7 +45,24 @@
     <%= form_with url: search_results_path, method: :get do |form| %>
       <div class="row  mb-6">
         <div class="col">
-          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :onclick => "getLocalHistory();" %>
+          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :onclick => "getLocalHistory(this);" %>
+            <table id = "historyDiv" name="history">
+              <tr> 
+                <td id = "history1"> </td>
+              </tr>
+              <tr> 
+                <td id = "history2"></td> 
+              </tr>
+              <tr> 
+                <td id = "history3"> </td>
+              </tr>
+              <tr> 
+                <td id = "history4"> </td> 
+              </tr>
+              <tr> 
+                <td id = "history5"> </td>
+              </tr>
+            </table>
         </div>
         <div class="col-auto">
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
@@ -37,4 +73,43 @@
 
 </div>
 
-<script>function getLocalHistory() {alert(JSON.stringify(window.localStorage.getItem("compassHistory")));}</script>
+
+
+<script>
+  function getLocalHistory(parent){
+  element = document.getElementById("historyDiv");
+  element.style.visibility = "hidden";
+  return;
+  var selectList = document.createElement("select");
+  selectList.id = "historySelection";
+  parent.appendChild(selectList);
+  cookie = getCookie("historyCookie");
+  history = JSON.parse(cookie);
+  for(element in history){
+    var option = document.createElement("option");
+    option.value = element;
+    option.text = history[element];
+    selectList.appendChild(option);
+  }
+  }
+</script>
+<script>
+alert("doing");
+  historyCookie = getCookie("compassHistory");
+  history = JSON.parse(historyCookie);
+  alert(JSON.stringify(history));
+  i = 1;
+  for(var element in history) {
+    alert(element);
+    td_id = "history" + i;
+    td = document.getElementById(td_id);
+    atitle = document.createElement("a");
+    atitle.text = element;
+    td.appendChild(atitle);
+    alink = document.createElement("a");
+    alinks.href = history[element];
+    td.appendChild(alink);
+    i = i+1;
+  }
+  alert("done");
+</script>
