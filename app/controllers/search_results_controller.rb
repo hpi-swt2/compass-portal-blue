@@ -40,7 +40,7 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
-  def searchForBuildings
+  def search_for_buildings
     Building.all.each do |building|
       @search_results.append(SearchResult.new(
                                id: @result_id,
@@ -51,7 +51,7 @@ class SearchResultsController < ApplicationController
     end
   end
 
-  def searchForRooms
+  def search_for_rooms
     Room.all.each do |room|
       @search_results.append(SearchResult.new(
                                id: @result_id,
