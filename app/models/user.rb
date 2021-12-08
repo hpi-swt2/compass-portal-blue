@@ -16,6 +16,12 @@ class User < ApplicationRecord
   has_one_attached :profile_picture
   has_and_belongs_to_many :rooms
 
+  #maybe, maybe not
+  #has_secure_password
+
+  has_many :assignments
+  has_many :roles, through: :assignments
+
   accepts_nested_attributes_for :openingtimes, allow_destroy: true
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
@@ -47,6 +53,10 @@ class User < ApplicationRecord
 
     parsed_phone.full_international
   end
+
+  def role?(role)
+    roles.any? { |r| r.name.underscore.to_sym == role }
+  end  
 
   # https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview
   # Implement the following if you want to enable copying over data from an
