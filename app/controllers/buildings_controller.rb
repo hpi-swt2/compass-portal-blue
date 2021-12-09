@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :set_building, only: %i[show edit update destroy]
-
+  
   # GET /buildings or /buildings.json
   def index
     @buildings = Building.all
@@ -20,7 +20,7 @@ class BuildingsController < ApplicationController
   # POST /buildings or /buildings.json
   def create
     @building = Building.new(building_params)
-
+    authorize @building
     respond_to do |format|
       if @building.save
         format.html { redirect_to @building, notice: "Building was successfully created." }
@@ -34,6 +34,7 @@ class BuildingsController < ApplicationController
 
   # PATCH/PUT /buildings/1 or /buildings/1.json
   def update
+    authorize @building
     respond_to do |format|
       if @building.update(building_params)
         format.html { redirect_to @building, notice: "Building was successfully updated." }
@@ -47,6 +48,7 @@ class BuildingsController < ApplicationController
 
   # DELETE /buildings/1 or /buildings/1.json
   def destroy
+    authorize @building
     @building.destroy
     respond_to do |format|
       format.html { redirect_to buildings_url, notice: "Building was successfully destroyed." }

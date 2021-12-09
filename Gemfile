@@ -53,6 +53,10 @@ gem 'tod'
 # Leaflet for map functionality
 gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
 
+#Pundit to define and enforce policies
+gem 'pundit'
+
+
 #
 # Gems that are loaded depending on the environment (development/test/production)
 #

@@ -1,8 +1,21 @@
 class ApplicationController < ActionController::Base
   # https://github.com/heartcombo/devise#configuring-models
   # Add additional allowed params for Users. Only include this code in devise controllers
+  
+  #Pundit to define and enforce policies
+  include Pundit
+  
   # This is a convenient way to customize devise controllers without creating a new ones
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+ 
+  private
+ 
+    def user_not_authorized
+      flash[:warning] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    end
 
   protected
 
