@@ -17,7 +17,10 @@ RSpec.describe "/openingtimes", type: :request do
   # Openingtime. As you add validations to Openingtime, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Openingtime.new(day: 6, opens: Tod::TimeOfDay(8), closes: Tod::TimeOfDay(17), timeable: FactoryBot.create(:building)).attributes
+    Openingtime.new(day: 6,
+                    opens: Tod::TimeOfDay(8),
+                    closes: Tod::TimeOfDay(17),
+                    timeable: FactoryBot.create(:building)).attributes
   end
 
   let(:invalid_attributes) do
@@ -85,7 +88,10 @@ RSpec.describe "/openingtimes", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_openingtime = Openingtime.new(day: 3, opens: Tod::TimeOfDay(10), closes: Tod::TimeOfDay(12), timeable: FactoryBot.create(:building))
+      new_openingtime = Openingtime.new(day: 3,
+                                        opens: Tod::TimeOfDay(10),
+                                        closes: Tod::TimeOfDay(12),
+                                        timeable: FactoryBot.create(:building))
       let(:new_attributes) do
         new_openingtime.attributes
       end

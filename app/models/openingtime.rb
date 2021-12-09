@@ -1,6 +1,8 @@
+# Fix to allow use of Tod::TimeOfDay in combination with time type in database
 ActiveModel::Type.register(:time_only, Tod::TimeOfDayType)
 ActiveRecord::Type.register(:time_only, Tod::TimeOfDayType)
 
+# Defines opening times for a day
 class Openingtime < ApplicationRecord
   belongs_to :timeable, polymorphic: true
   attribute :opens, :time_only
