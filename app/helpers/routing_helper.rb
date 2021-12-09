@@ -24,7 +24,7 @@ module RoutingHelper
       return nil unless response.code == 200
 
       JSON.parse(response.body)["routes"][0]
-    rescue Exception
+    rescue StandardError
       nil
     end
   end
