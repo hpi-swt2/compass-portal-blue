@@ -1,10 +1,12 @@
 # rubocop:disable Metrics/ModuleLength
 module Buildings
   UNIPOTSDAM_STYLING = {
-    color: "#dea93e"
+    color: "#dea93e",
+    className: "uni-potsdam-building building"
   }.freeze
   HPI_STYLING = {
-    color: "#eb34de"
+    color: "#eb34de",
+    className: "hpi-building building"
   }.freeze
   UNIPOTSDAM_POLYONGS = [
     [
