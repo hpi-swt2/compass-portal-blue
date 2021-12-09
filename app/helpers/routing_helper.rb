@@ -19,10 +19,15 @@ module RoutingHelper
     start_location = start.split(",")
     dest_location = destination.split(",")
     # The API requires long, lat instead of lat, long so we have to swap those
-    response = HTTParty.get("http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
-    return nil unless response.code == 200
-    json_response = JSON.parse(response.body)
-    json_response["routes"][0]
+    begin
+      response = HTTParty.get("http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
+      return nil unless response.code == 200
+
+      json_response = JSON.parse(response.body)
+      json_response["routes"][0]
+    rescue
+      nil
+    end
   end
 
   def self.transform_route_to_time_marker(route)
