@@ -7,12 +7,20 @@
 }
 
 .building-icon {
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 8px;
-  background: #eb34de;
-  border: 2px solid #eb34de;
-  color: #fff;
-  text-align: center;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: #eb34de;
+    border: 2px solid #eb34de;
+    color: #fff;
+    text-align: center;
+}
+
+.time-icon {
+    border-radius: 15%;
+    background: #3675af;
+    color: #fff;
+    padding: 8px;
+    text-align: center;
 }
