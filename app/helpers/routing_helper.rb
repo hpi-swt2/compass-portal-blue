@@ -7,7 +7,8 @@ module RoutingHelper
   end
 
   def self.valid_coordinates(coordinates)
-    return false unless coordinates.present?
+    return false if coordinates.blank?
+
     regex = /^[0-9]{1,2}\.[0-9]{1,6},[0-9]{1,2}\.[0-9]{1,6}$/
     coordinates.match(regex)
   end
