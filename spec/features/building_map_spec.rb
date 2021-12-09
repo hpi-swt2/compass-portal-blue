@@ -22,7 +22,7 @@ describe "Building Map page", type: :feature do
     expect(page).to have_selector("path.building", count: 15)
   end
 
-  it "should separate HPI and Uni-Potsdam buildings" do
+  it "separates HPI and Uni-Potsdam buildings" do
     visit building_map_path
     expect(page).to have_selector("path.hpi-building", count: 13)
     expect(page).to have_selector("path.uni-potsdam-building", count: 2)

@@ -7,7 +7,11 @@ module RoutingHelper
   end
 
   def self.calculate_route(start, destination)
-    if !(start.present? && destination.present?) # No route requested
+    unless (start.present? && destination.present?) # No route requested
+      return nil
+    end
+    regex = /^[0-9]{1,2}\.[0-9]{1,6}\,[0-9]{1,2}\.[0-9]{1,6}$/
+    unless (start.match(regex) && destination.match(regex))
       return nil
     end
     # The API request lat and long to be swapped.
