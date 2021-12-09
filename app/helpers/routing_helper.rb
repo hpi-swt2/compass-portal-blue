@@ -16,16 +16,20 @@ module RoutingHelper
   def self.calculate_route(start, destination)
     return nil unless valid_coordinates(start) && valid_coordinates(destination) # No route requested
 
-    # The API request lat and long to be swapped.
     start_location = start.split(",")
     dest_location = destination.split(",")
+    json_response = send_routing_request(start_location, dest_location)
+    json_response["routes"][0]
+  end
+
+  def self.send_routing_request(start_location, dest_location)
+    # The API request lat and long to be swapped.
     url = URI.parse("http://router.project-osrm.org/route/v1/foot/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
     end
-    json_response = JSON.parse(res.body)
-    json_response["routes"][0]
+    JSON.parse(res.body)
   end
 
   def self.transform_route_to_time_marker(route)
