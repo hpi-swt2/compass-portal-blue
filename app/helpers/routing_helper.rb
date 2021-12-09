@@ -24,7 +24,7 @@ module RoutingHelper
 
   def self.send_routing_request(start_location, dest_location)
     # The API request lat and long to be swapped.
-    url = URI.parse("http://router.project-osrm.org/route/v1/foot/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
+    url = URI.parse("http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
