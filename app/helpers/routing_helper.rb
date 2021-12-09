@@ -23,9 +23,8 @@ module RoutingHelper
       response = HTTParty.get("http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
       return nil unless response.code == 200
 
-      json_response = JSON.parse(response.body)
-      json_response["routes"][0]
-    rescue
+      JSON.parse(response.body)["routes"][0]
+    rescue HTTParty::ResponseError
       nil
     end
   end
