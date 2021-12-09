@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :people
   resources :rooms
   resources :openingtimes
   resources :buildings
