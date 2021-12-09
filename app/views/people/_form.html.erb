@@ -48,6 +48,14 @@
     <%= form.text_field :email, class: 'form-control' %>
   </div>
 
+  <div class="field mb-3">
+    <%= form.label :rooms, class: 'form-label' %><br/>
+    <%= form.select 'rooms',
+      options_from_collection_for_select(Room.all, :id, :name, person.rooms),
+      {},
+      multiple: true %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
