@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :rooms
   resources :openingtimes
   resources :buildings
+  resources :locations
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # '/users/...'
@@ -12,13 +13,11 @@ Rails.application.routes.draw do
       registrations: 'users/registrations',
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
-  resources :users, only: [:show]
+
   # '/login'
   get '/login', to: 'welcome#login'
 
   get '/building_map', to: 'building_map#index'
-
-  get '/locations', to: 'location#index'
 
   # '/search_results'
   get '/search_results', to: 'search_results#index'
