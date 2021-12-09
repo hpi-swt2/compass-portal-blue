@@ -3,7 +3,7 @@ require 'json'
 
 module RoutingHelper
   def self.seconds_to_minsec(sec)
-    format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60 % 60, seconds: sec % 60)
+    format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
 
   def self.valid_coordinates(coordinates)
