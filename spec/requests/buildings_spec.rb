@@ -17,11 +17,11 @@ RSpec.describe "/buildings", type: :request do
   # Building. As you add validations to Building, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    Building.new(name: "Main Building", location_longitude: -180, location_latitude: -90).attributes
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    Building.new(name: "does not exist", location_longitude: -1000, location_latitude: 500).attributes
   end
 
   describe "GET /index" do
@@ -78,7 +78,7 @@ RSpec.describe "/buildings", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post buildings_url, params: { building: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe "/buildings", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         building = Building.create! valid_attributes
         patch building_url(building), params: { building: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

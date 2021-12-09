@@ -17,11 +17,11 @@ RSpec.describe "/rooms", type: :request do
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    Room.new(name: "H-2.57", floor: "2", room_type: "Seminar", building: (FactoryBot.create(:building))).attributes
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    Room.new().attributes
   end
 
   describe "GET /index" do
@@ -78,22 +78,26 @@ RSpec.describe "/rooms", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post rooms_url, params: { room: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
+      new_room = Room.new(name: "H-E.51", floor: "E", room_type: "Seminar", building: (FactoryBot.create(:building)))
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        new_room.attributes
       end
 
       it "updates the requested room" do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: new_attributes }
         room.reload
-        skip("Add assertions for updated state")
+        expect(room.name).to eq(new_room.name)
+        expect(room.floor).to eq(new_room.floor)
+        expect(room.room_type).to eq(new_room.room_type)
+        expect(room.building).to eq(new_room.building)
       end
 
       it "redirects to the room" do
@@ -108,7 +112,7 @@ RSpec.describe "/rooms", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
