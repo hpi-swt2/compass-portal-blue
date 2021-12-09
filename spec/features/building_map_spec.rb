@@ -42,8 +42,8 @@ describe "Building Map page", type: :feature do
 
   it "shows no route, if it's not requested", js: true do
     visit building_map_path
-    expect(page).to_not have_css(".routing-path")
-    expect(page).to_not have_css(".time-icon")
+    expect(page).not_to have_css(".routing-path")
+    expect(page).not_to have_css(".time-icon")
   end
 
   it "shows the time of a calculated route", js: true do
