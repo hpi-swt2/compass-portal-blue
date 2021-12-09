@@ -38,5 +38,18 @@
   <%= @location.location_longitude %>
 </p>
 
+<p>
+  <strong>Opening Hours</strong>
+  <%= @location.openingtimes %>
+</p>
+
+<p>
+  <strong>Opening Times</strong>
+  <% @location.openingtimes.each do |openingtime| %>
+    <%= openingtimes.opens %> <br>
+    <%= openingtimes.closes %> <br>
+    <% end %>
+</p>
+
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
