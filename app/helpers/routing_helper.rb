@@ -6,16 +6,19 @@ module RoutingHelper
     format("%02d:%02d", sec / 60 % 60, sec % 60)
   end
 
-  def self.calculate_route(start, destination)
-    return nil unless start.present? && destination.present? # No route requested
-
+  def self.valid_coordinates(coordinates)
+    return false unless coordinates.present?
     regex = /^[0-9]{1,2}\.[0-9]{1,6},[0-9]{1,2}\.[0-9]{1,6}$/
-    return nil unless start.match(regex) && destination.match(regex)
+    coordinates.match(regex)
+  end
+
+  def self.calculate_route(start, destination)
+    return nil unless self.valid_coordinates(start) && self.valid_coordinates(destination) # No route requested
 
     # The API request lat and long to be swapped.
-    startLocation = start.split(",")
-    destLocation = destination.split(",")
-    url = URI.parse("http://router.project-osrm.org/route/v1/foot/#{startLocation[1]},#{startLocation[0]};#{destLocation[1]},#{destLocation[0]}?overview=full&geometries=geojson")
+    start_location = start.split(",")
+    dest_location = destination.split(",")
+    url = URI.parse("http://router.project-osrm.org/route/v1/foot/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) do |http|
       http.request(req)
@@ -27,13 +30,12 @@ module RoutingHelper
   def self.transform_route_to_time_marker(route)
     return [] unless route
 
-    walking_time = route["duration"]
-    pretty_time = seconds_to_minsec(walking_time)
+    walking_time = seconds_to_minsec(route["duration"])
     start = route["geometry"]["coordinates"][0]
     [{
       latlng: [start.second, start.first],
       div_icon: {
-        html: pretty_time,
+        html: walking_time,
         class_name: "time-icon"
       }
     }]
