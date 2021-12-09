@@ -1,5 +1,7 @@
 # The model representing a user who can log in
 class User < ApplicationRecord
+  belongs_to :person, :dependent => :destroy
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -10,7 +12,13 @@ class User < ApplicationRecord
          :omniauthable,
          omniauth_providers: %i[openid_connect]
 
-
+  def initialize(attributes = {})
+    super(attributes)
+    if(person.nil?)
+      person = Person.new
+      person.email = email
+    end
+  end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
@@ -24,7 +32,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
 
       read_auth_data_into_user(user, auth)
-
     end
   end
 
@@ -43,10 +50,11 @@ class User < ApplicationRecord
   private
 
   private_class_method def self.read_auth_data_into_user(user, auth)
-    #user.email = auth.info.email
+    user.email = auth.info.email
     user.username = auth.info.name
-    #user.first_name = auth.info.first_name
-    #user.last_name = auth.info.last_name
+    user.person = Person.new
+    user.person.first_name = auth.info.first_name
+    user.person.last_name = auth.info.last_name
+    user.person.email = auth.info.email
   end
-
 end
