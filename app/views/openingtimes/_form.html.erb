@@ -28,16 +28,16 @@
 
     <h2>WARNING:</h2>
     <p>This page is in a temporary state to enable filling the database for development.
-    Currently every openingtime gets assigned to a User (which can be selected in the following input field).
+    Currently every openingtime gets assigned to a Person (which can be selected in the following input field).
     If you want to create an openingtime entry associated with a building make sure the :timeable_type attribute is set to Building.</p>
    <div>
     <%= form.label :timeable_id %>
             <%= form.select 'timeable_id',
-              options_from_collection_for_select(User.all, :id, :username),
+              options_from_collection_for_select(Person.all, :id, :name),
               {},
               multiple: false %>
     </div>
-    <% openingtime.timeable_type = 'User' %>
+    <% openingtime.timeable_type = 'Person' %>
     <%= form.hidden_field :timeable_type%>
 
   <div class="actions">
