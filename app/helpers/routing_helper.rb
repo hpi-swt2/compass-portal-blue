@@ -24,7 +24,7 @@ module RoutingHelper
       return nil unless response.code == 200
 
       JSON.parse(response.body)["routes"][0]
-    rescue HTTParty::ResponseError
+    rescue Exception
       nil
     end
   end
