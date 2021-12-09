@@ -85,15 +85,18 @@ RSpec.describe "/buildings", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
+      new_building = Building.new(name: "ABC", location_longitude: 12, location_latitude: 13)
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        new_building.attributes
       end
 
       it "updates the requested building" do
         building = Building.create! valid_attributes
         patch building_url(building), params: { building: new_attributes }
         building.reload
-        skip("Add assertions for updated state")
+        expect(building.name).to eq(new_building.name)
+        expect(building.location_longitude).to eq(new_building.location_longitude)
+        expect(building.location_latitude).to eq(new_building.location_latitude)
       end
 
       it "redirects to the building" do
