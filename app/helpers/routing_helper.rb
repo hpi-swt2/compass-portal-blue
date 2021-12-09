@@ -3,7 +3,7 @@ require 'json'
 
 module RoutingHelper
   def self.seconds_to_minsec(sec)
-    format("%02d:%02d", sec / 60 % 60, sec % 60)
+    format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60 % 60, seconds: sec % 60)
   end
 
   def self.valid_coordinates(coordinates)
@@ -14,7 +14,7 @@ module RoutingHelper
   end
 
   def self.calculate_route(start, destination)
-    return nil unless self.valid_coordinates(start) && self.valid_coordinates(destination) # No route requested
+    return nil unless valid_coordinates(start) && valid_coordinates(destination) # No route requested
 
     # The API request lat and long to be swapped.
     start_location = start.split(",")
