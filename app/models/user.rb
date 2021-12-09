@@ -1,6 +1,6 @@
 # The model representing a user who can log in
 class User < ApplicationRecord
-  belongs_to :person, :dependent => :destroy
+  belongs_to :person, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   def initialize(attributes = {})
     super(attributes)
-    if(person.nil?)
+    if person.nil?
       person = Person.new
       person.email = email
     end
@@ -34,7 +34,6 @@ class User < ApplicationRecord
       read_auth_data_into_user(user, auth)
     end
   end
-
 
   # https://github.com/heartcombo/devise/wiki/OmniAuth:-Overview
   # Implement the following if you want to enable copying over data from an

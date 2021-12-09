@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "people/show", type: :view do
-  before(:each) do
+  before do
     @person = assign(:person, Person.create!(
-      phone_number: "Phone Number",
-      first_name: "First Name",
-      last_name: "Last Name",
-      email: "Email"
-    ))
+                                phone_number: "Phone Number",
+                                first_name: "First Name",
+                                last_name: "Last Name",
+                                email: "Email"
+                              ))
   end
 
   it "renders attributes in <p>" do

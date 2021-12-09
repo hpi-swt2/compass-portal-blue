@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "people/index", type: :view do
-  before(:each) do
+  before do
     assign(:people, [
-      Person.create!(
-        phone_number: "Phone Number",
-        first_name: "First Name",
-        last_name: "Last Name",
-        email: "Email"
-      ),
-      Person.create!(
-        phone_number: "Phone Number",
-        first_name: "First Name",
-        last_name: "Last Name",
-        email: "Email"
-      )
-    ])
+             Person.create!(
+               phone_number: "Phone Number",
+               first_name: "First Name",
+               last_name: "Last Name",
+               email: "Email"
+             ),
+             Person.create!(
+               phone_number: "Phone Number",
+               first_name: "First Name",
+               last_name: "Last Name",
+               email: "Email"
+             )
+           ])
   end
 
   it "renders a list of people" do

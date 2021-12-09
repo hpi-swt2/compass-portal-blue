@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "people/new", type: :view do
-  before(:each) do
+  before do
     assign(:person, Person.new(
-      phone_number: "MyString",
-      first_name: "MyString",
-      last_name: "MyString",
-      email: "MyString"
-    ))
+                      phone_number: "MyString",
+                      first_name: "MyString",
+                      last_name: "MyString",
+                      email: "MyString"
+                    ))
   end
 
   it "renders new person form" do
