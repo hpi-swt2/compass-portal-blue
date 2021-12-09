@@ -1,4 +1,4 @@
-require 'net/http'
+require 'httparty'
 require 'json'
 
 module RoutingHelper
@@ -18,18 +18,11 @@ module RoutingHelper
 
     start_location = start.split(",")
     dest_location = destination.split(",")
-    json_response = send_routing_request(start_location, dest_location)
+    # The API requires long, lat instead of lat, long so we have to swap those
+    response = HTTParty.get("http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
+    return nil unless response.code == 200
+    json_response = JSON.parse(response.body)
     json_response["routes"][0]
-  end
-
-  def self.send_routing_request(start_location, dest_location)
-    # The API request lat and long to be swapped.
-    url = URI.parse("http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson")
-    req = Net::HTTP::Get.new(url.to_s)
-    res = Net::HTTP.start(url.host, url.port) do |http|
-      http.request(req)
-    end
-    JSON.parse(res.body)
   end
 
   def self.transform_route_to_time_marker(route)
