@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_125451) do
+ActiveRecord::Schema.define(version: 2021_12_09_132545) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "location_latitude"
+    t.float "location_longitude"
+  end
+
   create_table "openingtimes", force: :cascade do |t|
     t.time "opens"
     t.time "closes"
@@ -59,30 +68,24 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.index ["timeable_type", "timeable_id"], name: "index_openingtimes_on_timeable"
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string "phone_number"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "people_rooms", id: false, force: :cascade do |t|
-    t.integer "person_id", null: false
-    t.integer "room_id", null: false
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.string "name"
-    t.integer "floor"
+    t.string "floor"
     t.string "room_type"
+    t.string "contact_person"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "building_id"
     t.integer "user_id"
     t.index ["building_id"], name: "index_rooms_on_building_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
+  end
+
+  create_table "rooms_users", id: false, force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+    t.index ["room_id", "user_id"], name: "index_rooms_users_on_room_id_and_user_id"
+    t.index ["user_id", "room_id"], name: "index_rooms_users_on_user_id_and_room_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,9 +99,10 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.string "provider"
     t.string "uid"
     t.string "username"
-    t.integer "person_id"
+    t.string "phone_number"
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -106,5 +110,4 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "rooms", "users"
-  add_foreign_key "users", "people"
 end

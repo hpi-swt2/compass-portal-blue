@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get '/building_map', to: 'building_map#index'
 
+  get '/locations', to: 'location#index'
+
   # '/search_results'
   get '/search_results', to: 'search_results#index'
 

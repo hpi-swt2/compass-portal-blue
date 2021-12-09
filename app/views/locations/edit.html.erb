@@ -1,0 +1,51 @@
+<h1>Editing Location</h1>
+
+<%= form_with(model: @location, local: true) do |form| %>
+    <% if @location.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+  
+        <ul>
+          <% @location.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :details %>
+      <%= form.text_field :details %>
+    </div>
+  
+    <div class="field">
+      <%= form.label :location_photo %>
+      <%= form.file_field :location_photo %>
+    </div>
+
+    <div class="field">
+      <%= form.label :location_latitude %>
+      <%= form.number_field :location_latitude %>
+    </div>
+
+    <div class="field">
+      <%= form.label :location_longitude %>
+      <%= form.number_field :location_longitude %>
+    </div>
+
+    # <div class="field">
+    # <%= form.label :opening_hours %>
+    # <%= form.text_field :opening_hours, value: @location.opening_hours.strftime("%d-%m-%Y") %>
+    # </div>
+  
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+<% end %>
+<%= link_to 'Show', @location %> |
+<%= link_to 'Back', locations_path %>

@@ -8,8 +8,9 @@
       <th>Name</th>
       <th>Details</th>
       <th>Photo</th>
-      <th>Opening Hours</th>
-      <th>Map</th>
+      # <th>Opening Hours</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
       <th colspan="5"></th>
       <th></th>
     </tr>
@@ -21,8 +22,9 @@
         <td><%= location.name %></td>
         <td><%= location.details %></td>
         <td><%= location.location_photo %></td>
-        <td><%= location.opening_hours %></td>
-        <td><%= location.map %></td>
+        # <td><%= location.opening_hours %></td>
+        <td><%= location.location_latitude %></td>
+        <td><%= location.location_longitude %></td>
         <td><%= link_to 'Show', location %></td>
         <td><%= link_to 'Edit', edit_location_path(location) %></td>
         <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>

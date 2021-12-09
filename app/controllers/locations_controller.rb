@@ -16,7 +16,8 @@ class LocationsController < ApplicationController
     end
   
     # GET /locations/1/edit
-    def edit; end
+    def edit
+    end
   
     # POST /locations or /locations.json
     def create
@@ -64,7 +65,7 @@ class LocationsController < ApplicationController
   
     # Only allow a list of trusted parameters through.
     def location_params
-      params.require(:location).permit(:name, :location_latitude, :location_longitude, :details)
+      params.require(:location).permit(:name, :details, :location_latitude, :location_longitude)
     end
   end
   
