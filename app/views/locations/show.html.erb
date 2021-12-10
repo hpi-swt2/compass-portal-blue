@@ -39,7 +39,7 @@
 </p>
 
 <p>
-  <strong>Opening Hours</strong>
+  <strong>Opening Times</strong>
   <%= @location.openingtimes %>
 </p>
 
@@ -48,6 +48,7 @@
   <% @location.openingtimes.each do |openingtime| %>
     <%= openingtimes.opens %> <br>
     <%= openingtimes.closes %> <br>
+    <%= openingtimes.day %> <br>
     <% end %>
 </p>
 

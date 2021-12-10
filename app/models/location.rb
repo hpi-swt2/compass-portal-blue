@@ -6,13 +6,10 @@ class Location < ApplicationRecord
   accepts_nested_attributes_for :openingtimes, allow_destroy: true
 
   def self.location_photo()  
-      user.profile_picture.attach(
+      location.location_photo.attach(
         io: File.open('app/assets/images/default-location-photo.png'),
         filename: 'default-location-photo.png',
         content_type: 'image/png'
       )
   end
 end
-  
-
-  
