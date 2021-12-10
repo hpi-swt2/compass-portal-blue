@@ -2,19 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "people/show", type: :view do
   before do
-    @person = assign(:person, Person.create!(
-                                phone_number: "Phone Number",
-                                first_name: "First Name",
-                                last_name: "Last Name",
-                                email: "Email"
-                              ))
+    @person = create :person
   end
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/Phone Number/)
-    expect(rendered).to match(/First Name/)
-    expect(rendered).to match(/Last Name/)
-    expect(rendered).to match(/Email/)
+    expect(rendered).to match(/\+4990909090/)
+    expect(rendered).to match(/Herbert/)
+    expect(rendered).to match(/Herbertson/)
+    expect(rendered).to match(/herbert.herbertson@hpi.de/)
   end
 end

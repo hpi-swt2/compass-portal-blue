@@ -35,11 +35,6 @@ RSpec.describe "Person details page", type: :feature do
     expect(page).to have_css "img[alt='#{filename}']"
   end
 
-  it "includes an input field to change the personname which displays the current personname" do
-    visit edit_person_path(@person)
-    expect(page).to have_field('person[personname]', with: @person.personname)
-  end
-
   it "includes an input field to change the first name" do
     visit edit_person_path(@person)
     expect(page).to have_field('person[first_name]')
