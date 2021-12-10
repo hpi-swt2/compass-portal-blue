@@ -114,7 +114,7 @@ RSpec.describe "/openingtimes", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'edit' template)" do
         openingtime = Openingtime.create! valid_attributes
         patch openingtime_url(openingtime), params: { openingtime: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
