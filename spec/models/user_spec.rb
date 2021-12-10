@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
     let(:user) { User.new(email: "herbert.herbertson@hpi.de") }
 
     it "has a person with matching email" do
-      expect(user.person).to_not be_nil
+      expect(user.person).not_to be_nil
       expect(user.person.email).to eq("herbert.herbertson@hpi.de")
     end
   end

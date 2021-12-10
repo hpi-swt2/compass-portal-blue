@@ -17,7 +17,8 @@ RSpec.describe "/people", type: :request do
   # Person. As you add validations to Person, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Person.new(first_name: "Herbert", last_name: "Herbertson", phone_number: "+4990909090", email: "herbert.herbertson@hpi.de").attributes
+    Person.new(first_name: "Herbert", last_name: "Herbertson", phone_number: "+4990909090",
+               email: "herbert.herbertson@hpi.de").attributes
   end
 
   let(:invalid_attributes) do
@@ -85,7 +86,8 @@ RSpec.describe "/people", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_person = Person.new(first_name: "Max", last_name: "Mustermann", phone_number: "+4989123456789", email: "max@mustermann.de")
+      new_person = Person.new(first_name: "Max", last_name: "Mustermann", phone_number: "+4989123456789",
+                              email: "max@mustermann.de")
       let(:new_attributes) do
         new_person.attributes
       end
