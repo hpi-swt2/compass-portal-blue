@@ -6,7 +6,7 @@ RSpec.describe "rooms/show", type: :view do
     @users = [(create :user)]
     @room = assign(:room, Room.create!(
                             name: "Name",
-                            floor: "Floor",
+                            floor: 0,
                             room_type: "Room Type",
                             users: @users,
                             building: @building

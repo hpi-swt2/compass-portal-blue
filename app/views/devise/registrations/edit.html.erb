@@ -61,9 +61,9 @@
         <%= f.fields_for :openingtimes do |o| %>
             <div class="field" id="opening-time-field-<%= o.object.id %>">
                 <%= o.number_field :day %>
-                <%= o.time_select :opens %>
+                <%= o.time_field :opens %>
                 <span>-</span>
-                <%= o.time_select :closes %>
+                <%= o.time_field :closes %>
                 <%= link_to(openingtime_path(o.object.id), :method => :delete, :class => 'btn btn-mini',
                     :remote => true, :onclick => "$('#opening-time-field-#{o.object.id}')[0].remove()") do %>
                 <i class="fas fa-trash"></i>

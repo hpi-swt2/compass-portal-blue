@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe "openingtimes/new", type: :view do
   before do
     assign(:openingtime, Openingtime.new(
-                           day: 1
+                           day: 1,
+                           opens: Tod::TimeOfDay.new(8, 0),
+                           closes: Tod::TimeOfDay.new(17, 0)
                          ))
   end
 

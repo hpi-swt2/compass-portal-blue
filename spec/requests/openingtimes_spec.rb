@@ -17,11 +17,14 @@ RSpec.describe "/openingtimes", type: :request do
   # Openingtime. As you add validations to Openingtime, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    Openingtime.new(day: 6,
+                    opens: Tod::TimeOfDay(8),
+                    closes: Tod::TimeOfDay(17),
+                    timeable: FactoryBot.create(:building)).attributes
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    Openingtime.new(day: 7, opens: Tod::TimeOfDay(8), closes: Tod::TimeOfDay(17)).attributes
   end
 
   describe "GET /index" do
@@ -76,24 +79,30 @@ RSpec.describe "/openingtimes", type: :request do
         end.to change(Openingtime, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
         post openingtimes_url, params: { openingtime: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
+      new_openingtime = Openingtime.new(day: 3,
+                                        opens: Tod::TimeOfDay(10),
+                                        closes: Tod::TimeOfDay(12),
+                                        timeable: FactoryBot.create(:building))
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        new_openingtime.attributes
       end
 
       it "updates the requested openingtime" do
         openingtime = Openingtime.create! valid_attributes
         patch openingtime_url(openingtime), params: { openingtime: new_attributes }
         openingtime.reload
-        skip("Add assertions for updated state")
+        expect(openingtime.day).to eq(new_openingtime.day)
+        expect(openingtime.opens).to eq(new_openingtime.opens)
+        expect(openingtime.closes).to eq(new_openingtime.closes)
       end
 
       it "redirects to the openingtime" do
@@ -105,10 +114,10 @@ RSpec.describe "/openingtimes", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'edit' template)" do
         openingtime = Openingtime.create! valid_attributes
         patch openingtime_url(openingtime), params: { openingtime: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
