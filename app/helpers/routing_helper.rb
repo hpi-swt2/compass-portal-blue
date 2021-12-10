@@ -6,7 +6,7 @@ module RoutingHelper
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
 
-  def self.valid_coordinates(coordinates)
+  def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
     regex = /^-?\d{1,2}(\.\d{1,8})?,-?\d{1,2}(\.\d{1,8})?$/
@@ -20,7 +20,7 @@ module RoutingHelper
   end
 
   def self.calculate_route(start, destination)
-    return unless valid_coordinates(start) && valid_coordinates(destination)
+    return unless valid_coordinates?(start) && valid_coordinates?(destination)
 
     begin
       response = HTTParty.get(routing_url(start, destination))
