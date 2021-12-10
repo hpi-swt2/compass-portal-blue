@@ -73,10 +73,39 @@
 
 </div>
 
+<script> function myJsonParse(str){
+  var ret = [];
+  str = str.substring(1, str.length - 1);
+  pairs = str.split(",");
+  for(i = 0; i < pairs.length; i++){
+    sub = pairs[i].substring(1, pairs[i].length - 1);
+    subsub = pairs[i].split('"');
+    key = subsub[1];
+    value = subsub[3];
+    ret.push(key);
+    ret.push(value);
+  }
+  return ret;
+}
 
-
+</script>
 <script>
   function getLocalHistory(parent){
+  var historyCookie = getCookie("compassHistory");
+  var history = JSON.parse(historyCookie);
+  i = 1;
+  for(var element in history) {
+    td_id = "history" + i;
+    td = document.getElementById(td_id);
+    atitle = document.createElement("a");
+    atitle.text = element;
+    td.appendChild(atitle);
+    alink = document.createElement("a");
+    alinks.href = history[element];
+    td.appendChild(alink);
+    i = i+1;
+  }
+
   element = document.getElementById("historyDiv");
   element.style.visibility = "hidden";
   return;
@@ -92,24 +121,4 @@
     selectList.appendChild(option);
   }
   }
-</script>
-<script>
-alert("doing");
-  historyCookie = getCookie("compassHistory");
-  history = JSON.parse(historyCookie);
-  alert(JSON.stringify(history));
-  i = 1;
-  for(var element in history) {
-    alert(element);
-    td_id = "history" + i;
-    td = document.getElementById(td_id);
-    atitle = document.createElement("a");
-    atitle.text = element;
-    td.appendChild(atitle);
-    alink = document.createElement("a");
-    alinks.href = history[element];
-    td.appendChild(alink);
-    i = i+1;
-  }
-  alert("done");
 </script>

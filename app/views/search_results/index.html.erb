@@ -53,10 +53,12 @@
     title = element.text;
     link = element.href;
     prev = getCookie("compassHistory");
+    alert(prev);
     if(prev == ""){
       prev = "{}";
     } 
     current = JSON.parse(prev);
+    alert(current);
     current_2 = {};
     current_2[title] = link;
 
@@ -69,7 +71,8 @@
         current_2[j] = current[j];
       }
     
-    document.cookie = "compassHistory=" + JSON.stringify(current_2);
+    document.cookie = "compassHistory=" + JSON.stringify(current_2) + "; path=/";
+    alert(JSON.stringify(current_2));
   } 
 </script>
 
