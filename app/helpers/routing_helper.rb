@@ -50,8 +50,8 @@ module RoutingHelper
   def self.transform_route_to_polyline(route)
     return [] unless route
 
-    coordinates = route["geometry"]["coordinates"].map do |coordinate|
-      [coordinate.second, coordinate.first]
+    coordinates = route["geometry"]["coordinates"].map do |(long, lat)|
+      [lat, long]
     end
     [{ latlngs: coordinates, options: { className: "routing-path" } }]
   end
