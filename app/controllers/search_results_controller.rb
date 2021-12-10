@@ -62,14 +62,14 @@ class SearchResultsController < ApplicationController
       @result_id += 1
     end
   end
-  
+
   def search_for_users
     User.all.each do |user|
-    	@search_results.append(SearchResult.new(
-    				id: @result_id,
-    				title: user.first_name + ' ' + user.last_name,
-    				link: user_path(user)
-    				))
+      @search_results.append(SearchResult.new(
+                               id: @result_id,
+                               title: user.first_name + ' ' + user.last_name,
+                               link: user_path(user)
+                             ))
     	@result_id += 1
     end
   end
