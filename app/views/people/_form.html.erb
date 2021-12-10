@@ -61,19 +61,28 @@
     <%= form.fields_for :openingtimes do |o| %>
       <div class="field" id="opening-time-field-<%= o.object.id %>">
         <%= o.select 'day',
-            options_for_select({'Monday' => 1, 'Tuesday' => 2, 'Wednesday' => 3, 'Thursday' => 4, 'Friday' => 5, 'Saturday' => 6, 'Sunday' => 7}, o.object.day),
+            options_for_select({'Monday' => 0,
+                                'Tuesday' => 1,
+                                'Wednesday' => 2,
+                                'Thursday' => 3,
+                                'Friday' => 4,
+                                'Saturday' => 5,
+                                'Sunday' => 6
+                               }, o.object.day),
             {},
             multiple: false %>
-        <%= o.time_field :opens %>
+        <%= o.time_field :opens, value: o.object.opens%>
         <span>-</span>
-        <%= o.time_field :closes %>
+        <%= o.time_field :closes, value: o.object.closes%>
         <%= link_to(openingtime_path(o.object.id), :method => :delete, :class => 'btn btn-mini',
-                    :remote => true, :onclick => "$('#opening-time-field-#{o.object.id}')[0].remove()") do %>
+                    :remote => true, :onclick =>
+                      "{$('#opening-time-field-#{o.object.id}').next().remove();
+                       $('#opening-time-field-#{o.object.id}')[0].remove()}") do %>
           <i class="fas fa-trash"></i>
         <% end %>
       </div>
     <% end %>
-    <%#<button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add opening time</button>%>
+    <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add opening time</button>
   </div>
 
   <div class="actions mt-3">
@@ -90,26 +99,20 @@
       })
 
       const addNewOpeningTime = (target) => {
-          $(`<div class="field">
-           <input type="number" name="user[openingtimes_attributes][-1][day]">
-           <select name="user[openingtimes_attributes][-1][opens(4i)]">
-           ${Array(24).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
-           </select>
-           :
-           <select name="user[openingtimes_attributes][-1][opens(5i)]">
-           ${Array(60).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
-           </select>
+          $(`<div class="field" id="opening-time-field-new">
+           <select name="person[openingtimes_attributes][-1][day]" id="opening-time-field-new">
+                  <option value="0">Monday</option>
+                  <option value="1">Tuesday</option>
+                  <option value="2">Wednesday</option>
+                  <option value="3">Thursday</option>
+                  <option value="4">Friday</option>
+                  <option value="5">Saturday</option>
+                  <option value="6">Sunday</option></select>
+           <input type="time" name="person[openingtimes_attributes][-1][opens]" id="opening-time-field-new">
            <span>-</span>
-           <select name="user[openingtimes_attributes][-1][closes(4i)]">
-           ${Array(24).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
-           </select>
-           :
-           <select name="user[openingtimes_attributes][-1][closes(5i)]">
-           ${Array(60).fill(0).map((_, i) => `<option value="${i}">${("0" + i).slice(-2)}</option>`).join('')}
-           </select>
-           <a class="btn btn-mini" onclick="$('#opening-time-field-17')[-1].remove()" data-remote="true" rel="nofollow" href="/openingtimes/17">
-           <svg class="svg-inline--fa fa-trash fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>
-           </a></div>`).insertBefore(target);
+           <input type="time" name="person[openingtimes_attributes][-1][closes]" id="opening-time-field-new">
+           </div>`).insertBefore(target);
+          target.remove();
       }
   </script>
 <% end %>
