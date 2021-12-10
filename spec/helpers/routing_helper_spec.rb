@@ -40,4 +40,10 @@ describe "Routing helper", type: :helper do
       expect(HTTParty).to have_received(:get).once
     end
   end
+
+  it "displays time as minutes and seconds" do
+    expect(RoutingHelper.format_seconds_as_minsec(514)).to match(/\d{2,}:\d{2}/)
+    expect(RoutingHelper.format_seconds_as_minsec(514)).to eq "08:34"
+    expect(RoutingHelper.format_seconds_as_minsec(30)).to eq "00:30"
+  end
 end

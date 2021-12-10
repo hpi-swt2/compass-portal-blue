@@ -20,15 +20,15 @@ module RoutingHelper
   end
 
   def self.calculate_route(start, destination)
-    return nil unless valid_coordinates(start) && valid_coordinates(destination) # No route requested
+    return unless valid_coordinates(start) && valid_coordinates(destination)
 
     begin
       response = HTTParty.get(routing_url(start, destination))
-      return nil unless response.code == 200
+      return unless response.code == 200 # OPTIMIZE give User feedback
 
       JSON.parse(response.body)["routes"][0]
     rescue StandardError
-      nil
+      return # OPTIMIZE give User feedback
     end
   end
 
@@ -47,11 +47,11 @@ module RoutingHelper
   end
 
   def self.transform_route_to_polyline(route)
-    return [] unless route
+    return unless route
 
     coordinates = route["geometry"]["coordinates"].map do |(long, lat)|
       [lat, long]
     end
-    [{ latlngs: coordinates, options: { className: "routing-path" } }]
+    { latlngs: coordinates, options: { className: "routing-path" } }
   end
 end
