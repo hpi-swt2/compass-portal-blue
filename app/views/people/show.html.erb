@@ -1,9 +1,19 @@
+<h1>Here are the Person's details!</h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @person.phone_number %>
-</p>
+<div class="edit-profile-picture">
+  <strong>Profile picture:</strong>
+  <div class='profile-picture-wrapper'>
+    <div class='profile-picture-container'>
+      <% if @person.profile_picture.attached? %>
+        <img src="<%=(url_for(@person.profile_picture))%>" alt="<%= @person.profile_picture.filename %>"/>
+      <% else %>
+        <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
+      <% end %>
+    </div>
+  </div>
+</div>
+
 
 <p>
   <strong>First name:</strong>
@@ -18,6 +28,11 @@
 <p>
   <strong>Email:</strong>
   <%= @person.email %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @person.phone_number %>
 </p>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
