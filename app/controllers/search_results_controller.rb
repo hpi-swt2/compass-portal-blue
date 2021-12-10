@@ -5,9 +5,12 @@ class SearchResultsController < ApplicationController
   def index
     @search_results ||= []
     @result_id = 1
+    return if params[:query].nil?
+    query = params[:query].strip
+    return if query.blank?
 
-    search_for_buildings
-    search_for_rooms
+    search_for_entries_starting_with query
+    search_for_entries_including query
 
     @search_results = @search_results.uniq(&:id)
   end
@@ -40,24 +43,40 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
-  def search_for_buildings
-    Building.all.each do |building|
+  def search_for_entries_starting_with(query)
+    buildings = Building.where("name LIKE ?", "#{query}%")
+    rooms = Room.where("name LIKE ?", "#{query}%")
+    add_buildings(buildings)
+    add_rooms(rooms)
+  end
+
+  def search_for_entries_including(query)
+    buildings = Building.where("name LIKE ?","_%#{query}%")
+    rooms = Room.where("name LIKE ?","_%#{query}%")
+    add_rooms(rooms)
+    add_buildings(buildings)
+  end
+
+  def add_rooms(rooms)
+    rooms.each do |room|
       @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: building.name,
-                               link: building_path(building)
-                             ))
+                              id: @result_id,
+                              title: room.name,
+                              link: room_path(room),
+                              description: room.room_type + " on floor " + room.floor + " of " + room.building.name
+                            ))
       @result_id += 1
     end
   end
 
-  def search_for_rooms
-    Room.all.each do |room|
+  def add_buildings(buildings)
+    buildings.each do |building|
       @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: room.name,
-                               link: room_path(room)
-                             ))
+                              id: @result_id,
+                              title: building.name,
+                              link: building_path(building),
+                              description: "Building"
+                            ))
       @result_id += 1
     end
   end
