@@ -63,7 +63,7 @@ class SearchResultsController < ApplicationController
                               id: @result_id,
                               title: room.name,
                               link: room_path(room),
-                              description: room.room_type + " on floor " + room.floor + " of " + room.building.name
+                              description: room.room_type + " on floor " + room.floor.to_s + " of " + room.building.name
                             ))
       @result_id += 1
     end
