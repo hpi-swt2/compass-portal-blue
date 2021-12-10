@@ -21,7 +21,11 @@
       <tr>
         <td><%= location.name %></td>
         <td><%= location.details %></td>
-        <td><img src=location.location_photo></td>
+        <td><% if location.location_photo.attached? %>
+              <img src="<%=(url_for(location.location_photo))%>" alt="<%= location.location_photo.filename %>" height="30"/>
+            <% else %>
+              <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo" height="30">
+            <% end %></td>
         <td><%= location.location_latitude %></td>
         <td><%= location.location_longitude %></td>
         <td><%= location.openingtimes %></td>

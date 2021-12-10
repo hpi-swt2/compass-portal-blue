@@ -65,10 +65,6 @@ class LocationsController < ApplicationController
   
     # Only allow a list of trusted parameters through.
     def location_params
-<<<<<<< Updated upstream
       params.require(:location).permit(:name, :details, :location_latitude, :location_longitude, :location_photo)
-=======
-      params.require(:location).permit(:name, :details, :location_latitude, :location_longitude, :location_photo, :openingtimes.day)
->>>>>>> Stashed changes
     end
   end
