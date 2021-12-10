@@ -79,7 +79,7 @@ RSpec.describe "/openingtimes", type: :request do
         end.to change(Openingtime, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
         post openingtimes_url, params: { openingtime: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
