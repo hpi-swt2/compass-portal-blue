@@ -14,10 +14,9 @@ module RoutingHelper
   end
 
   def self.routing_url(start, destination)
-    start_location = start.split(",")
-    dest_location = destination.split(",")
-    # The API requires long, lat instead of lat, long so we have to swap those
-    "http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_location[1]},#{start_location[0]};#{dest_location[1]},#{dest_location[0]}?overview=full&geometries=geojson"
+    (start_lat, start_long) = start.split(",")
+    (dest_lat, dest_long) = destination.split(",")
+    "http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_long},#{start_lat};#{dest_long},#{dest_lat}?overview=full&geometries=geojson"
   end
 
   def self.calculate_route(start, destination)
