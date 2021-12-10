@@ -1,4 +1,13 @@
 <h1>Here are the location's details!</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @location.details %>
+</p>
 
 <div class="edit-location-photo">
   <strong>Location photo:</strong>
@@ -14,37 +23,33 @@
 </div>
 
 <p>
-  <strong>Name</strong>
-  <%= @location.name %>
-</p>
-
-<p>
-  <strong>Details</strong>
-  <%= @location.details %>
-</p>
-
-<p>
-  <strong>Photo</strong>
-  <%= @location.location_photo %>
-</p>
-
-<p>
-  <strong>Latitude</strong>
+  <strong>Latitude:</strong>
   <%= @location.location_latitude %>
 </p>
 
 <p>
-  <strong>Longitude</strong>
+  <strong>Longitude:</strong>
   <%= @location.location_longitude %>
 </p>
 
+<%= map(
+    center: {
+        # HPI coordinates
+        latlng: [@location.location_latitude, @location.location_longitude],
+        zoom: 18,
+    },
+    polygons: Buildings.transform_leaflet_buildings(Buildings::UNIPOTSDAM_POLYONGS, Buildings::UNIPOTSDAM_STYLING)+
+    (Buildings.transform_leaflet_buildings(Buildings::HPI_POLYGONS, Buildings::HPI_STYLING)),
+    markers: Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS))
+%>
+
 <p>
-  <strong>Opening Times</strong>
+  <strong>Opening Times:</strong>
   <%= @location.openingtimes %>
 </p>
 
 <p>
-  <strong>Opening Times</strong>
+  <strong>Opening Times:</strong>
   <% @location.openingtimes.each do |openingtime| %>
     <%= openingtimes.opens %> <br>
     <%= openingtimes.closes %> <br>
