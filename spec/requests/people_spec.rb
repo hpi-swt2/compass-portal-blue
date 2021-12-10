@@ -17,11 +17,11 @@ RSpec.describe "/people", type: :request do
   # Person. As you add validations to Person, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    skip("Add a hash of attributes valid for your model")
+    Person.new(first_name: "Herbert", last_name: "Herbertson", phone_number: "+4990909090", email: "herbert.herbertson@hpi.de").attributes
   end
 
   let(:invalid_attributes) do
-    skip("Add a hash of attributes invalid for your model")
+    Person.new(phone_number: "Hallo").attributes
   end
 
   describe "GET /index" do
@@ -76,24 +76,28 @@ RSpec.describe "/people", type: :request do
         end.to change(Person, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
         post people_url, params: { person: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
+      new_person = Person.new(first_name: "Max", last_name: "Mustermann", phone_number: "+4989123456789", email: "max@mustermann.de")
       let(:new_attributes) do
-        skip("Add a hash of attributes valid for your model")
+        new_person.attributes
       end
 
       it "updates the requested person" do
         person = Person.create! valid_attributes
         patch person_url(person), params: { person: new_attributes }
         person.reload
-        skip("Add assertions for updated state")
+        expect(person.first_name).to eq(new_person.first_name)
+        expect(person.last_name).to eq(new_person.last_name)
+        expect(person.phone_number).to eq(new_person.phone_number)
+        expect(person.email).to eq(new_person.email)
       end
 
       it "redirects to the person" do
@@ -105,10 +109,10 @@ RSpec.describe "/people", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'edit' template)" do
         person = Person.create! valid_attributes
         patch person_url(person), params: { person: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
