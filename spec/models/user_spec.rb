@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "creation using constructor" do
-    let(:user) { User.new(email: "herbert.herbertson@hpi.de") }
+    let(:user) { described_class.new(email: "herbert.herbertson@hpi.de") }
 
     it "has a person with matching email" do
       expect(user.person).not_to be_nil
