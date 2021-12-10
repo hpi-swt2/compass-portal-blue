@@ -16,4 +16,5 @@
 </p>
 
 <%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<%= link_to 'Back', rooms_path %> |
+<%= link_to 'Map', building_map_path(target: "#{@room.building.location_latitude},#{@room.building.location_longitude}")%>

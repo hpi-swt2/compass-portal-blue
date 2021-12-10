@@ -9,6 +9,6 @@ module BuildingMapHelper
   end
 
   def self.leaflet_markers(route)
-    Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS) + RoutingHelper.transform_route_to_time_marker(route)
+    Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS) + RoutingHelper.transform_route_to_time_marker(route) + RoutingHelper.transform_target_to_marker(@target)
   end
 end

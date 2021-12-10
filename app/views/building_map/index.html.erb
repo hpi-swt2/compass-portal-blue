@@ -1,7 +1,9 @@
-<%= map(
+<%=
+  map(
     center: {
-        # HPI coordinates
-        latlng: [52.39339, 13.13208],
+        # HPI coordinates if no center is set
+        # if @center? else [52.39339, 13.13208]
+        latlng: !@target.nil? ? @target.split(",") : [52.39339, 13.13208],
         zoom: 18,
     },
     polygons: BuildingMapHelper.leaflet_polygons(),

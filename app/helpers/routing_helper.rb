@@ -54,4 +54,18 @@ module RoutingHelper
     end
     { latlngs: coordinates, options: { className: "routing-path" } }
   end
+
+  def self.transform_target_to_marker(point)
+    return [] unless point
+
+    coordinates = point.split(",")
+
+    [{
+      latlng: coordinates,
+      div_icon: {
+        html: "<img src='/assets/pin.png'>",
+        class_name: "target-pin"
+      }
+    }]
+  end
 end
