@@ -63,11 +63,12 @@ describe "Building Map page", type: :feature do
     visit building_map_path(target: "52.393913,13.133082")
     expect(page).to have_css('.target-pin')
   end
+end
 
-  it "indicates wich view is enabled", js: true do
+describe "Building map page layout", type: :feature do
+  it "indicates which view is enabled" do
     visit building_map_path
     expect(page).to have_css('.nav-link.active i.fa-map')
     expect(page).to have_css('.nav-link:not(.active) i.fa-search')
   end
-
 end
