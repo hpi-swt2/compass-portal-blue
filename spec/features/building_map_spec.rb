@@ -59,4 +59,9 @@ describe "Building Map page", type: :feature do
     end
   end
 
+  it "shows the pin of a target point", js: true do
+    visit building_map_path(target: "52.393913,13.133082")
+    expect(page).to have_css('.target-pin')
+  end
+
 end
