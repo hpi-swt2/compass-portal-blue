@@ -35,7 +35,7 @@ describe "Building Map page", type: :feature do
     expect(page).to have_selector("div.building-icon", minimum: 13)
   end
 
-  context "with routes" do
+  context "with route" do
     it "shows a calculated route", js: true do
       visit building_map_path(start: "52.393913,13.133082", dest: "52.393861,13.129606")
       expect(page).to have_css(".routing-path")
