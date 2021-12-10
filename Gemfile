@@ -76,6 +76,8 @@ group :development, :test do
   gem 'rubocop-performance', require: false # https://github.com/rubocop-hq/rubocop-performance
   # RSpec formatter compatible with GitHub Action's annotations
   gem 'rspec-github', require: false # https://github.com/Drieam/rspec-github
+  # Easy working with HTTP Requests
+  gem 'httparty'
 end
 
 group :development do
