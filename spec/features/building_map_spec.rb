@@ -9,6 +9,7 @@ describe "Building Map page", type: :feature do
       expect(page).to have_css('.nav-link:not(.active) i.fa-search')
     end
   end
+
   describe "map" do
     before do
         Capybara.current_driver = :selenium_chrome_headless
