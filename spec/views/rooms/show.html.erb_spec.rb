@@ -22,7 +22,9 @@ RSpec.describe "rooms/show", type: :view do
 
   it "renders a link to see the rooms building on the map" do
     render
-    expect(rendered).to have_selector("a[href='#{building_map_path(target: "#{@room.building.location_latitude},#{@room.building.location_longitude}")}']")
+    expect(rendered).to have_selector("a[href='#{
+      building_map_path(target: "#{@room.building.location_latitude},#{
+        @room.building.location_longitude}")}']")
   end
 
 end
