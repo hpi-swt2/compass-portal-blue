@@ -11,7 +11,6 @@ RSpec.describe "Person details page", type: :feature do
     )
   end
 
-
   it "includes profile picture input" do
     visit edit_person_path(@person)
     expect(page).to have_field 'person[profile_picture]'

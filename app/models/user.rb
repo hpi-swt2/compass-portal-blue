@@ -14,10 +14,10 @@ class User < ApplicationRecord
 
   def initialize(attributes = {})
     super(attributes)
-    if person.nil?
-      self.person = Person.new
-      person.email = email
-    end
+    return unless person.nil?
+
+    self.person = Person.new
+    person.email = email
   end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
@@ -51,9 +51,6 @@ class User < ApplicationRecord
   private_class_method def self.read_auth_data_into_user(user, auth)
     user.email = auth.info.email
     user.username = auth.info.name
-    user.person = Person.new
-    user.person.first_name = auth.info.first_name
-    user.person.last_name = auth.info.last_name
-    user.person.email = auth.info.email
+    user.person = Person.from_omniauth(auth)
   end
 end

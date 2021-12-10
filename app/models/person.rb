@@ -1,3 +1,4 @@
+# the model representing a person of interest
 class Person < ApplicationRecord
   include Timeable
 
@@ -17,6 +18,14 @@ class Person < ApplicationRecord
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def self.from_omniauth(auth)
+    person = self.new
+    person.first_name = auth.info.first_name
+    person.last_name = auth.info.last_name
+    person.email = auth.info.email
+    person
   end
 
   private
