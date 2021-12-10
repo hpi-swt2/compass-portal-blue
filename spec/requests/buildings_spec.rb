@@ -108,7 +108,7 @@ RSpec.describe "/buildings", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'edit' template)" do
         building = Building.create! valid_attributes
         patch building_url(building), params: { building: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
