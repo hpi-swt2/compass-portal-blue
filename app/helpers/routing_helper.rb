@@ -24,11 +24,11 @@ module RoutingHelper
 
     begin
       response = HTTParty.get(routing_url(start, destination))
-      return unless response.code == 200 # OPTIMIZE give User feedback
+      return unless response.code == 200 # OPTIMIZE: give User feedback
 
       JSON.parse(response.body)["routes"][0]
     rescue StandardError
-      return # OPTIMIZE give User feedback
+      # OPTIMIZE: give User feedback
     end
   end
 
