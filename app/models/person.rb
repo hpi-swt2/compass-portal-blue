@@ -21,7 +21,7 @@ class Person < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    person = self.new
+    person = new
     person.first_name = auth.info.first_name
     person.last_name = auth.info.last_name
     person.email = auth.info.email
