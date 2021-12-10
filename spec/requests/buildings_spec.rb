@@ -76,7 +76,7 @@ RSpec.describe "/buildings", type: :request do
         end.to change(Building, :count).by(0)
       end
 
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
         post buildings_url, params: { building: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
