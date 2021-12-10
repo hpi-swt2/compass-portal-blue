@@ -9,7 +9,7 @@ module RoutingHelper
   def self.valid_coordinates(coordinates)
     return false if coordinates.blank?
 
-    regex = /^-?\d{1,2}(\.\d{1,6})?,-?\d{1,2}(\.\d{1,6})?$/
+    regex = /^-?\d{1,2}(\.\d{1,8})?,-?\d{1,2}(\.\d{1,8})?$/
     coordinates.match(regex)
   end
 
