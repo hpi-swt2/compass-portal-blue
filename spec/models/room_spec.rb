@@ -7,7 +7,7 @@ RSpec.describe Room, type: :model do
     user = FactoryBot.create :user
 
     expect(room.name).to eq('C.2.4')
-    expect(room.floor).to eq("2")
+    expect(room.floor).to eq(2)
     expect(room.building.name).to eq(building.name)
     expect(room.room_type).to eq('Bachelorproject office')
     expect(room.users.first.username).to eq(user.username)
