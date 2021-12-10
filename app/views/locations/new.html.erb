@@ -1,51 +1,5 @@
 <h1>New Location</h1>
-<%= form_with scope: :location, url: locations_path, local: true do |form| %>
-    <% if @location.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@location.errors.count, "error") %> prohibited
-          this location from being saved:
-        </h2>
-        <ul>
-          <% @location.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>  
-    
-    <div class="field">
-        <%= form.label :name %>
-        <%= form.text_field :name %>
-    </div>
 
-    <div class="field">
-        <%= form.label :details %>
-        <%= form.text_field :details %>
-    </div>
+<%= render 'form', location: @location %>
 
-    <div class="field">
-        <%= form.label :location_photo %>
-        <%= form.file_field :location_photo %>
-    </div>
-
-    <div class="field">
-        <%= form.label :location_latitude %>
-        <%= form.number_field :location_latitude %>
-    </div>
-
-    <div class="field">
-        <%= form.label :location_longitude %>
-        <%= form.number_field :location_longitude %>
-    </div>
-
-    <div class="field">
-        <%= form.label :openingtimes %>
-        <%= form.number_field :openingtimes %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
-    </div>
-<% end %>
 <%= link_to 'Back', locations_path %>
