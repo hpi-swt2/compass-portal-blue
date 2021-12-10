@@ -14,9 +14,9 @@ class User < ApplicationRecord
 
   def initialize(attributes = {})
     super(attributes)
-    if person.nil?
-      person = Person.new
-      person.email = email
+    if self.person.nil?
+      self.person = Person.new
+      self.person.email = email
     end
   end
 
