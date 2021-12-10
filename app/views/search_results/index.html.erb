@@ -48,17 +48,14 @@
 }
 </script>
 
-<!-- <script>function getLocalHistory() {alert("hi");));}</script> -->
 <script> function addToLocalStorage(element) {
     title = element.text;
     link = element.href;
     prev = getCookie("compassHistory");
-    alert(prev);
     if(prev == ""){
       prev = "{}";
     } 
     current = JSON.parse(prev);
-    alert(current);
     current_2 = {};
     current_2[title] = link;
 
@@ -72,7 +69,6 @@
       }
     
     document.cookie = "compassHistory=" + JSON.stringify(current_2) + "; path=/";
-    alert(JSON.stringify(current_2));
   } 
 </script>
 

@@ -1,22 +1,3 @@
-<script> function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-</script>
-
-
-
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
     <h1 class="fw-light">
@@ -45,24 +26,11 @@
     <%= form_with url: search_results_path, method: :get do |form| %>
       <div class="row  mb-6">
         <div class="col">
-          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :onclick => "getLocalHistory(this);" %>
-            <table id = "historyDiv" name="history">
-              <tr> 
-                <td id = "history1"> </td>
-              </tr>
-              <tr> 
-                <td id = "history2"></td> 
-              </tr>
-              <tr> 
-                <td id = "history3"> </td>
-              </tr>
-              <tr> 
-                <td id = "history4"> </td> 
-              </tr>
-              <tr> 
-                <td id = "history5"> </td>
-              </tr>
-            </table>
+          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :onclick => "showHistory(this);" %>
+          <div name="history" class = "dropbtn">
+            <div id = "historyDiv" class = "dropdown-content">
+            </div>
+          </div>
         </div>
         <div class="col-auto">
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
@@ -70,55 +38,53 @@
       </div>
     <% end %>
   </div>
-
 </div>
 
-<script> function myJsonParse(str){
-  var ret = [];
-  str = str.substring(1, str.length - 1);
-  pairs = str.split(",");
-  for(i = 0; i < pairs.length; i++){
-    sub = pairs[i].substring(1, pairs[i].length - 1);
-    subsub = pairs[i].split('"');
-    key = subsub[1];
-    value = subsub[3];
-    ret.push(key);
-    ret.push(value);
-  }
-  return ret;
-}
-
-</script>
 <script>
-  function getLocalHistory(parent){
-  var historyCookie = getCookie("compassHistory");
-  var history = JSON.parse(historyCookie);
-  i = 1;
-  for(var element in history) {
-    td_id = "history" + i;
-    td = document.getElementById(td_id);
-    atitle = document.createElement("a");
-    atitle.text = element;
-    td.appendChild(atitle);
-    alink = document.createElement("a");
-    alinks.href = history[element];
-    td.appendChild(alink);
-    i = i+1;
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
-  element = document.getElementById("historyDiv");
-  element.style.visibility = "hidden";
-  return;
-  var selectList = document.createElement("select");
-  selectList.id = "historySelection";
-  parent.appendChild(selectList);
-  cookie = getCookie("historyCookie");
-  history = JSON.parse(cookie);
-  for(element in history){
-    var option = document.createElement("option");
-    option.value = element;
-    option.text = history[element];
-    selectList.appendChild(option);
+  function showHistory(parent){
+    var historyCookie = getCookie("compassHistory");
+    var history = JSON.parse(historyCookie);
+    var links = '';
+    for(var element in history){
+      links += '<li><a href=';
+      links += history[element];
+      links += '>';
+      links += element;
+      links += '</a></li>';
+    }
+    // links += '</ul>';
+	  document.getElementById("historyDiv").innerHTML = links;
+    document.getElementById("historyDiv").classList.toggle("show");
+    document.getElementById("historyDiv").style.display = "block";
   }
+
+  window.onclick = function(event){
+    if(!event.target.matches('.form-control')){
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove("show");
+          openDropdown.style.display = "none";
+        }
+      }
+    }
   }
 </script>
