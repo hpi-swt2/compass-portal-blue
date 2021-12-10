@@ -53,6 +53,6 @@ module RoutingHelper
     coordinates = route["geometry"]["coordinates"].map do |coordinate|
       [coordinate.second, coordinate.first]
     end
-    { latlngs: coordinates, options: { className: "routing-path" } }
+    [{ latlngs: coordinates, options: { className: "routing-path" } }]
   end
 end
