@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :people
   resources :rooms
   resources :openingtimes
   resources :buildings
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
       registrations: 'users/registrations',
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
-  resources :users, only: [:show]
+
   # '/protected'
   get '/protected', to: 'welcome#protected'
 

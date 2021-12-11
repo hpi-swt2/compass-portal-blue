@@ -35,9 +35,9 @@
     </div>
 
     <div>
-      <%= form.label :user_id %>
-        <%= form.select 'user_id',
-            options_from_collection_for_select(User.all, :id, :username),
+      <%= form.label :person_id %>
+        <%= form.select 'person_id',
+            options_from_collection_for_select(Person.all, :id, :name, room.person_ids),
             {},
             multiple: true %>
     </div>

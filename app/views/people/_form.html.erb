@@ -1,0 +1,88 @@
+<%= form_with(model: person) do |form| %>
+
+  <% if person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+        <% person.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mb-3 edit-profile-picture">
+    <%= form.label :profile_picture, class: 'form-label' %>
+    <div class='profile-picture-wrapper'>
+      <div class='profile-picture-container'>
+        <% if person.profile_picture.attached? %>
+          <img src="<%=(url_for(person.profile_picture))%>" alt="<%= person.profile_picture.filename %>"/>
+        <% else %>
+          <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
+        <% end %>
+      </div>
+      <button class='edit-btn' onclick="event.preventDefault(); $('input[type=file]').click()"><i class="fa fa-pen" aria-hidden="true"></i></button>
+    </div>
+    <%= form.file_field :profile_picture, class: 'form-control', accept: 'image/png,image/jpeg' %>
+  </div>
+
+
+  <div class="field mb-3">
+    <%= form.label :first_name, class: 'form-label' %>
+    <%= form.text_field :first_name, class: 'form-control' %>
+  </div>
+
+  <div class="field mb-3">
+    <%= form.label :last_name, class: 'form-label' %>
+    <%= form.text_field :last_name, class: 'form-control' %>
+  </div>
+
+  <div class="field mb-3">
+    <%= form.label :phone_number, class: 'form-label' %>
+    <%= form.text_field :phone_number, class: 'form-control' %>
+  </div>
+
+  <div class="field mb-3">
+    <%= form.label :email, class: 'form-label' %>
+    <%= form.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="field mb-3">
+    <%= form.label :rooms, class: 'form-label' %><br/>
+    <%= form.select 'rooms',
+      options_from_collection_for_select(Room.all, :id, :name, person.rooms),
+      {},
+      multiple: true %>
+  </div>
+
+  <div class="field mb-3 opening-times-container">
+    <%= form.label :openingtimes, class: 'form-label' %>
+    <%= form.fields_for :openingtimes do |o| %>
+      <div class="field" id="opening-time-field-<%= o.object.id %>">
+        <%= o.number_field :day %>
+        <%= o.time_field :opens %>
+        <span>-</span>
+        <%= o.time_field :closes %>
+        <%= link_to(openingtime_path(o.object.id), :method => :delete, :class => 'btn btn-mini',
+                    :remote => true, :onclick => "$('#opening-time-field-#{o.object.id}')[0].remove()") do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit "Update Person", class: 'btn btn-primary' %>
+  </div>
+
+  <script defer>
+      $('input[name="user[profile_picture]"]').change(function () {
+          const file = $(this).prop('files')[0] || null;
+          if (!file) {return; }
+          const url = URL.createObjectURL(file);
+          $('.profile-picture-container img').prop('src', url);
+          $('.profile-picture-container img').prop('alt', file.name);
+      })
+  </script>
+<% end %>
