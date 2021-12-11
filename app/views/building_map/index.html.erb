@@ -4,8 +4,7 @@
         latlng: [52.39339, 13.13208],
         zoom: 18,
     },
-    polygons: Buildings.transform_leaflet_buildings(Buildings::UNIPOTSDAM_POLYONGS, Buildings::UNIPOTSDAM_STYLING)+
-      (Buildings.transform_leaflet_buildings(Buildings::HPI_POLYGONS, Buildings::HPI_STYLING)),
-    polylines: RoutingHelper.transform_route_to_polyline(@route),
-    markers: Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS) + RoutingHelper.transform_route_to_time_marker(@route))
+    polygons: BuildingMapHelper.leaflet_polygons(),
+    polylines: BuildingMapHelper.leaflet_polylines(@route),
+    markers: BuildingMapHelper.leaflet_markers(@route))
 %>
