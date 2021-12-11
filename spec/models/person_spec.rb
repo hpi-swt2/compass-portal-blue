@@ -8,6 +8,11 @@ RSpec.describe Person, type: :model do
     expect(person.phone_number).to eq("+4990909090")
     expect(person.email).to eq("herbert.herbertson@hpi.de")
   end
+  
+  it "has formats the phone number" do 
+    person = create :person
+    expect(person.formatted_phone_number).to eq("+49 9090 9090")
+  end
 
   it "can be created from omniauth" do
     stub_const("Info", Struct.new(:first_name, :last_name, :email))
