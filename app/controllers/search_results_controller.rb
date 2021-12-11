@@ -46,13 +46,17 @@ class SearchResultsController < ApplicationController
   def search_for_entries_starting_with(query)
     buildings = Building.where("name LIKE ?", "#{query}%")
     rooms = Room.where("name LIKE ?", "#{query}%")
+    users = User.where("username LIKE ?", "#{query}%")
+    #persons = Person.where("first_name || ' ' || last_name LIKE ?", "#{query}%")
     add_buildings(buildings)
     add_rooms(rooms)
+    add_users(users)
   end
 
   def search_for_entries_including(query)
-    buildings = Building.where("name LIKE ?","_%#{query}%")
-    rooms = Room.where("name LIKE ?","_%#{query}%")
+    buildings = Building.where("name LIKE ?", "_%#{query}%")
+    rooms = Room.where("name LIKE ?", "_%#{query}%")
+    users = User.where("username LIKE ?", "_%#{query}%")
     add_rooms(rooms)
     add_buildings(buildings)
   end
@@ -76,6 +80,18 @@ class SearchResultsController < ApplicationController
                               title: building.name,
                               link: building_path(building),
                               description: "Building"
+                            ))
+      @result_id += 1
+    end
+  end
+
+  def add_users(users)
+    users.each do |user|
+      @search_results.append(SearchResult.new(
+                              id: @result_id,
+                              title: user.username,
+                              link: user_path(user),
+                              description: "User, E-Mail: #{user.email}"
                             ))
       @result_id += 1
     end
