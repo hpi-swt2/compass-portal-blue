@@ -6,6 +6,11 @@ module RoutingHelper
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
 
+  def self.coordinates(input)
+    return if input.blank?
+    Places::DESTINATIONS[:"#{input}"][:location]
+  end
+
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
