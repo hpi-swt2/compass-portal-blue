@@ -51,7 +51,10 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 
 @import "leaflet";
 
+body {
+  padding-top: 4rem;
+}
+
 .custom-container-padding {
-  padding-top: 3rem;
   padding-bottom: 5rem;
 }
