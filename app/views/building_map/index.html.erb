@@ -53,8 +53,8 @@
 <%= map(
     center: {
         # HPI coordinates
-        latlng: [52.39339, 13.13208],
-        zoom: 18,
+        latlng: RoutingHelper.center(@start),
+        zoom: 17,
     },
     polygons: BuildingMapHelper.leaflet_polygons(),
     polylines: BuildingMapHelper.leaflet_polylines(@route),

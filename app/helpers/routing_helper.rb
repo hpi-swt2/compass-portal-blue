@@ -12,6 +12,11 @@ module RoutingHelper
     Places::DESTINATIONS[:"#{input}"][:location]
   end
 
+  def self.center(start_coordinates)
+    if start_coordinates.nil? then return [52.39339, 13.13208] end
+    return start_coordinates.split(",").map{|c| c.to_f}
+  end
+
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
