@@ -7,7 +7,8 @@ module RoutingHelper
   end
 
   def self.coordinates(input)
-    return if input.blank?
+    if input.blank? then return end
+    if valid_coordinates?(input) then return input end
     Places::DESTINATIONS[:"#{input}"][:location]
   end
 
