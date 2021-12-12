@@ -51,7 +51,7 @@ gem 'tod'
 #
 
 # Leaflet for map functionality
-gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
+gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"#
 
 #
 # Gems that are loaded depending on the environment (development/test/production)
@@ -119,3 +119,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "phonelib"
+
+gem "viewpoint"
