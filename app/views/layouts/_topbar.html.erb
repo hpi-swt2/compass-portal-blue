@@ -6,8 +6,8 @@
                 <%= link_to edit_user_registration_path do %>
                     <span><%= current_user.username.blank? ? 'User profile' : current_user.username %></span>
                     <div class='profile-picture-container'>
-                        <% if current_user.profile_picture.attached? %>
-                            <img src="<%=(url_for(current_user.profile_picture))%>" alt="<%= current_user.profile_picture.filename %>"/>
+                        <% if current_user.person.profile_picture.attached? %>
+                            <img src="<%=(url_for(current_user.person.profile_picture))%>" alt="<%= current_user.person.profile_picture.filename %>"/>
                         <% else %>
                             <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
                         <% end %>
