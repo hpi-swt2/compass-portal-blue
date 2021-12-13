@@ -3,6 +3,5 @@ class WelcomeController < ApplicationController
     # Welcome page, accessible without login
   end
 
-  def login
-  end
+  def login; end
 end
