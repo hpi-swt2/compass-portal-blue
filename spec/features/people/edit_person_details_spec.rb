@@ -124,7 +124,7 @@ RSpec.describe "Person edit details page", type: :feature do
 
   it "can update rooms" do
     room1 = create :room
-    room2 = create :room, :name => "C.2.3"
+    room2 = create :room, name: "C.2.3"
     @person.rooms = [room1]
     visit edit_person_path(@person)
     select room2.name, from: 'person[room_ids][]'
@@ -132,6 +132,6 @@ RSpec.describe "Person edit details page", type: :feature do
     page.find('input[type=submit][name=commit]').click
     visit edit_person_path(@person)
     expect(page).to have_select('person[room_ids][]', selected: [room2.name])
-    end
+  end
 
 end
