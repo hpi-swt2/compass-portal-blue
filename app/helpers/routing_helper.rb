@@ -7,18 +7,14 @@ module RoutingHelper
   end
 
   def self.coordinates(input, your_location)
-    if input.blank? then return end
-    if valid_coordinates?(input) then return input end
-    if input == "Your location" then return your_location end
-    place = Places::DESTINATIONS[:"#{input}"]
-    result = nil
-    if place.present? then result = place[:location] end
-    result
+    return input if valid_coordinates?(input)
+    return your_location if input == "Your location"
+    Places::DESTINATIONS.dig(:"#{input}", :location)
   end
 
   def self.center(start_coordinates)
-    if start_coordinates.nil? then return [52.39339, 13.13208] end
-    return start_coordinates.split(",").map{|c| c.to_f}
+    return [52.39339, 13.13208] if start_coordinates.nil?
+    start_coordinates.split(",").map{|c| c.to_f}
   end
 
   def self.valid_coordinates?(coordinates)
