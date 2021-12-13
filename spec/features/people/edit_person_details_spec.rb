@@ -119,7 +119,19 @@ RSpec.describe "Person edit details page", type: :feature do
   it "includes an input field to change the room where the person can be found" do
     @room = create :room
     visit edit_person_path(@person)
-    expect(page).to have_select('person[rooms][]', with_options: [@room.name])
+    expect(page).to have_select('person[room_ids][]', with_options: [@room.name])
+  end
+
+  it "can update rooms" do
+    room1 = create :room
+    room2 = create :room, name: "C.2.3"
+    @person.rooms = [room1]
+    visit edit_person_path(@person)
+    select room2.name, from: 'person[room_ids][]'
+    unselect room1.name, from: 'person[room_ids][]'
+    page.find('input[type=submit][name=commit]').click
+    visit edit_person_path(@person)
+    expect(page).to have_select('person[room_ids][]', selected: [room2.name])
   end
 
 end

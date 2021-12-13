@@ -50,7 +50,7 @@
 
   <div class="field mb-3">
     <%= form.label :rooms, class: 'form-label' %><br/>
-    <%= form.select 'rooms',
+    <%= form.select 'room_ids',
       options_from_collection_for_select(Room.all, :id, :name, person.room_ids),
       {},
       multiple: true %>
