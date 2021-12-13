@@ -4,6 +4,5 @@ class WelcomeController < ApplicationController
   end
 
   def login
-    # Only accessible by logged in users, see `before_action` call
   end
 end
