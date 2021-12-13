@@ -12,9 +12,9 @@ Rails.application.routes.draw do
       registrations: 'users/registrations',
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
-
-  # '/protected'
-  get '/protected', to: 'welcome#protected'
+  resources :users, only: [:show]
+  # '/login'
+  get '/login', to: 'welcome#login'
 
   get '/building_map', to: 'building_map#index'
 
