@@ -4,7 +4,7 @@ RSpec.describe "rooms/new", type: :view do
   before do
     assign(:room, Room.new(
                     name: "MyString",
-                    floor: "MyString",
+                    floor: -1,
                     room_type: "MyString"
                   ))
   end

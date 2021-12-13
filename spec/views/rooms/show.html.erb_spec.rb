@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe "rooms/show", type: :view do
   before do
     @building = create :building
-    @users = [(create :user)]
+    @people = [(create :person)]
     @room = assign(:room, Room.create!(
                             name: "Name",
-                            floor: "Floor",
+                            floor: 0,
                             room_type: "Room Type",
-                            users: @users,
+                            people: @people,
                             building: @building
                           ))
   end
@@ -19,4 +19,12 @@ RSpec.describe "rooms/show", type: :view do
     expect(rendered).to match(/Floor/)
     expect(rendered).to match(/Room Type/)
   end
+
+  it "renders a link to see the rooms building on the map" do
+    render
+    expect(rendered).to have_selector("a[href='#{
+      building_map_path(target: "#{@room.building.location_latitude},#{
+        @room.building.location_longitude}")}']")
+  end
+
 end

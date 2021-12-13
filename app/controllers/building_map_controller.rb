@@ -3,5 +3,7 @@ class BuildingMapController < ApplicationController
     @start = RoutingHelper.coordinates(params[:start], params[:your_location])
     @destination = RoutingHelper.coordinates(params[:dest], "")
     @route = RoutingHelper.calculate_route(@start, @destination) if @start.present? && @destination.present?
+
+    @target = params[:target]
   end
 end

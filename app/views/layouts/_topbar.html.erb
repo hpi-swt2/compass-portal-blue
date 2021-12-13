@@ -1,0 +1,22 @@
+<div class='navbar topbar-custom'>
+    <span class="navbar-brand"><i class="fas fa-compass"></i><span>HPI Navigator</span></span>
+    <%# devise helper: https://github.com/heartcombo/devise#controller-filters-and-helpers %>
+    <div class='user-area'>
+        <% if user_signed_in? %>
+                <%= link_to edit_user_registration_path do %>
+                    <span><%= current_user.username.blank? ? 'User profile' : current_user.username %></span>
+                    <div class='profile-picture-container'>
+                        <% if current_user.person.profile_picture.attached? %>
+                            <img src="<%=(url_for(current_user.person.profile_picture))%>" alt="<%= current_user.person.profile_picture.filename %>"/>
+                        <% else %>
+                            <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
+                        <% end %>
+                    </div>
+                <% end %>
+        <% else %>
+            <%= link_to login_path, class: 'btn' do %>
+                <span>Login</span><i class="fas fa-sign-in-alt"></i>
+            <% end %>
+        <% end %> <%# user_signed_in?%>
+    </div>
+</div>
