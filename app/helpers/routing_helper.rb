@@ -18,7 +18,7 @@ module RoutingHelper
 
     start_coordinates.split(",").map(&:to_f)
   end
-  
+
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 

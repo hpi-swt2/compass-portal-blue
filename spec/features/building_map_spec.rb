@@ -61,7 +61,7 @@ describe "Building Map page", type: :feature do
         expect(page).not_to have_css(".routing-path")
         expect(page).not_to have_css(".time-icon")
       end
-      
+
       it "shows no route, if not all necessary parameters are provided", js: true do
         visit building_map_path(start: "52.393913,13.133082")
         expect(page).not_to have_css(".routing-path")
