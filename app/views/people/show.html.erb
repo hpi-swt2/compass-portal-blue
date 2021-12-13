@@ -35,5 +35,17 @@
   <%= @person.phone_number %>
 </p>
 
+<p>
+  <strong>Rooms:</strong>
+  <ul>
+      <% @person.rooms.each do | room | %>
+        <li>
+          <%= room.name %> |
+          <%= link_to 'Map', building_map_path(target: "#{room.building.location_latitude},#{room.building.location_longitude}")%>
+        </li>
+      <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', people_path %>
