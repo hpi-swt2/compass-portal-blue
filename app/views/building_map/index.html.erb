@@ -1,4 +1,4 @@
-<div class="accordion accordion-flush" id="routingInput">
+<div class="accordion mb-2 accordion-flush" id="routingInput">
 	<div class="accordion-item">
 		<h2 class="accordion-header" id="headingOne">
 			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -9,11 +9,11 @@
 		<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
 			data-bs-parent="#routingInput">
 			<div class="accordion-body">
-				<form class="row gy-2 gx-3 align-items-center" autocomplete="off">
+				<form class="row gy-2 gx-3 align-items-center" autocomplete="off" onsubmit="validate_input()">
 					<div class="col-auto">
 						<div class="input-group">
 							<div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
-							<input name='start' type="text" class="form-control" list="fromOptions" id="inputRoutingTo"
+							<input name='start' type="text" class="form-control" list="fromOptions" id="inputRoutingFrom"
 								placeholder="From">
 						</div>
 					</div>
@@ -24,8 +24,9 @@
 								placeholder="To">
 						</div>
 					</div>
+					<input name='your_location' type='hidden' id='your_location' >
 					<div class="col-auto">
-						<button type="submit" formaction="/building_map" class="btn btn-primary">Go</button>
+						<button type="submit" formaction="/building_map" class="btn btn-primary" onclick="setToCurrentLocation('your_location');">Go</button>
 					</div>
 				</form>
 			</div>
@@ -48,7 +49,6 @@
 		</option>
 		<% end %>
 </datalist>
-<br>
 
 <%= map(
     center: {
@@ -60,3 +60,40 @@
     polylines: BuildingMapHelper.leaflet_polylines(@route),
     markers: BuildingMapHelper.leaflet_markers(@route))
 %>
+
+<script>
+    let currentLocation;
+    function setToCurrentLocation(targetId) {
+        const target = document.getElementById(targetId);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                currentLocation = pos;
+				let {lat, lon} = currentLocation.coords;
+				currentLocation = String(lat) + "," + String(lon);
+            });
+        }
+		if (currentLocation == undefined) currentLocation = "52.39337,13.1313"
+		target.value = currentLocation;
+    }
+
+	function validate_input() {
+		const start_input = document.getElementById("inputRoutingFrom");
+		const dest_input = document.getElementById("inputRoutingTo");
+		const options = document.getElementById("toOptions").options;
+		let valid_start = false; let valid_dest = false;
+		
+		for (option of options) {	
+			if (option.value == start_input.value) valid_start = true;
+			if (option.value == dest_input.value) valid_dest = true;
+		}
+		if (!valid_start || !valid_dest) {
+			if (!valid_start && valid_dest) {
+				alert("Please select a valid starting place.");
+			} else if (valid_start && !valid_dest) {
+				alert("Please select a valid destination place.");
+			} else {
+				alert("Please select a valid starting and destination place.");
+			}
+		}
+	}
+</script>

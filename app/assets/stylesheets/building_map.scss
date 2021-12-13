@@ -6,6 +6,16 @@
     height: 80vh;
 }
 
+.accordion-button:not(.collapsed) {
+    /* color: #006e8e; */
+    background-color: #F4F4F4 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
 .route-start-icon {
     color: green
 }
