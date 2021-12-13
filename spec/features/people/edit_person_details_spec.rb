@@ -4,7 +4,6 @@ RSpec.describe "Person edit details page", type: :feature do
   before do
     @person = FactoryBot.create(:person)
 
-
     @person.profile_picture.attach(
       io: File.open('app/assets/images/default-profile-picture.png'),
       filename: 'default-profile-picture.png',
@@ -51,7 +50,7 @@ RSpec.describe "Person edit details page", type: :feature do
 
     visit edit_person_path(@person)
     expect(page).to have_field('person[first_name]', with: new_first_name)
-    expect(page).not_to have_field('person[first_name]', with: old_first_name)  
+    expect(page).not_to have_field('person[first_name]', with: old_first_name)
   end
 
   it "includes an input field to change the last name" do
@@ -69,7 +68,7 @@ RSpec.describe "Person edit details page", type: :feature do
 
     visit edit_person_path(@person)
     expect(page).to have_field('person[last_name]', with: new_last_name)
-    expect(page).not_to have_field('person[last_name]', with: old_last_name)  
+    expect(page).not_to have_field('person[last_name]', with: old_last_name)
   end
 
   it "includes an input field to change the email address" do
@@ -87,7 +86,7 @@ RSpec.describe "Person edit details page", type: :feature do
 
     visit edit_person_path(@person)
     expect(page).to have_field('person[email]', with: new_email_address)
-    expect(page).not_to have_field('person[email]', with: old_email_address)  
+    expect(page).not_to have_field('person[email]', with: old_email_address)
   end
 
   it "includes an input field to change the phone number" do
@@ -105,7 +104,7 @@ RSpec.describe "Person edit details page", type: :feature do
 
     visit edit_person_path(@person)
     expect(page).to have_field('person[phone_number]', with: new_phone_number)
-    expect(page).not_to have_field('person[phone_number]', with: old_phone_number)  
+    expect(page).not_to have_field('person[phone_number]', with: old_phone_number)
   end
 
   it "show phone number validation error message" do
