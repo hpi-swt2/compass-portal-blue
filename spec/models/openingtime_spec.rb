@@ -19,7 +19,7 @@ RSpec.describe Openingtime, type: :model do
     expect(@openingtime).to be_valid
   end
 
-  it "should reject days lower than 0" do
+  it "rejects days lower than 0" do
     @openingtime.day = -1
     expect(@openingtime).to be_invalid
     @openingtime.day = -5
