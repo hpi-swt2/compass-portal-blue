@@ -26,7 +26,7 @@ RSpec.describe Openingtime, type: :model do
     expect(@openingtime).to be_invalid
   end
 
-  it "should reject days larger than 6" do
+  it "rejects days larger than 6" do
     @openingtime.day = 7
     expect(@openingtime).to be_invalid
     @openingtime.day = 1000
