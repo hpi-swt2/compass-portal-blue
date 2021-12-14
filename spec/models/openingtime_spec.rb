@@ -11,7 +11,7 @@ RSpec.describe Openingtime, type: :model do
   end
 
   it "accepts days between 0 and 6" do
-    for index in 0..6
+    (0..6).each do |index|
       @openingtime.day = index
       expect(@openingtime).to be_valid
     end
