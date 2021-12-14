@@ -11,12 +11,10 @@ RSpec.describe Openingtime, type: :model do
   end
 
   it "accepts days between 0 and 6" do
-    @openingtime.day = 0
-    expect(@openingtime).to be_valid
-    @openingtime.day = 4
-    expect(@openingtime).to be_valid
-    @openingtime.day = 6
-    expect(@openingtime).to be_valid
+    for index in 0..6
+      @openingtime.day = index
+      expect(@openingtime).to be_valid
+    end
   end
 
   it "rejects days lower than 0" do
