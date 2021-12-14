@@ -8,7 +8,7 @@ class SearchResultsController < ApplicationController
 
     search_for_buildings
     search_for_rooms
-    search_for_users
+    search_for_people
 
     @search_results = @search_results.uniq(&:id)
   end
@@ -45,8 +45,8 @@ class SearchResultsController < ApplicationController
     Building.all.each do |building|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-                               title: building.name,
-                               link: building_path(building)
+                               title: "#{building.name} (Building)",
+                               link: building_path(building),
                              ))
       @result_id += 1
     end
@@ -56,19 +56,19 @@ class SearchResultsController < ApplicationController
     Room.all.each do |room|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-                               title: room.name,
-                               link: room_path(room)
+                               title: "#{room.name} (Room)",
+                               link: room_path(room),
                              ))
       @result_id += 1
     end
   end
 
-  def search_for_users
-    User.all.each do |user|
+  def search_for_people
+    Person.all.each do |person|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-                               title: "#{user.first_name} #{user.last_name}",
-                               link: user_path(user)
+                               title: "#{person.first_name} #{person.last_name} (Person)",
+                               link: person_path(person),
                              ))
       @result_id += 1
     end
