@@ -10,7 +10,7 @@ RSpec.describe Openingtime, type: :model do
     expect(@openingtime.day).to eq(1)
   end
 
-  it "should accept days between 0 and 6" do
+  it "accepts days between 0 and 6" do
     @openingtime.day = 0
     expect(@openingtime).to be_valid
     @openingtime.day = 4
