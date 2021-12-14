@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Openingtime, type: :model do
 
-  before(:each) do
+  before do
     @openingtime = FactoryBot.create(:openingtime)
   end
 
