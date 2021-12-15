@@ -19,13 +19,13 @@ RSpec.describe "Search result list page", type: :feature do
   it "shows buildings matching the query" do
     visit search_results_path(query: "xy")
     expect(page).to have_text(@building_xyz.name)
-    expect(page).to have_link(href: building_path(@building_xyz))
+    expect(page).to have_link(href: building_path(@building_xyz), count: 1)
 
     visit search_results_path(query: "ABC")
     expect(page).to have_text(@building_abc.name)
-    expect(page).to have_link(href: building_path(@building_abc))
+    expect(page).to have_link(href: building_path(@building_abc), count: 1)
     expect(page).to have_text(@abc_building.name)
-    expect(page).to have_link(href: building_path(@abc_building))
+    expect(page).to have_link(href: building_path(@abc_building), count: 1)
   end
 
   it "does not show buildings not matching the query" do
@@ -51,13 +51,13 @@ RSpec.describe "Search result list page", type: :feature do
   it "shows rooms matching the query" do
     visit search_results_path(query: "xyz")
     expect(page).to have_text(@room_xyz.name)
-    expect(page).to have_link(href: room_path(@room_xyz))
+    expect(page).to have_link(href: room_path(@room_xyz), count: 1)
 
     visit search_results_path(query: "AB")
     expect(page).to have_text(@room_abc.name)
-    expect(page).to have_link(href: room_path(@room_abc))
+    expect(page).to have_link(href: room_path(@room_abc), count: 1)
     expect(page).to have_text(@abc_room.name)
-    expect(page).to have_link(href: room_path(@abc_room))
+    expect(page).to have_link(href: room_path(@abc_room), count: 1)
   end
 
   it "does not show rooms not matching the query" do
@@ -83,31 +83,31 @@ RSpec.describe "Search result list page", type: :feature do
   it "shows people whose first name matches the query" do
     visit search_results_path(query: "marie")
     expect(page).to have_text(@curie.name)
-    expect(page).to have_link(href: person_path(@curie))
+    expect(page).to have_link(href: person_path(@curie), count: 1)
 
     visit search_results_path(query: "bern")
     expect(page).to have_text(@bernoulli.name)
-    expect(page).to have_link(href: person_path(@bernoulli))
+    expect(page).to have_link(href: person_path(@bernoulli), count: 1)
   end
 
   it "shows people whose last name matches the query" do
     visit search_results_path(query: "CUrIe")
     expect(page).to have_text(@curie.name)
-    expect(page).to have_link(href: person_path(@curie))
+    expect(page).to have_link(href: person_path(@curie), count: 1)
 
     visit search_results_path(query: "bern")
     expect(page).to have_text(@riemann.name)
-    expect(page).to have_link(href: person_path(@riemann))
+    expect(page).to have_link(href: person_path(@riemann), count: 1)
   end
 
   it "shows people whose full name matches the query" do
     visit search_results_path(query: "Daniel Bernoulli")
     expect(page).to have_text(@bernoulli.name)
-    expect(page).to have_link(href: person_path(@bernoulli))
+    expect(page).to have_link(href: person_path(@bernoulli), count: 1)
 
     visit search_results_path(query: "ernhard Riem")
     expect(page).to have_text(@riemann.name)
-    expect(page).to have_link(href: person_path(@riemann))
+    expect(page).to have_link(href: person_path(@riemann), count: 1)
   end
 
   it "does not show people whose first, last and full name do not match the query" do
