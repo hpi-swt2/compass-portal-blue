@@ -94,7 +94,7 @@ class SearchResultsController < ApplicationController
     people.each do |person|
       @search_results.append(SearchResult.new(
                               id: @result_id,
-                              title: "#{person.first_name} #{person.last_name}",
+                              title: person.name,
                               link: person_path(person),
                               description: "Person, E-Mail: #{person.email}"
                             ))
