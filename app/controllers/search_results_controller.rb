@@ -42,10 +42,10 @@ class SearchResultsController < ApplicationController
   end
 
   def search_for_entries_starting_with(query)
-    buildings = Building.where("name LIKE ?", "#{query}%")
-    rooms = Room.where("name LIKE ?", "#{query}%")
-    people = Person.where("first_name || ' ' || last_name LIKE ?
-                          OR last_name LIKE ?",
+    buildings = Building.where("LOWER(name) LIKE ?", "#{query}%")
+    rooms = Room.where("LOWER(name) LIKE ?", "#{query}%")
+    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                          OR LOWER(last_name) LIKE ?",
                           "#{query}%", "#{query}%")
 
     add_buildings(buildings)
@@ -54,11 +54,11 @@ class SearchResultsController < ApplicationController
   end
 
   def search_for_entries_including(query)
-    buildings = Building.where("name LIKE ? AND NOT name LIKE ?", "%#{query}%", "#{query}%")
-    rooms = Room.where("name LIKE ? AND NOT name LIKE ?", "%#{query}%", "#{query}%")
-    people = Person.where("first_name || ' ' || last_name LIKE ?
-                          AND NOT first_name || ' ' || last_name LIKE ?
-                          AND NOT last_name LIKE ?",
+    buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
+    rooms = Room.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
+    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                          AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                          AND NOT LOWER(last_name) LIKE ?",
                           "%#{query}%", "#{query}%", "#{query}%")
 
     add_rooms(rooms)
