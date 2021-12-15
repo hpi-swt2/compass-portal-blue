@@ -130,10 +130,5 @@ RSpec.describe "/openingtimes", type: :request do
       end.to change(Openingtime, :count).by(-1)
     end
 
-    it "redirects to the openingtimes list" do
-      openingtime = Openingtime.create! valid_attributes
-      delete openingtime_url(openingtime)
-      expect(response).to redirect_to(openingtimes_url)
-    end
   end
 end

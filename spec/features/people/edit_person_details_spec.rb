@@ -134,4 +134,12 @@ RSpec.describe "Person edit details page", type: :feature do
     expect(page).to have_select('person[room_ids][]', selected: [room2.name])
   end
 
+  it "includes a select field to change the day of an openingtime" do
+    @openingtime = create :openingtime
+    @person.openingtimes = [@openingtime]
+    visit edit_person_path(@person)
+    expect(@person.openingtimes).to include(@openingtime)
+    expect(page).to have_select('person[openingtimes_attributes][0][day]')
+  end
+
 end
