@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Occupancy</th>
       <th>Name</th>
       <th>Floor</th>
       <th>Room type</th>
@@ -15,6 +16,11 @@
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
+        <% if room.free? %>
+          <td><p class="occupancy free">free</p></td>
+        <% else %>
+          <td><p class="occupancy occupied">occupied</p></td>
+        <% end %>
         <td><%= room.name %></td>
         <td><%= room.floor %></td>
         <td><%= room.room_type %></td>
