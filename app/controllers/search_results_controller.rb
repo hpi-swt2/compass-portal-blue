@@ -11,8 +11,6 @@ class SearchResultsController < ApplicationController
 
     search_for_entries_starting_with query
     search_for_entries_including query
-
-    @search_results = @search_results.uniq(&:id)
   end
 
   def create
@@ -46,19 +44,26 @@ class SearchResultsController < ApplicationController
   def search_for_entries_starting_with(query)
     buildings = Building.where("name LIKE ?", "#{query}%")
     rooms = Room.where("name LIKE ?", "#{query}%")
-    users = User.where("username LIKE ?", "#{query}%")
-    #persons = Person.where("first_name || ' ' || last_name LIKE ?", "#{query}%")
+    people = Person.where("first_name || ' ' || last_name LIKE ?
+                          OR last_name LIKE ?",
+                          "#{query}%", "#{query}%")
+
     add_buildings(buildings)
     add_rooms(rooms)
-    add_users(users)
+    add_people(people)
   end
 
   def search_for_entries_including(query)
-    buildings = Building.where("name LIKE ?", "_%#{query}%")
-    rooms = Room.where("name LIKE ?", "_%#{query}%")
-    users = User.where("username LIKE ?", "_%#{query}%")
+    buildings = Building.where("name LIKE ? AND NOT name LIKE ?", "%#{query}%", "#{query}%")
+    rooms = Room.where("name LIKE ? AND NOT name LIKE ?", "%#{query}%", "#{query}%")
+    people = Person.where("first_name || ' ' || last_name LIKE ?
+                          AND NOT first_name || ' ' || last_name LIKE ?
+                          AND NOT last_name LIKE ?",
+                          "%#{query}%", "#{query}%", "#{query}%")
+
     add_rooms(rooms)
     add_buildings(buildings)
+    add_people(people)
   end
 
   def add_rooms(rooms)
@@ -67,7 +72,7 @@ class SearchResultsController < ApplicationController
                               id: @result_id,
                               title: room.name,
                               link: room_path(room),
-                              description: room.room_type + " on floor " + room.floor.to_s + " of " + room.building.name
+                              description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}"
                             ))
       @result_id += 1
     end
@@ -85,13 +90,13 @@ class SearchResultsController < ApplicationController
     end
   end
 
-  def add_users(users)
-    users.each do |user|
+  def add_people(people)
+    people.each do |person|
       @search_results.append(SearchResult.new(
                               id: @result_id,
-                              title: user.username,
-                              link: user_path(user),
-                              description: "User, E-Mail: #{user.email}"
+                              title: "#{person.first_name} #{person.last_name}",
+                              link: person_path(person),
+                              description: "Person, E-Mail: #{person.email}"
                             ))
       @result_id += 1
     end
