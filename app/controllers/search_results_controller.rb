@@ -8,7 +8,7 @@ class SearchResultsController < ApplicationController
 
     search_for_buildings
     search_for_rooms
-    search_for_users
+    search_for_people
 
     @search_results = @search_results.uniq(&:id)
   end
@@ -63,7 +63,7 @@ class SearchResultsController < ApplicationController
     end
   end
 
-  def search_for_users
+  def search_for_people
     Person.all.each do |person|
       @search_results.append(SearchResult.new(
                                id: @result_id,
