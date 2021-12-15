@@ -51,10 +51,6 @@ class OpeningtimesController < ApplicationController
   # DELETE /openingtimes/1 or /openingtimes/1.json
   def destroy
     @openingtime.destroy
-    respond_to do |format|
-      format.html { redirect_to openingtimes_url, notice: "Openingtime was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private
