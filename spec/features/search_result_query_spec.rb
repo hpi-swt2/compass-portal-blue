@@ -17,7 +17,7 @@ RSpec.describe "Search result list page", type: :feature do
   end
 
   it "shows buildings matching the query" do
-    visit search_results_path(query: "xy")
+    visit search_results_path(query: "XY")
     expect(page).to have_text(@building_xyz.name)
     expect(page).to have_link(href: building_path(@building_xyz))
 
