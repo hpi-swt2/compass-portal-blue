@@ -67,8 +67,13 @@ class SearchResultsController < ApplicationController
     Person.all.each do |person|
       @search_results.append(SearchResult.new(
                                id: @result_id,
+<<<<<<< HEAD
                                title: "#{person.first_name} #{person.last_name} (Person)",
                                link: person_path(person),
+=======
+                               title: "#{person.first_name} #{person.last_name}",
+                               link: person_path(person)
+>>>>>>> f0149ca0e70bff2ea402c41c31f6c12d848069ed
                              ))
       @result_id += 1
     end
