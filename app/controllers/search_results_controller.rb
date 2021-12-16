@@ -6,8 +6,8 @@ class SearchResultsController < ApplicationController
     @search_results ||= []
     @result_id = 1
     return if params[:query].nil?
-    query = params[:query].strip.downcase
-    return if query.blank?
+    query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
+    return if query.match(/^_*$/)
 
     search_for_entries_starting_with query
     search_for_entries_including query

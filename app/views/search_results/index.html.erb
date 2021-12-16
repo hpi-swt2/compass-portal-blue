@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 <% if @search_results.empty? %>
-  <h1>Your search did not match any pages</h1>
+  <div id="no_results_message">
+    <h1>Your search did not match any pages</h1>
+  </div>
 <% else %>
 <h1>Search Results</h1>
 
