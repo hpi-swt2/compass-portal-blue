@@ -6,18 +6,18 @@
 <% else %>
 <h1>Search Results</h1>
 
-<table class="search_result_table">
-  <thead>
-    <tr>
-      <th></th>
-    </tr>
-  </thead>
-
-    <tbody>
-      <% @search_results.each do |search_result| %>
-        <tr>
-          <td class="search_result_item">
-            <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
+  <tbody>
+    <% @search_results.each do |search_result| %>
+      <tr>
+        <td class="search_result_item">
+          <% if search_result.type == "person" %>
+            <img src="<%=(url_for('/assets/person.png'))%>" height="25" width="25" alt="user_picture">
+          <% elsif search_result.type == "building" %>
+            <img src="<%=(url_for('/assets/building.png'))%>" height="25" width="25" alt="building_picture">
+          <% elsif search_result.type == "room" %>
+            <img src="<%=(url_for('/assets/room.png'))%>" height="25" width="25" alt="room_picture">
+          <% end %>
+          <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
             <% if !search_result.description.nil? %>
               <p class="search_result_description"><%= search_result.description %></p>
             <% else %>
@@ -33,4 +33,3 @@
     </tbody>
   </table>
 <% end %>
-<br>

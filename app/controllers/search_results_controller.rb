@@ -73,7 +73,8 @@ class SearchResultsController < ApplicationController
                                id: @result_id,
                                title: room.name,
                                link: room_path(room),
-                               description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}"
+                               description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}",
+                               type: "room"
                              ))
       @result_id += 1
     end
@@ -85,7 +86,8 @@ class SearchResultsController < ApplicationController
                                id: @result_id,
                                title: building.name,
                                link: building_path(building),
-                               description: "Building"
+                               description: "Building",
+                               type: "building"
                              ))
       @result_id += 1
     end
@@ -97,7 +99,8 @@ class SearchResultsController < ApplicationController
                                id: @result_id,
                                title: person.name,
                                link: person_path(person),
-                               description: "Person, E-Mail: #{person.email}"
+                               description: "Person, E-Mail: #{person.email}",
+                               type: "person"
                              ))
       @result_id += 1
     end
