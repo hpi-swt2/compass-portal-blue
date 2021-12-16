@@ -69,3 +69,5 @@ yarn-debug.log*
 
 # Node modules
 node_modules
+
+tmp_credentials.txt

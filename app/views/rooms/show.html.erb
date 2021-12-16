@@ -1,9 +1,21 @@
-<p id="notice"><%= notice %></p>
+<table>
+  <tr>
+    <td width="100%">
+      <p class="name">
+        <%= @room.name %>
+      </p>
+    </td>
+    <td>
+      <% if @room.free? %>
+        <p class="occupancy free">free</p>
+      <% else %>
+        <p class="occupancy occupied">occupied</p>
+      <% end %>
+    </td>
+  </tr>
+</table>
 
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
+<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Floor:</strong>
