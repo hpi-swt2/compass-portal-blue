@@ -28,4 +28,9 @@ RSpec.describe "rooms/index", type: :view do
     assert_select "tr>td", text: "-2".to_s, count: 2
     assert_select "tr>td", text: "Room Type".to_s, count: 2
   end
+
+  it "renders the list based on their type" do
+    render
+    
+  end
 end
