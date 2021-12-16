@@ -13,6 +13,7 @@
     <% @search_results.each do |search_result| %>
       <tr>
         <td class="search_result_item">
+<<<<<<< HEAD
         <% if search_result.type == "user" %>
           <img src="<%=(url_for('/assets/user.png'))%>" height="30" width="30" alt="user_picture">
         <% elsif search_result.type == "building" %>
@@ -21,6 +22,7 @@
           <img src="<%=(url_for('/assets/room.png'))%>" height="30" width="30" alt="room_picture">
         <% end %>
         <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
+>>>>>>> dev
           <% if !search_result.description.nil? %>
             <p class="search_result_description"><%= search_result.description %></p>
           <% else %>
