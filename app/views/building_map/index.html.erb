@@ -9,3 +9,40 @@
     polylines: BuildingMapHelper.leaflet_polylines(@route),
     markers: BuildingMapHelper.leaflet_markers(@route, @target))
 %>
+<style>
+.indoorLabel{
+  background: rgba(255, 255, 255, 0);
+  border:0;
+  border-radius:0px;
+  box-shadow: 0 0px 0px;
+}
+</style>
+<script>
+  function onEachFeature(feature, layer) {
+    layer.bindTooltip(
+      feature.properties.name,
+      {
+          permanent: true,
+          direction:'center',
+          className: 'indoorLabel',
+          offset: [feature.properties.xoffset ?? 0, feature.properties.yoffset ?? 0]
+      }
+    );
+  }
+
+  fetch('assets/lecture-hall-building.geojson')
+    .then(response => response.json())
+    .then(geojsonFeature => {
+      L.geoJSON(geojsonFeature, { onEachFeature: onEachFeature }).addTo(map);
+      onZoom()
+    })
+  function onZoom() {
+    const zoomLevel = map.getZoom()
+    const tooltips = document.getElementsByClassName('indoorLabel')
+    const visibility = zoomLevel == 19 /* nearest zoom */ ? 'visible' : 'hidden'
+    for (let tooltip of tooltips) {
+      tooltip.style.visibility = visibility
+    }
+  }
+  map.on('zoomend', onZoom);
+</script>
