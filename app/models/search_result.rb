@@ -4,7 +4,7 @@ class SearchResult
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :id, :title, :description, :link, :resource
+  attr_accessor :id, :title, :description, :link, :resource, :type
 
   validates :id, :title, :link, presence: true
 
