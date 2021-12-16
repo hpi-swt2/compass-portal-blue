@@ -45,7 +45,6 @@ class SearchResultsController < ApplicationController
     Building.all.each do |building|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-<<<<<<< HEAD
                                title: building.name,
                                link: building_path(building),
                                type: "building",
@@ -58,7 +57,6 @@ class SearchResultsController < ApplicationController
     Room.all.each do |room|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-<<<<<<< HEAD
                                title: room.name,
                                link: room_path(room),
                                type: "room",
@@ -71,7 +69,6 @@ class SearchResultsController < ApplicationController
     Person.all.each do |person|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-<<<<<<< HEAD
                                title: "#{person.first_name} #{person.last_name}",
                                link: person_path(person),
                                type: "user",
