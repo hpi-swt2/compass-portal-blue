@@ -5,12 +5,13 @@ class SearchResultsController < ApplicationController
   def index
     @search_results ||= []
     @result_id = 1
+    return if params[:query].nil?
 
-    search_for_buildings
-    search_for_rooms
-    search_for_people
+    query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
+    return if query.match?(/^_*$/)
 
-    @search_results = @search_results.uniq(&:id)
+    search_for_entries_starting_with query
+    search_for_entries_including query
   end
 
   def create
@@ -41,34 +42,62 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
-  def search_for_buildings
-    Building.all.each do |building|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: building.name,
-                               link: building_path(building)
-                             ))
-      @result_id += 1
-    end
+  def search_for_entries_starting_with(query)
+    buildings = Building.where("LOWER(name) LIKE ?", "#{query}%")
+    rooms = Room.where("LOWER(name) LIKE ?", "#{query}%")
+    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                          OR LOWER(last_name) LIKE ?",
+                          "#{query}%", "#{query}%")
+
+    add_buildings(buildings)
+    add_rooms(rooms)
+    add_people(people)
   end
 
-  def search_for_rooms
-    Room.all.each do |room|
+  def search_for_entries_including(query)
+    buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
+    rooms = Room.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
+    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                          AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                          AND NOT LOWER(last_name) LIKE ?",
+                          "%#{query}%", "#{query}%", "#{query}%")
+
+    add_rooms(rooms)
+    add_buildings(buildings)
+    add_people(people)
+  end
+
+  def add_rooms(rooms)
+    rooms.each do |room|
       @search_results.append(SearchResult.new(
                                id: @result_id,
                                title: room.name,
-                               link: room_path(room)
+                               link: room_path(room),
+                               description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}"
                              ))
       @result_id += 1
     end
   end
 
-  def search_for_people
-    Person.all.each do |person|
+  def add_buildings(buildings)
+    buildings.each do |building|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-                               title: "#{person.first_name} #{person.last_name}",
-                               link: person_path(person)
+                               title: building.name,
+                               link: building_path(building),
+                               description: "Building"
+                             ))
+      @result_id += 1
+    end
+  end
+
+  def add_people(people)
+    people.each do |person|
+      @search_results.append(SearchResult.new(
+                               id: @result_id,
+                               title: person.name,
+                               link: person_path(person),
+                               description: "Person, E-Mail: #{person.email}"
                              ))
       @result_id += 1
     end
