@@ -6,8 +6,9 @@ class SearchResultsController < ApplicationController
     @search_results ||= []
     @result_id = 1
     return if params[:query].nil?
+
     query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
-    return if query.match(/^_*$/)
+    return if query.match?(/^_*$/)
 
     search_for_entries_starting_with query
     search_for_entries_including query
@@ -69,11 +70,11 @@ class SearchResultsController < ApplicationController
   def add_rooms(rooms)
     rooms.each do |room|
       @search_results.append(SearchResult.new(
-                              id: @result_id,
-                              title: room.name,
-                              link: room_path(room),
-                              description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}"
-                            ))
+                               id: @result_id,
+                               title: room.name,
+                               link: room_path(room),
+                               description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}"
+                             ))
       @result_id += 1
     end
   end
@@ -81,11 +82,11 @@ class SearchResultsController < ApplicationController
   def add_buildings(buildings)
     buildings.each do |building|
       @search_results.append(SearchResult.new(
-                              id: @result_id,
-                              title: building.name,
-                              link: building_path(building),
-                              description: "Building"
-                            ))
+                               id: @result_id,
+                               title: building.name,
+                               link: building_path(building),
+                               description: "Building"
+                             ))
       @result_id += 1
     end
   end
@@ -93,11 +94,11 @@ class SearchResultsController < ApplicationController
   def add_people(people)
     people.each do |person|
       @search_results.append(SearchResult.new(
-                              id: @result_id,
-                              title: person.name,
-                              link: person_path(person),
-                              description: "Person, E-Mail: #{person.email}"
-                            ))
+                               id: @result_id,
+                               title: person.name,
+                               link: person_path(person),
+                               description: "Person, E-Mail: #{person.email}"
+                             ))
       @result_id += 1
     end
   end
