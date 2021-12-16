@@ -47,7 +47,7 @@ class SearchResultsController < ApplicationController
                                id: @result_id,
                                title: building.name,
                                link: building_path(building),
-                               type: "building",
+                               type: "building"
                              ))
       @result_id += 1
     end
@@ -59,7 +59,7 @@ class SearchResultsController < ApplicationController
                                id: @result_id,
                                title: room.name,
                                link: room_path(room),
-                               type: "room",
+                               type: "room"
                              ))
       @result_id += 1
     end
@@ -71,8 +71,7 @@ class SearchResultsController < ApplicationController
                                id: @result_id,
                                title: "#{person.first_name} #{person.last_name}",
                                link: person_path(person),
-                               type: "user",
-
+                               type: "user"
                              ))
       @result_id += 1
     end
