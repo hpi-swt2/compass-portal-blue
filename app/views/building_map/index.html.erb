@@ -29,7 +29,8 @@
     );
   }
 
-  fetch('assets/lecture-hall-building.geojson')
+  function loadGeoJsonFile(filename) {
+    fetch(filename)
     .then(response => response.json())
     .then(geojsonFeature => {
       rooms = L.geoJSON(geojsonFeature, { onEachFeature: onEachFeature }).addTo(map);
@@ -38,6 +39,9 @@
       });
       onZoom()
     })
+  }
+
+  loadGeoJsonFile('assets/lecture-hall-building.geojson')
   function onZoom() {
     const zoomLevel = map.getZoom()
     const tooltips = document.getElementsByClassName('indoorLabel')
