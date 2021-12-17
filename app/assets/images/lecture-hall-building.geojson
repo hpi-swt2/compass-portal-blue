@@ -7,9 +7,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "HS3",
-                "xoffset": -5,
-                "yoffset": -10
+                "name": "HS3"
             },
             "geometry": {
                 "type": "LineString",
