@@ -25,7 +25,6 @@
           permanent: true,
           direction:'center',
           className: 'indoorLabel',
-          offset: [feature.properties.xoffset ?? 0, feature.properties.yoffset ?? 0]
       }
     );
   }
@@ -33,7 +32,10 @@
   fetch('assets/lecture-hall-building.geojson')
     .then(response => response.json())
     .then(geojsonFeature => {
-      L.geoJSON(geojsonFeature, { onEachFeature: onEachFeature }).addTo(map);
+      rooms = L.geoJSON(geojsonFeature, { onEachFeature: onEachFeature }).addTo(map);
+      rooms.eachLayer((layer)=>{
+        layer.getTooltip().setLatLng(layer.getBounds().getCenter());
+      });
       onZoom()
     })
   function onZoom() {
