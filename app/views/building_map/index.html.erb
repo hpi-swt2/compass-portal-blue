@@ -9,7 +9,7 @@
 		<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
 			data-bs-parent="#routingInput">
 			<div class="accordion-body">
-				<form class="row gy-2 gx-3 align-items-center" autocomplete="off">
+				<form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
 					<div class="col-auto">
 						<div class="input-group">
 							<div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
@@ -24,7 +24,6 @@
 								placeholder="To">
 						</div>
 					</div>
-					<input name='your_location' type='hidden' id='your_location' >
 					<div class="col-auto">
 						<button type="submit" formaction="/building_map" class="btn btn-primary" onclick="request_location()">Go</button>
 					</div>
@@ -62,7 +61,7 @@
 %>
 
 <script>
-    
+    let currentLocation;
 
 	function validate_start_input() {
 		const start_input = document.getElementById("start_input");
@@ -105,13 +104,11 @@
 	});
 
 	function request_location() {
-        const selection = document.getElementById("start_input");
-		if (selection.value != "Your location") return;
+		if (start_input_field.value != "Your location") return;
 		navigator.geolocation.getCurrentPosition(
 			(pos) => {
 				currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
 				start_input_field.setCustomValidity("");
-				document.getElementById("your_location").value = currentLocation;
 			},  
 			(error) => {
 				console.warn(`ERROR(${error.code}): ${error.message}`);
@@ -129,4 +126,16 @@
 			}
 		);
     }
+
+	document.getElementById("navigation_form").addEventListener("submit", () => {
+		event.preventDefault();
+		href = "/building_map";
+		if (start_input_field.value == "Your location") {
+			href += "?start=" + currentLocation;
+		} else {
+			href += "?start=" + start_input_field.value;
+		}
+		href += "&dest=" + dest_input_field.value;
+		window.location.href=href;
+	});
 </script>
