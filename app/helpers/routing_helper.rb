@@ -8,7 +8,7 @@ module RoutingHelper
 
   def self.coordinates(input)
     return input if valid_coordinates?(input)
-    Places::DESTINATIONS.dig(:"#{input}", :location)
+    Places::DESTINATIONS.dig(input, :location)
   end
 
   def self.center(start_coordinates)
