@@ -26,7 +26,7 @@
 					</div>
 					<input name='your_location' type='hidden' id='your_location' >
 					<div class="col-auto">
-						<button type="submit" formaction="/building_map" class="btn btn-primary">Go</button>
+						<button type="submit" formaction="/building_map" class="btn btn-primary" onclick="request_location()">Go</button>
 					</div>
 				</form>
 			</div>
@@ -62,23 +62,7 @@
 %>
 
 <script>
-    function request_location() {
-		let currentLocation;
-        const selection = document.getElementById("start_input");
-		if (selection.value != "Your location") return;
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((pos) => {
-				let {lat, lon} = pos.coords;
-				currentLocation = String(lat) + "," + String(lon);
-            });
-        }
-		if (currentLocation == undefined) {
-			let message = "We could not figure out your location... House A was chosen as a starting point. Note that some browsers support location requests only in secure contexts (HTTPS). So we should install an SSL certificate for localhost if we want to test this feature in localhost.";
-			alert(message);
-			currentLocation = "52.39337,13.1313";
-		}
-		document.getElementById("your_location").value = currentLocation;
-    }
+    
 
 	function validate_start_input() {
 		const start_input = document.getElementById("start_input");
@@ -119,4 +103,30 @@
 			dest_input_field.setCustomValidity("Please select a valid destination place.");
 		}
 	});
+
+	function request_location() {
+        const selection = document.getElementById("start_input");
+		if (selection.value != "Your location") return;
+		navigator.geolocation.getCurrentPosition(
+			(pos) => {
+				currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
+				start_input_field.setCustomValidity("");
+				document.getElementById("your_location").value = currentLocation;
+			},  
+			(error) => {
+				console.warn(`ERROR(${error.code}): ${error.message}`);
+				switch(error.code) {
+					case GeolocationPositionError.TIMEOUT:
+						start_input_field.setCustomValidity("Your browser could not determine your position. Please choose a different starting place.")
+						break;
+					case GeolocationPositionError.PERMISSION_DENIED:
+						start_input_field.setCustomValidity("You have to grant your browser the permission to access your location if you want to use this feature.")
+						break;
+					case GeolocationPositionError.POSITION_UNAVAILABLE:
+						start_input_field.setCustomValidity("Your browser could not determine your position. Please choose a different starting place.")
+						break;
+				}
+			}
+		);
+    }
 </script>
