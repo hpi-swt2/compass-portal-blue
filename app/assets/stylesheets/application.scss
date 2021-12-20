@@ -22,14 +22,14 @@ $font-size-base: 1rem;
 
 // Colors
 $body-color: $gray;
-$primary:    $hpi-blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+$primary: $hpi-blue;
+$success: $green;
+$info: $yellow;
+$danger: $red;
+$warning: $orange;
 
 // Input radius
-$border-radius:    2px;
+$border-radius: 2px;
 $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
@@ -39,14 +39,22 @@ External libraries
 // Bootstrap
 @import "bootstrap/scss/bootstrap";
 // FontAwesome
-$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/v4-shims';
+$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/v4-shims";
 
 // CSS partials
 @import "components/navbar";
 
-@import "leaflet"
+@import "leaflet";
+
+body {
+  padding-top: 4rem;
+}
+
+.custom-container-padding {
+  padding-bottom: 5rem;
+}

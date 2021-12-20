@@ -5,6 +5,8 @@ RSpec.describe "openingtimes/show", type: :view do
     @building = create :building
     @openingtime = assign(:openingtime, Openingtime.create!(
                                           day: 2,
+                                          opens: Tod::TimeOfDay.new(8, 0),
+                                          closes: Tod::TimeOfDay.new(17, 0),
                                           timeable: @building
                                         ))
   end

@@ -26,12 +26,17 @@ describe 'Sign In Page', type: :feature do
           find('#openid_connect-signin').click
         end
 
-        it 'shows a logout link' do
-          expect(page).to have_link(nil, href: destroy_user_session_path)
+        it 'shows a link to user profile edit page' do
+          expect(page).to have_link(nil, href: edit_user_registration_path)
         end
 
         it 'shows a success flash message' do
           expect(page).to have_css('.alert-success')
+        end
+
+        it 'shows a logout option on the user edit page' do
+          visit edit_user_registration_path
+          expect(page).to have_css(".button_to[action='#{destroy_user_session_path}']")
         end
       end
     end

@@ -6,10 +6,14 @@ RSpec.describe "openingtimes/index", type: :view do
     assign(:openingtimes, [
              Openingtime.create!(
                day: 2,
+               opens: Tod::TimeOfDay.new(8, 0),
+               closes: Tod::TimeOfDay.new(17, 0),
                timeable: @building
              ),
              Openingtime.create!(
                day: 2,
+               opens: Tod::TimeOfDay.new(8, 0),
+               closes: Tod::TimeOfDay.new(17, 0),
                timeable: @building
              )
            ])

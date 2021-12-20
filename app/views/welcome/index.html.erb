@@ -1,28 +1,5 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h1 class="fw-light">
-      Welcome to the HPI Compass Portal<%= ", #{current_user.username}" if user_signed_in? && current_user.username.present? %>!
-    </h1>
-    <p class="lead text-muted">Something short and concise about the value of the HPI Compass Portal. Short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-    <p>
-      <%= button_to(user_openid_connect_omniauth_authorize_path,
-        class: 'btn btn-primary btn-md', id: 'openid-signin',
-        # devise helper: https://github.com/heartcombo/devise#controller-filters-and-helpers
-        disabled: user_signed_in?,
-        # disable button after click: https://apidock.com/rails/ActionView/Helpers/UrlHelper/button_to
-        data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %>
-          <i class="fab fa-openid"></i> HPI OpenID Log In
-      <% end %>
-    </p>
-    <hr>
-    <p>
-      <%= link_to new_user_session_path, class: 'btn btn-outline-primary btn-sm', id: "signin" do %>
-        <i class="fas fa-sign-in-alt"></i> Local Log In
-      <% end %>
-      <%= link_to new_user_registration_path, class: 'btn btn-outline-secondary btn-sm', id: "signup" do %>
-        <i class="fas fa-user-plus"></i> Local Sign Up
-      <% end %>
-    </p>
     <%= form_with url: search_results_path, method: :get do |form| %>
       <div class="row  mb-6">
         <div class="col">
@@ -34,5 +11,4 @@
       </div>
     <% end %>
   </div>
-
 </div>
