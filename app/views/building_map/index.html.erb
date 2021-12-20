@@ -55,7 +55,7 @@
         latlng: RoutingHelper.center(@start),
         zoom: 17,
     },
-    polygons: BuildingMapHelper.leaflet_polygons(),
+    polygons: BuildingMapHelper.leaflet_polygons,
     polylines: BuildingMapHelper.leaflet_polylines(@route),
     markers: BuildingMapHelper.leaflet_markers(@route))
 %>
@@ -68,7 +68,7 @@
 		const startOptions = document.getElementById("startOptions").options;
 		let valid_start = false;
 		for (option of startOptions) {	
-			if (option.value == start_input.value) valid_start = true;
+			if (option.value === start_input.value) valid_start = true;
 		}
 		return valid_start;	
 	}
@@ -78,7 +78,7 @@
 		const destOptions = document.getElementById("destOptions").options;
 		let valid_dest = false;
 		for (option of destOptions) {	
-			if (option.value == dest_input.value) valid_dest = true;
+			if (option.value === dest_input.value) valid_dest = true;
 		}
 		return valid_dest;
 	}
@@ -104,7 +104,7 @@
 	});
 
 	function request_location() {
-		if (start_input_field.value != "Your location") return;
+		if (start_input_field.value !== "Your location") return;
 		navigator.geolocation.getCurrentPosition(
 			(pos) => {
 				currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
@@ -127,10 +127,10 @@
 		);
     }
 
-	document.getElementById("navigation_form").addEventListener("submit", () => {
+	document.getElementById("navigation_form").addEventListener("submit", (event) => {
 		event.preventDefault();
-		href = "/building_map";
-		if (start_input_field.value == "Your location") {
+		let href = "/building_map";
+		if (start_input_field.value === "Your location") {
 			href += "?start=" + currentLocation;
 		} else {
 			href += "?start=" + start_input_field.value;

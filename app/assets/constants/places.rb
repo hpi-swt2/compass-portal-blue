@@ -9,7 +9,7 @@ module Places
     },
     "Haus B" => {
       location: "52.3934534,13.1312424"
-    }, 
+    },
     "Haus C" => {
       location: "52.3934869,13.1325198"
     },
