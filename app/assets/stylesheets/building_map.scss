@@ -2,12 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+#offcanvas {
+  top: 4rem;
+  height: calc(100% - 4rem - 4rem);
+  width: 20%
+}
+
 #map {
   position: absolute;
   top: 4rem;
   left: 0;
   height: calc(100% - 4rem - 4rem);
   width: 100%;
+}
+
+.accordion-item {
+  background-color: #FFFFFF !important;
 }
 
 .accordion-button:not(.collapsed) {

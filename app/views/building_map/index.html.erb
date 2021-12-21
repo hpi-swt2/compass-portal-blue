@@ -1,36 +1,44 @@
-<div class="accordion mb-2 accordion-flush" id="routingInput">
-	<div class="accordion-item">
-		<h2 class="accordion-header" id="headingOne">
-			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-				data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				<i class="fas fa-directions directions-icon"></i>
-			</button>
-		</h2>
-		<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-			data-bs-parent="#routingInput">
-			<div class="accordion-body">
-				<form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
-					<div class="col-auto">
-						<div class="input-group">
-							<div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
-							<input name='start' type="text" class="form-control" list="startOptions" id="start_input"
-								placeholder="From" onchange="request_location()">
-						</div>
-					</div>
-					<div class="col-auto">
-						<div class="input-group">
-							<div class="input-group-text"><i class="fas fa-map-marker-alt route-end-icon"></i></div>
-							<input name='dest' type="text" class="form-control" list="destOptions" id="dest_input"
-								placeholder="To">
-						</div>
-					</div>
-					<div class="col-auto">
-						<button type="submit" formaction="/building_map" class="btn btn-primary" onclick="request_location()">Go</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title d-none d-sm-block" id="offcanvas">Navigation</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body px-0">
+    <div class="accordion mb-2 accordion-flush" id="routingInput">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-directions directions-icon"></i>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+          data-bs-parent="#routingInput">
+          <div class="accordion-body">
+            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
+              <div class="col-auto">
+                <div class="input-group">
+                  <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
+                  <input name='start' type="text" class="form-control" list="startOptions" id="start_input"
+                    placeholder="From" onchange="request_location()">
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="input-group">
+                  <div class="input-group-text"><i class="fas fa-map-marker-alt route-end-icon"></i></div>
+                  <input name='dest' type="text" class="form-control" list="destOptions" id="dest_input"
+                    placeholder="To">
+                </div>
+              </div>
+              <div class="col-auto">
+                <button type="submit" formaction="/building_map" class="btn btn-primary" onclick="request_location()">Go</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <datalist id="startOptions">
@@ -49,16 +57,18 @@
 		<% end %>
 </datalist>
 
-<%= map(
-    center: {
-        # HPI coordinates
-        latlng: RoutingHelper.center(@start),
-        zoom: 17,
-    },
-    polygons: BuildingMapHelper.leaflet_polygons,
-    polylines: BuildingMapHelper.leaflet_polylines(@route),
-    markers: BuildingMapHelper.leaflet_markers(@route, @target))
-%>
+<div class="container-fluid">
+  <%= map(
+      center: {
+          # HPI coordinates
+          latlng: RoutingHelper.center(@start),
+          zoom: 17,
+      },
+      polygons: BuildingMapHelper.leaflet_polygons,
+      polylines: BuildingMapHelper.leaflet_polylines(@route),
+      markers: BuildingMapHelper.leaflet_markers(@route, @target))
+  %>
+</div>
 
 <script>
     let currentLocation;
