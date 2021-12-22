@@ -5,7 +5,7 @@
 #offcanvas {
   top: 4rem;
   height: calc(100% - 4rem - 4rem);
-  width: 20%
+  width: 25%;
 }
 
 #map {
@@ -66,4 +66,10 @@
         width: 2rem;
         transform: translate(-1.1rem, -2.6rem);
     }
+}
+
+@media screen and (max-width: 800px) {
+  #offcanvas {
+    width: 100%;
+  }
 }
