@@ -6,16 +6,10 @@ module RoutingHelper
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
 
-  def self.coordinates(input)
+  def self.resolve_coordinates(input)
     return input if valid_coordinates?(input)
 
     Places::DESTINATIONS.dig(input, :location)
-  end
-
-  def self.center(start_coordinates)
-    return [52.39339, 13.13208] if start_coordinates.nil?
-
-    start_coordinates.split(",").map(&:to_f)
   end
 
   def self.valid_coordinates?(coordinates)

@@ -50,15 +50,15 @@ describe "Routing helper", type: :helper do
   context "when looking up coordinates" do
     it "lets valid coordinates pass" do
       location = "52.393913,13.133082"
-      expect(RoutingHelper.coordinates(location)).to eq location
+      expect(RoutingHelper.resolve_coordinates(location)).to eq location
     end
 
     it "looks up the locations of buildings" do
-      expect(RoutingHelper.coordinates("Haus G")).to eq "52.3947488,13.1248368"
+      expect(RoutingHelper.resolve_coordinates("Haus G")).to eq "52.3947488,13.1248368"
     end
 
     it "rejects invalid input" do
-      expect(RoutingHelper.coordinates("Haus ASDFQWERTZ")).to eq nil
+      expect(RoutingHelper.resolve_coordinates("Haus ASDFQWERTZ")).to eq nil
     end
   end
 end
