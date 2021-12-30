@@ -19,14 +19,14 @@
               <div class="col-auto">
                 <div class="input-group">
                   <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
-                  <input name='start' type="text" class="form-control" list="startOptions" id="start_input"
+                  <input name="start" type="text" class="form-control" list="startOptions" id="start_input"
                          placeholder="From" onchange="request_location()">
                 </div>
               </div>
               <div class="col-auto">
                 <div class="input-group">
                   <div class="input-group-text"><i class="fas fa-map-marker-alt route-end-icon"></i></div>
-                  <input name='dest' type="text" class="form-control" list="destOptions" id="dest_input"
+                  <input name="dest" type="text" class="form-control" list="destOptions" id="dest_input"
                          placeholder="To">
                 </div>
               </div>
@@ -72,11 +72,7 @@
     function validate_place_input(inputId, optionsId) {
         const input = document.getElementById(inputId);
         const options = document.getElementById(optionsId).options;
-        let valid = false;
-        for (const option of options) {
-            if (option.value === input.value) valid = true;
-        }
-        return valid;
+        return Array.from(options).some(o => o.value === input.value);
     }
 
     const start_input_field = document.getElementById("start_input");
