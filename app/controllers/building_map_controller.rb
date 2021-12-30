@@ -1,4 +1,6 @@
 class BuildingMapController < ApplicationController
+  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze
+
   def index
     @start = RoutingHelper.resolve_coordinates(params[:start])
     @destination = RoutingHelper.resolve_coordinates(params[:dest])

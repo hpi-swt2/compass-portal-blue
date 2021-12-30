@@ -15,7 +15,7 @@
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
              data-bs-parent="#routingInput">
           <div class="accordion-body">
-            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
+            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form" method="GET" action="/building_map">
               <div class="col-auto">
                 <div class="input-group">
                   <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
@@ -31,7 +31,7 @@
                 </div>
               </div>
               <div class="col-auto">
-                <button type="submit" formaction="/building_map" class="btn btn-primary" onclick="request_location()">Go</button>
+                <button type="submit" class="btn btn-primary">Go</button>
               </div>
             </form>
           </div>
@@ -42,7 +42,7 @@
 </div>
 
 <datalist id="startOptions">
-  <option>Your location</option>
+  <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
   <%= Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
@@ -76,7 +76,6 @@
     }
 
     const start_input_field = document.getElementById("start_input");
-    start_input_field.setCustomValidity("Please select a valid starting place.");
     start_input_field.addEventListener("change", () => {
         if (validate_place_input("start_input", "startOptions")) {
             start_input_field.setCustomValidity("");
@@ -84,9 +83,9 @@
             start_input_field.setCustomValidity("Please select a valid starting place.");
         }
     });
+    start_input_field.dispatchEvent(new Event("change"));
 
     const dest_input_field = document.getElementById("dest_input");
-    dest_input_field.setCustomValidity("Please select a valid destination place.");
     dest_input_field.addEventListener("change", () => {
         if (validate_place_input("dest_input", "destOptions")) {
             dest_input_field.setCustomValidity("");
@@ -94,9 +93,10 @@
             dest_input_field.setCustomValidity("Please select a valid destination place.");
         }
     });
+    dest_input_field.dispatchEvent(new Event("change"));
 
     function request_location() {
-        if (start_input_field.value !== "Your location") return;
+        if (start_input_field.value !== "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") return;
         navigator.geolocation.getCurrentPosition(
             (pos) => {
                 currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
@@ -113,15 +113,9 @@
         );
     }
 
-    document.getElementById("navigation_form").addEventListener("submit", (event) => {
-        event.preventDefault();
-        let href = "/building_map";
-        if (start_input_field.value === "Your location") {
-            href += "?start=" + currentLocation;
-        } else {
-            href += "?start=" + start_input_field.value;
+    document.getElementById("navigation_form").addEventListener("submit", () => {
+        if (start_input_field.value === "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") {
+            start_input_field.value = currentLocation;
         }
-        href += "&dest=" + dest_input_field.value;
-        window.location.href = href;
     });
 </script>
