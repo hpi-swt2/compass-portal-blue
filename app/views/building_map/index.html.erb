@@ -1,11 +1,121 @@
-<%=
-  map(
-    center: {
-        # HPI coordinates if no center is set
-        latlng: !@target.nil? ? @target.split(",") : [52.39339, 13.13208],
-        zoom: 18,
-    },
-    polygons: BuildingMapHelper.leaflet_polygons(),
-    polylines: BuildingMapHelper.leaflet_polylines(@route),
-    markers: BuildingMapHelper.leaflet_markers(@route, @target))
-%>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title d-none d-sm-block" id="offcanvas">Navigation</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body px-0">
+    <div class="accordion mb-2 accordion-flush" id="routingInput">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-directions directions-icon"></i>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+             data-bs-parent="#routingInput">
+          <div class="accordion-body">
+            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form" method="GET" action="/building_map">
+              <div class="col-auto">
+                <div class="input-group">
+                  <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
+                  <input name="start" type="text" class="form-control" list="startOptions" id="start_input"
+                         placeholder="From" onchange="request_location()">
+                </div>
+              </div>
+              <div class="col-auto">
+                <div class="input-group">
+                  <div class="input-group-text"><i class="fas fa-map-marker-alt route-end-icon"></i></div>
+                  <input name="dest" type="text" class="form-control" list="destOptions" id="dest_input"
+                         placeholder="To">
+                </div>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Go</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<datalist id="startOptions">
+  <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
+  <%= Places::DESTINATIONS.each do |dest, coords| %>
+    <option>
+      <%= dest %>
+    </option>
+  <% end %>
+</datalist>
+<datalist id="destOptions">
+  <%= Places::DESTINATIONS.each do |dest, coords| %>
+    <option>
+      <%= dest %>
+    </option>
+  <% end %>
+</datalist>
+
+<div class="container-fluid">
+  <%= map(
+        center: BuildingMapHelper.leaflet_center(@start),
+        polygons: BuildingMapHelper.leaflet_polygons,
+        polylines: BuildingMapHelper.leaflet_polylines(@route),
+        markers: BuildingMapHelper.leaflet_markers(@route, @target))
+  %>
+</div>
+
+<script>
+    let currentLocation;
+
+    function validate_place_input(inputId, optionsId) {
+        const input = document.getElementById(inputId);
+        const options = document.getElementById(optionsId).options;
+        return Array.from(options).some(o => o.value === input.value);
+    }
+
+    const start_input_field = document.getElementById("start_input");
+    start_input_field.addEventListener("change", () => {
+        if (validate_place_input("start_input", "startOptions")) {
+            start_input_field.setCustomValidity("");
+        } else {
+            start_input_field.setCustomValidity("Please select a valid starting place.");
+        }
+    });
+    start_input_field.dispatchEvent(new Event("change"));
+
+    const dest_input_field = document.getElementById("dest_input");
+    dest_input_field.addEventListener("change", () => {
+        if (validate_place_input("dest_input", "destOptions")) {
+            dest_input_field.setCustomValidity("");
+        } else {
+            dest_input_field.setCustomValidity("Please select a valid destination place.");
+        }
+    });
+    dest_input_field.dispatchEvent(new Event("change"));
+
+    function request_location() {
+        if (start_input_field.value !== "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") return;
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
+                start_input_field.setCustomValidity("");
+            },
+            (error) => {
+                console.warn(`ERROR(${error.code}): ${error.message}`);
+                if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
+                    start_input_field.setCustomValidity("You have to grant your browser the permission to access your location if you want to use this feature.")
+                } else {
+                    start_input_field.setCustomValidity("Your browser could not determine your position. Please choose a different starting place.")
+                }
+            }
+        );
+    }
+
+    document.getElementById("navigation_form").addEventListener("submit", () => {
+        if (start_input_field.value === "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") {
+            start_input_field.value = currentLocation;
+        }
+    });
+</script>
