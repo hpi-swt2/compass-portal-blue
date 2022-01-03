@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @building.name %>
+</p>
+
+<p>
+  <strong>Location latitude:</strong>
+  <%= @building.location_latitude %>
+</p>
+
+<p>
+  <strong>Location longitude:</strong>
+  <%= @building.location_longitude %>
+</p>
+
+<%= link_to 'Edit', edit_building_path(@building) %> |
+<%= link_to 'Back', buildings_path %> |
+<%= link_to 'Map', building_map_path(target: "#{@building.location_latitude},#{@building.location_longitude}")%>

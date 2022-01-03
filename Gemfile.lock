@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Finn-HPI/leaflet-rails.git
+  revision: 340f65cbc163dcc3523c43592831d43a65381296
+  specs:
+    leaflet-rails (1.7.4)
+      rails (>= 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -116,6 +123,9 @@ GEM
     globalid (0.5.2)
       activesupport (>= 5.0)
     hashie (5.0.0)
+    httparty (0.20.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
@@ -136,10 +146,14 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2021.1115)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multi_xml (0.6.0)
     nio4r (2.5.8)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
@@ -166,6 +180,7 @@ GEM
     parser (3.0.2.0)
       ast (~> 2.4.1)
     pg (1.2.3)
+    phonelib (0.6.54)
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
@@ -298,6 +313,7 @@ GEM
       httpclient (>= 2.4)
     thor (1.1.0)
     tilt (2.0.10)
+    tod (3.0.0)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -351,11 +367,14 @@ DEPENDENCIES
   devise-i18n
   devise-i18n-bootstrap
   factory_bot_rails
+  httparty
   jbuilder (~> 2.7)
+  leaflet-rails!
   listen (~> 3.3)
   omniauth
   omniauth_openid_connect
   pg
+  phonelib
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
@@ -371,6 +390,7 @@ DEPENDENCIES
   simplecov
   spring
   sqlite3 (~> 1.4)
+  tod
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
@@ -381,4 +401,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.1.4
+   2.2.32

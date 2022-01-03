@@ -1,0 +1,46 @@
+<%= form_with(model: openingtime) do |form| %>
+  <% if openingtime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(openingtime.errors.count, "error") %> prohibited this openingtime from being saved:</h2>
+
+      <ul>
+        <% openingtime.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :opens %>
+    <%= form.time_field :opens%>
+  </div>
+
+  <div class="field">
+    <%= form.label :closes %>
+    <%= form.time_field :closes%>
+  </div>
+
+  <div class="field">
+    <%= form.label :day %>
+    <%= form.number_field :day %>
+  </div>
+
+    <h2>WARNING:</h2>
+    <p>This page is in a temporary state to enable filling the database for development.
+    Currently every openingtime gets assigned to a Person (which can be selected in the following input field).
+    If you want to create an openingtime entry associated with a building make sure the :timeable_type attribute is set to Building.</p>
+   <div>
+    <%= form.label :timeable_id %>
+            <%= form.select 'timeable_id',
+              options_from_collection_for_select(Person.all, :id, :name),
+              {},
+              multiple: false %>
+    </div>
+    <% openingtime.timeable_type = 'Person' %>
+    <%= form.hidden_field :timeable_type%>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

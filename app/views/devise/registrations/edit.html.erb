@@ -5,7 +5,7 @@
 
     <h5 class="fw-light mt-3">User Details</h5>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field mb-3">
@@ -49,8 +49,15 @@
         <%= f.submit "Update User Account", class: 'btn btn-primary' %>
       </div>
     <% end %>
+    <h3 class="fw-light mt-5">Logout Account</h3>
 
-    <h2 class="fw-light mt-5">Cancel Account</h3>
+     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
+            <i class="fas fa-sign-out-alt"></i> Sign out
+     <% end%>
+
+    <%= link_to "Edit linked person", edit_person_path(resource.person) %>
+
+    <h3 class="fw-light mt-5">Cancel Account</h3>
 
     <p>
       <%= button_to "Cancel my account permanently",

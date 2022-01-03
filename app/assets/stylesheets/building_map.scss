@@ -1,0 +1,75 @@
+// Place all the styles related to the BuildingMap controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#offcanvas {
+  top: 4rem;
+  height: calc(100% - 4rem - 4rem);
+  width: 25%;
+}
+
+#map {
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  height: calc(100% - 4rem - 4rem);
+  width: 100%;
+}
+
+.accordion-item {
+  background-color: #FFFFFF !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #F4F4F4 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.route-start-icon {
+    color: green
+}
+
+.route-end-icon {
+    color: red
+}
+
+.directions-icon {
+    color: #007A9E;
+    font-size: xx-large;
+}
+
+.building-icon {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  background: #eb34de;
+  border: 2px solid #eb34de;
+  color: #fff;
+  text-align: center;
+}
+
+.time-icon {
+  border-radius: 15%;
+  background: #3675af;
+  color: #fff;
+  padding: 8px;
+  text-align: center;
+}
+
+.target-pin {
+    img {
+        width: 2rem;
+        transform: translate(-1.1rem, -2.6rem);
+    }
+}
+
+@media screen and (max-width: 800px) {
+  #offcanvas {
+    width: 100%;
+  }
+}

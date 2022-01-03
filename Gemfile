@@ -44,6 +44,15 @@ gem 'devise-i18n-bootstrap' # https://github.com/maximalink/devise-i18n-bootstra
 gem 'omniauth' # https://github.com/omniauth/omniauth
 gem 'omniauth_openid_connect' # https://github.com/m0n9oose/omniauth_openid_connect
 
+gem 'tod'
+
+#
+# Libraries
+#
+
+# Leaflet for map functionality
+gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
+
 #
 # Gems that are loaded depending on the environment (development/test/production)
 #
@@ -67,6 +76,8 @@ group :development, :test do
   gem 'rubocop-performance', require: false # https://github.com/rubocop-hq/rubocop-performance
   # RSpec formatter compatible with GitHub Action's annotations
   gem 'rspec-github', require: false # https://github.com/Drieam/rspec-github
+  # Easy working with HTTP Requests
+  gem 'httparty'
 end
 
 group :development do
@@ -106,3 +117,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "phonelib"
