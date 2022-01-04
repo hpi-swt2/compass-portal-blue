@@ -18,7 +18,7 @@
 }
 </style>
 <script>
-  function onEachFeature(feature, layer) {
+  function addIndoorLabel(feature, layer) {
     layer.bindTooltip(
       feature.properties.name,
       {
@@ -33,22 +33,27 @@
     fetch(filename)
     .then(response => response.json())
     .then(geojsonFeature => {
-      rooms = L.geoJSON(geojsonFeature, { onEachFeature: onEachFeature }).addTo(map);
+      // Manually add indoor labels to map 
+      const rooms = L.geoJSON(geojsonFeature, { onEachFeature: addIndoorLabel }).addTo(map);
       rooms.eachLayer((layer)=>{
         layer.getTooltip().setLatLng(layer.getBounds().getCenter());
       });
-      onZoom()
+      recalculateTooltipVisibility()
     })
   }
 
   loadGeoJsonFile('assets/lecture-hall-building.geojson')
-  function onZoom() {
+  function recalculateTooltipVisibility() {
     const zoomLevel = map.getZoom()
-    const tooltips = document.getElementsByClassName('indoorLabel')
-    const visibility = zoomLevel == 19 /* nearest zoom */ ? 'visible' : 'hidden'
-    for (let tooltip of tooltips) {
-      tooltip.style.visibility = visibility
-    }
+    map.eachLayer(layer => {
+      if (layer.getTooltip()) {
+        if (zoomLevel == 19 /* nearest zoom */) {
+          layer.openTooltip()
+        } else {
+          layer.closeTooltip()
+        }
+      }
+    })
   }
-  map.on('zoomend', onZoom);
+  map.on('zoomend', recalculateTooltipVisibility);
 </script>
