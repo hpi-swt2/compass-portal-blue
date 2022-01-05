@@ -4,11 +4,11 @@ RSpec.describe "rooms/index", type: :view do
   before do
     @building = create :building
     @people = [(create :person)]
-    @rooms = Room.create([{:name => "Hörsaal1", :floor => 0, :room_type => "Hörsaal"}, 
-            {:name => "H.257", :floor => 2, :room_type => "Seminarraum",}]) do |u|
-              u.people = @people
-              u.building = @building
-            end
+    @rooms = Room.create([{ name: "Hörsaal1", floor: 0, room_type: "Hörsaal" },
+                          { name: "H.257", floor: 2, room_type: "Seminarraum" }]) do |u|
+      u.people = @people
+      u.building = @building
+    end
   end
 
   it "renders a list of rooms" do
