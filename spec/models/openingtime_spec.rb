@@ -30,4 +30,10 @@ RSpec.describe Openingtime, type: :model do
     @openingtime.day = 1000
     expect(@openingtime).to be_invalid
   end
+
+  it "can output its day as a string" do
+    expect(@openingtime.day_as_string).to eq("Tuesday")
+    @openingtime.day = 4
+    expect(@openingtime.day_as_string).to eq("Friday")
+  end
 end
