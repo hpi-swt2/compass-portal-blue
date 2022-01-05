@@ -1,12 +1,17 @@
 require 'rails_helper'
 
-describe "New show page", type: :feature do
-    it "should display author's full name" do
-      # FactoryBot.create(:paper) do |paper|
-      #   FactoryBot.create_list(:author)
-      # end
-      # visit paper_path(@paper)       
-      # expect(@paper).to have_text(@author.name)
-    end
+describe "Location Show Page", type: :feature do
+  it "displays a locations' information" do
+    @location = FactoryBot.create :location
+    @openingtime = FactoryBot.create(:openingtime, timeable: @location)
+
+    visit location_path(@location)
+
+    expect(page).to have_text @location.name
+    expect(page).to have_text @location.details
+    expect(page).to have_text @location.openingtimes[0].day_as_string
+    expect(page).to have_text @location.openingtimes[0].opens
+    expect(page).to have_text @location.openingtimes[0].closes
   end
+end
   
