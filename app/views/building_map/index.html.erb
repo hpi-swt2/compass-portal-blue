@@ -57,7 +57,11 @@
   <% end %>
 </datalist>
 
-<div class="container-fluid">
+<script>
+    var map;
+</script>
+
+<div class="container-fluid">git
   <%= map(
         center: BuildingMapHelper.leaflet_center(@start),
         polygons: BuildingMapHelper.leaflet_polygons,
@@ -65,6 +69,42 @@
         markers: BuildingMapHelper.leaflet_markers(@route, @target))
   %>
 </div>
+
+<script>
+  let markers = [];
+
+  const marker_icon_properties = {
+      iconUrl: "<%=(url_for('/assets/marker-icon.png'))%>",
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: null,
+      shadowUrl: null,
+      shadowSize: null,
+      shadowAnchor: null
+  }
+
+  function addMarker(e) {
+      let icon = L.icon(marker_icon_properties);
+      let marker = L.marker(e.latlng, {icon: icon});
+      markers.push(marker);
+      marker.addTo(map);
+  }
+
+  function removeAllMarkers(e) {
+    markers.forEach(marker => marker.remove());
+    markers = [];
+  }
+
+  function onClick(e) {
+      if(markers.length === 2){
+          removeAllMarkers(e);
+      }else{
+          addMarker(e);
+      }
+  }
+
+  map.on('click', onClick);
+</script>
 
 <script>
     let currentLocation;
