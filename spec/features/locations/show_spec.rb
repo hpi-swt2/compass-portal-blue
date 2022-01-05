@@ -14,4 +14,3 @@ describe "Location Show Page", type: :feature do
     expect(page).to have_text @location.openingtimes[0].closes
   end
 end
-  

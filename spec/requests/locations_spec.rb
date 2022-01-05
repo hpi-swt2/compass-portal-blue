@@ -85,7 +85,8 @@ RSpec.describe "/locations", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_location = Location.new(name: "cafe ZWEI!", details: "cafe-details ZWEI :O", location_longitude: 3.5, location_latitude: 1.5)
+      new_location = Location.new(name: "cafe ZWEI!", details: "cafe-details ZWEI :O", location_longitude: 3.5,
+                                  location_latitude: 1.5)
       let(:new_attributes) do
         new_location.attributes
       end

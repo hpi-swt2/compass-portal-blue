@@ -4,11 +4,11 @@ RSpec.describe "locations/new", type: :view do
   before do
     @location = create :location
     #    assign(:person, Person.new(
-#                      phone_number: "MyString",
-#                      first_name: "MyString",
-#                      last_name: "MyString",
-#                      email: "MyString"
-#                    ))
+    #                      phone_number: "MyString",
+    #                      first_name: "MyString",
+    #                      last_name: "MyString",
+    #                      email: "MyString"
+    #                    ))
   end
 
   it "renders new location form" do

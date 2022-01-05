@@ -32,5 +32,4 @@ class Openingtime < ApplicationRecord
   def opens_before_closes
     errors.add(:opens, "Should open before closing") unless opens && closes && opens < closes
   end
-
 end

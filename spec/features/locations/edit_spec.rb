@@ -5,7 +5,7 @@ describe "location edit page", type: :feature do
     @location = FactoryBot.create :location
   end
 
-  it "should exist at 'edit_author_path' and render without error" do
+  it "exists at 'edit_author_path' and render without error" do
     visit edit_location_url(@location)
     page.fill_in 'location[name]', with: 'Updated_name'
     page.fill_in 'location[details]', with: 'Updated_details'
@@ -13,7 +13,8 @@ describe "location edit page", type: :feature do
     page.fill_in 'location[location_longitude]', with: 20.0
     find('input[type="submit"]').click
 
-    expect(Location.where(name: "Updated_name", details: "Updated_details", location_latitude: 14.0, location_longitude: 20.0)).to exist
+    expect(Location.where(name: "Updated_name", details: "Updated_details", location_latitude: 14.0,
+                          location_longitude: 20.0)).to exist
   end
 
   it "can update photo" do
