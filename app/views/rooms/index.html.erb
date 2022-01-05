@@ -14,7 +14,7 @@
 
   <tbody>
     <tr>
-      <td><b>Seminarräume:</b></td>
+      <td id="Seminarraum"><b>Seminarräume:</b></td>
     <% @rooms.each do |room| %>
       <% if room.room_type == "Seminarraum" %>
       <tr>
@@ -22,15 +22,13 @@
         <td id=normalRow><%= room.floor %></td>
         <td id=normalRow><%= room.room_type %></td>
         <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
     </tr>
 
     <tr>
-      <td><b>Hörsäle:</b></td>
+      <td id="Hörsaal"><b>Hörsäle:</b></td>
     <% @rooms.each do |room| %>
       <% if room.room_type == "Hörsaal" %>
       <tr>
@@ -38,15 +36,13 @@
         <td id=normalRow><%= room.floor %></td>
         <td id=normalRow><%= room.room_type %></td>
         <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
     </tr>
 
     <tr>
-      <td><b>Poolräume:</b></td>
+      <td id="Poolraum"><b>Poolräume:</b></td>
     <% @rooms.each do |room| %>
       <% if room.room_type == "Poolraum" %>
       <tr>
@@ -54,14 +50,12 @@
         <td id=normalRow><%= room.floor %></td>
         <td id=normalRow><%= room.room_type %></td>
         <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
     </tr>
     <tr>
-      <td><b>Konferenzräume:</b></td>
+      <td id="Konferenzraum"><b>Konferenzräume:</b></td>
     <% @rooms.each do |room| %>
       <% if room.room_type == "Konferenzraum" %>
       <tr>
@@ -69,8 +63,6 @@
         <td id=normalRow><%= room.floor %></td>
         <td id=normalRow><%= room.room_type %></td>
         <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
