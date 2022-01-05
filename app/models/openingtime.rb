@@ -14,9 +14,23 @@ class Openingtime < ApplicationRecord
   validates :closes, presence: true
   validate :opens_before_closes
 
+  def day_as_string
+    mapping = {
+      0 => 'Monday',
+      1 => 'Tuesday',
+      2 => 'Wednesday',
+      3 => 'Thursday',
+      4 => 'Friday',
+      5 => 'Saturday',
+      6 => 'Sunday'
+    }
+    mapping[day]
+  end
+
   private
 
   def opens_before_closes
     errors.add(:opens, "Should open before closing") unless opens && closes && opens < closes
   end
+
 end

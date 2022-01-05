@@ -22,16 +22,6 @@
   </div>
 </div>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @location.location_latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @location.location_longitude %>
-</p>
-
 <%= map(
     center: {
         latlng: [@location.location_latitude, @location.location_longitude],
@@ -42,16 +32,14 @@
 
 <p>
   <strong>Opening Times:</strong>
-  <%= @location.openingtimes %>
-</p>
-
-<p>
-  <strong>Opening Times:</strong>
-  <% @location.openingtimes.each do |openingtime| %>
-    <%= openingtimes.opens %> <br>
-    <%= openingtimes.closes %> <br>
-    <%= openingtimes.day %> <br>
-    <% end %>
+  <br>
+  <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
+    <%= openingtime.day_as_string %>:
+    <%= openingtime.opens %>
+    -
+    <%= openingtime.closes %>
+    <br>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
