@@ -26,7 +26,7 @@ describe "Building Map page", type: :feature do
       expect(page).to have_css(".leaflet-container")
     end
 
-    it "highlights builings on the map", js: true do
+    it "highlights buildings on the map", js: true do
       visit building_map_path
       expect(page).to have_css(".leaflet-interactive")
       expect(page).to have_selector("path.building", count: 15)
@@ -58,6 +58,12 @@ describe "Building Map page", type: :feature do
 
       it "shows no route, if it's not requested", js: true do
         visit building_map_path
+        expect(page).not_to have_css(".routing-path")
+        expect(page).not_to have_css(".time-icon")
+      end
+
+      it "shows no route, if not all necessary parameters are provided", js: true do
+        visit building_map_path(start: "52.393913,13.133082")
         expect(page).not_to have_css(".routing-path")
         expect(page).not_to have_css(".time-icon")
       end

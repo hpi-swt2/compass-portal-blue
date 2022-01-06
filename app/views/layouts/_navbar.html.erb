@@ -7,6 +7,11 @@
         <li class="nav-item">
           <a class="nav-link <%= route_active_class?(building_map_path) %>" href="/building_map"><i class="fas fa-map"></i> Map</a>
         </li>
+        <% if request.path == building_map_path %>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"> <i class="fas fa-directions" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i> Navigation </a>
+          </li>
+        <% end %>
       </ul>
   </div>
 </nav>
