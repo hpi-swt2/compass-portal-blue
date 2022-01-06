@@ -10,7 +10,7 @@
     markers: BuildingMapHelper.leaflet_markers(@route, @target))
 %>
 <style>
-.indoorLabel{
+.indoor-label{
   background: rgba(255, 255, 255, 0);
   border:0;
   border-radius:0px;
@@ -24,7 +24,7 @@
       {
           permanent: true,
           direction:'center',
-          className: 'indoorLabel',
+          className: 'indoor-label',
       }
     );
   }
@@ -48,7 +48,7 @@
     map.eachLayer(layer => {
       if (layer.getTooltip()) {
         if (zoomLevel == 19 /* nearest zoom */) {
-          layer.openTooltip()
+          layer.openTooltip(layer.getBounds().getCenter())
         } else {
           layer.closeTooltip()
         }
