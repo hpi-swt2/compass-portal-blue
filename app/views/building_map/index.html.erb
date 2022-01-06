@@ -43,14 +43,14 @@
 
 <datalist id="startOptions">
   <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
-  <%= Places::DESTINATIONS.each do |dest, coords| %>
+  <% Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
   <% end %>
 </datalist>
 <datalist id="destOptions">
-  <%= Places::DESTINATIONS.each do |dest, coords| %>
+  <% Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
