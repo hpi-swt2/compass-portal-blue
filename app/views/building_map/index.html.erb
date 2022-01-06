@@ -68,12 +68,34 @@
 </div>
 
 <script>
-  // var center = <%= BuildingMapHelper.leaflet_center(@start).to_json %>;
-  var map = L.map('map').setView([52.4471,13.5523], 13);
+  const view = <%= raw BuildingMapHelper.leaflet_center(@start).to_json %>;
+  const polygons = <%= raw BuildingMapHelper.leaflet_polygons.to_json %>;
+  const markers = <%= raw BuildingMapHelper.leaflet_markers(@route, @target).to_json %>;
+  const polylines = <%= raw BuildingMapHelper.leaflet_polylines(@route).to_json %>;
+
+  const map = L.map('map').setView(view["latlng"], view["zoom"]);
+  
   L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19,
   }).addTo(map);
+
+  markers.forEach((marker) => {
+    marker['divIcon']['iconSize'] = [];
+    marker['divIcon']['iconAnchor'] = [0, 0];
+    marker['divIcon']['popupAnchor'] = [0, 0];
+    var icon = L.divIcon(marker['divIcon']);
+    L.marker(marker['latlng'], {icon: icon}).addTo(map);
+  });
+
+  polygons.forEach(polygon => {
+    L.polygon(polygon['latlngs'], polygon['options']).addTo(map);
+  });
+
+  polylines.forEach(polyline => {
+    L.polyline(polyline['latlngs'], polyline['options']).addTo(map);
+  });
+
 </script>
 
 <script>

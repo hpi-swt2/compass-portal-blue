@@ -45,9 +45,9 @@ module RoutingHelper
     start = route["geometry"]["coordinates"][0]
     [{
       latlng: [start.second, start.first],
-      div_icon: {
+      divIcon: {
         html: walking_time,
-        class_name: "time-icon"
+        className: "time-icon"
       }
     }]
   end
@@ -68,9 +68,9 @@ module RoutingHelper
 
     [{
       latlng: coordinates,
-      div_icon: {
+      divIcon: {
         html: "<img src='/assets/pin.png'>",
-        class_name: "target-pin"
+        className: "target-pin"
       }
     }]
   end
