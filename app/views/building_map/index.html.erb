@@ -78,7 +78,7 @@
     marker['divIcon']['iconSize'] = [];
     marker['divIcon']['iconAnchor'] = [0, 0];
     marker['divIcon']['popupAnchor'] = [0, 0];
-    var icon = L.divIcon(marker['divIcon']);
+    const icon = L.divIcon(marker['divIcon']);
     L.marker(marker['latlng'], {icon: icon}).addTo(map);
   });
 
