@@ -1,3 +1,9 @@
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+</head>
+
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title d-none d-sm-block" id="offcanvas">Navigation</h5>
@@ -58,13 +64,17 @@
 </datalist>
 
 <div class="container-fluid">
-  <%= map(
-        center: BuildingMapHelper.leaflet_center(@start),
-        polygons: BuildingMapHelper.leaflet_polygons,
-        polylines: BuildingMapHelper.leaflet_polylines(@route),
-        markers: BuildingMapHelper.leaflet_markers(@route, @target))
-  %>
+  <div id="map"></div>
 </div>
+
+<script>
+  // var center = <%= BuildingMapHelper.leaflet_center(@start).to_json %>;
+  var map = L.map('map').setView([52.4471,13.5523], 13);
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19,
+  }).addTo(map);
+</script>
 
 <script>
     let currentLocation;
