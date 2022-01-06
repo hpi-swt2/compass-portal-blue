@@ -43,6 +43,8 @@
 
 <datalist id="startOptions">
   <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
+  <option><%= BuildingMapController::PIN_1_MAGIC_STRING %></option>
+  <option><%= BuildingMapController::PIN_2_MAGIC_STRING %></option>
   <%= Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
@@ -50,6 +52,8 @@
   <% end %>
 </datalist>
 <datalist id="destOptions">
+  <option><%= BuildingMapController::PIN_1_MAGIC_STRING %></option>
+  <option><%= BuildingMapController::PIN_2_MAGIC_STRING %></option>
   <%= Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
@@ -71,35 +75,41 @@
 </div>
 
 <script>
-  let markers = [];
+  let LeafIcon = L.Icon.extend({
+      options: {
+          iconSize: [40, 40],
+          iconAnchor: [20, 40],
+          popupAnchor: null,
+          shadowUrl: null,
+          shadowSize: null,
+          shadowAnchor: null
+      }
+  });
 
-  const marker_icon_properties = {
-      iconUrl: "<%=(url_for('/assets/marker-icon.png'))%>",
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
-      popupAnchor: null,
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null
-  }
+  let pinIcons = [
+      new LeafIcon({iconUrl: "<%=(url_for('/assets/pin-1.png'))%>" }),
+      new LeafIcon({iconUrl: "<%=(url_for('/assets/pin-2.png'))%>" })
+  ];
 
-  function addMarker(e) {
-      let icon = L.icon(marker_icon_properties);
-      let marker = L.marker(e.latlng, {icon: icon});
-      markers.push(marker);
-      marker.addTo(map);
+  let pins = [];
+
+  function addMarker(e, pinNumber) {
+      pins[pinNumber] = L.marker(e.latlng, {icon: pinIcons[pinNumber]});
+      pins[pinNumber].addTo(map);
   }
 
   function removeAllMarkers(e) {
-    markers.forEach(marker => marker.remove());
-    markers = [];
+      pins.forEach(pin => pin.remove());
+      pins = [];
   }
 
   function onClick(e) {
-      if(markers.length === 2){
-          removeAllMarkers(e);
+      if(!pins[0]){
+          addMarker(e, 0);
+      }else if(!pins[1]){
+          addMarker(e, 1);
       }else{
-          addMarker(e);
+          removeAllMarkers(e);
       }
   }
 
@@ -115,47 +125,61 @@
         return Array.from(options).some(o => o.value === input.value);
     }
 
-    const start_input_field = document.getElementById("start_input");
-    start_input_field.addEventListener("change", () => {
+    const startInputField = document.getElementById("start_input");
+    startInputField.addEventListener("change", () => {
         if (validate_place_input("start_input", "startOptions")) {
-            start_input_field.setCustomValidity("");
+            startInputField.setCustomValidity("");
         } else {
-            start_input_field.setCustomValidity("Please select a valid starting place.");
+            startInputField.setCustomValidity("Please select a valid starting place.");
         }
     });
-    start_input_field.dispatchEvent(new Event("change"));
+    startInputField.dispatchEvent(new Event("change"));
 
-    const dest_input_field = document.getElementById("dest_input");
-    dest_input_field.addEventListener("change", () => {
+    const destInputField = document.getElementById("dest_input");
+    destInputField.addEventListener("change", () => {
         if (validate_place_input("dest_input", "destOptions")) {
-            dest_input_field.setCustomValidity("");
+            destInputField.setCustomValidity("");
         } else {
-            dest_input_field.setCustomValidity("Please select a valid destination place.");
+            destInputField.setCustomValidity("Please select a valid destination place.");
         }
     });
-    dest_input_field.dispatchEvent(new Event("change"));
+    destInputField.dispatchEvent(new Event("change"));
 
     function request_location() {
-        if (start_input_field.value !== "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") return;
+        if (startInputField.value !== "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") return;
         navigator.geolocation.getCurrentPosition(
             (pos) => {
                 currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
-                start_input_field.setCustomValidity("");
+                startInputField.setCustomValidity("");
             },
             (error) => {
                 console.warn(`ERROR(${error.code}): ${error.message}`);
                 if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
-                    start_input_field.setCustomValidity("You have to grant your browser the permission to access your location if you want to use this feature.")
+                    startInputField.setCustomValidity("You have to grant your browser the permission to access your location if you want to use this feature.")
                 } else {
-                    start_input_field.setCustomValidity("Your browser could not determine your position. Please choose a different starting place.")
+                    startInputField.setCustomValidity("Your browser could not determine your position. Please choose a different starting place.")
                 }
             }
         );
     }
 
+    function pinCoordinatesString(pin){
+        return String(pin.getLatLng().lat.toFixed(7)) + "," + String(pin.getLatLng().lng.toFixed(7))
+    }
+
     document.getElementById("navigation_form").addEventListener("submit", () => {
-        if (start_input_field.value === "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") {
-            start_input_field.value = currentLocation;
+        for(let inputField of [startInputField, destInputField]){
+            switch(inputField.value){
+                case "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>":
+                    inputField.value = currentLocation;
+                    break;
+                case "<%= BuildingMapController::PIN_1_MAGIC_STRING %>":
+                    inputField.value = pinCoordinatesString(pins[0]);
+                    break;
+                case "<%= BuildingMapController::PIN_2_MAGIC_STRING %>":
+                    inputField.value = pinCoordinatesString(pins[1]);
+                    break;
+            }
         }
     });
 </script>
