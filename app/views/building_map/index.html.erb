@@ -15,7 +15,7 @@
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
              data-bs-parent="#routingInput">
           <div class="accordion-body">
-            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form" method="GET" action="/building_map">
+            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
               <div class="col-auto">
                 <div class="input-group">
                   <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
@@ -61,36 +61,7 @@
   <div id="map"></div>
 </div>
 
-<script>
-  const view = <%= raw BuildingMapHelper.leaflet_center(@start).to_json %>;
-  const polygons = <%= raw BuildingMapHelper.leaflet_polygons.to_json %>;
-  const markers = <%= raw BuildingMapHelper.leaflet_markers(@route, @target).to_json %>;
-  const polylines = <%= raw BuildingMapHelper.leaflet_polylines(@route).to_json %>;
-
-  const map = L.map('map').setView(view["latlng"], view["zoom"]);
-  
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    maxZoom: 19,
-  }).addTo(map);
-
-  markers.forEach(marker => {
-    marker['divIcon']['iconSize'] = [];
-    marker['divIcon']['iconAnchor'] = [0, 0];
-    marker['divIcon']['popupAnchor'] = [0, 0];
-    const icon = L.divIcon(marker['divIcon']);
-    L.marker(marker['latlng'], {icon: icon}).addTo(map);
-  });
-
-  polygons.forEach(polygon => {
-    L.polygon(polygon['latlngs'], polygon['options']).addTo(map);
-  });
-
-  polylines.forEach(polyline => {
-    L.polyline(polyline['latlngs'], polyline['options']).addTo(map);
-  });
-
-</script>
+<%= javascript_pack_tag 'building_map' %>
 
 <script>
     let currentLocation;
@@ -143,5 +114,6 @@
         if (start_input_field.value === "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") {
             start_input_field.value = currentLocation;
         }
+        console.log("Routing calculate");
     });
 </script>
