@@ -50,25 +50,35 @@ describe "Building Map page", type: :feature do
       expect(page).to have_css('.target-pin')
     end
 
+    it "shows no route, if it's not requested", js: true do
+      visit building_map_path
+      expect(page).not_to have_css(".routing-path")
+      expect(page).not_to have_css(".time-icon")
+    end
+
     context "with route" do
-      it "shows a calculated route", js: true do
+      before do
         visit building_map_path
-        click_link 'nav-link-navigation'
-        fill_in 'start_input', with: 'Haus A'
-        fill_in 'dest_input', with: 'Haus L'
+        find("#nav-link-navigation").click()
+        fill_in 'start', with: 'Haus A'
+        fill_in 'dest', with: 'Haus L'
         click_on 'Go'
+      end
+
+      it "shows a calculated route", js: true do
         expect(page).to have_css(".routing-path")
       end
 
       it "shows the time of a calculated route", js: true do
-        visit building_map_path #(start: "52.393913,13.133082", dest: "52.393861,13.129606")
         expect(page).to have_css(".time-icon")
       end
 
-      it "shows no route, if it's not requested", js: true do
-        visit building_map_path
-        expect(page).not_to have_css(".routing-path")
-        expect(page).not_to have_css(".time-icon")
+      it "only shows one route at the time", ts: true do
+        expect(page).to have_css(".routing-path", count: 1)
+        fill_in 'start', with: 'Haus A'
+        fill_in 'dest', with: 'Haus L'
+        click_on 'Go'
+        expect(page).to have_css(".routing-path", count: 1)
       end
 
     end

@@ -74,6 +74,10 @@ function request_location() {
 let map;
 setupMap();
 
+function test() {
+    console.log("Test");
+}
+
 async function setupMap() {
     map = L.map("map");
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
