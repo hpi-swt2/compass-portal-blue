@@ -1,5 +1,5 @@
 module BuildingMapHelper
-  def self.leaflet_center()
+  def self.leaflet_center
     {
       latlng: %w[52.39339 13.13208],
       zoom: 17

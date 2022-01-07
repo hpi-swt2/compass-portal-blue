@@ -13,7 +13,7 @@ class BuildingMapController < ApplicationController
   end
 
   def view
-    view = BuildingMapHelper.leaflet_center()
+    view = BuildingMapHelper.leaflet_center
     respond_to do |format|
       format.json { render json: view }
     end
@@ -31,7 +31,8 @@ class BuildingMapController < ApplicationController
     dest = RoutingHelper.resolve_coordinates(params[:dest])
     route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
 
-    result = { polyline: RoutingHelper.transform_route_to_polyline(route), marker: RoutingHelper.transform_route_to_time_marker(route) }
+    result = { polyline: RoutingHelper.transform_route_to_polyline(route),
+      marker: RoutingHelper.transform_route_to_time_marker(route) }
     respond_to do |format|
       format.json { render json: result }
     end

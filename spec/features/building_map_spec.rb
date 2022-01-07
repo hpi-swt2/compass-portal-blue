@@ -59,7 +59,7 @@ describe "Building Map page", type: :feature do
     context "with route" do
       before do
         visit building_map_path
-        find("#nav-link-navigation").click()
+        find("#nav-link-navigation").click
         fill_in 'start', with: 'Haus A'
         fill_in 'dest', with: 'Haus L'
         click_on 'Go'
