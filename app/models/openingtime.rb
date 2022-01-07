@@ -14,8 +14,6 @@ class Openingtime < ApplicationRecord
   validates :closes, presence: true
   validate :opens_before_closes
 
-
-
   def self.day_number_to_string_mapping
     mapping = {
       0 => 'Monday',
@@ -36,12 +34,12 @@ class Openingtime < ApplicationRecord
       'Thursday' => 3,
       'Friday' => 4,
       'Saturday' => 5,
-      'Sunday'=> 6
+      'Sunday' => 6
     }
   end
 
   def day_as_string
-    self.class.day_number_to_string_mapping[day]    
+    self.class.day_number_to_string_mapping[day]
   end
 
   private
