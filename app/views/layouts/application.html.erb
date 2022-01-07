@@ -11,13 +11,11 @@
   </head>
 
   <body>
-    <%= render 'layouts/topbar' %>
     <%= render 'layouts/alerts' %>
     <%# https://getbootstrap.com/docs/5.0/layout/containers/ %>
     <%# https://getbootstrap.com/docs/5.0/utilities/spacing/ %>
-    <div class="container mt-2"> <%# mt-2 == margin-top: 2*spacer %>
+    <div class="container mt-2" id="app-outlet-outer"> <%# mt-2 == margin-top: 2*spacer %>
       <%= yield %>
     </div>
-    <%= render 'layouts/navbar' %>
   </body>
 </html>
