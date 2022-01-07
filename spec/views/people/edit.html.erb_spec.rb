@@ -1,26 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe "locations/edit", type: :view do
+RSpec.describe "people/edit", type: :view do
   before do
-    @location = create :location
+    @person = create :person
   end
 
-  it "renders the edit location form" do
+  it "renders the edit person form" do
     render
 
-    assert_select "form[action=?][method=?]", location_path(@location), "post" do
+    assert_select "form[action=?][method=?]", person_path(@person), "post" do
 
-      assert_select "input[name=?]", "location[name]"
+      assert_select "input[name=?]", "person[phone_number]"
 
-      assert_select "input[name=?]", "location[details]"
+      assert_select "input[name=?]", "person[first_name]"
 
-      assert_select "input[name=?]", "location[location_photo]"
+      assert_select "input[name=?]", "person[last_name]"
 
-      assert_select "input[name=?]", "location[location_latitude]"
-
-      assert_select "input[name=?]", "location[location_longitude]"
-
-      assert_select "input[name=?]", "location[location_longitude]"
+      assert_select "input[name=?]", "person[email]"
     end
   end
 end

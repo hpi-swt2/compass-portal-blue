@@ -1,15 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "people/show", type: :view do
+RSpec.describe "locations/show", type: :view do
   before do
-    @person = create :person
+    @location = create :location
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes" do
     render
-    expect(rendered).to match(/\+4990909090/)
-    expect(rendered).to match(/Herbert/)
-    expect(rendered).to match(/Herbertson/)
-    expect(rendered).to match(/herbert.herbertson@hpi.de/)
+    expect(rendered).to match(/cafe/)
+    expect(rendered).to match(/cafe-details/)
   end
 end

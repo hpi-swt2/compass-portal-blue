@@ -135,7 +135,8 @@ RSpec.describe "Person edit details page", type: :feature do
   end
 
   it "includes a select field to change the day of an openingtime" do
-    @openingtime = FactoryBot.create(:openingtime, timeable: @person)
+    @openingtime = create :openingtime
+    @person.openingtimes = [@openingtime]
     visit edit_person_path(@person)
     expect(@person.openingtimes).to include(@openingtime)
     expect(page).to have_select('person[openingtimes_attributes][0][day]')

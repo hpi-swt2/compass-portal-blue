@@ -61,14 +61,7 @@
     <%= form.fields_for :openingtimes do |o| %>
       <div class="field" id="opening-time-field-<%= o.object.id %>">
         <%= o.select 'day',
-            options_for_select({'Monday' => 0,
-                                'Tuesday' => 1,
-                                'Wednesday' => 2,
-                                'Thursday' => 3,
-                                'Friday' => 4,
-                                'Saturday' => 5,
-                                'Sunday' => 6
-                               }, o.object.day),
+            options_for_select(Openingtime.day_string_to_number_mapping, o.object.day),
             {},
             multiple: false %>
         <%= o.time_field :opens, value: o.object.opens%>
@@ -98,16 +91,14 @@
           $('.profile-picture-container img').prop('alt', file.name);
       })
 
+      const options_html = `
+      <% Openingtime.day_number_to_string_mapping.each do |number, string| %>
+        <option value=<%= number %>><%= string %></option>
+      <% end %>`; 
+
       const addNewOpeningTime = (target) => {
           $(`<div class="field" id="opening-time-field-new">
-           <select name="person[openingtimes_attributes][-1][day]" id="opening-time-field-new">
-                  <option value="0">Monday</option>
-                  <option value="1">Tuesday</option>
-                  <option value="2">Wednesday</option>
-                  <option value="3">Thursday</option>
-                  <option value="4">Friday</option>
-                  <option value="5">Saturday</option>
-                  <option value="6">Sunday</option></select>
+           <select name="person[openingtimes_attributes][-1][day]" id="opening-time-field-new">` + options_html + `</select>
            <input type="time" name="person[openingtimes_attributes][-1][opens]" id="opening-time-field-new">
            <span>-</span>
            <input type="time" name="person[openingtimes_attributes][-1][closes]" id="opening-time-field-new">

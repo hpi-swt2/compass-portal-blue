@@ -2,7 +2,7 @@
 class Location < ApplicationRecord
   include Timeable
 
-  validates :name, :location_longitude, :location_latitude, presence: true
+  validates :name, presence: true
   validates :location_latitude, \
             presence: true, \
             numericality: { greater_than_or_equal_to: -90, less_than_or_equal_to: 90 }
