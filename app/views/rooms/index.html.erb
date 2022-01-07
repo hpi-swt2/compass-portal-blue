@@ -15,12 +15,12 @@
       Calendar
     </div>
     <div class="col-0">
-      sHOW
+      Show
     </div>
   </div>
   <div> Seminar Rooms</div>
    <% @rooms.each do |room| %>
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end" >
         <% if room.room_type == "Seminarraum" %>
           <div class="col-3">
             <%= room.name %>
@@ -29,7 +29,7 @@
           <%= room.floor %>
           </div>
           <div class="col-3">
-            CalendarLink
+            <%= link_to 'Calendar', calendar_path %>
           </div>
           <div class="col-0">
             <%= link_to 'Show', room %>

@@ -17,6 +17,8 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit; end
 
+  def calendar; end
+
   # POST /rooms or /rooms.json
   def create
     @room = Room.new(room_params)
