@@ -42,6 +42,13 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
+  def add_search_results(rooms, buildings, locations, people)
+    add_buildings(buildings)
+    add_rooms(rooms)
+    add_locations(locations)
+    add_people(people)
+  end
+
   def search_for_entries_starting_with(query)
     buildings = Building.where("LOWER(name) LIKE ?", "#{query}%")
     rooms = Room.where("LOWER(name) LIKE ?", "#{query}%")
@@ -49,11 +56,7 @@ class SearchResultsController < ApplicationController
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           OR LOWER(last_name) LIKE ?",
                           "#{query}%", "#{query}%")
-
-    add_buildings(buildings)
-    add_rooms(rooms)
-    add_locations(locations)
-    add_people(people)
+    add_search_results(rooms, buildings, locations, people)
   end
 
   def search_for_entries_including(query)
@@ -64,10 +67,7 @@ class SearchResultsController < ApplicationController
                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(last_name) LIKE ?",
                           "%#{query}%", "#{query}%", "#{query}%")
-    add_rooms(rooms)
-    add_buildings(buildings)
-    add_locations(locations)
-    add_people(people)
+    add_search_results(rooms, buildings, locations, people)
   end
 
   def add_rooms(rooms)
