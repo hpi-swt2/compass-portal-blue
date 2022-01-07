@@ -38,8 +38,8 @@
   <ul>
       <% @person.rooms.each do | room | %>
         <li>
-          <%= room.name %> |
-          <%= link_to 'Map', building_map_path(target: "#{room.building.location_latitude},#{room.building.location_longitude}")%>
+          <%= link_to room.name, room_path(room) %> |
+          <%# <%= link_to 'Map', building_map_path(target: "#{room.building.location_latitude},#{room.building.location_longitude}")%> %>
         </li>
       <% end %>
   </ul>
@@ -55,6 +55,3 @@
     <% end %>
   </ul>
 </p>
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
