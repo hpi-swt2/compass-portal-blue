@@ -64,7 +64,6 @@ class SearchResultsController < ApplicationController
                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(last_name) LIKE ?",
                           "%#{query}%", "#{query}%", "#{query}%")
-
     add_rooms(rooms)
     add_buildings(buildings)
     add_locations(locations)
