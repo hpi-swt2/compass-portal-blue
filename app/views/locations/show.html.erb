@@ -1,0 +1,48 @@
+<h1>Here are the location's details!</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @location.details %>
+</p>
+
+<div class="edit-location-photo">
+  <strong>Location photo:</strong>
+  <div class='location-photo-wrapper'>
+    <div class='location-photo-container'>
+        <% if @location.location_photo.attached? %>
+            <img src="<%=(url_for(@location.location_photo))%>" alt="<%= @location.location_photo.filename %>"/>
+        <% else %>
+            <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo">
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="location-map-wrapper">
+  <%= map(
+        center: {
+          latlng: [@location.location_latitude, @location.location_longitude],
+          zoom: 18,
+        },
+        markers: [Locations.transform_leaflet_position([@location.location_latitude, @location.location_longitude], @location.name)])
+  %>
+</div>
+
+<p>
+  <strong>Opening Times:</strong>
+  <br>
+  <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
+    <%= openingtime.day_as_string %>:
+    <%= openingtime.opens %>
+    -
+    <%= openingtime.closes %>
+    <br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
