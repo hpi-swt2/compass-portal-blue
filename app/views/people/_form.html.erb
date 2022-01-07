@@ -57,7 +57,7 @@
   </div>
 
   <div class="field mb-3 opening-times-container">
-    <%= form.label :openingtimes, class: 'form-label' %>
+    <%= form.label :office_hours, class: 'form-label' %>
     <%= form.fields_for :openingtimes do |o| %>
       <div class="field" id="opening-time-field-<%= o.object.id %>">
         <%= o.select 'day',
@@ -75,7 +75,7 @@
         <% end %>
       </div>
     <% end %>
-    <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add opening time</button>
+    <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add office hour</button>
   </div>
 
   <div class="actions mt-3">

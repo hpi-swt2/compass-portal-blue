@@ -42,6 +42,10 @@ class Openingtime < ApplicationRecord
     self.class.day_number_to_string_mapping[day]
   end
 
+  def to_string
+    "#{self.day_as_string}, #{self.opens} - #{self.closes}"
+  end
+
   private
 
   def opens_before_closes

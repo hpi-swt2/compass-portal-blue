@@ -1,4 +1,3 @@
-<h1>Here are the Person's details!</h1>
 <p id="notice"><%= notice %></p>
 
 <div class="edit-profile-picture">
@@ -13,7 +12,6 @@
     </div>
   </div>
 </div>
-
 
 <p>
   <strong>First name:</strong>
@@ -44,6 +42,17 @@
           <%= link_to 'Map', building_map_path(target: "#{room.building.location_latitude},#{room.building.location_longitude}")%>
         </li>
       <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Office hours:</strong>
+  <ul>
+    <% @person.openingtimes.each do | opening_time | %>
+      <li>
+        <%= opening_time.to_string %>
+      </li>
+    <% end %>
   </ul>
 </p>
 
