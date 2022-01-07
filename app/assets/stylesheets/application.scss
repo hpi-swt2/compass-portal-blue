@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require recurring_select
  *= require_tree .
  *= require_self
  */
@@ -52,9 +53,9 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "leaflet";
 
 body {
-  padding: 4rem 0;
+    padding: 4rem 0;
 }
 
 .custom-container-padding {
-  padding-bottom: 5rem;
+    padding-bottom: 5rem;
 }
