@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Building, type: :model do
-  before :each do
+  before do
     @building = FactoryBot.create :building
     @openingtime = FactoryBot.create(:openingtime, timeable: @building)
-  end 
+  end
 
   it "has name, location_latitude, location_longitude" do
     expect(@building.name).to eq('A')

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Location, type: :model do
-  before :each do
+  before do
     @location = FactoryBot.create :location
     @openingtime = FactoryBot.create(:openingtime, timeable: @location)
   end
