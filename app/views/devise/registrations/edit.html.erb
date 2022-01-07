@@ -6,16 +6,14 @@
       <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
       <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
       <%= link_to "Add new room", new_room_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>      
+      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
     </div>
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>
 
-
-
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-      <%= render 'form', person: resource.person %>
+
       <div class="field mb-3">
         <%= f.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
         <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
@@ -57,9 +55,6 @@
         <%= f.submit "Update User Account", class: 'btn btn-primary' %>
       </div>
     <% end %>
-
-    <%= link_to "Edit linked person", edit_person_path(resource.person), class: 'btn btn-secondary link-btn' %>
-
     <h3 class="fw-light mt-5">Logout Account</h3>
 
     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
