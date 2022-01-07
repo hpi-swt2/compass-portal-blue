@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.text "details"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "location_latitude"
+    t.float "location_longitude"
+  end
+
   create_table "openingtimes", force: :cascade do |t|
     t.time "opens"
     t.time "closes"
