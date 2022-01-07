@@ -46,21 +46,22 @@ describe "Building Map page", type: :feature do
     end
 
     it "shows the pin of a target point", js: true do
-      visit building_map_path(target: "52.393913,13.133082")
+      visit building_map_path(target: "52.393913,13.133082") # TODO: This doesn't work anymore
       expect(page).to have_css('.target-pin')
     end
 
     context "with route" do
       it "shows a calculated route", js: true do
-        visit building_map_path(start: "52.393913,13.133082", dest: "52.393861,13.129606")
-        fill_in 'start', with: 'Haus A'
-        fill_in 'dest', with: 'Haus B'
+        visit building_map_path
+        click_link 'nav-link-navigation'
+        fill_in 'start_input', with: 'Haus A'
+        fill_in 'dest_input', with: 'Haus L'
         click_on 'Go'
         expect(page).to have_css(".routing-path")
       end
 
       it "shows the time of a calculated route", js: true do
-        visit building_map_path(start: "52.393913,13.133082", dest: "52.393861,13.129606")
+        visit building_map_path #(start: "52.393913,13.133082", dest: "52.393861,13.129606")
         expect(page).to have_css(".time-icon")
       end
 
