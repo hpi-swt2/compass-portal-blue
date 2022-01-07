@@ -10,7 +10,7 @@ class BuildingMapController < ApplicationController
   end
 
   def buildings
-    polygons = BuildingMapHelper.leaflet_polygons.to_json
+    polygons = BuildingMapHelper.leaflet_polygons
     respond_to do |format|
       format.json { render json: polygons }
     end
@@ -18,25 +18,27 @@ class BuildingMapController < ApplicationController
 
   def view
     start = RoutingHelper.resolve_coordinates(params[:start])
-    view = BuildingMapHelper.leaflet_center(@start).to_json
+    view = BuildingMapHelper.leaflet_center(@start)
     respond_to do |format|
       format.json { render json: view }
     end
   end
 
   def markers
-    markers = Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS).to_json
+    markers = Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS)
     respond_to do |format|
       format.json { render json: markers }
     end
   end
 
-  def route(start, dest)
-    parsedStart = RoutingHelper.resolve_coordinates(start)
-    parsedDestination = RoutingHelper.resolve_coordinates(dest)
-    route = RoutingHelper.calculate_route(parsedStart, parsedDestination) if parsedStart.present? && parsedDestination.present?
+  def route
+    start = RoutingHelper.resolve_coordinates(params[:start])
+    dest = RoutingHelper.resolve_coordinates(params[:dest])
+    route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
+
+    result = { polyline: RoutingHelper.transform_route_to_polyline(route), markers: RoutingHelper.transform_route_to_time_marker(route) }
     respond_to do |format|
-      format.json { render json: @route }
+      format.json { render json: result }
     end
   end
   

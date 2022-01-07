@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/login', to: 'welcome#login'
 
   get '/building_map', to: 'building_map#index'
+  get '/building_map_route', to: 'building_map#route'
   get '/building_map_markers', to: 'building_map#markers'
   get '/building_map_buildings', to: 'building_map#buildings'
   get '/building_map_view', to: 'building_map#view'
