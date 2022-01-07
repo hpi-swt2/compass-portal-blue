@@ -22,9 +22,11 @@ describe "Person Show Page", type: :feature do
     visit person_path(@person)
 
     expect(page).to have_text room1.name
-    expect(page).to have_link 'Map', :href => building_map_path(target: "#{room1.building.location_latitude},#{room1.building.location_longitude}")
+    expect(page).to have_link 'Map', href:
+      building_map_path(target: "#{room1.building.location_latitude},#{room1.building.location_longitude}")
     expect(page).to have_text room2.name
-    expect(page).to have_link 'Map', :href => building_map_path(target: "#{room2.building.location_latitude},#{room2.building.location_longitude}")
+    expect(page).to have_link 'Map', href:
+      building_map_path(target: "#{room2.building.location_latitude},#{room2.building.location_longitude}")
   end
 
   it "displays the office hours of the person" do

@@ -43,7 +43,7 @@ class Openingtime < ApplicationRecord
   end
 
   def to_string
-    "#{self.day_as_string}, #{self.opens} - #{self.closes}"
+    "#{day_as_string}, #{opens} - #{closes}"
   end
 
   private
