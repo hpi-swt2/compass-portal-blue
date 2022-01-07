@@ -1,5 +1,5 @@
 class BuildingMapController < ApplicationController
-  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze
+  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze # TODO: This is currenty hard coded in the building_map.js file
 
   def index
     @target = params[:target]
