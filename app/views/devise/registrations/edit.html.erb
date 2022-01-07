@@ -11,9 +11,11 @@
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>
 
+
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-
+      <%= render 'form', person: resource.person %>
       <div class="field mb-3">
         <%= f.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
         <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
