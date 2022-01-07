@@ -1,4 +1,5 @@
 let currentLocation;
+let routeLayer;
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // TODO: Change this!!!
 
 const start_input_field = document.getElementById("start_input");
@@ -36,7 +37,6 @@ document
         const start = start_input_field.value;
         const dest = dest_input_field.value;
         displayRoute(start, dest);
-        console.log("Routing calculate");
     });
 
 function validate_place_input(inputId, optionsId) {
@@ -46,9 +46,7 @@ function validate_place_input(inputId, optionsId) {
 }
 
 function request_location() {
-    console.log("T1");
     if (start_input_field.value !== YOUR_LOCATION_MAGIC_STRING) return;
-    console.log("Test");
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             currentLocation =
@@ -104,20 +102,28 @@ function addPolygons(polygons) {
     });
 }
 
-function addMarkers(markers) {
+function addMarkers(markers, layer=map) {
     markers.forEach((marker) => {
-        marker["divIcon"]["iconSize"] = [];
-        marker["divIcon"]["iconAnchor"] = [0, 0];
-        marker["divIcon"]["popupAnchor"] = [0, 0];
-        const icon = L.divIcon(marker["divIcon"]);
-        L.marker(marker["latlng"], { icon: icon }).addTo(map);
+        addMarker(marker, layer);
     });
 }
 
-function addPolylines(polylines) {
+function addMarker(marker, layer=map) {
+    marker["divIcon"]["iconSize"] = [];
+    marker["divIcon"]["iconAnchor"] = [0, 0];
+    marker["divIcon"]["popupAnchor"] = [0, 0];
+    const icon = L.divIcon(marker["divIcon"]);
+    L.marker(marker["latlng"], { icon: icon }).addTo(layer);
+}
+
+function addPolylines(polylines, layer=map) {
     polylines.forEach((polyline) => {
-        L.polyline(polyline["latlngs"], polyline["options"]).addTo(map);
+        addPolyline(polyline, layer)
     });
+}
+
+function addPolyline(polyline, layer=map) {
+    L.polyline(polyline["latlngs"], polyline["options"]).addTo(layer);
 }
 
 async function displayRoute(start, dest) {
@@ -127,9 +133,10 @@ async function displayRoute(start, dest) {
         data: `start=${start}&dest=${dest}`,
         dataType: "json",
     });
-    console.log(route);
-    addPolylines([route["polyline"]], map);
-    addMarkers(route["markers"], map);
+    if(routeLayer) routeLayer.clearLayers(); else routeLayer = L.layerGroup();
+    addPolyline(route['polyline'], routeLayer);
+    addMarkers([route["marker"]], routeLayer);
+    routeLayer.addTo(map);
 }
 
 async function getBuildings() {

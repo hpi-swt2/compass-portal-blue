@@ -39,17 +39,17 @@ module RoutingHelper
   end
 
   def self.transform_route_to_time_marker(route)
-    return [] unless route
+    return {} unless route
 
     walking_time = format_seconds_as_minsec(route["duration"])
     start = route["geometry"]["coordinates"][0]
-    [{
+    {
       latlng: [start.second, start.first],
       divIcon: {
         html: walking_time,
         className: "time-icon"
       }
-    }]
+    }
   end
 
   def self.transform_route_to_polyline(route)

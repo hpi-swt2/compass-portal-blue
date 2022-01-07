@@ -1,9 +1,7 @@
 module BuildingMapHelper
-  def self.leaflet_center(start_coordinates)
-    center = start_coordinates.nil? ? %w[52.39339 13.13208] : start_coordinates.split(",")
-
+  def self.leaflet_center()
     {
-      latlng: center,
+      latlng: %w[52.39339 13.13208],
       zoom: 17
     }
   end
