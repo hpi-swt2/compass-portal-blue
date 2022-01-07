@@ -51,22 +51,22 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows locations matching the query" do
     visit search_results_path(query: "vill")
-    expect(page).to have_link(@pavillon.name, href: locations_path(@pavillon), count: 1)
+    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon), count: 1)
 
     visit search_results_path(query: "Ban")
-    expect(page).to have_link(@bank.name, href: locations_path(@bank), count: 1)
+    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
   end
 
   it "does not show locations not matching the query" do
     visit search_results_path(query: "Ban")
     expect(page).not_to have_text(@pavillon.name)
-    expect(page).not_to have_link(href: building_path(@pavillon))
+    expect(page).not_to have_link(href: location_path(@pavillon))
     expect(page).not_to have_text(@kocktail_bar.name)
-    expect(page).not_to have_link(href: building_path(@kocktail_bar))
+    expect(page).not_to have_link(href: location_path(@kocktail_bar))
 
     visit search_results_path(query: "vill")
     expect(page).not_to have_text(@bank.name)
-    expect(page).not_to have_link(href: building_path(@bank))
+    expect(page).not_to have_link(href: location_path(@bank))
   end
 
   it "lists locations starting with the query before other found locations" do

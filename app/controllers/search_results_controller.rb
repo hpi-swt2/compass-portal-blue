@@ -102,7 +102,7 @@ class SearchResultsController < ApplicationController
       @search_results.append(SearchResult.new(
                                id: @result_id,
                                title: location.name,
-                               link: location(location),
+                               link: location_path(location),
                                description: "Location",
                                type: "location"
                              ))
