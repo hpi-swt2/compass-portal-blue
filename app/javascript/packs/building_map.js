@@ -1,5 +1,4 @@
 let currentLocation;
-let routeLayer;
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // TODO: Change this!!!
 
 const start_input_field = document.getElementById("start_input");
@@ -72,11 +71,8 @@ function request_location() {
 
 // Map features
 let map;
+let routeLayer;
 setupMap();
-
-function test() {
-    console.log("Test");
-}
 
 async function setupMap() {
     map = L.map("map");
