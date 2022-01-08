@@ -32,10 +32,9 @@ class BuildingMapController < ApplicationController
     route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
 
     result = { polyline: RoutingHelper.transform_route_to_polyline(route),
-      marker: RoutingHelper.transform_route_to_time_marker(route) }
+               marker: RoutingHelper.transform_route_to_time_marker(route) }
     respond_to do |format|
       format.json { render json: result }
     end
   end
-  
 end
