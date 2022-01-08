@@ -1,0 +1,84 @@
+<%= form_with(model: location) do |form| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% @location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :details %>
+    <%= form.text_field :details %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_photo %>
+    <%= form.file_field :location_photo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_latitude %>
+    <%= form.number_field :location_latitude, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_longitude %>
+    <%= form.number_field :location_longitude, step: :any %>
+  </div>
+
+  <div class="field mb-3 opening-times-container">
+    <%= form.label :openingtimes, class: 'form-label' %>
+    <%= form.fields_for :openingtimes do |o| %>
+      <div class="field" id="opening-time-field-<%= o.object.id %>">
+        <%= o.select 'day',
+                     options_for_select(Openingtime.day_string_to_number_mapping, o.object.day),
+                     {},
+                     multiple: false %>
+        <%= o.time_field :opens, value: o.object.opens %>
+        <span>-</span>
+        <%= o.time_field :closes, value: o.object.closes %>
+        <%= link_to(openingtime_path(o.object.id), :method => :delete, :class => 'btn btn-mini',
+                    :remote => true, :onclick =>
+                      "{$('#opening-time-field-#{o.object.id}').next().remove();
+                       $('#opening-time-field-#{o.object.id}')[0].remove()}") do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </div>
+    <% end %>
+    <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);"><i class="fas fa-plus"></i> Add
+      opening time
+    </button>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+  <script defer>
+    const options_html = `
+      <% Openingtime.day_number_to_string_mapping.each do |number, string| %>
+        <option value=<%= number %>><%= string %></option>
+      <% end %>`; 
+
+    
+      const addNewOpeningTime = (target) => {
+          $(`<div class="field" id="opening-time-field-new">
+           <select name="location[openingtimes_attributes][-1][day]" id="opening-time-field-new"> ` + options_html + `</select>
+           <input type="time" name="location[openingtimes_attributes][-1][opens]" id="opening-time-field-new">
+           <span>-</span>
+           <input type="time" name="location[openingtimes_attributes][-1][closes]" id="opening-time-field-new">
+           </div>`).insertBefore(target);
+          target.remove();
+      }
+  </script>
+<% end %>

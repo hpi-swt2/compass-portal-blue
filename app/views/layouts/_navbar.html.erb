@@ -2,6 +2,9 @@
   <div class="container-fluid">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
+          <a class="nav-link <%= route_active_class?(rooms_path) %>" href="/rooms"><i class="fas fa-door-open"></i> Rooms</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link <%= route_active_class?(root_path) %> <%= route_active_class?(search_results_path)  %>" href="/"><i class="fas fa-search"></i> Search</a>
         </li>
         <li class="nav-item">

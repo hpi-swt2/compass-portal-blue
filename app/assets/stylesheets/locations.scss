@@ -1,0 +1,23 @@
+// Place all the styles related to the Locations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.edit-location-photo {
+  .location-photo-wrapper {
+    .location-photo-container {
+      height: 20rem;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.location-map-wrapper #map {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  height: 400px;
+}
+

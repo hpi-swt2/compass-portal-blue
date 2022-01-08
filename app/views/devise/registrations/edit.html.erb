@@ -49,6 +49,14 @@
         <%= f.submit "Update User Account", class: 'btn btn-primary' %>
       </div>
     <% end %>
+
+    <h3 class="fw-light mt-5">Contribute Content</h3>
+    
+    <div class="actions mt-3">
+      <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
+    </div>
+
     <h3 class="fw-light mt-5">Logout Account</h3>
 
      <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
