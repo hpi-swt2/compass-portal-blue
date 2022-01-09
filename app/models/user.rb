@@ -3,7 +3,7 @@ require "date"
 # The model representing a user who can log in
 class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
-
+  has_many :location
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -20,6 +20,17 @@ class User < ApplicationRecord
 
     self.person = Person.new
     person.email = email
+  end
+
+  def roles=(roles)
+    roles = [*roles].map { |r| r.to_sym }
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
+  end
+
+  def roles
+    ROLES.reject do |r|
+      ((roles_mask.to_i || 0) & 2**ROLES.index(r)).zero?
+    end
   end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb

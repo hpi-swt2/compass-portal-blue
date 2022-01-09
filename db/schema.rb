@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_125451) do
+ActiveRecord::Schema.define(version: 2022_01_09_224314) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "location_latitude"
     t.float "location_longitude"
+    t.integer "user_id"
   end
 
   create_table "openingtimes", force: :cascade do |t|
@@ -106,6 +107,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.string "uid"
     t.string "username"
     t.integer "person_id"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
