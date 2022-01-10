@@ -42,8 +42,8 @@ $("#navigation_form")[0]
     });
 
 function validate_place_input(inputId, optionsId) {
-    const input = $("#"+ inputId)[0];
-    const options = $("#"+ optionsId)[0].options;
+    const input = $(`#${inputId}`)[0];
+    const options = $(`#${optionsId}`)[0].options;
     return Array.from(options).some((o) => o.value === input.value);
 }
 
