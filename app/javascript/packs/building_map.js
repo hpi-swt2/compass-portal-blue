@@ -5,7 +5,7 @@ const YOUR_LOCATION_MAGIC_STRING = "Your location" // TODO: Change this!!!
 
 setupMap();
 
-const start_input_field = document.getElementById("start_input");
+const start_input_field = $("#start_input")[0];
 start_input_field.addEventListener("change", () => {
     request_location();
     if (validate_place_input("start_input", "startOptions")) {
@@ -18,7 +18,7 @@ start_input_field.addEventListener("change", () => {
 });
 start_input_field.dispatchEvent(new Event("change"));
 
-const dest_input_field = document.getElementById("dest_input");
+const dest_input_field = $("#dest_input")[0];
 dest_input_field.addEventListener("change", () => {
     if (validate_place_input("dest_input", "destOptions")) {
         dest_input_field.setCustomValidity("");
@@ -30,8 +30,7 @@ dest_input_field.addEventListener("change", () => {
 });
 dest_input_field.dispatchEvent(new Event("change"));
 
-document
-    .getElementById("navigation_form")
+$("#navigation_form")[0]
     .addEventListener("submit", (event) => {
         event.preventDefault();
         if (start_input_field.value === YOUR_LOCATION_MAGIC_STRING) {
@@ -43,8 +42,8 @@ document
     });
 
 function validate_place_input(inputId, optionsId) {
-    const input = document.getElementById(inputId);
-    const options = document.getElementById(optionsId).options;
+    const input = $("#"+ inputId)[0];
+    const options = $("#"+ optionsId)[0].options;
     return Array.from(options).some((o) => o.value === input.value);
 }
 
