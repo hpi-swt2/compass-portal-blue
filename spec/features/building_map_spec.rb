@@ -66,7 +66,8 @@ describe "Building Map page", type: :feature do
       expect(page).not_to have_css(".time-icon")
     end
 
-    context "with route" do
+    # Following tests seem to be inconsistent when run on GitHub Actions.
+    context "with route", :type => "inconsistent", :type => "local-only" do
       before do
         visit building_map_path
         find("#nav-link-navigation").click

@@ -60,7 +60,7 @@ export function addPolyline(polyline, layer = map) {
 export async function displayRoute(start, dest) {
     const route = await $.ajax({
         type: "GET",
-        url: "building_map_route",
+        url: "/building_map/route",
         data: `start=${start}&dest=${dest}`,
         dataType: "json",
     });
@@ -74,7 +74,7 @@ export async function displayRoute(start, dest) {
 async function getBuildings() {
     return $.ajax({
         type: "GET",
-        url: "/building_map_buildings",
+        url: "/building_map/buildings",
         dataType: "json",
     });
 }
@@ -82,7 +82,7 @@ async function getBuildings() {
 async function getBuildingMarkers() {
     return $.ajax({
         type: "GET",
-        url: "/building_map_markers",
+        url: "/building_map/markers",
         dataType: "json",
     });
 }
@@ -90,7 +90,7 @@ async function getBuildingMarkers() {
 async function getView() {
     return $.ajax({
         type: "GET",
-        url: "/building_map_view",
+        url: "/building_map/view",
         dataType: "json",
     });
 }
