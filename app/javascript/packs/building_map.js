@@ -1,5 +1,9 @@
+import { displayRoute, setupMap, map, getMap } from './leafletMap.js';
+
 let currentLocation;
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // TODO: Change this!!!
+
+setupMap();
 
 const start_input_field = document.getElementById("start_input");
 start_input_field.addEventListener("change", () => {
@@ -69,96 +73,42 @@ function request_location() {
     );
 }
 
-// Map features
-let map;
-let routeLayer;
-setupMap();
+// TODO: Indoor Labels:
 
-async function setupMap() {
-    map = L.map("map");
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19,
-    }).addTo(map);
+// function addIndoorLabel(feature, layer) {
+//     layer.bindTooltip(feature.properties.name, {
+//         permanent: true,
+//         direction: "center",
+//         className: "indoor-label",
+//     });
+// }
 
-    // these operations are executed in parallel
-    getView().then((view) => {
-        map.setView(view["latlng"], view["zoom"]);
-    });
+// function loadGeoJsonFile(filename) {
+//     fetch(filename)
+//         .then((response) => response.json())
+//         .then((geojsonFeatureCollection) => {
+//             // Manually add indoor labels to map
+//             const rooms = L.geoJSON(geojsonFeatureCollection, {
+//                 onEachFeature: addIndoorLabel,
+//             }).addTo(map);
+//             rooms.eachLayer((layer) => {
+//                 layer.getTooltip().setLatLng(layer.getBounds().getCenter());
+//             });
+//             recalculateTooltipVisibility();
+//         });
+// }
 
-    getBuildings().then((buildingPolygons) => {
-        addPolygons(buildingPolygons);
-    });
-
-    getBuildingMarkers().then((buildingMarkers) => {
-        addMarkers(buildingMarkers);
-    });
-}
-
-function addPolygons(polygons) {
-    polygons.forEach((polygon) => {
-        L.polygon(polygon["latlngs"], polygon["options"]).addTo(map);
-    });
-}
-
-function addMarkers(markers, layer=map) {
-    markers.forEach((marker) => {
-        addMarker(marker, layer);
-    });
-}
-
-function addMarker(marker, layer=map) {
-    marker["divIcon"]["iconSize"] = [];
-    marker["divIcon"]["iconAnchor"] = [0, 0];
-    marker["divIcon"]["popupAnchor"] = [0, 0];
-    const icon = L.divIcon(marker["divIcon"]);
-    L.marker(marker["latlng"], { icon: icon }).addTo(layer);
-}
-
-function addPolylines(polylines, layer=map) {
-    polylines.forEach((polyline) => {
-        addPolyline(polyline, layer)
-    });
-}
-
-function addPolyline(polyline, layer=map) {
-    L.polyline(polyline["latlngs"], polyline["options"]).addTo(layer);
-}
-
-async function displayRoute(start, dest) {
-    const route = await $.ajax({
-        type: "GET",
-        url: "building_map_route",
-        data: `start=${start}&dest=${dest}`,
-        dataType: "json",
-    });
-    if(routeLayer) routeLayer.clearLayers(); else routeLayer = L.layerGroup();
-    addPolyline(route['polyline'], routeLayer);
-    addMarkers([route["marker"]], routeLayer);
-    routeLayer.addTo(map);
-}
-
-async function getBuildings() {
-    return $.ajax({
-        type: "GET",
-        url: "building_map_buildings",
-        dataType: "json",
-    });
-}
-
-async function getBuildingMarkers() {
-    return $.ajax({
-        type: "GET",
-        url: "building_map_markers",
-        dataType: "json",
-    });
-}
-
-async function getView() {
-    return $.ajax({
-        type: "GET",
-        url: "building_map_view",
-        dataType: "json",
-    });
-}
+// loadGeoJsonFile("assets/lecture-hall-building.geojson");
+// function recalculateTooltipVisibility() {
+//     const zoomLevel = map.getZoom();
+//     map.eachLayer((layer) => {
+//         if (layer.getTooltip()) {
+//             if (zoomLevel == 19 /* nearest zoom */) {
+//                 layer.openTooltip(layer.getBounds().getCenter());
+//             } else {
+//                 layer.closeTooltip();
+//             }
+//         }
+//     });
+// }
+// map.on("zoomend", recalculateTooltipVisibility);
