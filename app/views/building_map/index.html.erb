@@ -65,7 +65,7 @@
     var map;
 </script>
 
-<div class="container-fluid">git
+<div class="container-fluid">
   <%= map(
         center: BuildingMapHelper.leaflet_center(@start),
         polygons: BuildingMapHelper.leaflet_polygons,
@@ -75,41 +75,36 @@
 </div>
 
 <script>
-  let LeafIcon = L.Icon.extend({
-      options: {
-          iconSize: [40, 40],
-          iconAnchor: [20, 40],
-          popupAnchor: null,
-          shadowUrl: null,
-          shadowSize: null,
-          shadowAnchor: null
-      }
-  });
-
   let pinIcons = [
-      new LeafIcon({iconUrl: "<%=(url_for('/assets/pin-1.png'))%>" }),
-      new LeafIcon({iconUrl: "<%=(url_for('/assets/pin-2.png'))%>" })
+      L.divIcon({
+          iconSize: null,
+          html: "<div style='' class='pin-icon1'></div>",
+      }),
+      L.divIcon({
+          iconSize: null,
+          html: "<div style='' class='pin-icon2'></div>",
+      })
   ];
 
   let pins = [];
 
-  function addMarker(e, pinNumber) {
+  function addPin(e, pinNumber) {
       pins[pinNumber] = L.marker(e.latlng, {icon: pinIcons[pinNumber]});
       pins[pinNumber].addTo(map);
   }
 
-  function removeAllMarkers(e) {
+  function removeAllPins(e) {
       pins.forEach(pin => pin.remove());
       pins = [];
   }
 
   function onClick(e) {
       if(!pins[0]){
-          addMarker(e, 0);
+          addPin(e, 0);
       }else if(!pins[1]){
-          addMarker(e, 1);
+          addPin(e, 1);
       }else{
-          removeAllMarkers(e);
+          removeAllPins(e);
       }
   }
 
