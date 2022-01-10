@@ -22,20 +22,6 @@
   </div>
 </div>
 
-<div class="location-map-wrapper">
-  <div id="map"> </div>
-  <%# <%= map(
-        center: {
-          latlng: [@location.location_latitude, @location.location_longitude],
-          zoom: 18,
-        },
-        markers: [Locations.transform_leaflet_position([@location.location_latitude, @location.location_longitude], @location.name)])
-  %>
-</div>
-
-<%# TODO: This passes all the tests altough for now no markers are added to the map. %>
-<%= javascript_pack_tag 'locations' %>
-
 <p>
   <strong>Opening Times:</strong>
   <br>
