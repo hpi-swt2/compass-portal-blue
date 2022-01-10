@@ -1,5 +1,15 @@
 require "rails_helper"
 
+def wait_for_ajax
+  Timeout.timeout(Capybara.default_max_wait_time) do
+    loop until finished_all_ajax_requests?
+  end
+end
+
+def finished_all_ajax_requests?
+  page.evaluate_script('jQuery.active').zero?
+end
+
 describe "Building Map page", type: :feature do
 
   describe "layout" do
@@ -63,7 +73,7 @@ describe "Building Map page", type: :feature do
         fill_in 'start', with: 'Haus A'
         fill_in 'dest', with: 'Haus L'
         click_on 'Go'
-        sleep 4
+        wait_for_ajax
       end
 
       it "shows a calculated route", js: true do
