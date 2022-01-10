@@ -12,7 +12,6 @@ describe "Building Map page", type: :feature do
 
   describe "map" do
     before do
-      Selenium::WebDriver::Remote::Capabilities.chrome( "goog:loggingPrefs": { browser: 'ALL' } )
       Capybara.current_driver = :selenium_chrome_headless
       Capybara.ignore_hidden_elements = false
     end
