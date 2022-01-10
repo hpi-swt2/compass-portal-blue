@@ -60,19 +60,4 @@ module RoutingHelper
     end
     { latlngs: coordinates, options: { className: "routing-path" } }
   end
-
-  # TODO: Needed for targets to transform them into leaflet markers:
-  # def self.transform_target_to_marker(point)
-  #   return {} unless point
-
-  #   coordinates = point.split(",")
-
-  #   {
-  #     latlng: coordinates,
-  #     divIcon: {
-  #       html: "<img src='/assets/pin.png'>",
-  #       className: "target-pin"
-  #     }
-  #   }
-  # end
 end

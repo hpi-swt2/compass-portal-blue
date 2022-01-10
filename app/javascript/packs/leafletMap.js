@@ -12,6 +12,7 @@ export async function setupMap() {
     // these operations are executed in parallel
     getView().then((view) => {
         setView(view);
+        addTargetMarker();
     });
 
     getBuildings().then((buildingPolygons) => {
@@ -61,6 +62,23 @@ export async function setupMap() {
         });
     }
     map.on("zoomend", recalculateTooltipVisibility);
+}
+
+function addTargetMarker() {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has("target")) return
+    const target = params.get("target");
+    const coordinates = target.split(",");
+
+    const marker = {
+        latlng: coordinates,
+        divIcon: {
+            html: "<img src='/assets/pin.png'>",
+            className: "target-pin",
+        },
+    };
+    addMarker(marker, map);
+    setView({latlng: coordinates, zoom: 19});
 }
 
 export function setView(view) {
