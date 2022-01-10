@@ -11,7 +11,7 @@ export async function setupMap() {
 
     // these operations are executed in parallel
     getView().then((view) => {
-        map.setView(view["latlng"], view["zoom"]);
+        setView(view);
     });
 
     getBuildings().then((buildingPolygons) => {
@@ -21,6 +21,10 @@ export async function setupMap() {
     getBuildingMarkers().then((buildingMarkers) => {
         addMarkers(buildingMarkers);
     });
+}
+
+export function setView(view) {
+    map.setView(view["latlng"], view["zoom"]);
 }
 
 export function addPolygons(polygons) {
@@ -70,7 +74,7 @@ export async function displayRoute(start, dest) {
 async function getBuildings() {
     return $.ajax({
         type: "GET",
-        url: "building_map_buildings",
+        url: "/building_map_buildings",
         dataType: "json",
     });
 }
@@ -78,7 +82,7 @@ async function getBuildings() {
 async function getBuildingMarkers() {
     return $.ajax({
         type: "GET",
-        url: "building_map_markers",
+        url: "/building_map_markers",
         dataType: "json",
     });
 }
@@ -86,7 +90,7 @@ async function getBuildingMarkers() {
 async function getView() {
     return $.ajax({
         type: "GET",
-        url: "building_map_view",
+        url: "/building_map_view",
         dataType: "json",
     });
 }
