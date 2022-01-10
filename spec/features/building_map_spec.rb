@@ -64,10 +64,10 @@ describe "Building Map page", type: :feature do
         fill_in 'start', with: 'Haus A'
         fill_in 'dest', with: 'Haus L'
         click_on 'Go'
+        sleep 4
       end
 
       it "shows a calculated route", js: true do
-        puts page.html
         expect(page).to have_css(".routing-path")
       end
 
