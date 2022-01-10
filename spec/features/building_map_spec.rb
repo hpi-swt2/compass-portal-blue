@@ -1,11 +1,10 @@
 require "rails_helper"
 
 def wait_for_ajax
-  timer_end = Time.now + 5.seconds 
-  while page.evaluate_script('$.active') != 0    
-    if Time.now > timer_end
-      fail "Page took more than 5 seconds to load via ajax"
-    end 
+  timer_end = Time.now + 5.seconds
+  while page.evaluate_script('$.active') != 0
+    raise "Page took more than 5 seconds to load via ajax" if Time.now > timer_end
+
     sleep 0.1
   end
 end
