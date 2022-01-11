@@ -9,19 +9,15 @@ export async function setupMap() {
         maxZoom: 19,
     }).addTo(map);
 
-    // these operations are executed in parallel
-    getView().then((view) => {
-        setView(view);
-        addTargetMarker();
-    });
+    const view = await getView();
+    setView(view);
+    addTargetMarker();
 
-    getBuildings().then((buildingPolygons) => {
-        addPolygons(buildingPolygons);
-    });
+    const buildingPolygons = await getBuildings();
+    addPolygons(buildingPolygons);
 
-    getBuildingMarkers().then((buildingMarkers) => {
-        addMarkers(buildingMarkers);
-    });
+    const buildingMarkers = await getBuildingMarkers();
+    addMarkers(buildingMarkers);
 
     // Add indoor labels
 
