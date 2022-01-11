@@ -6,9 +6,9 @@ class Users::GeoLocationsController < ApplicationController
     protect_from_forgery with: :null_session
     skip_before_action :verify_authenticity_token
 
+    # FIXME: this should be cleaned every now and then
     # Maps from user ids to (location, timestamp) tuples
-    # FIXME: this is not thread safe, but we are multithreaded
-    @@locations = {}
+    @@locations = Concurrent::Hash.new
 
     def update_geo_location
       return head :unauthorized unless user_signed_in?
