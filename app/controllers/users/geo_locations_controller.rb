@@ -2,10 +2,6 @@ require "date"
 
 class Users::GeoLocationsController < ApplicationController
 
-    # FIXME: this is bad, we know (it turns of CSRF checks)
-    protect_from_forgery with: :null_session
-    skip_before_action :verify_authenticity_token
-
     # FIXME: this should be cleaned every now and then
     # Maps from user ids to (location, timestamp) tuples
     @@locations = Concurrent::Hash.new

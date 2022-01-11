@@ -5,6 +5,10 @@ let positionMarker;
 let watcher_id;
 let currentLocation;
 
+// FIXME: this should probably be in application.js or something similarly
+// global, but it didn't work when we put it there
+const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
 export async function setupMap() {
     map = L.map("map");
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -159,7 +163,16 @@ function recalculateTooltipVisibility() {
 
 const syncPositionWithLiveServerImpl = async (location) => {
     const body = new URLSearchParams({ location });
-    const response = await fetch("/users/geo_location", { method: "PUT", body });
+    const response = await fetch(
+        "/users/geo_location",
+        {
+            method: "PUT",
+            body,
+            headers: {
+                "X-CSRF-TOKEN": CSRF_TOKEN,
+            },
+        }
+    );
     console.assert(response.status === 204); // HTTP "No content"
 };
 const syncPositionWithLiveServer = ratelimit(syncPositionWithLiveServerImpl, 10000);
