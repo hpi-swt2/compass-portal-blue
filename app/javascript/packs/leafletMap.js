@@ -9,15 +9,14 @@ export async function setupMap() {
         maxZoom: 19,
     }).addTo(map);
 
-    const [view, buildingPolygons, buildingMarkers] = await Promise.all([
-        getView(),
-        getBuildings(),
-        getBuildingMarkers(),
-    ]);
-
+    const view = await getView();
     setView(view);
     addTargetMarker();
+
+    const buildingPolygons = await getBuildings();
     addPolygons(buildingPolygons);
+
+    const buildingMarkers = await getBuildingMarkers();
     addMarkers(buildingMarkers);
 
     // Add indoor labels
