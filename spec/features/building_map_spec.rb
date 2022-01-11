@@ -70,8 +70,8 @@ describe "Building Map page", type: :feature do
       expect(page).to have_selector("path.uni-potsdam-building", count: 2)
     end
 
-    # Following tests seem to be inconsistent when run on GitHub Actions.
-    context "with route", inconsistent: true, local_only: true do
+    # Following tests might be inconsistent when run on GitHub Actions.
+    context "with route", inconsistent: true do
       before do
         visit building_map_path
         find("#nav-link-navigation").click
