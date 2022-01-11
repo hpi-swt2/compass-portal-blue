@@ -9,15 +9,15 @@ export async function setupMap() {
         maxZoom: 19,
     }).addTo(map);
 
-    // If we paralize these via e.g. Promise.all the tests don't succeed (race condition?)
-    const view = await getView();
+    const [view, buildingPolygons, buildingMarkers] = await Promise.all([
+        getView(),
+        getBuildings(),
+        getBuildingMarkers(),
+    ]);
+
     setView(view);
     addTargetMarker();
-
-    const buildingPolygons = await getBuildings();
     addPolygons(buildingPolygons);
-
-    const buildingMarkers = await getBuildingMarkers();
     addMarkers(buildingMarkers);
 
     // Add indoor labels

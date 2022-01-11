@@ -32,18 +32,14 @@ dest_input_field.dispatchEvent(new Event("change"));
 
 $("#navigation_form")[0]
     .addEventListener("submit", (event) => {
-        startRouteCalculation(event)
+        event.preventDefault();
+        if (start_input_field.value === YOUR_LOCATION_MAGIC_STRING) {
+            start_input_field.value = currentLocation;
+        }
+        const start = start_input_field.value;
+        const dest = dest_input_field.value;
+        displayRoute(start, dest);
     });
-
-async function startRouteCalculation(event) {
-    event.preventDefault();
-    if (start_input_field.value === YOUR_LOCATION_MAGIC_STRING) {
-        start_input_field.value = currentLocation;
-    }
-    const start = start_input_field.value;
-    const dest = dest_input_field.value;
-    await displayRoute(start, dest);
-}
 
 function validate_place_input(inputId, optionsId) {
     const input = $(`#${inputId}`)[0];
