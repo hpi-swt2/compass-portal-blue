@@ -9,6 +9,7 @@ export async function setupMap() {
         maxZoom: 19,
     }).addTo(map);
 
+    // If we paralize these via e.g. Promise.all the tests don't succeed (race condition?)
     const view = await getView();
     setView(view);
     addTargetMarker();
