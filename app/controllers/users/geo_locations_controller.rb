@@ -6,6 +6,7 @@ class Users::GeoLocationsController < ApplicationController
     protect_from_forgery with: :null_session
 
     # Maps from user ids to (location, timestamp) tuples
+    # FIXME: this is not thread safe, but we are multithreaded
     @@locations = {}
 
     def update_geo_location

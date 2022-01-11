@@ -28,8 +28,8 @@ export async function setupMap() {
     loadGeoJsonFile("assets/lecture-hall-building.geojson");
     map.on("zoomend", recalculateTooltipVisibility);
 
-    positionIcon = L.icon({iconUrl: "assets/location-icon.png", iconSize: [37.5, 50], iconAnchor: [18.75, 50]});
-    positionMarker = L.marker([0, 0], {icon: positionIcon}).bindPopup("Your position");
+    positionIcon = L.icon({ iconUrl: "assets/location-icon.png", iconSize: [37.5, 50], iconAnchor: [18.75, 50] });
+    positionMarker = L.marker([0, 0], { icon: positionIcon }).bindPopup("Your position");
 }
 
 function addTargetMarker() {
@@ -46,7 +46,7 @@ function addTargetMarker() {
         },
     };
     addMarker(marker, map);
-    setView({latlng: coordinates, zoom: 19});
+    setView({ latlng: coordinates, zoom: 19 });
 }
 
 export function setView(view) {
@@ -157,21 +157,43 @@ function recalculateTooltipVisibility() {
     });
 }
 
+const syncPositionWithLiveServerImpl = async (location) => {
+    // FIXME: use logged in user instead of sending id
+    const body = new URLSearchParams({ user: 1, location });
+    const response = await fetch("/users/geo_location", { method: "PUT", body });
+    console.assert(response.status === 204); // HTTP "No content"
+};
+const syncPositionWithLiveServer = ratelimit(syncPositionWithLiveServerImpl, 10000);
+
 export function trackingHandler() {
     const tracking_switch = document.getElementById("tracking_switch");
     if (tracking_switch.checked) {
-      positionMarker.addTo(map);
-      watcher_id = navigator.geolocation.watchPosition(
-        (pos) => {
-          currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude) ;
-          positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
-        },
-        (error) => {
-          alert("We cannot determine your location. Maybe you are not permitting your browse r to determine your location.");
-        }
-      );
+        positionMarker.addTo(map);
+        watcher_id = navigator.geolocation.watchPosition(
+            (pos) => {
+                currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
+                positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
+                syncPositionWithLiveServer(currentLocation);
+            },
+            (error) => {
+                alert("We cannot determine your location. Maybe you are not permitting your browse r to determine your location.");
+            }
+        );
     } else {
-      navigator.geolocation.clearWatch(watcher_id);
-      positionMarker.remove();
+        navigator.geolocation.clearWatch(watcher_id);
+        positionMarker.remove();
     }
+}
+
+// Returns a modified version of `f` that only runs if the last call is longer
+// than `limit` ms ago.
+function ratelimit(f, limit) {
+    let locked = false;
+    return (...args) => {
+        if (!locked) {
+            locked = true;
+            setTimeout(() => locked = false, limit);
+            return f(...args);
+        }
+    };
 }
