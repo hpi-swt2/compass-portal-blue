@@ -39,8 +39,6 @@ module RoutingHelper
   end
 
   def self.transform_route_to_time_marker(route)
-    return {} unless route
-
     walking_time = format_seconds_as_minsec(route["duration"])
     start = route["geometry"]["coordinates"][0]
     {
@@ -53,8 +51,6 @@ module RoutingHelper
   end
 
   def self.transform_route_to_polyline(route)
-    return unless route
-
     coordinates = route["geometry"]["coordinates"].map do |(long, lat)|
       [lat, long]
     end

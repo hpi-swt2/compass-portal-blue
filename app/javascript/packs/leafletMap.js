@@ -20,43 +20,7 @@ export async function setupMap() {
     addMarkers(buildingMarkers);
 
     // Add indoor labels
-
-    function addIndoorLabel(feature, layer) {
-        layer.bindTooltip(feature.properties.name, {
-            permanent: true,
-            direction: "center",
-            className: "indoor-label",
-        });
-    }
-
-    function loadGeoJsonFile(filename) {
-        fetch(filename)
-            .then((response) => response.json())
-            .then((geojsonFeatureCollection) => {
-                // Manually add indoor labels to map
-                const rooms = L.geoJSON(geojsonFeatureCollection, {
-                    onEachFeature: addIndoorLabel,
-                }).addTo(map);
-                rooms.eachLayer((layer) => {
-                    layer.getTooltip().setLatLng(layer.getBounds().getCenter());
-                });
-                recalculateTooltipVisibility();
-            });
-    }
-
     loadGeoJsonFile("assets/lecture-hall-building.geojson");
-    function recalculateTooltipVisibility() {
-        const zoomLevel = map.getZoom();
-        map.eachLayer((layer) => {
-            if (layer.getTooltip()) {
-                if (zoomLevel == 19 /* nearest zoom */) {
-                    layer.openTooltip(layer.getBounds().getCenter());
-                } else {
-                    layer.closeTooltip();
-                }
-            }
-        });
-    }
     map.on("zoomend", recalculateTooltipVisibility);
 }
 
@@ -146,5 +110,41 @@ async function getView() {
         type: "GET",
         url: "/building_map/view",
         dataType: "json",
+    });
+}
+
+function addIndoorLabel(feature, layer) {
+    layer.bindTooltip(feature.properties.name, {
+        permanent: true,
+        direction: "center",
+        className: "indoor-label",
+    });
+}
+
+function loadGeoJsonFile(filename) {
+    fetch(filename)
+        .then((response) => response.json())
+        .then((geojsonFeatureCollection) => {
+            // Manually add indoor labels to map
+            const rooms = L.geoJSON(geojsonFeatureCollection, {
+                onEachFeature: addIndoorLabel,
+            }).addTo(map);
+            rooms.eachLayer((layer) => {
+                layer.getTooltip().setLatLng(layer.getBounds().getCenter());
+            });
+            recalculateTooltipVisibility();
+        });
+}
+
+function recalculateTooltipVisibility() {
+    const zoomLevel = map.getZoom();
+    map.eachLayer((layer) => {
+        if (layer.getTooltip()) {
+            if (zoomLevel == 19 /* nearest zoom */) {
+                layer.openTooltip(layer.getBounds().getCenter());
+            } else {
+                layer.closeTooltip();
+            }
+        }
     });
 }

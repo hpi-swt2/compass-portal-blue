@@ -1,7 +1,7 @@
 import { displayRoute, setupMap } from './leafletMap.js';
 
 let currentLocation;
-const YOUR_LOCATION_MAGIC_STRING = "Your location" // TODO: Change this!!!
+const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
 
 setupMap();
 
