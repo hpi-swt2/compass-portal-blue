@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get '/login', to: 'welcome#login'
 
   get '/building_map', to: 'building_map#index'
+  get '/building_map/route', to: 'building_map#route'
+  get '/building_map/markers', to: 'building_map#markers'
+  get '/building_map/buildings', to: 'building_map#buildings'
+  get '/building_map/view', to: 'building_map#view'
 
   # '/search_results'
   get '/search_results', to: 'search_results#index'
