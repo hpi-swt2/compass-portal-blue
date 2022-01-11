@@ -158,8 +158,7 @@ function recalculateTooltipVisibility() {
 }
 
 const syncPositionWithLiveServerImpl = async (location) => {
-    // FIXME: use logged in user instead of sending id
-    const body = new URLSearchParams({ user: 1, location });
+    const body = new URLSearchParams({ location });
     const response = await fetch("/users/geo_location", { method: "PUT", body });
     console.assert(response.status === 204); // HTTP "No content"
 };
