@@ -1,9 +1,9 @@
-import { displayRoute, setupMap } from './leafletMap.js';
+import { displayRoute, setupMap, trackingHandler } from './leafletMap.js';
 
-let currentLocation;
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
 
 setupMap();
+document.getElementById("tracking_switch").addEventListener("click", trackingHandler);
 
 const start_input_field = $("#start_input")[0];
 start_input_field.addEventListener("change", () => {
@@ -46,6 +46,9 @@ function validate_place_input(inputId, optionsId) {
     const options = $(`#${optionsId}`)[0].options;
     return Array.from(options).some((o) => o.value === input.value);
 }
+
+// FIXME: this declaration is duplicated in leafletMap.js
+let currentLocation;
 
 function request_location() {
     if (start_input_field.value !== YOUR_LOCATION_MAGIC_STRING) return;

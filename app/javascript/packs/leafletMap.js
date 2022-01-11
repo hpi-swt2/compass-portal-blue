@@ -3,6 +3,7 @@ let routeLayer;
 let positionIcon;
 let positionMarker;
 let watcher_id;
+let currentLocation;
 
 export async function setupMap() {
     map = L.map("map");
@@ -27,7 +28,7 @@ export async function setupMap() {
     loadGeoJsonFile("assets/lecture-hall-building.geojson");
     map.on("zoomend", recalculateTooltipVisibility);
 
-    positionIcon = L.icon({iconUrl: "<%= url_for('assets/location-icon.png') %>", iconSize: [37.5, 50], iconAnchor: [18.75, 50]});
+    positionIcon = L.icon({iconUrl: "assets/location-icon.png", iconSize: [37.5, 50], iconAnchor: [18.75, 50]});
     positionMarker = L.marker([0, 0], {icon: positionIcon}).bindPopup("Your position");
 }
 
@@ -156,7 +157,7 @@ function recalculateTooltipVisibility() {
     });
 }
 
-function trackingHandler() {
+export function trackingHandler() {
     const tracking_switch = document.getElementById("tracking_switch");
     if (tracking_switch.checked) {
       positionMarker.addTo(map);
@@ -174,4 +175,3 @@ function trackingHandler() {
       positionMarker.remove();
     }
 }
-
