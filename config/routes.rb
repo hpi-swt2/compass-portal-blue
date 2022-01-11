@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   # '/search_results'
   get '/search_results', to: 'search_results#index'
 
+  put '/users/geo_location', to: 'users/geo_locations#update_geo_location'
+
   # '/'
   # Sets `root_url`, devise gem requires this to be set
   root to: "welcome#index"
