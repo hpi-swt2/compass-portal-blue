@@ -1,5 +1,4 @@
 class BuildingMapController < ApplicationController
-
   def index; end
 
   def buildings
