@@ -19,7 +19,7 @@ describe "Building Map page", type: :feature do
     end
   end
 
-  describe "map" do
+  describe "map", inconsistent: true do
     before do
       Capybara.current_driver = :selenium_chrome_headless
       Capybara.ignore_hidden_elements = false
@@ -44,7 +44,7 @@ describe "Building Map page", type: :feature do
       expect(page).to have_selector("path.building", count: 15)
     end
 
-    it "separates HPI and Uni-Potsdam buildings" do
+    it "separates HPI and Uni-Potsdam buildings", js: true do
       visit building_map_path
       wait_for_ajax
       page.assert_selector('path.hpi-building', minimum: 1, wait: 5)
@@ -88,7 +88,7 @@ describe "Building Map page", type: :feature do
     end
 
     # Following tests seem to be inconsistent when run on GitHub Actions.
-    context "with route", local_only: true, inconsistent: true do
+    context "with route", inconsistent: true do
       before do
         visit building_map_path
         find("#nav-link-navigation").click
@@ -108,7 +108,7 @@ describe "Building Map page", type: :feature do
         expect(page).to have_css(".time-icon")
       end
 
-      it "only shows one route at the time", ts: true do
+      it "only shows one route at the time", js: true do
         find(".routing-path", wait: 5)
         expect(page).to have_css(".routing-path", count: 1)
         fill_in 'start', with: 'Haus A'
