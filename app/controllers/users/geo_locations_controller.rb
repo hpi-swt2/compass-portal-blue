@@ -17,7 +17,7 @@ class Users::GeoLocationsController < ApplicationController
       # lock ourself out of passing metadata / force us to clean out csrf
       # tokens etc. beforehand?
       location = params.require(:location)
-      raise ActionController::BadRequest, "Invalid coordinates" unless RoutingHelper.valid_coordinates?(location)
+      return render(status: :bad_request, plain: "Invalid coordinates") unless RoutingHelper.valid_coordinates?(location)
 
       @@locations[current_user.id] = [location, DateTime.now]
     end
