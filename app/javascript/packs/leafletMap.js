@@ -1,11 +1,14 @@
 let map;
 let routeLayer;
+let positionIcon;
+let positionMarker;
+let watcher_id;
 
 export async function setupMap() {
     map = L.map("map");
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Location icon from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> licensed by CC BY 3.0',
         maxZoom: 19,
     }).addTo(map);
 
@@ -23,6 +26,9 @@ export async function setupMap() {
     // Add indoor labels
     loadGeoJsonFile("assets/lecture-hall-building.geojson");
     map.on("zoomend", recalculateTooltipVisibility);
+
+    positionIcon = L.icon({iconUrl: "<%= url_for('assets/location-icon.png') %>", iconSize: [37.5, 50], iconAnchor: [18.75, 50]});
+    positionMarker = L.marker([0, 0], {icon: positionIcon}).bindPopup("Your position");
 }
 
 function addTargetMarker() {
@@ -149,3 +155,23 @@ function recalculateTooltipVisibility() {
         }
     });
 }
+
+function trackingHandler() {
+    const tracking_switch = document.getElementById("tracking_switch");
+    if (tracking_switch.checked) {
+      positionMarker.addTo(map);
+      watcher_id = navigator.geolocation.watchPosition(
+        (pos) => {
+          currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude) ;
+          positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
+        },
+        (error) => {
+          alert("We cannot determine your location. Maybe you are not permitting your browse r to determine your location.");
+        }
+      );
+    } else {
+      navigator.geolocation.clearWatch(watcher_id);
+      positionMarker.remove();
+    }
+}
+
