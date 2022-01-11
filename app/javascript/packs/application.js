@@ -19,6 +19,8 @@ import 'bootstrap';
 import "@fortawesome/fontawesome-free/js/all";
 
 import * as L from "leaflet"
+import * as polylabel from 'polylabel';
+global.polylabel = polylabel
 
 Rails.start()
 Turbolinks.start()
