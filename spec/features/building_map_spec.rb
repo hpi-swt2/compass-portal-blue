@@ -71,7 +71,7 @@ describe "Building Map page", type: :feature do
     end
 
     # Following tests seem to be inconsistent when run on GitHub Actions.
-    context "with route", inconsistent: true do
+    context "with route", inconsistent: true, local_only: true do
       before do
         visit building_map_path
         find("#nav-link-navigation").click
