@@ -22,8 +22,8 @@
         <td><%= person.email %></td>
         <td><%= person.phone_number %></td>
         <td class="td-btn"><%= link_to 'Show', person, class: "btn btn-secondary link-btn"  %></td>
-        <td class="td-btn"><%= link_to 'Edit', edit_person_path(person), class: "btn btn-secondary link-btn"  %></td>
-        <td class="td-btn"><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+        <td class="td-btn"><% if can? :update, person %><%= link_to 'Edit', edit_person_path(person), class: "btn btn-secondary link-btn"  %><%end%></td>
+        <td class="td-btn"><% if can? :destroy, person %><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
       </tr>
     <% end %>
   </tbody>
