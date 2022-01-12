@@ -1,4 +1,5 @@
 class BuildingsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_building, only: %i[show edit update destroy]
 
   # GET /buildings or /buildings.json
@@ -20,7 +21,7 @@ class BuildingsController < ApplicationController
   # POST /buildings or /buildings.json
   def create
     @building = Building.new(building_params)
-
+    @building.user_id = current_user.id
     respond_to do |format|
       if @building.save
         format.html { redirect_to edit_building_path(@building), notice: "Building was successfully created." }

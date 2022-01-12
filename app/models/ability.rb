@@ -9,6 +9,7 @@ class Ability
         can :manage, :all
       else
         can :manage, Location, user_id: user.id
+        can :manage, Building, user_id: user.id
         can :read, :all
       end
 

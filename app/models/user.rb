@@ -4,6 +4,7 @@ require "date"
 class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
   has_many :location
+  has_many :building
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
