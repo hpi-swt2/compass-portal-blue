@@ -15,12 +15,12 @@
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
              data-bs-parent="#routingInput">
           <div class="accordion-body">
-            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form" method="GET" action="/building_map">
+            <form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
               <div class="col-auto">
                 <div class="input-group">
                   <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
                   <input name="start" type="text" class="form-control" list="startOptions" id="start_input"
-                         placeholder="From" onchange="request_location()">
+                         placeholder="From">
                 </div>
               </div>
               <div class="col-auto">
@@ -31,7 +31,7 @@
                 </div>
               </div>
               <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Go</button>
+                <button type="submit" class="btn btn-primary" id="routing-button">Go</button>
               </div>
             </form>
           </div>
@@ -43,14 +43,14 @@
 
 <datalist id="startOptions">
   <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
-  <%= Places::DESTINATIONS.each do |dest, coords| %>
+  <% Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
   <% end %>
 </datalist>
 <datalist id="destOptions">
-  <%= Places::DESTINATIONS.each do |dest, coords| %>
+  <% Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
@@ -58,106 +58,7 @@
 </datalist>
 
 <div class="container-fluid">
-  <%= map(
-        center: BuildingMapHelper.leaflet_center(@start),
-        polygons: BuildingMapHelper.leaflet_polygons,
-        polylines: BuildingMapHelper.leaflet_polylines(@route),
-        markers: BuildingMapHelper.leaflet_markers(@route, @target))
-  %>
+  <div id="map"></div>
 </div>
 
-<script>
-    let currentLocation;
-
-    function validate_place_input(inputId, optionsId) {
-        const input = document.getElementById(inputId);
-        const options = document.getElementById(optionsId).options;
-        return Array.from(options).some(o => o.value === input.value);
-    }
-
-    const start_input_field = document.getElementById("start_input");
-    start_input_field.addEventListener("change", () => {
-        if (validate_place_input("start_input", "startOptions")) {
-            start_input_field.setCustomValidity("");
-        } else {
-            start_input_field.setCustomValidity("Please select a valid starting place.");
-        }
-    });
-    start_input_field.dispatchEvent(new Event("change"));
-
-    const dest_input_field = document.getElementById("dest_input");
-    dest_input_field.addEventListener("change", () => {
-        if (validate_place_input("dest_input", "destOptions")) {
-            dest_input_field.setCustomValidity("");
-        } else {
-            dest_input_field.setCustomValidity("Please select a valid destination place.");
-        }
-    });
-    dest_input_field.dispatchEvent(new Event("change"));
-
-    function request_location() {
-        if (start_input_field.value !== "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") return;
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
-                start_input_field.setCustomValidity("");
-            },
-            (error) => {
-                console.warn(`ERROR(${error.code}): ${error.message}`);
-                if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
-                    start_input_field.setCustomValidity("You have to grant your browser the permission to access your location if you want to use this feature.")
-                } else {
-                    start_input_field.setCustomValidity("Your browser could not determine your position. Please choose a different starting place.")
-                }
-            }
-        );
-    }
-
-    document.getElementById("navigation_form").addEventListener("submit", () => {
-        if (start_input_field.value === "<%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %>") {
-            start_input_field.value = currentLocation;
-        }
-    });
-</script>
-
-<%# Indoor labels %>
-<script>
-  function addIndoorLabel(feature, layer) {
-    layer.bindTooltip(
-      feature.properties.name,
-      {
-          permanent: true,
-          direction:'center',
-          className: 'indoor-label',
-      }
-    );
-  }
-
-  function loadGeoJsonFile(filename) {
-    fetch(filename)
-    .then(response => response.json())
-    .then(geojsonFeatureCollection => {
-      // Manually add indoor labels to map
-      const rooms = L.geoJSON(geojsonFeatureCollection, { onEachFeature: addIndoorLabel }).addTo(map);
-      rooms.eachLayer((layer)=>{
-        layer.getTooltip().setLatLng(layer.getBounds().getCenter());
-      });
-      recalculateTooltipVisibility()
-    })
-  }
-
-  loadGeoJsonFile('assets/lecture-hall-building.geojson')
-  function recalculateTooltipVisibility() {
-    const zoomLevel = map.getZoom()
-    map.eachLayer(layer => {
-      if (layer.getTooltip()) {
-        if (zoomLevel == 19 /* nearest zoom */) {
-          layer.openTooltip(layer.getBounds().getCenter())
-        } else {
-          layer.closeTooltip()
-        }
-      }
-    })
-  }
-  map.on('zoomend', recalculateTooltipVisibility);
-</script>
+<%= javascript_pack_tag 'building_map' %>

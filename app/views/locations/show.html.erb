@@ -22,16 +22,6 @@
   </div>
 </div>
 
-<div class="location-map-wrapper">
-  <%= map(
-        center: {
-          latlng: [@location.location_latitude, @location.location_longitude],
-          zoom: 18,
-        },
-        markers: [Locations.transform_leaflet_position([@location.location_latitude, @location.location_longitude], @location.name)])
-  %>
-</div>
-
 <p>
   <strong>Opening Times:</strong>
   <br>
