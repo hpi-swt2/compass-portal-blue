@@ -17,13 +17,23 @@
   </div>
 
   <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
     <%= form.label :d_start %>
     <%= form.datetime_select :d_start %>
   </div>
 
   <div class="field">
+    <%= form.label :d_end %>
+    <%= form.datetime_select :d_end %>
+  </div>
+
+  <div class="field">
     <%= form.label :recurring %>
-    <%= form.text_field :recurring %>
+    <%= form.text_area :recurring %>
   </div>
 
   <div class="actions">

@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :event do
     name { "MyString" }
-    d_start { "2022-01-07 15:44:47" }
+    description { "MyText" }
+    d_start { "2022-01-12 10:58:13" }
+    d_end { "2022-01-12 10:58:13" }
     recurring { "MyText" }
   end
 end
