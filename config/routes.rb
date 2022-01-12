@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :events
   resources :people
   resources :rooms
   resources :openingtimes
   resources :buildings
+  resources :locations
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # '/users/...'
@@ -13,8 +15,8 @@ Rails.application.routes.draw do
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
 
-  # '/protected'
-  get '/protected', to: 'welcome#protected'
+  # '/login'
+  get '/login', to: 'welcome#login'
 
   get '/building_map', to: 'building_map#index'
 

@@ -352,5 +352,4 @@ module Buildings
     end
   end
 end
-
 # rubocop:enable Metrics/ModuleLength
