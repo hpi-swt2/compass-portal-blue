@@ -45,7 +45,7 @@ class Room < ApplicationRecord
 
     free = false
     calendar_items.each do |item|
-      free = item.start > current_datetime || current_datetime < item.end
+      free = (current_datetime < item.start) || (item.end < current_datetime)
       if !free
         return free
       end
