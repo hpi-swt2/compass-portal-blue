@@ -1,4 +1,4 @@
-import { displayRoute, setupMap } from './leafletMap.js';
+import { displayRoute, setupMap, pins } from './leafletMap.js';
 
 let currentLocation;
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
@@ -7,30 +7,30 @@ const PIN_2_MAGIC_STRING = "Pin 2"
 
 setupMap();
 
-const start_input_field = $("#start_input")[0];
-start_input_field.addEventListener("change", () => {
+const startInputField = $("#start_input")[0];
+startInputField.addEventListener("change", () => {
     request_location();
     if (validate_place_input("start_input", "startOptions")) {
-        start_input_field.setCustomValidity("");
+        startInputField.setCustomValidity("");
     } else {
-        start_input_field.setCustomValidity(
+        startInputField.setCustomValidity(
             "Please select a valid starting place."
         );
     }
 });
-start_input_field.dispatchEvent(new Event("change"));
+startInputField.dispatchEvent(new Event("change"));
 
-const dest_input_field = $("#dest_input")[0];
-dest_input_field.addEventListener("change", () => {
+const destInputField = $("#dest_input")[0];
+destInputField.addEventListener("change", () => {
     if (validate_place_input("dest_input", "destOptions")) {
-        dest_input_field.setCustomValidity("");
+        destInputField.setCustomValidity("");
     } else {
-        dest_input_field.setCustomValidity(
+        destInputField.setCustomValidity(
             "Please select a valid destination place."
         );
     }
 });
-dest_input_field.dispatchEvent(new Event("change"));
+destInputField.dispatchEvent(new Event("change"));
 
 $("#navigation_form")[0]
     .addEventListener("submit", (event) => {
@@ -48,8 +48,8 @@ $("#navigation_form")[0]
                     break;
             }
         }
-        const start = start_input_field.value;
-        const dest = dest_input_field.value;
+        const start = startInputField.value;
+        const dest = destInputField.value;
         displayRoute(start, dest);
     });
 
@@ -64,23 +64,23 @@ function validate_place_input(inputId, optionsId) {
 }
 
 function request_location() {
-    if (start_input_field.value !== YOUR_LOCATION_MAGIC_STRING) return;
+    if (startInputField.value !== YOUR_LOCATION_MAGIC_STRING) return;
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             currentLocation =
                 String(pos.coords.latitude) +
                 "," +
                 String(pos.coords.longitude);
-            start_input_field.setCustomValidity("");
+            startInputField.setCustomValidity("");
         },
         (error) => {
             console.warn(`ERROR(${error.code}): ${error.message}`);
             if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
-                start_input_field.setCustomValidity(
+                startInputField.setCustomValidity(
                     "You have to grant your browser the permission to access your location if you want to use this feature."
                 );
             } else {
-                start_input_field.setCustomValidity(
+                startInputField.setCustomValidity(
                     "Your browser could not determine your position. Please choose a different starting place."
                 );
             }

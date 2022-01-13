@@ -10,7 +10,7 @@ let pinIcons = [
         html: "<div style='' class='pin-icon2'></div>",
     })
 ];
-let pins = [];
+export let pins = [];
 
 export async function setupMap() {
     map = L.map("map");
@@ -33,7 +33,8 @@ export async function setupMap() {
 
     // Add indoor labels
     loadGeoJsonFile("assets/lecture-hall-building.geojson");
-    map.on("click", recalculateTooltipVisibility);
+    map.on("zoomend", recalculateTooltipVisibility);
+
     // Add pins on click
     map.on("click", onClick);
 }
@@ -49,7 +50,6 @@ function removeAllPins(e) {
 }
 
 function onClick(e) {
-    console.log("click");
     if(!pins[0]){
         addPin(e, 0);
     }else if(!pins[1]){
@@ -59,7 +59,7 @@ function onClick(e) {
     }
 }
 
-function addTargetMarker() {
+export function addTargetMarker() {
     const params = new URLSearchParams(window.location.search);
     if (!params.has("target")) return
     const target = params.get("target");
