@@ -46,6 +46,14 @@ class User < ApplicationRecord
   #   end
   # end
 
+  def last_known_position_with_timestamp
+    Users::GeoLocationsController.locations[id]
+  end
+
+  def last_known_position
+    last_known_position_with_timestamp[0]
+  end
+
   private
 
   private_class_method def self.read_auth_data_into_user(user, auth)
