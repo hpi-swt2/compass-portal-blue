@@ -1,6 +1,10 @@
-import { displayRoute, setupMap, trackingHandler } from './leafletMap.js';
+import { displayRoute, addAnyMarker, ratelimit, setupMap } from './leafletMap.js';
 
+// FIXME: this should probably be in application.js or something similarly
+// global, but it didn't work when we put it there
+const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
+let currentLocation;
 
 setupMap();
 document.getElementById("tracking_switch").addEventListener("click", trackingHandler);
@@ -47,9 +51,6 @@ function validate_place_input(inputId, optionsId) {
     return Array.from(options).some((o) => o.value === input.value);
 }
 
-// FIXME: this declaration is duplicated in leafletMap.js
-let currentLocation;
-
 function request_location() {
     if (start_input_field.value !== YOUR_LOCATION_MAGIC_STRING) return;
     navigator.geolocation.getCurrentPosition(
@@ -73,4 +74,45 @@ function request_location() {
             }
         }
     );
+}
+
+const syncUserPositionWithServerImpl = async (location) => {
+    const body = new URLSearchParams({ location });
+    const response = await fetch(
+        "/users/geo_location",
+        {
+            method: "PUT",
+            body,
+            headers: {
+                "X-CSRF-TOKEN": CSRF_TOKEN,
+            },
+        }
+    );
+    console.assert(response.status === 204); // HTTP "No content"
+};
+const syncUserPositionWithServer = ratelimit(syncUserPositionWithServerImpl, 10000);
+
+let watcher_id;
+const positionIcon = L.icon({ iconUrl: "assets/location-icon.png", iconSize: [37.5, 50], iconAnchor: [18.75, 50] });
+const positionMarker = L.marker([0, 0], { icon: positionIcon });
+positionMarker.bindPopup("Your position");
+
+function trackingHandler() {
+    const tracking_switch = document.getElementById("tracking_switch");
+    if (tracking_switch.checked) {
+        addAnyMarker(positionMarker);
+        watcher_id = navigator.geolocation.watchPosition(
+            (pos) => {
+                currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
+                positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
+                syncUserPositionWithServer(currentLocation);
+            },
+            (error) => {
+                alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
+            }
+        );
+    } else {
+        navigator.geolocation.clearWatch(watcher_id);
+        positionMarker.remove();
+    }
 }

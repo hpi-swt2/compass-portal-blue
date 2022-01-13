@@ -1,13 +1,6 @@
 let map;
 let routeLayer;
-let positionIcon;
-let positionMarker;
-let watcher_id;
-let currentLocation;
 
-// FIXME: this should probably be in application.js or something similarly
-// global, but it didn't work when we put it there
-const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
 export async function setupMap() {
     map = L.map("map");
@@ -31,9 +24,6 @@ export async function setupMap() {
     // Add indoor labels
     loadGeoJsonFile("assets/lecture-hall-building.geojson");
     map.on("zoomend", recalculateTooltipVisibility);
-
-    positionIcon = L.icon({ iconUrl: "assets/location-icon.png", iconSize: [37.5, 50], iconAnchor: [18.75, 50] });
-    positionMarker = L.marker([0, 0], { icon: positionIcon }).bindPopup("Your position");
 }
 
 function addTargetMarker() {
@@ -75,6 +65,10 @@ export function addMarker(marker, layer = map) {
     marker["divIcon"]["popupAnchor"] = [0, 0];
     const icon = L.divIcon(marker["divIcon"]);
     L.marker(marker["latlng"], { icon: icon }).addTo(layer);
+}
+
+export function addAnyMarker(marker, layer = map) {
+    marker.addTo(layer);
 }
 
 export function addPolylines(polylines, layer = map) {
@@ -161,45 +155,9 @@ function recalculateTooltipVisibility() {
     });
 }
 
-const syncUserPositionWithServerImpl = async (location) => {
-    const body = new URLSearchParams({ location });
-    const response = await fetch(
-        "/users/geo_location",
-        {
-            method: "PUT",
-            body,
-            headers: {
-                "X-CSRF-TOKEN": CSRF_TOKEN,
-            },
-        }
-    );
-    console.assert(response.status === 204); // HTTP "No content"
-};
-const syncUserPositionWithServer = ratelimit(syncUserPositionWithServerImpl, 10000);
-
-export function trackingHandler() {
-    const tracking_switch = document.getElementById("tracking_switch");
-    if (tracking_switch.checked) {
-        positionMarker.addTo(map);
-        watcher_id = navigator.geolocation.watchPosition(
-            (pos) => {
-                currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
-                positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
-                syncUserPositionWithServer(currentLocation);
-            },
-            (error) => {
-                alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
-            }
-        );
-    } else {
-        navigator.geolocation.clearWatch(watcher_id);
-        positionMarker.remove();
-    }
-}
-
 // Returns a modified version of `f` that only runs if the last call is longer
 // than `limit` ms ago.
-function ratelimit(f, limit) {
+export function ratelimit(f, limit) {
     let locked = false;
     return (...args) => {
         if (!locked) {
