@@ -7,7 +7,7 @@ let currentLocation;
 
 // FIXME: this should probably be in application.js or something similarly
 // global, but it didn't work when we put it there
-const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+const CSRF_TOKEN = "Hello World"; // document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
 export async function setupMap() {
     map = L.map("map");
@@ -188,7 +188,7 @@ export function trackingHandler() {
                 syncUserPositionWithServer(currentLocation);
             },
             (error) => {
-                alert("We cannot determine your location. Maybe you are not permitting your browse r to determine your location.");
+                alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
             }
         );
     } else {
