@@ -65,7 +65,7 @@ class User < ApplicationRecord
   end
 
   def last_known_location
-    last_known_location_with_timestamp[0]
+    last_known_location_with_timestamp&.at(0)
   end
 
   private
