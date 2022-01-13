@@ -22,6 +22,7 @@ describe "Building Map page", type: :feature do
 
     it "contains a map", js: true do
       visit building_map_path
+      find(".leaflet-container")
       expect(page).to have_css("#map")
       expect(page).to have_css(".leaflet-container")
     end
