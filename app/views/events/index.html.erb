@@ -2,6 +2,16 @@
 
 <h1>Events</h1>
 
+<%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
+  <div class="form-group">
+    <%= file_field_tag :file, class: '' %>
+  </div>
+
+  <div class="form-group">
+    <%= submit_tag "Import ICS", class: 'btn btn-info' %>
+  </div>
+<% end %>
+
 <table>
   <thead>
     <tr>

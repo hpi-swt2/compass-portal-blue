@@ -129,6 +129,9 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    icalendar (2.7.1)
+      ice_cube (~> 0.16)
+    ice_cube (0.16.4)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -369,6 +372,7 @@ DEPENDENCIES
   devise-i18n-bootstrap
   factory_bot_rails
   httparty
+  icalendar
   jbuilder (~> 2.7)
   leaflet-rails!
   listen (~> 3.3)

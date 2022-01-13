@@ -6,6 +6,11 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def import
+    Event.import(params[:file])
+    redirect_to root_url, notice: "Imported Events from ICS"
+  end
+
   # GET /events/1 or /events/1.json
   def show
   end
