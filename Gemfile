@@ -117,4 +117,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "phonelib"
 
+# Provides the class `Concurrent::Hash` which is needed to keep user location data in a thread-safe way.
 gem "concurrent-ruby", "~> 1.1"
