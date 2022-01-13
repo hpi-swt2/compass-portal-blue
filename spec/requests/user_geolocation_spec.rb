@@ -51,7 +51,7 @@ RSpec.describe "/users/geo_location", type: :request do
       expect(@user.last_known_location).to be_nil
     end
 
-    it "singles when there is nothing to delete" do
+    it "signals when there is nothing to delete" do
       sign_in @user
       expect(@user.last_known_location).to be_nil
 
