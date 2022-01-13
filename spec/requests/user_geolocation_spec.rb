@@ -26,11 +26,11 @@ RSpec.describe "/users/geo_location", type: :request do
 
       put users_geo_location_url, params: { location: "42.42,13.37" }
       expect(response).to be_successful
-      expect(@user.last_known_position).to eq("42.42,13.37")
+      expect(@user.last_known_location).to eq("42.42,13.37")
 
       put users_geo_location_url, params: { location: "52.12,6.66" }
       expect(response).to be_successful
-      expect(@user.last_known_position).to eq("52.12,6.66")
+      expect(@user.last_known_location).to eq("52.12,6.66")
     end
   end
 end

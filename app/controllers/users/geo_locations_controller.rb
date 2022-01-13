@@ -1,13 +1,4 @@
-require "date"
-
 class Users::GeoLocationsController < ApplicationController
-  # FIXME: this should be cleaned every now and then
-  # Maps from user ids to (location, timestamp) tuples
-  @locations = Concurrent::Hash.new
-
-  class << self
-    attr_accessor :locations
-  end
 
   def update_geo_location
     return head :unauthorized unless user_signed_in?
@@ -26,6 +17,6 @@ class Users::GeoLocationsController < ApplicationController
       return render status: :bad_request, plain: "Invalid coordinates"
     end
 
-    self.class.locations[current_user.id] = [location, DateTime.now]
+    current_user.update_last_known_location(location)
   end
 end
