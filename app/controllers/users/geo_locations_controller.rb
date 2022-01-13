@@ -17,8 +17,6 @@ class Users::GeoLocationsController < ApplicationController
     current_user.update_last_known_location(location)
   end
 
-  # TODO: add DELETE route
-  # A test already exists in user_geolocation_spec.rb that is currently skipped :^)
   def delete_geo_location
     return head :unauthorized unless user_signed_in?
 
