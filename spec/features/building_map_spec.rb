@@ -28,18 +28,21 @@ describe "Building Map page", type: :feature do
 
     it "highlights buildings on the map", js: true do
       visit building_map_path
+      page.assert_selector('path.building', count: 15, wait: 5)
       expect(page).to have_css(".leaflet-interactive")
       expect(page).to have_selector("path.building", count: 15)
     end
 
-    it "separates HPI and Uni-Potsdam buildings" do
+    it "separates HPI and Uni-Potsdam buildings", js: true do
       visit building_map_path
+      page.assert_selector('path.hpi-building', minimum: 1, wait: 5)
       expect(page).to have_selector("path.hpi-building", count: 13)
       expect(page).to have_selector("path.uni-potsdam-building", count: 2)
     end
 
     it "shows the name of the HPI buildings", js: true do
       visit building_map_path
+      page.assert_selector("div.building-icon", minimum: 13, wait: 5)
       expect(page).to have_css(".leaflet-marker-pane")
       expect(page).to have_css(".leaflet-marker-icon")
       expect(page).to have_selector("div.building-icon", minimum: 13)
@@ -47,31 +50,56 @@ describe "Building Map page", type: :feature do
 
     it "shows the pin of a target point", js: true do
       visit building_map_path(target: "52.393913,13.133082")
-      expect(page).to have_css('.target-pin')
+      find(".target-pin", wait: 5)
+      expect(page).to have_css(".target-pin")
     end
 
-    context "with route" do
+    it "shows no route, if it's not requested", js: true do
+      visit building_map_path
+      expect(page).not_to have_css(".routing-path")
+      expect(page).not_to have_css(".time-icon")
+    end
+
+    it "renders the map with all special features", js: true do
+      visit building_map_path
+      expect(page).to have_css("#map")
+      expect(page).to have_css(".leaflet-container")
+      page.assert_selector("path.building", count: 15, wait: 5)
+      expect(page).to have_selector("path.hpi-building", count: 13)
+      expect(page).to have_selector("div.building-icon", minimum: 13)
+      expect(page).to have_selector("path.uni-potsdam-building", count: 2)
+    end
+
+    # Following tests might be inconsistent when run on GitHub Actions.
+    context "with route", inconsistent: true, local_only: true do
+      before do
+        visit building_map_path
+        find("#nav-link-navigation").click
+        fill_in 'start', with: 'Haus A'
+        fill_in 'dest', with: 'Haus L'
+        click_on 'Go'
+      end
+
       it "shows a calculated route", js: true do
-        visit building_map_path(start: "52.393913,13.133082", dest: "52.393861,13.129606")
+        find(".routing-path", wait: 15)
         expect(page).to have_css(".routing-path")
       end
 
-      it "shows no route, if it's not requested", js: true do
-        visit building_map_path
-        expect(page).not_to have_css(".routing-path")
-        expect(page).not_to have_css(".time-icon")
-      end
-
-      it "shows no route, if not all necessary parameters are provided", js: true do
-        visit building_map_path(start: "52.393913,13.133082")
-        expect(page).not_to have_css(".routing-path")
-        expect(page).not_to have_css(".time-icon")
-      end
-
       it "shows the time of a calculated route", js: true do
-        visit building_map_path(start: "52.393913,13.133082", dest: "52.393861,13.129606")
+        find(".time-icon", wait: 15)
         expect(page).to have_css(".time-icon")
       end
+
+      it "only shows one route at the time", js: true do
+        find(".routing-path", wait: 15)
+        expect(page).to have_css(".routing-path", count: 1)
+        fill_in 'start', with: 'Haus A'
+        fill_in 'dest', with: 'Haus L'
+        click_on 'Go'
+        find(".routing-path", wait: 5)
+        expect(page).to have_css(".routing-path", count: 1)
+      end
+
     end
   end
 end

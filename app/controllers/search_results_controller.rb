@@ -42,29 +42,32 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
+  def add_search_results(rooms, buildings, locations, people)
+    add_buildings(buildings)
+    add_rooms(rooms)
+    add_locations(locations)
+    add_people(people)
+  end
+
   def search_for_entries_starting_with(query)
     buildings = Building.where("LOWER(name) LIKE ?", "#{query}%")
     rooms = Room.where("LOWER(name) LIKE ?", "#{query}%")
+    locations = Location.where("LOWER(name) LIKE ?", "#{query}%")
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           OR LOWER(last_name) LIKE ?",
                           "#{query}%", "#{query}%")
-
-    add_buildings(buildings)
-    add_rooms(rooms)
-    add_people(people)
+    add_search_results(rooms, buildings, locations, people)
   end
 
   def search_for_entries_including(query)
     buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
     rooms = Room.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
+    locations = Location.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(last_name) LIKE ?",
                           "%#{query}%", "#{query}%", "#{query}%")
-
-    add_rooms(rooms)
-    add_buildings(buildings)
-    add_people(people)
+    add_search_results(rooms, buildings, locations, people)
   end
 
   def add_rooms(rooms)
@@ -88,6 +91,19 @@ class SearchResultsController < ApplicationController
                                link: building_path(building),
                                description: "Building",
                                type: "building"
+                             ))
+      @result_id += 1
+    end
+  end
+
+  def add_locations(locations)
+    locations.each do |location|
+      @search_results.append(SearchResult.new(
+                               id: @result_id,
+                               title: location.name,
+                               link: location_path(location),
+                               description: "Location",
+                               type: "location"
                              ))
       @result_id += 1
     end

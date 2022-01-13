@@ -50,9 +50,6 @@ gem 'tod'
 # Libraries
 #
 
-# Leaflet for map functionality
-gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
-
 #
 # Gems that are loaded depending on the environment (development/test/production)
 #
