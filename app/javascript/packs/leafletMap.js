@@ -161,7 +161,7 @@ function recalculateTooltipVisibility() {
     });
 }
 
-const syncPositionWithLiveServerImpl = async (location) => {
+const syncUserPositionWithServerImpl = async (location) => {
     const body = new URLSearchParams({ location });
     const response = await fetch(
         "/users/geo_location",
@@ -175,7 +175,7 @@ const syncPositionWithLiveServerImpl = async (location) => {
     );
     console.assert(response.status === 204); // HTTP "No content"
 };
-const syncPositionWithLiveServer = ratelimit(syncPositionWithLiveServerImpl, 10000);
+const syncUserPositionWithServer = ratelimit(syncUserPositionWithServerImpl, 10000);
 
 export function trackingHandler() {
     const tracking_switch = document.getElementById("tracking_switch");
@@ -185,7 +185,7 @@ export function trackingHandler() {
             (pos) => {
                 currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
                 positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
-                syncPositionWithLiveServer(currentLocation);
+                syncUserPositionWithServer(currentLocation);
             },
             (error) => {
                 alert("We cannot determine your location. Maybe you are not permitting your browse r to determine your location.");
