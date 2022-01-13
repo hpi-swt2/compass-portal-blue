@@ -68,6 +68,10 @@ class User < ApplicationRecord
     last_known_location_with_timestamp&.at(0)
   end
 
+  def delete_last_known_location
+    self.class.locations.delete id
+  end
+
   private
 
   private_class_method def self.read_auth_data_into_user(user, auth)

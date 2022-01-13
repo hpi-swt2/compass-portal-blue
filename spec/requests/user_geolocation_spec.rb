@@ -37,17 +37,26 @@ RSpec.describe "/users/geo_location", type: :request do
   end
 
   describe "DELETE /users/geo_location" do
+    it "doesn't allow requests from unauthenticated users" do
+      delete users_geo_location_url
+      expect(response).to have_http_status :unauthorized
+    end
+
     it "deletes the location of the user" do
       sign_in @user
       @user.update_last_known_location "42.42,13.37"
+
       expect(@user.last_known_location).not_to be_nil
-
-      ###############################
-      skip "Not implemented yet"
-      ###############################
-
       delete users_geo_location_url
       expect(@user.last_known_location).to be_nil
+    end
+
+    it "singles when there is nothing to delete" do
+      sign_in @user
+      expect(@user.last_known_location).to be_nil
+
+      delete users_geo_location_url
+      expect(response).to have_http_status :not_found
     end
   end
 end

@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   put '/users/geo_location', to: 'users/geo_locations#update_geo_location'
 
+  delete '/users/geo_location', to: 'users/geo_locations#delete_geo_location'
+
   # '/'
   # Sets `root_url`, devise gem requires this to be set
   root to: "welcome#index"
