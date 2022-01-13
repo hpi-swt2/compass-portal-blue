@@ -22,9 +22,6 @@ class Users::GeoLocationsController < ApplicationController
   def delete_geo_location
     return head :unauthorized unless user_signed_in?
 
-    if current_user.delete_last_known_location.nil?
-      return render status: :not_found, plain: "No `location` to delete"
-    end
-
+    return render status: :not_found, plain: "No `location` to delete" if current_user.delete_last_known_location.nil?
   end
 end
