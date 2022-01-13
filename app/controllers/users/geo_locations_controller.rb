@@ -19,4 +19,7 @@ class Users::GeoLocationsController < ApplicationController
 
     current_user.update_last_known_location(location)
   end
+
+  # TODO: add DELETE route
+  # A test already exists in user_geolocation_spec.rb that is currently skipped :^)
 end
