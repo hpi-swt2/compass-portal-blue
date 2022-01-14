@@ -3,7 +3,7 @@ class BuildingMapController < ApplicationController
   PIN_1_MAGIC_STRING = "Pin 1".freeze
   PIN_2_MAGIC_STRING = "Pin 2".freeze
 
-  def index; end
+  def _index; end
 
   def buildings
     polygons = BuildingMapHelper.leaflet_polygons
