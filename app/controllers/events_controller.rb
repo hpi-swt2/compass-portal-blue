@@ -7,8 +7,14 @@ class EventsController < ApplicationController
   end
 
   def import
-    Event.import(params[:file])
-    redirect_to root_url, notice: "Imported Events from ICS"
+    file = params[:file].tempfile
+    if file.path.split('.').last.casecmp? "ics" then
+      Event.import(file)
+      redirect_to events_url, notice: "Imported Events from ICS"
+    else
+      redirect_to events_url, alert: "Only ICS files can be imported"
+    end
+    file.close!
   end
 
   # GET /events/1 or /events/1.json
