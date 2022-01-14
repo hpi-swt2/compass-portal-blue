@@ -1,3 +1,5 @@
+import { resetTargetMarkers, showTargetMarker } from "./leafletMap";
+
 global.ajaxCall = (
   event,
   target,
@@ -10,12 +12,38 @@ global.ajaxCall = (
       const link = $(this);
       const href = link.attr("href");
       link.attr("href", "#");
+      const [baseLink, queryParams] = href.split(/\?(.+)/);
       link.on("click", (event) => {
-        ajaxCall(event, href, "", true);
+        ajaxCall(event, baseLink, queryParams, true);
       });
     });
   };
   event?.preventDefault();
+  if (target === "/route") {
+    $("#browse-outlet-container").addClass("navigation");
+    const params = new URLSearchParams(valuesToSubmit);
+    if (params.get("dest")) {
+      $("#navigation_form #dest_input").val(params.get("dest"));
+      $("#navigation_form #dest_input")[0].dispatchEvent(new Event("change"));
+    }
+    if (params.get("start")) {
+      $("#navigation_form #start_input").val(params.get("start"));
+      $("#navigation_form #start_input")[0].dispatchEvent(new Event("change"));
+    }
+    if (pushToHistory) {
+      history.pushState(
+        {
+          canGetBack,
+        },
+        null,
+        `/map${target}?${valuesToSubmit}`
+      );
+    }
+    return;
+  } else {
+    if (global.routeLayer) routeLayer.clearLayers();
+    $("#browse-outlet-container").removeClass("navigation");
+  }
   $("#browse-outlet").html(
     '<div class="loading"><i class="fas fa-compass"></i></div>'
   );
@@ -26,9 +54,21 @@ global.ajaxCall = (
     dataType: "html",
     success: function (text) {
       const parsed = new DOMParser().parseFromString(text, "text/html");
-      $("#browse-outlet").html(
-        parsed.querySelector("#app-outlet-outer").innerHTML
-      );
+      const content = parsed.querySelector("#app-outlet-outer");
+      $("#browse-outlet").html(content.innerHTML);
+      const latLongInfo = content.querySelector("#_latlonginfo");
+      setTimeout(() => {
+        if (latLongInfo) {
+          const latlong = JSON.parse(latLongInfo.innerHTML);
+          showTargetMarker(latlong);
+        }
+      }, 0);
+      applyAjaxWrap();
+      if (canGetBack) {
+        $("#floating-back").addClass("visible");
+      } else {
+        $("#floating-back").removeClass("visible");
+      }
       if (pushToHistory) {
         history.pushState(
           {
@@ -37,12 +77,6 @@ global.ajaxCall = (
           null,
           `/map${target}?${valuesToSubmit}`
         );
-      }
-      applyAjaxWrap();
-      if (canGetBack) {
-        $("#floating-back").addClass("visible");
-      } else {
-        $("#floating-back").removeClass("visible");
       }
     },
   });
@@ -53,6 +87,7 @@ function navigateToLocation(pushToHistory = false) {
   $("#toggle-overlay").addClass("visible");
   $("#toggle-overlay").addClass("open");
   const path = location.pathname.slice(4);
+  resetTargetMarkers();
   ajaxCall(
     null,
     path,
