@@ -7,6 +7,11 @@ class EventsController < ApplicationController
   end
 
   def import
+    if params[:file].nil? then
+      redirect_to events_url, alert: "Please choose an ICS file to import"
+      return
+    end
+
     file = params[:file].tempfile
     if file.path.split('.').last.casecmp? "ics" then
       Event.import(file)
