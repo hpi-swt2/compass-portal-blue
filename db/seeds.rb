@@ -9,4 +9,5 @@ hsg = Building.create!(name: "Hörsaalgebäude", location_latitude: 0.5321, loca
 hptg = Building.create!(name: "Hauptgebäude", location_latitude: 0.1674, location_longitude: 0.2345)
 Room.create!(name: "Hörsaal1", floor: 0, room_type: "Hörsaal", building: hsg)
 Room.create!(name: "Hörsaal2", floor: 0, room_type: "Hörsaal", building: hsg)
-Room.create!(name: "H.257", floor: 2, room_type: "Seminarraum", building: hptg)
+seminar_room = Room.create!(name: "H.257", floor: 2, room_type: "Seminarraum", building: hptg)
+Event.create!(name: "Mathe 1", description: "Mathe 1 Vorlesung bei Meinel", d_start: "2022-01-15 10:58:13", d_end: "2022-01-15 11:58:13", recurring: "false",  room: seminar_room)

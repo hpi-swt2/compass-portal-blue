@@ -1,6 +1,7 @@
 require 'icalendar'
 
 class Event < ApplicationRecord
+    belongs_to :room
     def self.import(file)
         calendars = Icalendar::Calendar.parse(file.tempfile)
         calendar = calendars.first

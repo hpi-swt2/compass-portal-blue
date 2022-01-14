@@ -1,1 +1,30 @@
 <h1>Calendar</h1>
+
+ <% @events.each do |event| %>
+    <div class="d-flex justify-content-end">
+        <% if event.room_id == @room.id %>
+          <div class="col-3">
+            <%= event.name %>
+          </div>
+          <div class="col-3 ">
+            <%= event.description %>
+          </div>  
+        <% end %>
+    </div>
+<% end %>
+
+<%= week_calendar(number_of_weeks: 1) do |date| %>
+  <%= date %>
+  <% @events.each do |event| %>
+    <div class="d-flex justify-content-end">
+        <% if event.room_id == @room.id %>
+          <div class="col-3">
+            <%= event.name %>
+          </div>
+          <div class="col-3 ">
+            <%= event.description %>
+          </div>  
+        <% end %>
+    </div>
+<% end %>
+<% end %>

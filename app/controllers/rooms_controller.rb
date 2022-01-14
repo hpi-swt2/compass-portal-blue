@@ -17,7 +17,10 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit; end
 
-  def calendar; end
+  def calendar
+    @room = Room.find(params[:id])
+    @events = Event.all
+  end
 
   # POST /rooms or /rooms.json
   def create

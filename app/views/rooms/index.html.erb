@@ -29,7 +29,7 @@
           <%= room.floor %>
           </div>
           <div class="col-3">
-            <%= link_to 'Calendar', calendar_path %>
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
           </div>
           <div class="col-0">
             <%= link_to 'Show', room %>
