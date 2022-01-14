@@ -1,5 +1,12 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
+    <h3 class="fw-light">Contribute Content</h3>
+
+    <div class="actions mt-3">
+      <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
+    </div>
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>
 
@@ -49,13 +56,6 @@
         <%= f.submit "Update User Account", class: 'btn btn-primary' %>
       </div>
     <% end %>
-
-    <h3 class="fw-light mt-5">Contribute Content</h3>
-    
-    <div class="actions mt-3">
-      <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
-    </div>
 
     <h3 class="fw-light mt-5">Logout Account</h3>
 
