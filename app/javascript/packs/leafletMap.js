@@ -1,12 +1,14 @@
 let map;
 let routeLayer;
+let layerControl;
 
 export async function setupMap() {
     map = L.map("map");
+    layerControl = L.control.layers({}).addTo(map);
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19,
+        maxZoom: 22,
     }).addTo(map);
 
     const [view, buildingPolygons, buildingMarkers] = await Promise.all([
@@ -21,7 +23,8 @@ export async function setupMap() {
     addMarkers(buildingMarkers);
 
     // Add indoor labels
-    loadGeoJsonFile("assets/lecture-hall-building.geojson");
+    loadGeoJsonFile('assets/ABC-Building-0.geojson');
+    loadGeoJsonFile('assets/ABC-Building-1.geojson');
     map.on("zoomend", recalculateTooltipVisibility);
 }
 
@@ -115,11 +118,13 @@ async function getView() {
 }
 
 function addIndoorLabel(feature, layer) {
-    layer.bindTooltip(feature.properties.name, {
+    const point = polylabel([layer._latlngs[0].map(point => {return [point.lat, point.lng]})], 0.000001, true);
+    L.circleMarker({lat: point[0], lng: point[1]}, {opacity: 0, radius: 0}).bindTooltip(
+        feature.properties.name, {
         permanent: true,
         direction: "center",
         className: "indoor-label",
-    });
+    }).addTo(map);
 }
 
 function loadGeoJsonFile(filename) {
@@ -127,13 +132,23 @@ function loadGeoJsonFile(filename) {
         .then((response) => response.json())
         .then((geojsonFeatureCollection) => {
             // Manually add indoor labels to map
-            const rooms = L.geoJSON(geojsonFeatureCollection, {
-                onEachFeature: addIndoorLabel,
-            }).addTo(map);
-            rooms.eachLayer((layer) => {
-                layer.getTooltip().setLatLng(layer.getBounds().getCenter());
+            const rooms = L.geoJSON(geojsonFeatureCollection, { filter: (f => {return f.geometry.type != "Point"}) }).addTo(map);
+            const group = L.layerGroup(rooms);
+            rooms.eachLayer((layer)=>{  
+                const point = polylabel([layer._latlngs[0].map(point => {return [point.lat, point.lng]})], 0.000001, true);
+                L.circleMarker({lat: point[0], lng: point[1]}, {opacity: 0, radius: 0}).bindTooltip(
+                feature.properties.name,
+                {
+                    permanent: true,
+                    direction:'center',
+                    className: 'indoor-label',
+                }
+                ).addTo(map).addTo(group);
+                //console.log(layer._latlngs[0].map(point => {return [point.lat, point.lng]}));
+                //console.log(polylabel([layer._latlngs[0].map(point => {return [point.lat, point.lng]})], 1.0));
             });
             recalculateTooltipVisibility();
+            layerControl.addBaseLayer(rooms);
         });
 }
 
@@ -141,10 +156,11 @@ function recalculateTooltipVisibility() {
     const zoomLevel = map.getZoom();
     map.eachLayer((layer) => {
         if (layer.getTooltip()) {
-            if (zoomLevel == 19 /* nearest zoom */) {
-                layer.openTooltip(layer.getBounds().getCenter());
+            if (zoomLevel >= 19 /* nearest zoom */) {
+                //layer.openTooltip()
+                //layer.getTooltip().update();
             } else {
-                layer.closeTooltip();
+                //layer.closeTooltip()
             }
         }
     });
