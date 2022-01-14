@@ -1,0 +1,35 @@
+<form class="row gy-2 gx-3 align-items-center" autocomplete="off" id="navigation_form">
+    <div class="col-auto">
+    <div class="input-group">
+        <div class="input-group-text"><i class="fas fa-map-marker-alt route-start-icon"></i></div>
+        <input name="start" type="text" class="form-control" list="startOptions" id="start_input"
+                placeholder="From">
+    </div>
+    </div>
+    <div class="col-auto">
+    <div class="input-group">
+        <div class="input-group-text"><i class="fas fa-map-marker-alt route-end-icon"></i></div>
+        <input name="dest" type="text" class="form-control" list="destOptions" id="dest_input"
+                placeholder="To">
+    </div>
+    </div>
+    <div class="col-auto">
+    <button type="submit" class="btn btn-primary" id="routing-button">Go</button>
+    </div>
+</form>
+
+<datalist id="startOptions">
+  <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
+  <% BuildingMapHelper.get_destinations.each do |dest, coords| %>
+    <option>
+      <%= dest %>
+    </option>
+  <% end %>
+</datalist>
+<datalist id="destOptions">
+  <% BuildingMapHelper.get_destinations.each do |dest, coords| %>
+    <option>
+      <%= dest %>
+    </option>
+  <% end %>
+</datalist>

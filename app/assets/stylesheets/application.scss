@@ -133,13 +133,31 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
     }
   }
 
-  #browse-outlet {
+  #browse-outlet-container {
     background: white;
     padding: 1.5rem;
     width: 100%;
     border-radius: 8px;
     margin-top: 0.5rem;
     overflow: auto;
+
+    &.navigation {
+      #browse-outlet {
+        display: none;
+      }
+
+      #navigation-area {
+        display: block;
+      }
+    }
+  }
+
+  #navigation-area {
+    display: none;
+  }
+
+  #browse-outlet {
+    width: 100%;
   }
 
   @media only screen and (max-width: $mobile-break-point) {
