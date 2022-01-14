@@ -33,3 +33,9 @@
     <br>
   <% end %>
 </p>
+
+<a class='btn btn-primary' href="/route?dest=<%= @location.name %>"><i class="fas fa-route"></i><span>Directions</span></a>
+
+<script id="_latlonginfo" type="application/json">
+[<%= @location.location_latitude %>,<%= @location.location_longitude %>]
+</script>
