@@ -4,7 +4,7 @@
     <%= render '/building_map/index' %>
   </div>
   <div class="app-overlay-bottom" id="_overlay">
-    <%= form_with url: search_results_path, method: :get do |form| %>
+    <%= form_with url: search_results_path, method: :get, :id => 'search-form' do |form| %>
       <div class="search-bar">
         <button type="button" class="btn" id="floating-back" onclick="ajaxBack()"><i class="fas fa-arrow-left"></i><span>Back</span></button>
           <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :autocomplete => :off %>
@@ -14,12 +14,17 @@
         <i class="fas fa-chevron-up"></i>
       </button>
     <% end %>
-    <div id='browse-outlet'></div>
+    <div id='browse-outlet-container'>
+      <div id='navigation-area'>
+        <%= render 'building_map/navigationForm' %>
+      </div>
+      <div id='browse-outlet'></div>
+    </div>
   </div>
 </div>
 
 <script>
-$('form').submit(function(event) {
+$('#search-form').submit(function(event) {
     $("#_overlay").addClass('open');
     $("#toggle-overlay").addClass('visible');
     $("#toggle-overlay").addClass('open');
