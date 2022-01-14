@@ -52,6 +52,8 @@ gem 'tod'
 
 # Leaflet for map functionality
 gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
+# ICalendar for ics parsing
+gem 'icalendar'
 
 # gem for calendar
 gem "simple_calendar", "~> 2.4"
