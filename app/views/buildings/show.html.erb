@@ -15,5 +15,8 @@
   <%= @building.location_longitude %>
 </p>
 
-<%# <button class="btn btn-primary" onclick="highlightOnMap(<%= "'#{@building.location_latitude}','#{@building.location_longitude}'" %>)"><i style="margin-right: 0.5rem;" class="fas fa-map-marker-alt"></i>Show on map</button> %>
-<%# <%= link_to 'Map', building_map_path(target: "#{@building.location_latitude},#{@building.location_longitude}")%>
+<a class='btn btn-primary' href="/route?dest=<%= @building.name %>"><i class="fas fa-route"></i><span>Directions</span></a>
+
+<script id="_latlonginfo" type="application/json">
+[<%= @building.location_latitude %>,<%= @building.location_longitude %>]
+</script>
