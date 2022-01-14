@@ -1,7 +1,7 @@
 <div class='navbar topbar-custom'>
-    <span class="navbar-brand"><i class="fas fa-compass"></i><span>HPI Navigator</span></span>
+    <span class="navbar-brand me-auto"><i class="fas fa-compass"></i><span>HPI Navigator</span></span>
     <%# devise helper: https://github.com/heartcombo/devise#controller-filters-and-helpers %>
-    <div class='user-area'>
+    <div class='user-area ms-auto'>
         <% if user_signed_in? %>
                 <%= link_to edit_user_registration_path do %>
                     <span><%= current_user.username.blank? ? 'User profile' : current_user.username %></span>
@@ -18,5 +18,13 @@
                 <span>Login</span><i class="fas fa-sign-in-alt"></i>
             <% end %>
         <% end %> <%# user_signed_in?%>
+    </div>
+    <div class="language-area ms-3">
+        <%= link_to request.path + "?locale=en", class: 'btn btn-outline-secondary border-0 text-light' + ("#{locale}" == 'en'? ' active' : '')  do %>
+            EN
+        <% end %>
+        <%= link_to request.path + "?locale=de", class: 'btn btn-outline-secondary border-0 text-light' + ("#{locale}" == 'de'? ' active' : '')  do %>
+            DE
+        <% end %>
     </div>
 </div>
