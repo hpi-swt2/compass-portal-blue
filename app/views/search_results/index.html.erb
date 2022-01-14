@@ -14,6 +14,8 @@
             <img src="<%=(url_for('/assets/person.png'))%>" height="25" width="25" alt="user_picture">
           <% elsif search_result.type == "building" %>
             <img src="<%=(url_for('/assets/building.png'))%>" height="25" width="25" alt="building_picture">
+          <% elsif search_result.type == "location" %>
+            <img src="<%=(url_for('/assets/location.png'))%>" height="25" width="25" alt="location_picture">
           <% elsif search_result.type == "room" %>
             <img src="<%=(url_for('/assets/room.png'))%>" height="25" width="25" alt="room_picture">
           <% end %>
