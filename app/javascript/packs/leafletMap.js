@@ -6,7 +6,7 @@ export async function setupMap() {
     map = L.map("map");
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Location icon from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> licensed by CC BY 3.0',
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Crosshairs icon by <a href="https://fontawesome.com/license/free">Font Awesome</a>',
         maxZoom: 19,
     }).addTo(map);
 
