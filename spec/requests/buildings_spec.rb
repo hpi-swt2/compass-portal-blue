@@ -17,11 +17,11 @@ RSpec.describe "/buildings", type: :request do
   # Building. As you add validations to Building, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Building.new(name: "Main Building", location_longitude: -180, location_latitude: -90).attributes
+    Building.new(name: "Main Building", location_longitude: -180, location_latitude: -90, user: FactoryBot.build(:user)).attributes
   end
 
   let(:invalid_attributes) do
-    Building.new(name: "does not exist", location_longitude: -1000, location_latitude: 500).attributes
+    Building.new(name: "does not exist", location_longitude: -1000, location_latitude: 500, user: FactoryBot.build(:user)).attributes
   end
 
   describe "GET /index" do
