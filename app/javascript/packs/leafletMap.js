@@ -1,14 +1,19 @@
 let map;
 let routeLayer;
 let layerControl;
+// Defines the floor that is currently displayed
+let currentFloor = 0;
+// object that contains for each existing floor two layer groups, one for rooms and one for labels
+const floors = {};
 
 export async function setupMap() {
     map = L.map("map");
-    layerControl = L.control.layers({}).addTo(map);
+    layerControl = L.control.layers({}, {}, { collapsed: false }).addTo(map);
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 22,
+        maxNativeZoom: 19
     }).addTo(map);
 
     const [view, buildingPolygons, buildingMarkers] = await Promise.all([
@@ -20,12 +25,16 @@ export async function setupMap() {
     setView(view);
     addTargetMarker();
     addPolygons(buildingPolygons);
-    addMarkers(buildingMarkers);
+    //addMarkers(buildingMarkers);
 
-    // Add indoor labels
+    // display indoor information eg. rooms, labels
     loadGeoJsonFile('assets/ABC-Building-0.geojson');
     loadGeoJsonFile('assets/ABC-Building-1.geojson');
-    map.on("zoomend", recalculateTooltipVisibility);
+    map.on('zoomend', recalculateTooltipVisibility);
+    map.on('baselayerchange', function (event) {
+        currentFloor = parseInt(event.name);
+        recalculateTooltipVisibility()
+    });
 }
 
 function addTargetMarker() {
@@ -41,8 +50,9 @@ function addTargetMarker() {
             className: "target-pin",
         },
     };
+
     addMarker(marker, map);
-    setView({latlng: coordinates, zoom: 19});
+    setView({ latlng: coordinates, zoom: 19 });
 }
 
 export function setView(view) {
@@ -117,51 +127,54 @@ async function getView() {
     });
 }
 
-function addIndoorLabel(feature, layer) {
-    const point = polylabel([layer._latlngs[0].map(point => {return [point.lat, point.lng]})], 0.000001, true);
-    L.circleMarker({lat: point[0], lng: point[1]}, {opacity: 0, radius: 0}).bindTooltip(
-        feature.properties.name, {
-        permanent: true,
-        direction: "center",
-        className: "indoor-label",
-    }).addTo(map);
+function setupGeoJsonFeature(feature, layer) {
+    const level = parseInt(feature.properties.level_name);
+    if (Number.isInteger(level)) {
+        if (!floors[level]) {
+            floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup() };
+            const layer = L.layerGroup([floors[level].rooms, floors[level].labels]);
+            layerControl.addBaseLayer(layer, feature.properties.level_name);
+            // We add the current floor to the map here so that the map and layer control reference the same object 
+            // now the layer controll will select the correct check box automatically
+            if (level == currentFloor) {
+                layer.addTo(map);
+            }
+        }
+
+        floors[level].rooms.addLayer(layer);
+
+        // find a position, create a invisible marker and bind a tooltip to it
+        // we do not bind the tooltip to the room because you can only change the position of a tooltip by defining an offset 
+        // to the referenced object (you cannot give it a coordinate), we would need to determine an offset for each room
+        const markerPosition = polylabel(feature.geometry.coordinates, 0.000001);
+
+        const label = L.circleMarker({ lat: markerPosition[1], lng: markerPosition[0] }, { opacity: 0, radius: 0 }).bindTooltip(
+            feature.properties.name,
+            {
+                permanent: true,
+                direction: 'center',
+                className: 'indoor-label',
+            }
+        )
+
+        floors[level].labels.addLayer(label);
+        label.closeTooltip();
+    }
 }
 
 function loadGeoJsonFile(filename) {
-    fetch(filename)
-        .then((response) => response.json())
-        .then((geojsonFeatureCollection) => {
-            // Manually add indoor labels to map
-            const rooms = L.geoJSON(geojsonFeatureCollection, { filter: (f => {return f.geometry.type != "Point"}) }).addTo(map);
-            const group = L.layerGroup(rooms);
-            rooms.eachLayer((layer)=>{  
-                const point = polylabel([layer._latlngs[0].map(point => {return [point.lat, point.lng]})], 0.000001, true);
-                L.circleMarker({lat: point[0], lng: point[1]}, {opacity: 0, radius: 0}).bindTooltip(
-                feature.properties.name,
-                {
-                    permanent: true,
-                    direction:'center',
-                    className: 'indoor-label',
-                }
-                ).addTo(map).addTo(group);
-                //console.log(layer._latlngs[0].map(point => {return [point.lat, point.lng]}));
-                //console.log(polylabel([layer._latlngs[0].map(point => {return [point.lat, point.lng]})], 1.0));
-            });
-            recalculateTooltipVisibility();
-            layerControl.addBaseLayer(rooms);
-        });
+    return fetch(filename)
+        .then(response => response.json())
+        .then(geojsonFeatureCollection => {
+            L.geoJSON(geojsonFeatureCollection, { onEachFeature: setupGeoJsonFeature, filter: (f => { return f.geometry.type != "Point" }) });
+        })
 }
 
 function recalculateTooltipVisibility() {
-    const zoomLevel = map.getZoom();
-    map.eachLayer((layer) => {
-        if (layer.getTooltip()) {
-            if (zoomLevel >= 19 /* nearest zoom */) {
-                //layer.openTooltip()
-                //layer.getTooltip().update();
-            } else {
-                //layer.closeTooltip()
-            }
-        }
-    });
+    const zoomLevel = map.getZoom()
+    if (zoomLevel >= 19) {
+        floors[currentFloor].labels.eachLayer(layer => layer.openTooltip());
+    } else {
+        floors[currentFloor].labels.eachLayer(layer => layer.closeTooltip());
+    }
 }

@@ -857,7 +857,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "0;1",
+                "level_name": "0",
                 "name": "A-E-Elevator"
             },
             "geometry": {
@@ -1954,7 +1954,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "0;1",
+                "level_name": "0",
                 "name": "A-E-Stairwell"
             },
             "geometry": {
@@ -2124,7 +2124,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "0;1",
+                "level_name": "0",
                 "name": "C-E-Elevator"
             },
             "geometry": {
@@ -3585,7 +3585,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "gorund",
+                "level_name": "0",
                 "name": "A-E.15"
             },
             "geometry": {
@@ -4266,7 +4266,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "0;1",
+                "level_name": "0",
                 "name": "A-E-Stairwell"
             },
             "geometry": {
@@ -4305,7 +4305,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "0;1",
+                "level_name": "0",
                 "name": "B-E-Stairwell"
             },
             "geometry": {
@@ -4393,7 +4393,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "gorund",
+                "level_name": "0",
                 "name": "A-E.16"
             },
             "geometry": {
@@ -4466,7 +4466,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "level_name": "0;1",
+                "level_name": "0",
                 "name": "C-E-Stairwell"
             },
             "geometry": {
