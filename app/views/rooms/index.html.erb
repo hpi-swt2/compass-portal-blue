@@ -49,7 +49,7 @@
           <%= room.floor %>
           </div>
           <div class="col-3">
-            CalendarLink
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
           </div>
           <div class="col-0">
             <%= link_to 'Show', room %>
@@ -69,7 +69,7 @@
           <%= room.floor %>
           </div>
           <div class="col-3">
-            CalendarLink
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
           </div>
           <div class="col-0">
             <%= link_to 'Show', room %>
@@ -89,7 +89,7 @@
           <%= room.floor %>
           </div>
           <div class="col-3">
-            CalendarLink
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
           </div>
           <div class="col-0">
             <%= link_to 'Show', room %>

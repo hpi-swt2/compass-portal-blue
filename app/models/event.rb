@@ -11,4 +11,8 @@ class Event < ApplicationRecord
         puts "start date-time timezone: #{event.dtstart.ical_params['tzid']}"
         puts "summary: #{event.summary}"
     end
+
+    def start_time
+        Date.parse(self.d_start.strftime("%Y/%m/%d"))
+    end
 end
