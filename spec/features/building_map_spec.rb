@@ -11,15 +11,6 @@ describe "Building Map page", type: :feature do
   end
 
   describe "map" do
-    before do
-      Capybara.current_driver = :selenium_chrome_headless
-      Capybara.ignore_hidden_elements = false
-    end
-
-    after do
-      Capybara.current_driver = :default
-    end
-
     it "contains a map", js: true do
       visit building_map_path
       find(".leaflet-container")
