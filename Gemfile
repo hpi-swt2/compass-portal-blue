@@ -52,9 +52,8 @@ gem 'tod'
 
 # Leaflet for map functionality
 gem 'leaflet-rails', git: "git://github.com/Finn-HPI/leaflet-rails.git"
-# iCalendar and recurring_select for calendar functionality
-gem 'icalendar', github: "icalendar/icalendar"
-gem 'recurring_select', github: "Syndicode/recurring_select"
+# ICalendar for ics parsing
+gem 'icalendar'
 
 #
 # Gems that are loaded depending on the environment (development/test/production)

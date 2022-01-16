@@ -4,6 +4,7 @@ RSpec.describe "events/new", type: :view do
   before(:each) do
     assign(:event, Event.new(
       name: "MyString",
+      description: "MyText",
       recurring: "MyText"
     ))
   end
@@ -14,6 +15,8 @@ RSpec.describe "events/new", type: :view do
     assert_select "form[action=?][method=?]", events_path, "post" do
 
       assert_select "input[name=?]", "event[name]"
+
+      assert_select "textarea[name=?]", "event[description]"
 
       assert_select "textarea[name=?]", "event[recurring]"
     end
