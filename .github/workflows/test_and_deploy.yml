@@ -31,9 +31,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Install Firefox
-        run: sudo apt-get update && sudo apt-get install -y firefox
-
       - name: Setup Node
         uses: actions/setup-node@v2
         with:

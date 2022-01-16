@@ -31,7 +31,7 @@ require 'rspec/rails'
 require Rails.root.join('spec/support/factory_bot')
 require Rails.root.join('spec/support/devise')
 
-Capybara.javascript_driver = :selenium_headless
+Capybara.javascript_driver = :selenium_chrome_headless
 Capybara.ignore_hidden_elements = false
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
