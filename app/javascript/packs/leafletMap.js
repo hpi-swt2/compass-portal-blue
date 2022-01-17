@@ -67,7 +67,7 @@ function onClick(e) {
     }
 }
 
-export function addTargetMarker() {
+function addTargetMarker() {
     const params = new URLSearchParams(window.location.search);
     if (!params.has("target")) return
     const target = params.get("target");
