@@ -25,7 +25,7 @@ export async function setupMap() {
         getBuildings(),
         getBuildingMarkers(),
     ]);
-
+    console.log("test");
     setView(view);
     addTargetMarker();
     addPolygons(buildingPolygons);
@@ -42,20 +42,29 @@ export async function setupMap() {
 function addPin(e, pinNumber) {
     pins[pinNumber] = L.marker(e.latlng, {icon: pinIcons[pinNumber]});
     pins[pinNumber].addTo(map);
+    pins[pinNumber].on("click", function(e) {
+        removePin(pinNumber);
+    });
 }
 
-function removeAllPins(e) {
-    pins.forEach(pin => pin.remove());
-    pins = [];
+function removePin(pinNumber){
+    pins[pinNumber].remove();
+    pins[pinNumber] = null;
+}
+
+function removeAllPins() {
+    for(let i=0; i<pins.length; i++){
+        removePin(i);
+    }
 }
 
 function onClick(e) {
-    if(!pins[0]){
+    if(!pins[0] || pins[0]===null){
         addPin(e, 0);
-    }else if(!pins[1]){
+    }else if(!pins[1] || pins[1]===null){
         addPin(e, 1);
     }else{
-        removeAllPins(e);
+        removeAllPins();
     }
 }
 
