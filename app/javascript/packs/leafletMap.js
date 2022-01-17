@@ -25,7 +25,7 @@ export async function setupMap() {
     setView(view);
     addTargetMarker();
     addPolygons(buildingPolygons);
-    //addMarkers(buildingMarkers);
+    addMarkers(buildingMarkers);
 
     // display indoor information eg. rooms, labels
     loadGeoJsonFile('assets/ABC-Building-0.geojson');
@@ -128,51 +128,56 @@ async function getView() {
 }
 
 function setupGeoJsonFeature(feature, layer) {
-    const level = parseInt(feature.properties.level_name);
-    if (Number.isInteger(level)) {
-        if (!floors[level]) {
-            floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup() };
-            const layer = L.layerGroup([floors[level].rooms, floors[level].labels]);
-            layerControl.addBaseLayer(layer, feature.properties.level_name);
-            // We add the current floor to the map here so that the map and layer control reference the same object 
-            // now the layer controll will select the correct check box automatically
-            if (level == currentFloor) {
-                layer.addTo(map);
-            }
-        }
-
-        floors[level].rooms.addLayer(layer);
-
-        // find a position, create a invisible marker and bind a tooltip to it
-        // we do not bind the tooltip to the room because you can only change the position of a tooltip by defining an offset 
-        // to the referenced object (you cannot give it a coordinate), we would need to determine an offset for each room
-        const markerPosition = polylabel(feature.geometry.coordinates, 0.000001);
-
-        const label = L.circleMarker({ lat: markerPosition[1], lng: markerPosition[0] }, { opacity: 0, radius: 0 }).bindTooltip(
-            feature.properties.name,
-            {
-                permanent: true,
-                direction: 'center',
-                className: 'indoor-label',
-            }
-        )
-
-        floors[level].labels.addLayer(label);
-        label.closeTooltip();
+    if (isNaN(feature.properties.level_name)) {
+        console.warn("feature has no valid level name and will be skipped: ", feature.properties.level_name, feature);
+        return;
     }
+
+    const level = parseInt(feature.properties.level_name);
+    if (!floors[level]) {
+        floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup() };
+        const newLayer = L.layerGroup([floors[level].rooms, floors[level].labels]);
+        layerControl.addBaseLayer(newLayer, feature.properties.level_name);
+        // We add the current floor to the map here so that the map and layer control reference the same object 
+        // now the layer control will select the correct check box automatically
+        if (level === currentFloor) {
+            newLayer.addTo(map);
+        }
+    }
+
+    floors[level].rooms.addLayer(layer);
+
+    // find a position, create an invisible marker and bind a tooltip to it
+    // we do not bind the tooltip to the room because you can only change the position of a tooltip by defining an offset
+    // to the referenced object (you cannot give it a coordinate), we would need to determine an offset for each room
+
+    // used for polylabel to estimate the visual center of a polygon that is inside of the polygon
+    // lower value -> higher precision
+    const markerPositionPrecision = 0.000001;
+    const markerPosition = polylabel(feature.geometry.coordinates, markerPositionPrecision);
+
+    const label = L.circleMarker({ lat: markerPosition[1], lng: markerPosition[0] }, { opacity: 0, radius: 0 }).bindTooltip(
+        feature.properties.name,
+        {
+            permanent: true,
+            direction: 'center',
+            className: 'indoor-label',
+        }
+    )
+
+    floors[level].labels.addLayer(label);
+    label.closeTooltip();
 }
 
-function loadGeoJsonFile(filename) {
-    return fetch(filename)
-        .then(response => response.json())
-        .then(geojsonFeatureCollection => {
-            L.geoJSON(geojsonFeatureCollection, { onEachFeature: setupGeoJsonFeature, filter: (f => { return f.geometry.type != "Point" }) });
-        })
+async function loadGeoJsonFile(filename) {
+    const file = await fetch(filename);
+    const geojsonFeatureCollection = await file.json();
+    L.geoJSON(geojsonFeatureCollection, { onEachFeature: setupGeoJsonFeature, filter: (feature => { return feature.geometry.type != "Point"; }) });
 }
 
 function recalculateTooltipVisibility() {
     const zoomLevel = map.getZoom()
-    if (zoomLevel >= 19) {
+    if (zoomLevel >= 20) {
         floors[currentFloor].labels.eachLayer(layer => layer.openTooltip());
     } else {
         floors[currentFloor].labels.eachLayer(layer => layer.closeTooltip());
