@@ -25,7 +25,6 @@ export async function setupMap() {
         getBuildings(),
         getBuildingMarkers(),
     ]);
-    console.log("test");
     setView(view);
     addTargetMarker();
     addPolygons(buildingPolygons);
