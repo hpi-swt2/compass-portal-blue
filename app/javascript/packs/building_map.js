@@ -7,10 +7,10 @@ const PIN_2_MAGIC_STRING = "Pin 2"
 
 setupMap();
 
-const startInputField = $("#start_input")[0];
+const startInputField = $("#startInput")[0];
 startInputField.addEventListener("change", () => {
-    request_location();
-    if (validate_place_input("start_input", "startOptions")) {
+    requestLocation();
+    if (validatePlaceInput("startInput", "startOptions")) {
         startInputField.setCustomValidity("");
     } else {
         startInputField.setCustomValidity(
@@ -20,9 +20,9 @@ startInputField.addEventListener("change", () => {
 });
 startInputField.dispatchEvent(new Event("change"));
 
-const destInputField = $("#dest_input")[0];
+const destInputField = $("#destInput")[0];
 destInputField.addEventListener("change", () => {
-    if (validate_place_input("dest_input", "destOptions")) {
+    if (validatePlaceInput("destInput", "destOptions")) {
         destInputField.setCustomValidity("");
     } else {
         destInputField.setCustomValidity(
@@ -32,7 +32,7 @@ destInputField.addEventListener("change", () => {
 });
 destInputField.dispatchEvent(new Event("change"));
 
-$("#navigation_form")[0]
+$("#navigationForm")[0]
     .addEventListener("submit", (event) => {
         event.preventDefault();
         for(let inputField of [startInputField, destInputField]){
@@ -57,13 +57,13 @@ function pinCoordinatesString(pin){
     return String(pin.getLatLng().lat.toFixed(7)) + "," + String(pin.getLatLng().lng.toFixed(7))
 }
 
-function validate_place_input(inputId, optionsId) {
+function validatePlaceInput(inputId, optionsId) {
     const input = $(`#${inputId}`)[0];
     const options = $(`#${optionsId}`)[0].options;
     return Array.from(options).some((o) => o.value === input.value);
 }
 
-function request_location() {
+function requestLocation() {
     if (startInputField.value !== YOUR_LOCATION_MAGIC_STRING) return;
     navigator.geolocation.getCurrentPosition(
         (pos) => {
