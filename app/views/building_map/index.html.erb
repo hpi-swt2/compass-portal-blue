@@ -45,16 +45,17 @@
   <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_1_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_2_MAGIC_STRING %></option>
-  <%= Places::DESTINATIONS.each do |dest, coords| %>
+  <% Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
   <% end %>
 </datalist>
 <datalist id="destOptions">
+  <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_1_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_2_MAGIC_STRING %></option>
-  <%= Places::DESTINATIONS.each do |dest, coords| %>
+  <% Places::DESTINATIONS.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
