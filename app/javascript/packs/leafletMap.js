@@ -29,9 +29,9 @@ export async function setupMap() {
     ]);
 
     setView(view);
-    //addTargetMarker();
-    //addPolygons(buildingPolygons);
-    //addMarkers(buildingMarkers);
+    addTargetMarker();
+    addPolygons(buildingPolygons);
+    addMarkers(buildingMarkers);
 
     // display indoor information eg. rooms, labels
     loadGeoJsonFile('assets/ABC-Building-0.geojson');
