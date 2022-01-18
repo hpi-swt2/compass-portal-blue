@@ -4,7 +4,7 @@ set -ex
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-apt-get update && apt-get upgrade -y && apt-get install libpq-dev yarn
+apt-get update && apt-get upgrade -y && apt-get install -y libpq-dev yarn
 
 # install rvm
 gpg --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
