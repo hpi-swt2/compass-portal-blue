@@ -3,7 +3,11 @@
     <%= form_with url: search_results_path, method: :get do |form| %>
       <div class="row  mb-6">
         <div class="col">
-          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search" %>
+          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :onclick => "showHistory(this);" %>
+          <div name="history" class = "dropbtn">
+            <div id = "historyDiv" class = "dropdown-content">
+            </div>
+          </div>
         </div>
         <div class="col-auto">
           <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
@@ -12,3 +16,52 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function showHistory(parent){
+    var historyCookie = getCookie("compassHistory");
+    var history = JSON.parse(historyCookie);
+    var links = '';
+    for(var element in history){
+      links += '<li><a href=';
+      links += history[element];
+      links += '>';
+      links += element;
+      links += '</a></li>';
+    }
+    // links += '</ul>';
+	  document.getElementById("historyDiv").innerHTML = links;
+    document.getElementById("historyDiv").classList.toggle("show");
+    document.getElementById("historyDiv").style.display = "block";
+  }
+
+  window.onclick = function(event){
+    if(!event.target.matches('.form-control')){
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove("show");
+          openDropdown.style.display = "none";
+        }
+      }
+    }
+  }
+</script>
