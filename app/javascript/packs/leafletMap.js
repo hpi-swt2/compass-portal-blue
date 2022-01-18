@@ -14,7 +14,10 @@ const floors = {};
 
 export async function setupMap() {
     map = L.map("map");
-    layerControl = L.control.layers({}, {}, { collapsed: false }).addTo(map);
+    layerControl = L.control.layers({}, {}).addTo(map);
+    // add a title to the leaflet layer control
+    $('<h6>Floors</h6>').insertBefore('div.leaflet-control-layers-base');
+
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
