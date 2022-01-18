@@ -4,8 +4,8 @@ RSpec.describe "rooms/index", type: :view do
   before do
     @building = create :building
     @people = [(create :person)]
-    @rooms = Room.create([{ name: "Hörsaal1", floor: 0, room_type: "Hörsaal" },
-                          { name: "H.257", floor: 2, room_type: "Seminarraum" }]) do |u|
+    @rooms = Room.create([{ name: "Lecture hall 1", floor: 0, room_type: "lecture-hall" },
+                          { name: "H-2.57", floor: 2, room_type: "seminar-room" }]) do |u|
       u.people = @people
       u.building = @building
     end
@@ -13,11 +13,11 @@ RSpec.describe "rooms/index", type: :view do
 
   it "renders a list of rooms" do
     render
-    assert_select "tr>td", text: "Seminarräume:".to_s, count: 1
-    assert_select "tr>td", text: "H.257".to_s, count: 1
-    assert_select "tr>td", text: "Hörsäle:".to_s, count: 1
-    assert_select "tr>td", text: "Hörsaal1".to_s, count: 1
-    assert_select "tr>td", text: "Poolräume:".to_s, count: 1
-    assert_select "tr>td", text: "Konferenzräume:".to_s, count: 1
+    assert_select "tr>th", text: "Seminar rooms:".to_s, count: 1
+    assert_select "tr>td", text: "H-2.57".to_s, count: 1
+    assert_select "tr>th", text: "Lecture halls:".to_s, count: 1
+    assert_select "tr>td", text: "Lecture hall 1".to_s, count: 1
+    assert_select "tr>th", text: "Pool rooms:".to_s, count: 1
+    assert_select "tr>th", text: "Conference rooms:".to_s, count: 1
   end
 end
