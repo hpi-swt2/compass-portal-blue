@@ -1,9 +1,15 @@
+import * as polylabel from 'polylabel';
+
 let map;
 let routeLayer;
 let layerControl;
-// Defines the floor that is currently displayed
+/**
+ * defines the floor that is currently displayed
+ */
 let currentFloor = 0;
-// object that contains for each existing floor two layer groups, one for rooms and one for labels
+/**
+ * object that contains for each existing floor two layer groups, one for rooms and one for labels
+ */
 const floors = {};
 
 export async function setupMap() {
@@ -23,17 +29,17 @@ export async function setupMap() {
     ]);
 
     setView(view);
-    addTargetMarker();
-    addPolygons(buildingPolygons);
-    addMarkers(buildingMarkers);
+    //addTargetMarker();
+    //addPolygons(buildingPolygons);
+    //addMarkers(buildingMarkers);
 
     // display indoor information eg. rooms, labels
     loadGeoJsonFile('assets/ABC-Building-0.geojson');
     loadGeoJsonFile('assets/ABC-Building-1.geojson');
     map.on('zoomend', recalculateTooltipVisibility);
-    map.on('baselayerchange', function (event) {
+    map.on('baselayerchange', (event) => {
         currentFloor = parseInt(event.name);
-        recalculateTooltipVisibility()
+        recalculateTooltipVisibility();
     });
 }
 
@@ -156,7 +162,7 @@ function setupGeoJsonFeature(feature, layer) {
     const markerPositionPrecision = 0.000001;
     const markerPosition = polylabel(feature.geometry.coordinates, markerPositionPrecision);
 
-    const label = L.circleMarker({ lat: markerPosition[1], lng: markerPosition[0] }, { opacity: 0, radius: 0 }).bindTooltip(
+    const label = L.circleMarker({ lat: markerPosition[1], lng: markerPosition[0] }, { opacity: 0, radius: 0, fill: false }).bindTooltip(
         feature.properties.name,
         {
             permanent: true,
@@ -172,7 +178,8 @@ function setupGeoJsonFeature(feature, layer) {
 async function loadGeoJsonFile(filename) {
     const file = await fetch(filename);
     const geojsonFeatureCollection = await file.json();
-    L.geoJSON(geojsonFeatureCollection, { onEachFeature: setupGeoJsonFeature, filter: (feature => { return feature.geometry.type != "Point"; }) });
+    // the gejson files contain points for certain properties eg. doors, however we have not implemented the visualization of those and filter them here
+    L.geoJSON(geojsonFeatureCollection, { onEachFeature: setupGeoJsonFeature, filter: (feature => feature.geometry.type != "Point") });
 }
 
 function recalculateTooltipVisibility() {

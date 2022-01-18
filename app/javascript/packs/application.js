@@ -18,8 +18,6 @@ import 'bootstrap';
 // Fontawesome: https://fontawesome.com/
 import "@fortawesome/fontawesome-free/js/all";
 
-import * as polylabel from 'polylabel';
-global.polylabel = polylabel
 import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
