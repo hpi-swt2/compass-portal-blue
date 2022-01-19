@@ -3,6 +3,8 @@ require 'rails_helper'
 describe "location edit page", type: :feature do
   before do
     @location = FactoryBot.create :location
+    @user = FactoryBot.create :user
+    sign_in(FactoryBot.create(:user, admin: true))
   end
 
   it "exists at 'edit_author_path' and render without error" do
