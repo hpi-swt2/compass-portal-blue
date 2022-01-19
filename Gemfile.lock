@@ -373,6 +373,7 @@ DEPENDENCIES
   factory_bot_rails
   httparty
   icalendar
+  ice_cube
   jbuilder (~> 2.7)
   leaflet-rails!
   listen (~> 3.3)

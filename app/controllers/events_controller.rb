@@ -4,6 +4,7 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    @calendar_events = @events.flat_map{ |e| e.calendar_events(params.fetch(:start_date, Time.zone.now).to_date) }
   end
 
   def import
@@ -13,7 +14,7 @@ class EventsController < ApplicationController
     end
 
     file = params[:file].tempfile
-    if file.path.split('.').last.casecmp? "ics" then
+    if File.extname(file.path) == ".ics" then
       Event.import(file)
       redirect_to events_url, notice: "Imported Events from ICS"
     else
