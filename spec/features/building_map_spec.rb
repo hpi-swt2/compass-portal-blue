@@ -70,6 +70,17 @@ describe "Building Map page", type: :feature do
       expect(page).to have_selector("path.uni-potsdam-building", count: 2)
     end
 
+    it "adds and removes pins on click on map", js: true do
+      visit building_map_path
+      find("#map").click
+      expect(page).to have_css(".pin-icon1")
+      find("#map").click
+      expect(page).to have_css(".pin-icon2")
+      find("#map").click
+      expect(page).not_to have_css(".pin-icon1")
+      expect(page).not_to have_css(".pin-icon2")
+    end
+
     # Following tests might be inconsistent when run on GitHub Actions.
     context "with route", inconsistent: true, local_only: true do
       before do
