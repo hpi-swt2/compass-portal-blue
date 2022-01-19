@@ -137,12 +137,13 @@ async function getView() {
 }
 
 function setupGeoJsonFeature(feature, layer) {
-    if (isNaN(feature.properties.level_name)) {
+    const level = parseInt(feature.properties.level_name);
+
+    if (isNaN(level)) {
         console.warn("feature has no valid level name and will be skipped: ", feature.properties.level_name, feature);
         return;
     }
 
-    const level = parseInt(feature.properties.level_name);
     if (!floors[level]) {
         floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup() };
         const newLayer = L.layerGroup([floors[level].rooms, floors[level].labels]);
@@ -191,5 +192,11 @@ function recalculateTooltipVisibility() {
         floors[currentFloor].labels.eachLayer(layer => layer.openTooltip());
     } else {
         floors[currentFloor].labels.eachLayer(layer => layer.closeTooltip());
+    }
+
+    if (zoomLevel <= 17) {
+        floors[currentFloor].rooms.removeFrom(map);
+    } else {
+        floors[currentFloor].rooms.addTo(map);
     }
 }
