@@ -35,22 +35,21 @@ destInputField.dispatchEvent(new Event("change"));
 $("#navigationForm")[0]
     .addEventListener("submit", (event) => {
         event.preventDefault();
-        for(let inputField of [startInputField, destInputField]){
-            switch(inputField.value){
+        let coordinates = [startInputField.value, destInputField.value];
+        coordinates.forEach((routePoint, i) => {
+            switch(routePoint){
                 case YOUR_LOCATION_MAGIC_STRING:
-                    inputField.value = currentLocation;
+                    coordinates[i] = currentLocation;
                     break;
                 case PIN_1_MAGIC_STRING:
-                    inputField.value = pinCoordinatesString(pins[0]);
+                    coordinates[i] = pinCoordinatesString(pins[0]);
                     break;
                 case PIN_2_MAGIC_STRING:
-                    inputField.value = pinCoordinatesString(pins[1]);
+                    coordinates[i] = pinCoordinatesString(pins[1]);
                     break;
             }
-        }
-        const start = startInputField.value;
-        const dest = destInputField.value;
-        displayRoute(start, dest);
+        })
+        displayRoute(coordinates[0], coordinates[1]);
     });
 
 function pinCoordinatesString(pin){
