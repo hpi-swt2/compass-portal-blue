@@ -17,6 +17,12 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit; end
 
+  def calendar
+    @room = Room.find(params[:id])
+    start_date = Date.today.to_date
+    @events = Event.where("room_id = :room and d_start >= :week_start and d_end <= :week_end", room: @room.id, week_start: Time.parse(start_date.beginning_of_month.beginning_of_week.to_s), week_end: Time.parse(start_date.end_of_month.end_of_week.to_s))
+  end
+
   # POST /rooms or /rooms.json
   def create
     @room = Room.new(room_params)

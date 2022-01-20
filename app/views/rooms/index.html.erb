@@ -2,30 +2,106 @@
 
 <h1>Rooms</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Floor</th>
-      <th>Room type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @rooms.each do |room| %>
-      <tr>
-        <td><%= room.name %></td>
-        <td><%= room.floor %></td>
-        <td><%= room.room_type %></td>
-        <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="container">
+  <div class="d-flex justify-content-end">
+    <div class="col-3 header ">
+      Name
+    </div>
+    <div class="col-3 ">
+      Floor
+    </div>
+    <div class="col-3">
+      Calendar
+    </div>
+    <div class="col-0">
+      Show
+    </div>
+  </div>
+  <div> Seminar Rooms</div>
+   <% @rooms.each do |room| %>
+    <div class="d-flex justify-content-end" >
+        <% if room.room_type == "Seminarraum" %>
+          <div class="col-3">
+            <%= room.name %>
+          </div>
+          <div class="col-3 ">
+          <%= room.floor %>
+          </div>
+          <div class="col-3">
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
+          </div>
+          <div class="col-0">
+            <%= link_to 'Show', room %>
+          </div>
+      
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+    <div> Lecture Halls</div>
+   <% @rooms.each do |room| %>
+    <div class="d-flex justify-content-end">
+        <% if room.room_type == "Hörsaal" %>
+          <div class="col-3">
+            <%= room.name %>
+          </div>
+          <div class="col-3 ">
+          <%= room.floor %>
+          </div>
+          <div class="col-3">
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
+          </div>
+          <div class="col-0">
+            <%= link_to 'Show', room %>
+          </div>
+      
+        <% end %>
+      </div>
+    <% end %>
+    <div> Pool Rooms</div>
+   <% @rooms.each do |room| %>
+    <div class="d-flex justify-content-end">
+        <% if room.room_type == "Poolraum" %>
+          <div class="col-3">
+            <%= room.name %>
+          </div>
+          <div class="col-3 ">
+          <%= room.floor %>
+          </div>
+          <div class="col-3">
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
+          </div>
+          <div class="col-0">
+            <%= link_to 'Show', room %>
+          </div>
+      
+        <% end %>
+      </div>
+    <% end %>
+    <div> Conference Rooms</div>
+   <% @rooms.each do |room| %>
+    <div class="d-flex justify-content-end">
+        <% if room.room_type == "Konfrenzraum" %>
+          <div class="col-3">
+            <%= room.name %>
+          </div>
+          <div class="col-3 ">
+          <%= room.floor %>
+          </div>
+          <div class="col-3">
+            <%= link_to 'Calendar', calendar_path(id: room.id) %>
+          </div>
+          <div class="col-0">
+            <%= link_to 'Show', room %>
+          </div>
+      
+        <% end %>
+      </div>
+    <% end %>
+</div>
 
-<br>
 
-<%= link_to 'New Room', new_room_path %>
+
+  
+
+

@@ -5,6 +5,7 @@ require 'yaml'
 require 'date'
 
 class Event < ApplicationRecord
+  belongs_to :room
 
   def self.ical_rule_to_ice_cube_yaml(icalendar_rrule)
     rrule_yaml = ""
