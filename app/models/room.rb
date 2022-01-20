@@ -9,7 +9,7 @@ class Room < ApplicationRecord
       'Lecture hall' => 'lecture-hall',
       'Pool room' => 'pool-room',
       'Seminar room' => 'seminar-room',
-      'Conference room' => 'conference-room',
+      'Conference room' => 'conference-room'
     }
   end
 
@@ -18,8 +18,7 @@ class Room < ApplicationRecord
       'lecture-hall' => 'Lecture hall',
       'pool-room' => 'Pool room',
       'seminar-room' => 'Seminar room',
-      'conference-room' => 'Conference room',
+      'conference-room' => 'Conference room'
     }
   end
-
 end
