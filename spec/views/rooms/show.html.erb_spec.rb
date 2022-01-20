@@ -17,7 +17,6 @@ RSpec.describe "rooms/show", type: :view do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Floor/)
-    expect(rendered).to match(/Room Type/)
   end
 
 end

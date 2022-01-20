@@ -1,3 +1,4 @@
+# the model representing a room
 class Room < ApplicationRecord
   belongs_to :building
   has_and_belongs_to_many :people
