@@ -4,7 +4,10 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
-    @calendar_events = @events.flat_map{ |e| e.calendar_events(params.fetch(:start_date, Time.zone.now).to_date) }
+    @calendar_events = @events.flat_map{ |e| e.calendar_events(Event.find(427).d_start, Event.find(427).d_end) }
+    @calendar_events.each do |event|
+      puts "#{event.name}: #{event.d_start} - #{event.d_end}" 
+    end
   end
 
   def import
