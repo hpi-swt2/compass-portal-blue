@@ -24,5 +24,3 @@ import "leaflet/dist/leaflet.css";
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-

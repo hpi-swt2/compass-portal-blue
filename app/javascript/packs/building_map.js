@@ -1,71 +1,120 @@
-import { displayRoute, setupMap } from './leafletMap.js';
+import { displayRoute, setupMap, pins } from './leafletMap.js';
 
 let currentLocation;
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
+const PIN_1_MAGIC_STRING = "Pin 1"
+const PIN_2_MAGIC_STRING = "Pin 2"
 
 setupMap();
 
-const start_input_field = $("#start_input")[0];
-start_input_field.addEventListener("change", () => {
-    request_location();
-    if (validate_place_input("start_input", "startOptions")) {
-        start_input_field.setCustomValidity("");
-    } else {
-        start_input_field.setCustomValidity(
+const map = $("#map")[0];
+map.addEventListener("click", () => {
+    resolveMagicPinStrings(startInputField);
+    resolveMagicPinStrings(destInputField);
+})
+
+const startInputField = $("#startInput")[0];
+startInputField.addEventListener("change", () => {
+    resolveMagicStrings(startInputField);
+    if (!validatePlaceInput("startInput", "startOptions")) {
+        startInputField.setCustomValidity(
             "Please select a valid starting place."
         );
     }
 });
-start_input_field.dispatchEvent(new Event("change"));
+startInputField.dispatchEvent(new Event("change"));
 
-const dest_input_field = $("#dest_input")[0];
-dest_input_field.addEventListener("change", () => {
-    if (validate_place_input("dest_input", "destOptions")) {
-        dest_input_field.setCustomValidity("");
-    } else {
-        dest_input_field.setCustomValidity(
+const destInputField = $("#destInput")[0];
+destInputField.addEventListener("change", () => {
+    resolveMagicStrings(destInputField);
+    if (!validatePlaceInput("destInput", "destOptions")) {
+        destInputField.setCustomValidity(
             "Please select a valid destination place."
         );
     }
 });
-dest_input_field.dispatchEvent(new Event("change"));
+destInputField.dispatchEvent(new Event("change"));
 
-$("#navigation_form")[0]
+$("#navigationForm")[0]
     .addEventListener("submit", (event) => {
         event.preventDefault();
-        if (start_input_field.value === YOUR_LOCATION_MAGIC_STRING) {
-            start_input_field.value = currentLocation;
-        }
-        const start = start_input_field.value;
-        const dest = dest_input_field.value;
-        displayRoute(start, dest);
+        let coordinates = [startInputField.value, destInputField.value];
+        coordinates.forEach((routePoint, i) => {
+            switch(routePoint){
+                case YOUR_LOCATION_MAGIC_STRING:
+                    coordinates[i] = currentLocation;
+                    break;
+                case PIN_1_MAGIC_STRING:
+                    coordinates[i] = pinCoordinatesString(pins[0]);
+                    break;
+                case PIN_2_MAGIC_STRING:
+                    coordinates[i] = pinCoordinatesString(pins[1]);
+                    break;
+            }
+        })
+        displayRoute(coordinates[0], coordinates[1]);
     });
 
-function validate_place_input(inputId, optionsId) {
+function pinCoordinatesString(pin){
+    return String(pin.getLatLng().lat.toFixed(7)) + "," + String(pin.getLatLng().lng.toFixed(7))
+}
+
+function validatePlaceInput(inputId, optionsId) {
     const input = $(`#${inputId}`)[0];
     const options = $(`#${optionsId}`)[0].options;
     return Array.from(options).some((o) => o.value === input.value);
 }
 
-function request_location() {
-    if (start_input_field.value !== YOUR_LOCATION_MAGIC_STRING) return;
+function resolveMagicPinStrings(inputField) {
+    if(inputField.value === PIN_1_MAGIC_STRING){
+        checkPinExistence(0, inputField);
+    }else if(inputField.value === PIN_2_MAGIC_STRING) {
+        checkPinExistence(1, inputField);
+    }
+}
+
+function resolveMagicStrings(inputField) {
+    switch (inputField.value) {
+        case YOUR_LOCATION_MAGIC_STRING:
+            requestLocation(inputField);
+            break;
+        case PIN_1_MAGIC_STRING:
+        case PIN_2_MAGIC_STRING:
+            resolveMagicPinStrings(inputField);
+            break;
+        default:
+            inputField.setCustomValidity("");
+    }
+}
+
+function checkPinExistence(pinNumber, inputField){
+    if(!pins[pinNumber] || pins[pinNumber]===null){
+        inputField.setCustomValidity(
+            "You have to click on the map to set a pin to use this feature."
+        );
+    }else{
+        inputField.setCustomValidity("");
+    }
+}
+
+function requestLocation(inputField){
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             currentLocation =
                 String(pos.coords.latitude) +
                 "," +
                 String(pos.coords.longitude);
-            start_input_field.setCustomValidity("");
+            inputField.setCustomValidity("");
         },
         (error) => {
             console.warn(`ERROR(${error.code}): ${error.message}`);
             if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
-                start_input_field.setCustomValidity(
+                inputField.setCustomValidity(
                     "You have to grant your browser the permission to access your location if you want to use this feature."
                 );
             } else {
-                start_input_field.setCustomValidity(
-                    "Your browser could not determine your position. Please choose a different starting place."
+                inputField.setCustomValidity(
+                    "Your browser could not determine your position. Please choose a different place."
                 );
             }
         }

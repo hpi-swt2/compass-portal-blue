@@ -1,5 +1,7 @@
 class BuildingMapController < ApplicationController
   YOUR_LOCATION_MAGIC_STRING = "Your location".freeze # TODO: This is currenty hard coded in the building_map.js file
+  PIN_1_MAGIC_STRING = "Pin 1".freeze
+  PIN_2_MAGIC_STRING = "Pin 2".freeze
 
   def index; end
 
