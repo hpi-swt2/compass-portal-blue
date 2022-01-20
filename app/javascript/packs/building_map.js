@@ -74,7 +74,6 @@ function resolveMagicPinStrings(inputField) {
 }
 
 function resolveMagicStrings(inputField) {
-
     switch (inputField.value) {
         case YOUR_LOCATION_MAGIC_STRING:
             requestLocation(inputField);
