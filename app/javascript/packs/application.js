@@ -18,10 +18,9 @@ import 'bootstrap';
 // Fontawesome: https://fontawesome.com/
 import "@fortawesome/fontawesome-free/js/all";
 
-import * as L from "leaflet"
+import * as L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-

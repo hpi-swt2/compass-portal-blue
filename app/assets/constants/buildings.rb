@@ -335,9 +335,9 @@ module Buildings
     hpi_letters.map do |hpi_letter|
       {
         latlng: hpi_letter[:coordinate],
-        div_icon: {
+        divIcon: {
           html: hpi_letter[:letter],
-          class_name: "building-icon"
+          className: "building-icon"
         }
       }
     end
@@ -352,5 +352,4 @@ module Buildings
     end
   end
 end
-
 # rubocop:enable Metrics/ModuleLength
