@@ -53,6 +53,36 @@
   text-align: center;
 }
 
+.pin-icon1, .pin-icon2 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 50% 0;
+  background: #CA091A;
+  position: absolute;
+  transform: rotate(-45deg)  translate(9px, -20px);
+  left: 50%;
+  top: 50%;
+}
+
+.pin-icon1::before, .pin-icon2::before {
+  width: 14px;
+  height: 14px;
+  margin: 3px 0 0 3px;
+  background: #fff;
+  position: absolute;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  text-align: center;
+}
+
+.pin-icon1::before {
+  content: '1';
+}
+
+.pin-icon2::before {
+  content: '2';
+}
+
 .indoor-label{
   background: rgba(255, 255, 255, 0) !important;
   border:0 !important;
