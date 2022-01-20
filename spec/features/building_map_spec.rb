@@ -76,9 +76,17 @@ describe "Building Map page", type: :feature do
       expect(page).to have_css(".pin-icon1")
       find("#map").click(x: 55, y: 55)
       expect(page).to have_css(".pin-icon2")
-      find("#map").click(x: 60,y: 60)
+      find("#map").click(x: 60, y: 60)
       expect(page).not_to have_css(".pin-icon1")
       expect(page).not_to have_css(".pin-icon2")
+    end
+
+    it "removes a pin when clicked again", js: true do
+      visit building_map_path
+      find("#map").click(x: 50, y: 50)
+      expect(page).to have_css(".pin-icon1")
+      find("#map").click(x: 50, y: 50)
+      expect(page).not_to have_css(".pin-icon1")
     end
 
     # Following tests might be inconsistent when run on GitHub Actions.
