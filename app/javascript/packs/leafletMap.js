@@ -218,3 +218,16 @@ export function ratelimit(f, limit) {
         }
     };
 }
+
+// Returns a function that calls return the value returned by `initializer`.
+// Repeated calls return the same value returned by the first call.
+// In order to work properly, `initializer` should not return `null`.
+export function lazyInit(initializer) {
+    let value = null;
+    return () => {
+        if (value === null) {
+            value = initializer();
+        }
+        return value;
+    };
+}

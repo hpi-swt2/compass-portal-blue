@@ -1,8 +1,11 @@
-import { displayRoute, addAnyMarker, ratelimit, setupMap } from './leafletMap.js';
+import { displayRoute, addAnyMarker, lazyInit, ratelimit, setupMap } from './leafletMap.js';
 
 // FIXME: this should probably be in application.js or something similarly
 // global, but it didn't work when we put it there
-const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+// The `lazyinit` is needed, because the `querySelector` seems to, somewhat
+// randomly, block the execution of the script in our tests. This is a
+// workaround, until a real solution is found.
+const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
 let currentLocation;
 
@@ -84,7 +87,7 @@ const syncUserPositionWithServerImpl = async (location) => {
             method: "PUT",
             body,
             headers: {
-                "X-CSRF-TOKEN": CSRF_TOKEN,
+                "X-CSRF-TOKEN": csrfToken(),
             },
         }
     );
