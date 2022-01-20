@@ -12,35 +12,38 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :opens %>
-    <%= form.time_field :opens%>
+    <%= form.label :opens, class: "form-label" %>
+    <%= form.time_field :opens, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :closes %>
-    <%= form.time_field :closes%>
+    <%= form.label :closes, class: "form-label" %>
+    <%= form.time_field :closes, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :day %>
-    <%= form.number_field :day %>
+    <%= form.label :day, class: "form-label" %>
+    <%= form.select 'day',
+      options_for_select(Openingtime.day_string_to_number_mapping, form.object.day),
+      {},
+      multiple: false, class: "form-control" %>
   </div>
 
-    <h2>WARNING:</h2>
-    <p>This page is in a temporary state to enable filling the database for development.
-    Currently every openingtime gets assigned to a Person (which can be selected in the following input field).
-    If you want to create an openingtime entry associated with a building make sure the :timeable_type attribute is set to Building.</p>
-   <div>
+  <h2>WARNING:</h2>
+  <p>This page is in a temporary state to enable filling the database for development.
+  Currently every openingtime gets assigned to a Person (which can be selected in the following input field).
+  If you want to create an openingtime entry associated with a building make sure the :timeable_type attribute is set to Building.</p>
+  <div>
     <%= form.label :timeable_id %>
-            <%= form.select 'timeable_id',
-              options_from_collection_for_select(Person.all, :id, :name),
-              {},
-              multiple: false %>
-    </div>
-    <% openingtime.timeable_type = 'Person' %>
-    <%= form.hidden_field :timeable_type%>
+    <%= form.select 'timeable_id',
+      options_from_collection_for_select(Person.all, :id, :name),
+      {},
+      multiple: false, class: "form-control" %>
+  </div>
+  <% openingtime.timeable_type = 'Person' %>
+  <%= form.hidden_field :timeable_type %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions mt-3">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
