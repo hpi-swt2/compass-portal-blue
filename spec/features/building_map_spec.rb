@@ -72,11 +72,11 @@ describe "Building Map page", type: :feature do
 
     it "adds and removes pins on click on map", js: true do
       visit building_map_path
-      find("#map").click
+      find("#map").click(x: 50, y: 50)
       expect(page).to have_css(".pin-icon1")
-      find("#map").click
+      find("#map").click(x: 55, y: 55)
       expect(page).to have_css(".pin-icon2")
-      find("#map").click
+      find("#map").click(x: 60,y: 60)
       expect(page).not_to have_css(".pin-icon1")
       expect(page).not_to have_css(".pin-icon2")
     end
