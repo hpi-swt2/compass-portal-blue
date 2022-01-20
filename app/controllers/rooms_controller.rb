@@ -19,8 +19,9 @@ class RoomsController < ApplicationController
 
   def calendar
     @room = Room.find(params[:id])
-    start_date = Date.today.to_date
-    @events = Event.where("room_id = :room and d_start >= :week_start and d_end <= :week_end", room: @room.id, week_start: Time.parse(start_date.beginning_of_month.beginning_of_week.to_s), week_end: Time.parse(start_date.end_of_month.end_of_week.to_s))
+    # start_date = Date.today.to_date
+    # @events = Event.where("room_id = :room and d_start >= :week_start and d_end <= :week_end", room: @room.id, week_start: Time.parse(start_date.beginning_of_month.beginning_of_week.to_s), week_end: Time.parse(start_date.end_of_month.end_of_week.to_s))
+    @events = @room.events
   end
 
   # POST /rooms or /rooms.json

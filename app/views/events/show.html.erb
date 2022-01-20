@@ -11,18 +11,28 @@
 </p>
 
 <p>
-  <strong>D start:</strong>
+  <strong>Room:</strong>
+  <% room = @event.room_id? ? Room.find(@event.room_id) : nil %>
+  <% if !room.nil? then %>
+    <%= link_to room.name, room_path(room) %>
+  <% else %>
+    <%= "No Room" %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
   <%= @event.d_start %>
 </p>
 
 <p>
-  <strong>D end:</strong>
+  <strong>End Date:</strong>
   <%= @event.d_end %>
 </p>
 
 <p>
   <strong>Recurring:</strong>
-  <%= @event.recurring %>
+  <%= @event.rule %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
