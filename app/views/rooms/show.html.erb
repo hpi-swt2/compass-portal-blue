@@ -23,7 +23,7 @@
     <strong>Room type:</strong>
   </label>
   <p class="form-control-static">
-    <%= @room.room_type %>
+    <%= Room.room_type_to_external_mapping[@room.room_type] %>
   </p>
 </div>
 

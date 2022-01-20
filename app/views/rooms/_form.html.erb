@@ -23,7 +23,11 @@
 
   <div class="field">
     <%= form.label :room_type, class: "form-label" %>
-    <%= form.text_field :room_type, class: "form-control" %>
+    <!--<%= form.text_field :room_type, class: "form-control" %>-->
+    <%= form.select 'room_type',
+      options_for_select(Room.room_type_to_internal_mapping, room.room_type),
+      {},
+      multiple: false, class: "form-control form-inline" %>
   </div>
 
     <div>
