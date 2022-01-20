@@ -9,7 +9,8 @@ setupMap();
 
 const map = $("#map")[0];
 map.addEventListener("click", () => {
-    resolvePinMagicStrings();
+    resolveMagicPinStrings(startInputField);
+    resolveMagicPinStrings(destInputField);
 })
 
 const startInputField = $("#startInput")[0];
@@ -64,29 +65,23 @@ function validatePlaceInput(inputId, optionsId) {
     return Array.from(options).some((o) => o.value === input.value);
 }
 
-function resolvePinMagicStrings() {
-    [startInputField, destInputField].forEach((inputField) => {
-        switch (inputField.value) {
-            case PIN_1_MAGIC_STRING:
-                checkPinExistence(0, inputField);
-                break;
-            case PIN_2_MAGIC_STRING:
-                checkPinExistence(1, inputField);
-                break;
-        }
-    })
+function resolveMagicPinStrings(inputField) {
+    if(inputField.value === PIN_1_MAGIC_STRING){
+        checkPinExistence(0, inputField);
+    }else if(inputField.value === PIN_2_MAGIC_STRING) {
+        checkPinExistence(1, inputField);
+    }
 }
 
 function resolveMagicStrings(inputField) {
+
     switch (inputField.value) {
         case YOUR_LOCATION_MAGIC_STRING:
             requestLocation(inputField);
             break;
         case PIN_1_MAGIC_STRING:
-            checkPinExistence(0, inputField);
-            break;
         case PIN_2_MAGIC_STRING:
-            checkPinExistence(1, inputField);
+            resolveMagicPinStrings(inputField);
             break;
         default:
             inputField.setCustomValidity("");
