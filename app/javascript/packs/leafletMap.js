@@ -2,6 +2,17 @@ import * as polylabel from 'polylabel';
 
 let map;
 let routeLayer;
+let pinIcons = [
+    L.divIcon({
+        iconSize: null,
+        html: "<div style='' class='pin-icon1'></div>",
+    }),
+    L.divIcon({
+        iconSize: null,
+        html: "<div style='' class='pin-icon2'></div>",
+    })
+];
+export let pins = [];
 let layerControl;
 /**
  * defines the floor that is currently displayed
@@ -30,7 +41,6 @@ export async function setupMap() {
         getBuildings(),
         getBuildingMarkers(),
     ]);
-
     setView(view);
     addTargetMarker();
     addPolygons(buildingPolygons);
@@ -44,6 +54,38 @@ export async function setupMap() {
         currentFloor = parseInt(event.name);
         recalculateTooltipVisibility();
     });
+
+    // Add pins on click
+    map.on("click", onClick);
+}
+
+function addPin(e, pinNumber) {
+    pins[pinNumber] = L.marker(e.latlng, {icon: pinIcons[pinNumber]});
+    pins[pinNumber].addTo(map);
+    pins[pinNumber].on("click", function(e) {
+        removePin(pinNumber);
+    });
+}
+
+function removePin(pinNumber){
+    pins[pinNumber].remove();
+    pins[pinNumber] = null;
+}
+
+function removeAllPins() {
+    for(let i=0; i<pins.length; i++){
+        removePin(i);
+    }
+}
+
+function onClick(e) {
+    if(!pins[0] || pins[0]===null){
+        addPin(e, 0);
+    }else if(!pins[1] || pins[1]===null){
+        addPin(e, 1);
+    }else{
+        removeAllPins();
+    }
 }
 
 function addTargetMarker() {
