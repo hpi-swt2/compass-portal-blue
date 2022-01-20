@@ -76,7 +76,7 @@ describe "Building Map page", type: :feature do
       expect(page).to have_css(".pin-icon1")
       find("#map").click(x: 55, y: 55)
       expect(page).to have_css(".pin-icon2")
-      find("#map").click(x: 60,y: 60)
+      find("#map").click(x: 60, y: 60)
       expect(page).not_to have_css(".pin-icon1")
       expect(page).not_to have_css(".pin-icon2")
     end
