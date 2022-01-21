@@ -1,16 +1,7 @@
 <%= form_with(model: person) do |form| %>
 
-  <% if person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
 
-      <ul>
-        <% person.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
 
   <div class="field mb-3 profile-picture edit-profile-picture">
     <%= form.label :profile_picture, class: 'form-label' %>
@@ -76,7 +67,55 @@
     <% end %>
     <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add office hour</button>
   </div>
+<%=form.fields_for :user, person.user do | user_fields | %>
+  <div class="field mb-3">
+        <%= user_fields.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
+        <%= user_fields.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
+      </div>
 
+      <div class="field mb-3">
+        <%= user_fields.label :email, class: 'form-label' %>
+        <%= user_fields.text_field :email, class: 'form-control', autocomplete: "email" %>
+
+      <% if Devise.mappings[:user].confirmable? && user.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= user.unconfirmed_email %></div>
+      <% end %>
+
+      <%# If provider is nil, i.e. not set to 'openid_connect', then it's an account with local pw %>
+      <% if person.user.provider.nil? %>
+        <h5 class="fw-light mt-3">Login Password</h5>
+
+        <div class="field mb-1">
+          <%= user_fields.label :password, class: 'form-label' %> <span class="text-muted">(leave blank if you don't want to change it)</span>
+          <%= user_fields.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
+          <% if @minimum_password_length %>
+            <div id="passwordHelp" class="form-text"><%= @minimum_password_length %> characters minimum</div>
+          <% end %>
+        </div>
+
+        <div class="field mb-1">
+          <%= user_fields.label :password_confirmation, class: 'form-label' %>
+          <%= user_fields.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+        </div>
+
+        <div class="field mb-1">
+          <%= user_fields.label :current_password, class: 'form-label' %> <span class="text-muted">(we need your current password to confirm password changes)</span>
+          <%= user_fields.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
+        </div>
+      <% end %> <%# if resource.provider.nil? %>
+
+  <% end %>
+  <% if person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+        <% person.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="actions mt-3">
     <%= form.submit class: "btn btn-primary" %>
   </div>

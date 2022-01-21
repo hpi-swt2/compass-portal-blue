@@ -13,4 +13,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Allows users to update user details without password.
     resource.update_without_password(params.except("current_password"))
   end
+
+  def user_params
+    params.require(:user).permit(:username, :email, person_params: [:id, :phone_number, :first_name, :last_name, :email, { room_ids: [] }, :profile_picture, { openingtimes_attributes: [:id, :day, :opens, :closes]}])
+  end
+
 end

@@ -26,6 +26,10 @@ class User < ApplicationRecord
     person.owners = [self]
   end
 
+  def update_user(user, user_params, username)
+     user.update(:username => username)
+  end
+
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
   def self.from_omniauth(auth)

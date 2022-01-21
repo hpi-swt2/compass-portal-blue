@@ -16,7 +16,7 @@
     <div class='profile-picture-wrapper'>
       <div class='profile-picture-container'>
         <% if resource.person.profile_picture.attached? %>
-          <img src="<%= (url_for(person.profile_picture)) %>" alt="<%= resource.person.profile_picture.filename %>"/>
+          <img src="<%= (url_for(resource.person.profile_picture)) %>" alt="<%= resource.person.profile_picture.filename %>"/>
         <% else %>
           <img src="<%= (url_for('/assets/default-profile-picture.png')) %>" alt="default-profile-picture">
         <% end %>
