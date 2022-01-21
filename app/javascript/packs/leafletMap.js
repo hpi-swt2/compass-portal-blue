@@ -32,7 +32,7 @@ export async function setupMap() {
 
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | Crosshairs icon by <a href="https://fontawesome.com/license/free">Font Awesome</a>',
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 22,
         maxNativeZoom: 19
     }).addTo(map);
