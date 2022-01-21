@@ -55,11 +55,13 @@
       </div>
     <% end %>
 
+    <%= link_to "Edit linked person", edit_person_path(resource.person), class: 'btn btn-secondary link-btn' %>
+
     <h3 class="fw-light mt-5">Logout Account</h3>
 
-     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
-            <i class="fas fa-sign-out-alt"></i> Sign out
-     <% end%>
+    <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
+      <i class="fas fa-sign-out-alt"></i> Sign out
+    <% end%>
 
     <h3 class="fw-light mt-5">Cancel Account</h3>
 
