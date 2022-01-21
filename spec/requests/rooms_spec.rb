@@ -65,7 +65,7 @@ RSpec.describe "/rooms", type: :request do
 
       it "redirects to the created room" do
         post rooms_url, params: { room: valid_attributes }
-        expect(response).to redirect_to(room_url(Room.last))
+        expect(response).to redirect_to(edit_room_url(Room.last))
       end
     end
 
@@ -104,7 +104,7 @@ RSpec.describe "/rooms", type: :request do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: new_attributes }
         room.reload
-        expect(response).to redirect_to(room_url(room))
+        expect(response).to redirect_to(edit_room_url(room))
       end
     end
 

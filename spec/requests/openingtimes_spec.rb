@@ -68,7 +68,7 @@ RSpec.describe "/openingtimes", type: :request do
 
       it "redirects to the created openingtime" do
         post openingtimes_url, params: { openingtime: valid_attributes }
-        expect(response).to redirect_to(openingtime_url(Openingtime.last))
+        expect(response).to redirect_to(edit_openingtime_url(Openingtime.last))
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe "/openingtimes", type: :request do
         openingtime = Openingtime.create! valid_attributes
         patch openingtime_url(openingtime), params: { openingtime: new_attributes }
         openingtime.reload
-        expect(response).to redirect_to(openingtime_url(openingtime))
+        expect(response).to redirect_to(edit_openingtime_url(openingtime))
       end
     end
 
