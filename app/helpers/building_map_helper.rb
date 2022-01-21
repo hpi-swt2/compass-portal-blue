@@ -12,17 +12,17 @@ module BuildingMapHelper
   end
 
   def self.get_destinations
-    buildings = Building.all.to_h do | building |
-        [
-            building.name,
-            "#{building.location_latitude},#{building.location_longitude}"
-        ]
+    buildings = Building.all.to_h do |building|
+      [
+        building.name,
+        "#{building.location_latitude},#{building.location_longitude}"
+      ]
     end
-    locations = Location.all.to_h do | building |
-        [
-            building.name,
-            "#{building.location_latitude},#{building.location_longitude}"
-        ]
+    locations = Location.all.to_h do |building|
+      [
+        building.name,
+        "#{building.location_latitude},#{building.location_longitude}"
+      ]
     end
     buildings.merge(locations)
   end
