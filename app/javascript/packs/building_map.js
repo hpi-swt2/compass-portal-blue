@@ -1,3 +1,4 @@
+import GpsManager from "./gps_manager.js";
 import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
 import { lazyInit, ratelimit } from "./utils.js";
 
@@ -8,11 +9,11 @@ import { lazyInit, ratelimit } from "./utils.js";
 // workaround, until a real solution is found.
 const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
 
+const gpsManager = new GpsManager();
+
 const YOUR_LOCATION_MAGIC_STRING = "Your location" // This will be changed when the page supports multiple languages
 const PIN_1_MAGIC_STRING = "Pin 1"
 const PIN_2_MAGIC_STRING = "Pin 2"
-
-let currentLocation;
 
 setupMap();
 const trackingSwitch = document.getElementById("trackingSwitch");
@@ -47,26 +48,28 @@ destInputField.addEventListener("change", () => {
 destInputField.dispatchEvent(new Event("change"));
 
 $("#navigationForm")[0]
-    .addEventListener("submit", (event) => {
+    .addEventListener("submit", event => {
         event.preventDefault();
         let coordinates = [startInputField.value, destInputField.value];
-        coordinates.forEach((routePoint, i) => {
-            switch(routePoint){
-                case YOUR_LOCATION_MAGIC_STRING:
-                    coordinates[i] = currentLocation;
-                    break;
-                case PIN_1_MAGIC_STRING:
-                    coordinates[i] = pinCoordinatesString(pins[0]);
-                    break;
-                case PIN_2_MAGIC_STRING:
-                    coordinates[i] = pinCoordinatesString(pins[1]);
-                    break;
+        (async () => {
+            for (let i = 0; i < coordinates.length; i++) {
+                switch (coordinates[i]) {
+                    case YOUR_LOCATION_MAGIC_STRING:
+                        coordinates[i] = await gpsManager.currentLocationString();
+                        break;
+                    case PIN_1_MAGIC_STRING:
+                        coordinates[i] = pinCoordinatesString(pins[0]);
+                        break;
+                    case PIN_2_MAGIC_STRING:
+                        coordinates[i] = pinCoordinatesString(pins[1]);
+                        break;
+                }
             }
-        })
-        displayRoute(coordinates[0], coordinates[1]);
+            displayRoute(coordinates[0], coordinates[1]);
+        })();
     });
 
-function pinCoordinatesString(pin){
+function pinCoordinatesString(pin) {
     return String(pin.getLatLng().lat.toFixed(7)) + "," + String(pin.getLatLng().lng.toFixed(7))
 }
 
@@ -77,9 +80,9 @@ function validatePlaceInput(inputId, optionsId) {
 }
 
 function resolveMagicPinStrings(inputField) {
-    if(inputField.value === PIN_1_MAGIC_STRING){
+    if (inputField.value === PIN_1_MAGIC_STRING) {
         checkPinExistence(0, inputField);
-    }else if(inputField.value === PIN_2_MAGIC_STRING) {
+    } else if (inputField.value === PIN_2_MAGIC_STRING) {
         checkPinExistence(1, inputField);
     }
 }
@@ -87,7 +90,17 @@ function resolveMagicPinStrings(inputField) {
 function resolveMagicStrings(inputField) {
     switch (inputField.value) {
         case YOUR_LOCATION_MAGIC_STRING:
-            requestLocation(inputField);
+            // This populates the cached location value with a current reading
+            // TODO: We should clarify the behavior of the two features with POs
+            //   - Should a navigation from "Your location" always stick to the
+            //   location that was current when the start was selected? If so,
+            //   we should probably keep that information around _in the form_
+            //   / in the input and not in global javascript objects or ...
+            //   - Should the most recent location always be requested when the
+            //   form is actually submitted?
+            gpsManager.currentLocation()
+                .then(() => inputField.setCustomValidity(""))
+                .catch(({ customMessage }) => inputField.setCustomValidity(customMessage));
             break;
         case PIN_1_MAGIC_STRING:
         case PIN_2_MAGIC_STRING:
@@ -98,38 +111,14 @@ function resolveMagicStrings(inputField) {
     }
 }
 
-function checkPinExistence(pinNumber, inputField){
-    if(!pins[pinNumber] || pins[pinNumber]===null){
+function checkPinExistence(pinNumber, inputField) {
+    if (!pins[pinNumber] || pins[pinNumber] === null) {
         inputField.setCustomValidity(
             "You have to click on the map to set a pin to use this feature."
         );
-    }else{
+    } else {
         inputField.setCustomValidity("");
     }
-}
-
-function requestLocation(inputField){
-    navigator.geolocation.getCurrentPosition(
-        (pos) => {
-            currentLocation =
-                String(pos.coords.latitude) +
-                "," +
-                String(pos.coords.longitude);
-            inputField.setCustomValidity("");
-        },
-        (error) => {
-            console.warn(`ERROR(${error.code}): ${error.message}`);
-            if (error.code === GeolocationPositionError.PERMISSION_DENIED) {
-                inputField.setCustomValidity(
-                    "You have to grant your browser the permission to access your location if you want to use this feature."
-                );
-            } else {
-                inputField.setCustomValidity(
-                    "Your browser could not determine your position. Please choose a different place."
-                );
-            }
-        }
-    );
 }
 
 const syncUserPositionWithServerImpl = async (location) => {
@@ -148,7 +137,6 @@ const syncUserPositionWithServerImpl = async (location) => {
 };
 const syncUserPositionWithServer = ratelimit(syncUserPositionWithServerImpl, 10000);
 
-let watcherId;
 const positionIcon = L.icon({ iconUrl: "assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
 const positionMarker = L.marker([0, 0], { icon: positionIcon });
 positionMarker.bindPopup("Your position");
@@ -156,18 +144,13 @@ positionMarker.bindPopup("Your position");
 function trackingHandler() {
     if (trackingSwitch.checked) {
         addAnyMarker(positionMarker);
-        watcherId = navigator.geolocation.watchPosition(
-            (pos) => {
-                currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
-                positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
-                syncUserPositionWithServer(currentLocation);
-            },
-            (error) => {
-                alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
-            }
-        );
+        gpsManager.registerCallback(location => {
+            positionMarker.setLatLng([location.coords.latitude, location.coords.longitude]);
+            syncUserPositionWithServer(GpsManager.formatLocation(locationString));
+        });
     } else {
-        navigator.geolocation.clearWatch(watcherId);
+        gpsManager.clearAllCallbacks();
+        gpsManager.forgetLastKnownLocation();
         positionMarker.remove();
     }
 }
