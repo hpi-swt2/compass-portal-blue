@@ -15,7 +15,7 @@ module RoutingHelper
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
-    regex = /^-?\d{1,2}(\.\d{1,200})?,-?\d{1,2}(\.\d{1,200})?$/
+    regex = /^-?\d{1,2}(\.\d+)?,-?\d{1,2}(\.\d+)?$/
     coordinates.match(regex)
   end
 

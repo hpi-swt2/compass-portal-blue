@@ -1,5 +1,9 @@
 import { resetTargetMarkers, showTargetMarker } from "./leafletMap";
 
+/** This function is used to circumvent the browser's native navigation
+ * and instead load the results of called pages (search, show) into the
+ * little window (div#browse-outlet).
+ */
 global.ajaxCall = (
   event,
   target,
@@ -7,10 +11,14 @@ global.ajaxCall = (
   canGetBack = false,
   pushToHistory = true
 ) => {
+  /** This function wraps all links in the loaded html data so that
+   * they call the ajaxCall function instead of navigating to the page.
+   */
   const applyAjaxWrap = () => {
     $("#browse-outlet a").each(function () {
       const link = $(this);
       const href = link.attr("href");
+      // Remove the original href of the link:
       link.attr("href", "#");
       const [baseLink, queryParams] = href.split(/\?(.+)/);
       link.on("click", (event) => {
@@ -19,9 +27,13 @@ global.ajaxCall = (
     });
   };
   event?.preventDefault();
+  /** Special handling of all /map/route paths so that instead of loading another page,
+   * the route navigation screen is shown on in the browse outlet so that a navigation can be started.
+   */
   if (target === "/route") {
     $("#browse-outlet-container").addClass("navigation");
     const params = new URLSearchParams(valuesToSubmit);
+    // Copy the start and dest from the url into the corresponding form fields.
     if (params.get("dest")) {
       $("#navigationForm #destInput").val(params.get("dest"));
       $("#navigationForm #destInput")[0].dispatchEvent(new Event("change"));
@@ -41,21 +53,29 @@ global.ajaxCall = (
     }
     return;
   } else {
+    // Clear all routes if the url does not contain the route keyword, i.e. only show routes if
+    // the url dictates it
     if (global.routeLayer) routeLayer.clearLayers();
     $("#browse-outlet-container").removeClass("navigation");
   }
+  // Show loading animation
   $("#browse-outlet").html(
     '<div class="loading"><i class="fas fa-compass"></i></div>'
   );
+  // Make a remote call to the target url (e.g. search, show, etc.)
   $.ajax({
     type: "GET",
     url: target,
     data: valuesToSubmit,
     dataType: "html",
     success: function (text) {
+      // Parse received text to valid DOM elements and insert them into the #browse-outlet
       const parsed = new DOMParser().parseFromString(text, "text/html");
       const content = parsed.querySelector("#app-outlet-outer");
       $("#browse-outlet").html(content.innerHTML);
+
+      // Retrieve all location info from a (possibly nonexistent) script tag on the
+      // target page and show it on the map if it exists
       const latLongInfo = content.querySelector("#_latlonginfo");
       setTimeout(() => {
         if (latLongInfo) {
@@ -86,6 +106,7 @@ function navigateToLocation(pushToHistory = false) {
   $("#_overlay").addClass("open");
   $("#toggle-overlay").addClass("visible");
   $("#toggle-overlay").addClass("open");
+  // Slice away the /map part of the url to find the **real** target url
   const path = location.pathname.slice(4);
   resetTargetMarkers();
   ajaxCall(
