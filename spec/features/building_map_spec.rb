@@ -49,6 +49,17 @@ describe "Building Map page", type: :feature do
     expect(page).to have_css(".target-pin")
   end
 
+  it "shows the pin of a location", js: true do
+    location = Location.create!(
+      name: 'Test Location',
+      location_latitude: "52.3918793",
+      location_longitude: "13.1240368"
+    )
+    visit "/map#{location_path(location)}"
+    find(".target-pin", wait: 5)
+    expect(page).to have_css(".target-pin")
+  end
+
   it "shows no route, if it's not requested", js: true do
     visit root_path
     expect(page).not_to have_css(".routing-path")
