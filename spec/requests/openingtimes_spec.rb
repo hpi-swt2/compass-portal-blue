@@ -88,10 +88,12 @@ RSpec.describe "/openingtimes", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_openingtime = Openingtime.new(day: 3,
-                                        opens: Tod::TimeOfDay(10),
-                                        closes: Tod::TimeOfDay(12),
-                                        timeable: create(:building))
+      let(:new_openingtime) do
+        Openingtime.new(day: 3,
+          opens: Tod::TimeOfDay(10),
+          closes: Tod::TimeOfDay(12),
+          timeable: create(:building))
+      end
       let(:new_attributes) do
         new_openingtime.attributes
       end
