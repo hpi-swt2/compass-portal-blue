@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<div class="edit-profile-picture">
-  <strong>Profile picture:</strong>
+<h2 class="mb-3 fw-light">
+  <%= @person.first_name %>
+  <%= @person.last_name %>
+</h2>
+
+<div class="mb-3 profile-picture show-profile-picture">
   <div class='profile-picture-wrapper'>
     <div class='profile-picture-container'>
       <% if @person.profile_picture.attached? %>
@@ -12,16 +16,6 @@
     </div>
   </div>
 </div>
-
-<p>
-  <strong>First name:</strong>
-  <%= @person.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @person.last_name %>
-</p>
 
 <p>
   <strong>Email:</strong>
@@ -38,8 +32,7 @@
   <ul>
       <% @person.rooms.each do | room | %>
         <li>
-          <%= room.name %> |
-          <%= link_to 'Map', building_map_path(target: "#{room.building.location_latitude},#{room.building.location_longitude}")%>
+          <%= link_to room.name, room_path(room) %>
         </li>
       <% end %>
   </ul>
@@ -55,6 +48,3 @@
     <% end %>
   </ul>
 </p>
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>
