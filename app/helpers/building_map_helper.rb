@@ -15,8 +15,8 @@ module BuildingMapHelper
     buildings = Building.all.to_h do |building|
       [ building.name, "#{building.location_latitude},#{building.location_longitude}" ]
     end
-    locations = Location.all.to_h do |building|
-      [ building.name, "#{building.location_latitude},#{building.location_longitude}" ]
+    locations = Location.all.to_h do |location|
+      [ location.name, "#{location.location_latitude},#{location.location_longitude}" ]
     end
     buildings.merge(locations)
   end
