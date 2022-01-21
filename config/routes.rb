@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   # Sets `root_url`, devise gem requires this to be set
   root to: "welcome#index"
 
-  get '/map/*path' => "welcome#index"
+  get '/map/*path' => "welcome#index", as: 'map'
 end
