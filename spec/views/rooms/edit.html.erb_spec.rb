@@ -21,6 +21,8 @@ RSpec.describe "rooms/edit", type: :view do
       assert_select "input[name=?]", "room[name]"
 
       assert_select "input[name=?]", "room[floor]"
+  
+      assert_select "select[name=?]", "room[room_type]"
     end
   end
 end

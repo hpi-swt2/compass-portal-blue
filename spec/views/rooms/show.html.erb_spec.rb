@@ -16,6 +16,7 @@ RSpec.describe "rooms/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
+    expect(rendered).to match(/Room type/)
     expect(rendered).to match(/Floor/)
   end
 
