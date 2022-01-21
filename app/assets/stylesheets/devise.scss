@@ -53,3 +53,14 @@
     height: 0;
   }
 }
+
+.actions {
+  display: flex;
+  flex-direction: column;
+
+  .btn-primary {
+    width: 50%;
+    max-width: 200px;
+    margin-bottom: 6px;
+  }
+}
