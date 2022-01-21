@@ -13,11 +13,12 @@
     </thead>
 
     <tbody>
+      <% Room.room_type_to_external_mapping.each do |internal,external| %>
       <tr>
-        <th colspan="6"><b>Seminar rooms:</b></th>
+        <th colspan="6"><b><%= external.pluralize() %>:</b></th>
       </tr>
       <% @rooms.each do |room| %>
-        <% if room.room_type == "seminar-room" %>
+        <% if room.room_type == internal %>
           <tr>
             <td><%= room.name %></td>
             <td><%= room.floor %></td>
@@ -27,51 +28,7 @@
           </tr>
         <% end %>
       <% end %>
-
-      <tr>
-        <th colspan="6"><b>Lecture halls:</b></th>
-      </tr>
-      <% @rooms.each do |room| %>
-        <% if room.room_type == "lecture-hall" %>
-          <tr>
-            <td><%= room.name %></td>
-            <td><%= room.floor %></td>
-            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
-          </tr>
-        <% end %>
-      <% end %>
-
-      <tr>
-        <th colspan="6"><b>Pool rooms:</b></th>
-      </tr>
-      <% @rooms.each do |room| %>
-        <% if room.room_type == "pool-room" %>
-          <tr>
-            <td><%= room.name %></td>
-            <td><%= room.floor %></td>
-            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
-          </tr>
-        <% end %>
-      <% end %>
-
-      <tr>
-        <th colspan="6"><b>Conference rooms:</b></th>
-      </tr>
-      <% @rooms.each do |room| %>
-        <% if room.room_type == "conference-room" %>
-          <tr>
-            <td><%= room.name %></td>
-            <td><%= room.floor %></td>
-            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
-          </tr>
-        <% end %>
-      <% end %>
+    <% end %>
     </tbody>
   </table>
 </div>
