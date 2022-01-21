@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "User details page", type: :feature do
   before do
-    @user = FactoryBot.create(:user)
+    @user = create(:user)
   end
 
   it "is not viewable when not logged in" do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Person Show Page", type: :feature do
   before do
-    @person = FactoryBot.create :person
+    @person = create :person
   end
 
   it "displays a persons' information" do
