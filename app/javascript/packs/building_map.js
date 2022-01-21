@@ -1,4 +1,5 @@
-import { addAnyMarker, displayRoute, lazyInit, pins, ratelimit, setupMap } from './leafletMap.js';
+import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
+import { lazyInit, ratelimit } from "./utils.js";
 
 // FIXME: this should probably be in application.js or something similarly
 // global, but it didn't work when we put it there
