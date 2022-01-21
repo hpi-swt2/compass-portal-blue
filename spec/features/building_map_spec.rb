@@ -92,14 +92,14 @@ describe "Building Map page", type: :feature do
         location_latitude: "52.3934534",
         location_longitude: "13.1312424"
       )
-      Building.create!(
-        name: 'Haus L',
+      Location.create!(
+        name: 'Location 1',
         location_latitude: "52.39262",
         location_longitude: "13.12488"
       )
       visit map_path('route')
       fill_in 'start', with: 'Haus A'
-      fill_in 'dest', with: 'Haus L'
+      fill_in 'dest', with: 'Location 1'
       click_on 'Go'
     end
 
@@ -122,7 +122,7 @@ describe "Building Map page", type: :feature do
       find(".routing-path", wait: 15)
       expect(page).to have_css(".routing-path", count: 1)
       fill_in 'start', with: 'Haus A'
-      fill_in 'dest', with: 'Haus L'
+      fill_in 'dest', with: 'Location 1'
       click_on 'Go'
       find(".routing-path", wait: 5)
       expect(page).to have_css(".routing-path", count: 1)
