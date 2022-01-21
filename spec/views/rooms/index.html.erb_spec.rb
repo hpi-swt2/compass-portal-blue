@@ -13,11 +13,11 @@ RSpec.describe "rooms/index", type: :view do
 
   it "renders a list of rooms" do
     render
-    assert_select "tr>td", text: "Seminarräume:".to_s, count: 1
-    assert_select "tr>td", text: "H.257".to_s, count: 1
-    assert_select "tr>td", text: "Hörsäle:".to_s, count: 1
-    assert_select "tr>td", text: "Hörsaal1".to_s, count: 1
-    assert_select "tr>td", text: "Poolräume:".to_s, count: 1
-    assert_select "tr>td", text: "Konferenzräume:".to_s, count: 1
+    expect(rendered).to have_text("Seminar Rooms")
+    expect(rendered).to have_text("H.257")
+    expect(rendered).to have_text("Lecture Halls")
+    expect(rendered).to have_text("Hörsaal1")
+    expect(rendered).to have_text("Pool Rooms")
+    expect(rendered).to have_text("Conference Rooms")
   end
 end
