@@ -86,7 +86,7 @@ RSpec.describe "/rooms", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_room) do
-        Room.new(name: "H-E.51", floor: "E", room_type: "seminar-room", building: FactoryBot.create(:building))
+        Room.new(name: "H-E.51", floor: "E", room_type: "seminar-room", building: create(:building))
       end
       let(:new_attributes) do
         new_room.attributes

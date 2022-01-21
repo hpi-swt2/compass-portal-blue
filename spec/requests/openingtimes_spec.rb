@@ -90,9 +90,9 @@ RSpec.describe "/openingtimes", type: :request do
     context "with valid parameters" do
       let(:new_openingtime) do
         Openingtime.new(day: 3,
-          opens: Tod::TimeOfDay(10),
-          closes: Tod::TimeOfDay(12),
-          timeable: create(:building))
+                        opens: Tod::TimeOfDay(10),
+                        closes: Tod::TimeOfDay(12),
+                        timeable: create(:building))
       end
       let(:new_attributes) do
         new_openingtime.attributes
