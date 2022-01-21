@@ -1,6 +1,8 @@
 import * as polylabel from "polylabel";
+import { PIN_1_MAGIC_STRING, PIN_2_MAGIC_STRING } from "./constants";
 
 let targetMarkerLayer;
+
 let pinIcons = [
   L.divIcon({
     iconSize: null,
@@ -11,7 +13,9 @@ let pinIcons = [
     html: "<div style='' class='pin-icon2'></div>",
   }),
 ];
+
 export let pins = [];
+
 let layerControl;
 /**
  * defines the floor that is currently displayed
@@ -24,7 +28,7 @@ const floors = {};
 
 export async function setupMap() {
   global.map = L.map("map");
-  layerControl = L.control.layers({}, {}).addTo(map);
+  layerControl = L.control.layers({}, {}, { position: "topleft" }).addTo(map);
   // add a title to the leaflet layer control
   $("<h6>Floors</h6>").insertBefore("div.leaflet-control-layers-base");
 
@@ -46,8 +50,8 @@ export async function setupMap() {
   addMarkers(buildingMarkers);
 
   // display indoor information eg. rooms, labels
-  loadGeoJsonFile("assets/ABC-Building-0.geojson");
-  loadGeoJsonFile("assets/ABC-Building-1.geojson");
+  await loadGeoJsonFile("/assets/ABC-Building-0.geojson");
+  await loadGeoJsonFile("/assets/ABC-Building-1.geojson");
   map.on("zoomend", recalculateTooltipVisibility);
   map.on("baselayerchange", (event) => {
     currentFloor = parseInt(event.name);
@@ -82,6 +86,14 @@ function onClick(e) {
     addPin(e, 0);
   } else if (!pins[1] || pins[1] === null) {
     addPin(e, 1);
+    $("#_overlay").addClass("open");
+    $("#toggle-overlay").addClass("visible");
+    $("#toggle-overlay").addClass("open");
+    ajaxCall(
+      null,
+      "/route",
+      `start=${PIN_1_MAGIC_STRING}&dest=${PIN_2_MAGIC_STRING}`
+    );
   } else {
     removeAllPins();
   }

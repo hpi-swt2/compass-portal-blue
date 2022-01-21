@@ -1,14 +1,16 @@
 import { displayRoute, setupMap, pins } from "./leafletMap.js";
+import {
+  PIN_1_MAGIC_STRING,
+  PIN_2_MAGIC_STRING,
+  YOUR_LOCATION_MAGIC_STRING,
+} from "./constants";
 
 let currentLocation;
-const YOUR_LOCATION_MAGIC_STRING = "Your location"; // This will be changed when the page supports multiple languages
-const PIN_1_MAGIC_STRING = "Pin 1";
-const PIN_2_MAGIC_STRING = "Pin 2";
 
 setupMap();
 
-const map = $("#map")[0];
-map.addEventListener("click", () => {
+const mapElement = $("#map")[0];
+mapElement.addEventListener("click", () => {
   resolveMagicPinStrings(startInputField);
   resolveMagicPinStrings(destInputField);
 });

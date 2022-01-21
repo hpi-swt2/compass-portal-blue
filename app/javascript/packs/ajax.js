@@ -23,12 +23,12 @@ global.ajaxCall = (
     $("#browse-outlet-container").addClass("navigation");
     const params = new URLSearchParams(valuesToSubmit);
     if (params.get("dest")) {
-      $("#navigation_form #dest_input").val(params.get("dest"));
-      $("#navigation_form #dest_input")[0].dispatchEvent(new Event("change"));
+      $("#navigationForm #destInput").val(params.get("dest"));
+      $("#navigationForm #destInput")[0].dispatchEvent(new Event("change"));
     }
     if (params.get("start")) {
-      $("#navigation_form #start_input").val(params.get("start"));
-      $("#navigation_form #start_input")[0].dispatchEvent(new Event("change"));
+      $("#navigationForm #startInput").val(params.get("start"));
+      $("#navigationForm #startInput")[0].dispatchEvent(new Event("change"));
     }
     if (pushToHistory) {
       history.pushState(
