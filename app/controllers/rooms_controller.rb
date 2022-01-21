@@ -1,3 +1,6 @@
+require 'time'
+require 'date'
+
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy]
 
@@ -19,9 +22,11 @@ class RoomsController < ApplicationController
 
   def calendar
     @room = Room.find(params[:id])
-    # start_date = Date.today.to_date
-    # @events = Event.where("room_id = :room and d_start >= :week_start and d_end <= :week_end", room: @room.id, week_start: Time.parse(start_date.beginning_of_month.beginning_of_week.to_s), week_end: Time.parse(start_date.end_of_month.end_of_week.to_s))
+    
+    @month = Date::MONTHNAMES[Date.today.month]
+    @year = Time.now.year
     @events = @room.events
+    # Event.generate_calendar_events(@events, start_date, end_date)
   end
 
   # POST /rooms or /rooms.json

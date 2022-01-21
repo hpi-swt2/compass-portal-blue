@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # '/search_results'
   get '/search_results', to: 'search_results#index'
 
-  get 'calendar', to: 'rooms#calendar'
+  get '/calendar', to: 'rooms#calendar'
 
   # '/'
   # Sets `root_url`, devise gem requires this to be set

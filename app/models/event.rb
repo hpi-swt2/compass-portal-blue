@@ -3,7 +3,7 @@ require 'ice_cube'
 require 'json'
 require 'yaml'
 require 'date'
-
+require 'time'
 class Event < ApplicationRecord
 
   def self.ical_rule_to_ice_cube_yaml(icalendar_rrule)
@@ -49,6 +49,14 @@ class Event < ApplicationRecord
     end
   end
 
+  def self.generate_calendar_events(events, start_date, end_date)
+    events.flat_map{ |event| event.calendar_events(start_date, end_date)}
+  end
+
+  def start_hour_minute
+    d_start.strftime('%H:%M')
+  end
+
   def start_time
     d_start
   end
@@ -57,8 +65,12 @@ class Event < ApplicationRecord
     d_end
   end
 
+  def end_hour_minute
+    d_end.strftime('%H:%M')
+  end
+
   def rule
-    IceCube::Rule.from_yaml(recurring)
+    IceCube::Rule.from_yaml(recurring) if !recurring.empty?
   end
 
   def schedule
@@ -72,7 +84,7 @@ class Event < ApplicationRecord
       [self] if (start_date..end_date).cover?(d_start) or (start_date..end_date).cover?(d_end)
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
-        Event.new(id: id, name: name, description: description, d_start: occurrence.start_time, d_end: occurrence.end_time)
+        Event.new(id: id, name: name, description: description, d_start: occurrence.start_date_time, d_end: occurrence.end_time)
       end
     end
   end

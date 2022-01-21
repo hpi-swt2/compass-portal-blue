@@ -19,3 +19,37 @@ header{
 collapse{
     height: auto;
 }
+
+.simple-calendar {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: x-large;
+    .day {
+        font-family: helvetica;
+        font-size: large;
+    }
+    .content{
+        font-size: medium;
+    }
+
+    .wday-0 {}
+    .wday-1 {}
+    .wday-2 {}
+    .wday-3 {}
+    .wday-4 {}
+    .wday-5 {}
+    .wday-6 {}
+  
+    .today {
+        background-color: cornflowerblue;
+    }
+    .past {}
+    .future {}
+  
+    .start-date {}
+  
+    .prev-month {}
+    .next-month { }
+    .current-month {}
+  
+    .has-events {}
+  }
