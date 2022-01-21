@@ -22,7 +22,7 @@
   <option><%= BuildingMapController::YOUR_LOCATION_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_1_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_2_MAGIC_STRING %></option>
-  <% BuildingMapHelper.get_destinations.each do |dest, coords| %>
+  <% BuildingMapHelper.destinations.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
@@ -31,7 +31,7 @@
 <datalist id="destOptions">
   <option><%= BuildingMapController::PIN_1_MAGIC_STRING %></option>
   <option><%= BuildingMapController::PIN_2_MAGIC_STRING %></option>
-  <% BuildingMapHelper.get_destinations.each do |dest, coords| %>
+  <% BuildingMapHelper.destinations.each do |dest, coords| %>
     <option>
       <%= dest %>
     </option>
