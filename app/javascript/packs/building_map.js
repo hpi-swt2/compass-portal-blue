@@ -14,7 +14,8 @@ const PIN_2_MAGIC_STRING = "Pin 2"
 let currentLocation;
 
 setupMap();
-document.getElementById("tracking_switch").addEventListener("click", trackingHandler);
+const trackingSwitch = document.getElementById("trackingSwitch");
+trackingSwitch.addEventListener("click", trackingHandler);
 
 const map = $("#map")[0];
 map.addEventListener("click", () => {
@@ -146,16 +147,15 @@ const syncUserPositionWithServerImpl = async (location) => {
 };
 const syncUserPositionWithServer = ratelimit(syncUserPositionWithServerImpl, 10000);
 
-let watcher_id;
+let watcherId;
 const positionIcon = L.icon({ iconUrl: "assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
 const positionMarker = L.marker([0, 0], { icon: positionIcon });
 positionMarker.bindPopup("Your position");
 
 function trackingHandler() {
-    const tracking_switch = document.getElementById("tracking_switch");
-    if (tracking_switch.checked) {
+    if (trackingSwitch.checked) {
         addAnyMarker(positionMarker);
-        watcher_id = navigator.geolocation.watchPosition(
+        watcherId = navigator.geolocation.watchPosition(
             (pos) => {
                 currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
                 positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
@@ -166,7 +166,7 @@ function trackingHandler() {
             }
         );
     } else {
-        navigator.geolocation.clearWatch(watcher_id);
+        navigator.geolocation.clearWatch(watcherId);
         positionMarker.remove();
     }
 }
