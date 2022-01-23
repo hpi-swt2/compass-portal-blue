@@ -9,4 +9,5 @@ hsg = Building.create!(name: "Hörsaalgebäude", location_latitude: 0.5321, loca
 hptg = Building.create!(name: "Hauptgebäude", location_latitude: 0.1674, location_longitude: 0.2345)
 Room.create!(name: "Hörsaal1", floor: 0, room_type: "Hörsaal", building: hsg)
 Room.create!(name: "Hörsaal2", floor: 0, room_type: "Hörsaal", building: hsg)
+Room.create!(name: "Hörsaal3", floor: 0, room_type: "Hörsaal", building: hsg)
 Room.create!(name: "H.257", floor: 2, room_type: "Seminarraum", building: hptg)

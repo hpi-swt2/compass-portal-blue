@@ -4,6 +4,8 @@
     <h1>Your search did not match any pages</h1>
   </div>
 <% else %>
+
+
 <h1>Search Results</h1>
 
   <tbody>
@@ -19,19 +21,60 @@
           <% elsif search_result.type == "room" %>
             <img src="<%=(url_for('/assets/room.png'))%>" height="25" width="25" alt="room_picture">
           <% end %>
-          <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
-            <% if !search_result.description.nil? %>
-              <p class="search_result_description"><%= search_result.description %></p>
-            <% else %>
-              <p class="search_result_description">
-                This is a dummy-description meant to be removed.
-                It shows that this text has to be very short.
-                [ remove me at 'app/views/search_results/index.html.erb' ]
-              </p>
-            <% end %>
-          </td>
+          <div class="search_result_container" onclick="addToHistory(this);">
+            <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
+              <% if !search_result.description.nil? %>
+                <p class="search_result_description"><%= search_result.description %></p>
+              <% else %>
+                <p class="search_result_description">
+                  This is a dummy-description meant to be removed.
+                  It shows that this text has to be very short.
+                  [ remove me at 'app/views/search_results/index.html.erb' ]
+                </p>
+              <% end %>
+          </div>
+            </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% end %>
+<script>
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function addToHistory(element) {
+    var title = element.getElementsByTagName("a")[0].text;
+    var link = element.getElementsByTagName("a")[0].href;
+    var previousHistory = getCookie("compassHistory");
+    
+    if(previousHistory == "") {
+      previousHistory = "{}";
+    }
+    currentHistory = JSON.parse(previousHistory);
+    helperHistory = {};
+    helperHistory[title] = link;
+    var i = 0;
+    for(var j in currentHistory){
+      i = i + 1;
+      if(i > 4){
+        break;
+      }
+      helperHistory[j] = currentHistory[j];
+    }
+    document.cookie = "compassHistory=" + JSON.stringify(helperHistory) + "; path=/";
+    }
+</script>
