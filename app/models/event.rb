@@ -5,6 +5,7 @@ require 'yaml'
 require 'date'
 require 'time'
 class Event < ApplicationRecord
+  belongs_to :room, optional: true
 
   def self.ical_rule_to_ice_cube_yaml(icalendar_rrule)
     rrule_yaml = ""
@@ -28,7 +29,7 @@ class Event < ApplicationRecord
 
   def self.find_room(location_string)
     room = Room.find_by(name: location_string)
-    room ? room.id : nil
+    room ? room : nil
   end
 
   def self.import(file)
@@ -42,9 +43,8 @@ class Event < ApplicationRecord
           description:  (parse_event.description.nil?) ? ""
                         : parse_event.description.force_encoding("UTF-8"),
           recurring:    ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
-          room_id:      find_room(parse_event.location.to_s)
+          room:         find_room(parse_event.location.to_s)
         )
-        Room.find(event.room_id).events << event if event.room_id?
       end
     end
   end

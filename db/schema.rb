@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_20_142621) do
+ActiveRecord::Schema.define(version: 2022_01_23_161253) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_142621) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "room_id"
+    t.index ["room_id"], name: "index_events_on_room_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_142621) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "rooms"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "rooms", "users"
   add_foreign_key "users", "people"

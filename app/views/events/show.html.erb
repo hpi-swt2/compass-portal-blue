@@ -12,11 +12,10 @@
 
 <p>
   <strong>Room:</strong>
-  <% room = @event.room_id? ? Room.find(@event.room_id) : nil %>
-  <% if !room.nil? then %>
-    <%= link_to room.name, room_path(room) %>
+  <% if @event.room.nil? then %>
+    <td><%= "No Room" %></td>
   <% else %>
-    <%= "No Room" %>
+    <td><%= link_to @event.room.name, room_path(@event.room) %></td>
   <% end %>
 </p>
 
