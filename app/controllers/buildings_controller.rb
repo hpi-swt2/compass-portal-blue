@@ -19,6 +19,7 @@ class BuildingsController < ApplicationController
   def edit; end
 
   # POST /buildings or /buildings.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @building = Building.new(building_params)
     @building.user_id = current_user.id
@@ -32,6 +33,7 @@ class BuildingsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /buildings/1 or /buildings/1.json
   def update

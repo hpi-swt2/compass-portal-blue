@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Person edit details page", type: :feature do
   before do
-    @person = FactoryBot.create(:person)
+    @person = create(:person)
 
     @person.profile_picture.attach(
       io: File.open('app/assets/images/default-profile-picture.png'),
@@ -10,7 +10,7 @@ RSpec.describe "Person edit details page", type: :feature do
       content_type: 'image/png'
     )
 
-    sign_in(FactoryBot.create(:user, admin: true))
+    sign_in(create(:user, admin: true))
   end
 
   it "includes profile picture input" do

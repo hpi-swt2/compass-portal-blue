@@ -19,6 +19,7 @@ class LocationsController < ApplicationController
   def edit; end
 
   # POST /locations or /locations.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @location = Location.new(location_params)
     @location.user_id = current_user.id
@@ -32,6 +33,7 @@ class LocationsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength 
 
   # PATCH/PUT /locations/1 or /locations/1.json
   def update

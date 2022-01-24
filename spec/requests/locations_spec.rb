@@ -14,14 +14,14 @@ require 'rails_helper'
 
 RSpec.describe "/locations", type: :request do
   before do
-    sign_in(FactoryBot.create(:user, admin: true))
+    sign_in(create(:user, admin: true))
   end
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
 
   let(:valid_attributes) do
     Location.new(name: "cafe", details: "cafe-details", location_longitude: 3.5, location_latitude: 1.5,
-                 user: FactoryBot.create(:user)).attributes
+                 user: create(:user)).attributes
   end
 
   let(:invalid_attributes) do
