@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   # '/login'
   get '/login', to: 'welcome#login'
 
-  get '/building_map', to: 'building_map#index'
+  # '/building/map'
   get '/building_map/route', to: 'building_map#route'
   get '/building_map/markers', to: 'building_map#markers'
   get '/building_map/buildings', to: 'building_map#buildings'
@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   # '/'
   # Sets `root_url`, devise gem requires this to be set
   root to: "welcome#index"
+
+  get '/map/*path' => "welcome#index", as: 'map'
 end

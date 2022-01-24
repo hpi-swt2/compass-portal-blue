@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Person Show Page", type: :feature do
   before do
-    @person = FactoryBot.create :person
+    @person = create :person
   end
 
   it "displays a persons' information" do
@@ -21,12 +21,8 @@ describe "Person Show Page", type: :feature do
 
     visit person_path(@person)
 
-    expect(page).to have_text room1.name
-    expect(page).to have_link 'Map', href:
-      building_map_path(target: "#{room1.building.location_latitude},#{room1.building.location_longitude}")
-    expect(page).to have_text room2.name
-    expect(page).to have_link 'Map', href:
-      building_map_path(target: "#{room2.building.location_latitude},#{room2.building.location_longitude}")
+    expect(page).to have_link room1.name, href: room_path(room1)
+    expect(page).to have_link room2.name, href: room_path(room2)
   end
 
   it "displays the office hours of the person" do

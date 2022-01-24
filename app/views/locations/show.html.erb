@@ -1,26 +1,21 @@
-<h1>Here are the location's details!</h1>
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
+<h2 class="mb-3 fw-light"><%= @location.name %></h2>
+
+<div class='edit-location-photo'>
+  <div class='location-photo-wrapper'>
+    <div class='location-photo-container'>
+      <% if @location.location_photo.attached? %>
+        <img src="<%=(url_for(@location.location_photo))%>" alt="<%= @location.location_photo.filename %>"/>
+      <% else %>
+        <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo">
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <p>
   <strong>Details:</strong>
   <%= @location.details %>
 </p>
-
-<div class="edit-location-photo">
-  <strong>Location photo:</strong>
-  <div class='location-photo-wrapper'>
-    <div class='location-photo-container'>
-        <% if @location.location_photo.attached? %>
-            <img src="<%=(url_for(@location.location_photo))%>" alt="<%= @location.location_photo.filename %>"/>
-        <% else %>
-            <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo">
-        <% end %>
-    </div>
-  </div>
-</div>
 
 <p>
   <strong>Opening Times:</strong>
@@ -34,5 +29,8 @@
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+<a class='btn btn-primary' href="/route?dest=<%= @location.name %>"><i class="fas fa-route"></i><span>Directions</span></a>
+
+<script id="_latlonginfo" type="application/json">
+[<%= @location.location_latitude %>,<%= @location.location_longitude %>]
+</script>
