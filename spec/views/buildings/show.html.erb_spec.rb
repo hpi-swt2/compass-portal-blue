@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "buildings/show", type: :view do
   before do
-    @building = FactoryBot.create :building
+    @building = create :building
   end
 
   it "renders attributes in <p>" do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "buildings/edit", type: :view do
   before do
-    @building = FactoryBot.create :building
+    @building = create :building
   end
 
   it "renders the edit building form" do

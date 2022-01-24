@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
       end
     end
   end
-  # rubocop:enable Metrics/MethodLength 
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /locations/1 or /locations/1.json
   def update

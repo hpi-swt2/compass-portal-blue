@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def roles=(roles)
-    roles = [*roles].map { |r| r.to_sym }
+    roles = [*roles].map &:to_sym 
     self.roles_mask = (roles & ROLES).sum { |r| 2**ROLES.index(r) }
   end
 

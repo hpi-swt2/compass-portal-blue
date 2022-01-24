@@ -14,7 +14,7 @@ require 'rails_helper'
 
 RSpec.describe "/people", type: :request do
   before do
-    sign_in(FactoryBot.create(:user, admin: true))
+    sign_in(create(:user, admin: true))
   end
   # Person. As you add validations to Person, be sure to
   # adjust the attributes here as well.
