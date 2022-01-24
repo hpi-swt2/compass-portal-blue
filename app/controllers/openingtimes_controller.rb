@@ -26,8 +26,8 @@ class OpeningtimesController < ApplicationController
 
     respond_to do |format|
       if @openingtime.save
-        format.html { redirect_to @openingtime, notice: "Openingtime was successfully created." }
-        format.json { render :show, status: :created, location: @openingtime }
+        format.html { redirect_to edit_openingtime_path(@openingtime), notice: "Openingtime was successfully created." }
+        format.json { render :edit, status: :created, location: @openingtime }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @openingtime.errors, status: :unprocessable_entity }
@@ -39,8 +39,8 @@ class OpeningtimesController < ApplicationController
   def update
     respond_to do |format|
       if @openingtime.update(openingtime_params)
-        format.html { redirect_to @openingtime, notice: "Openingtime was successfully updated." }
-        format.json { render :show, status: :ok, location: @openingtime }
+        format.html { redirect_to edit_openingtime_path(@openingtime), notice: "Openingtime was successfully updated." }
+        format.json { render :edit, status: :ok, location: @openingtime }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @openingtime.errors, status: :unprocessable_entity }

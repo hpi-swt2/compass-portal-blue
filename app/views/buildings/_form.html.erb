@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control"%>
   </div>
 
   <div class="field">
-    <%= form.label :location_latitude %>
-    <%= form.text_field :location_latitude %>
+    <%= form.label :location_latitude, class: "form-label" %>
+    <%= form.text_field :location_latitude, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :location_longitude %>
-    <%= form.text_field :location_longitude %>
+    <%= form.label :location_longitude, class: "form-label" %>
+    <%= form.text_field :location_longitude, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit class: 'btn btn-primary' %>
+  <div class="actions mt-3">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

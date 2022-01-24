@@ -1,19 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-6 col-md-6 mx-auto">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Opens:</strong>
-  <%= @openingtime.opens %>
-</p>
+    <h2 class="fw-light">Opening time</h2>
 
-<p>
-  <strong>Closes:</strong>
-  <%= @openingtime.closes %>
-</p>
+    <div class="field mb-3">
+      <label class="form-label">
+        <strong>Opens:</strong>
+      </label>
+      <p class="form-control-static">
+      <%= @openingtime.opens %>
+      </p>
+    </div>
 
-<p>
-  <strong>Day:</strong>
-  <%= @openingtime.day %>
-</p>
+    <div class="field mb-3">
+      <label class="form-label">
+        <strong>Closes:</strong>
+      </label>
+      <p class="form-control-static">
+      <%= @openingtime.closes %>
+      </p>
+    </div>
+    <p>
 
-<%= link_to 'Edit', edit_openingtime_path(@openingtime) %> |
-<%= link_to 'Back', openingtimes_path %>
+    <div class="field mb-3">
+      <label class="form-label">
+        <strong>Day:</strong>
+      </label>
+      <p class="form-control-static">
+        <%= @openingtime.day_as_string %>:
+      </p>
+    </div>
+
+    <div class="actions mt-3">
+      <%= link_to 'Edit', edit_openingtime_path(@openingtime), class: "btn btn-secondary link-btn" %>
+      <%= link_to 'Back', openingtimes_path, class: "btn btn-secondary link-btn" %>
+    </div>
+  </div> <%# col-lg-6 col-md-6 mx-auto %>
+</div> <%# row %>
