@@ -18,8 +18,10 @@ RSpec.describe "/locations", type: :request do
   end
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
+
   let(:valid_attributes) do
-    Location.new(name: "cafe", details: "cafe-details", location_longitude: 3.5, location_latitude: 1.5, user: FactoryBot.create(:user)).attributes
+    Location.new(name: "cafe", details: "cafe-details", location_longitude: 3.5, location_latitude: 1.5,
+                 user: FactoryBot.create(:user)).attributes
   end
 
   let(:invalid_attributes) do

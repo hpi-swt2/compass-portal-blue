@@ -18,6 +18,7 @@ RSpec.describe "/people", type: :request do
   end
   # Person. As you add validations to Person, be sure to
   # adjust the attributes here as well.
+
   let(:valid_attributes) do
     Person.new(first_name: "Herbert", last_name: "Herbertson", phone_number: "+4990909090",
                email: "herbert.herbertson@hpi.de").attributes
