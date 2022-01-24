@@ -57,6 +57,8 @@ export async function setupMap() {
     currentFloor = parseInt(event.name);
     recalculateTooltipVisibility();
   });
+  // Call recalculateTooltipVisibility once to set the visibilities correct
+  recalculateTooltipVisibility();
 
   // Add pins on click
   map.on("click", onClick);
