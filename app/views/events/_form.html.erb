@@ -23,7 +23,7 @@
   
     <div>
       <%= form.label :room %>
-        <%= form.select 'room',
+        <%= form.select 'room_id',
             options_from_collection_for_select(Room.all, :id, :name),
             {},
             multiple: false %>
