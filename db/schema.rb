@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 2022_01_25_153503) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "building_owner", id: false, force: :cascade do |t|
+    t.integer "building_id", null: false
+    t.integer "user_id", null: false
+  end
+
   create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.float "location_latitude"
@@ -49,8 +54,8 @@ ActiveRecord::Schema.define(version: 2022_01_25_153503) do
     t.integer "user_id"
   end
 
-  create_table "buildings_users", id: false, force: :cascade do |t|
-    t.integer "building_id", null: false
+  create_table "location_owner", id: false, force: :cascade do |t|
+    t.integer "location_id", null: false
     t.integer "user_id", null: false
   end
 
@@ -62,11 +67,6 @@ ActiveRecord::Schema.define(version: 2022_01_25_153503) do
     t.float "location_latitude"
     t.float "location_longitude"
     t.integer "user_id"
-  end
-
-  create_table "locations_users", id: false, force: :cascade do |t|
-    t.integer "location_id", null: false
-    t.integer "user_id", null: false
   end
 
   create_table "openingtimes", force: :cascade do |t|

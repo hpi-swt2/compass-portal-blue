@@ -5,8 +5,8 @@ describe 'User authorization', type: :feature do
   it "is possible for an Admin to manage person, location and building" do
     @user = create(:user, admin: true)
     ability = Ability.new(@user)
-    expect(ability).to be_able_to(:manage, Location.new(users: [@user])) # location
-    expect(ability).to be_able_to(:manage, Building.new(users: [@user])) # building
+    expect(ability).to be_able_to(:manage, Location.new(owners: [@user])) # location
+    expect(ability).to be_able_to(:manage, Building.new(owners: [@user])) # building
     expect(ability).to be_able_to(:manage, Person.new(owners: [@user])) # person
   end
 
@@ -25,8 +25,8 @@ describe 'User authorization', type: :feature do
   it "is possible as user without Admin permission to update and delete an own person, location and building" do
     @user = create(:user, admin: false)
     ability = Ability.new(@user)
-    expect(ability).to be_able_to(:manage, Location.new(users: [@user])) # location
-    expect(ability).to be_able_to(:manage, Building.new(users: [@user])) # building
+    expect(ability).to be_able_to(:manage, Location.new(owners: [@user])) # location
+    expect(ability).to be_able_to(:manage, Building.new(owners: [@user])) # building
     expect(ability).to be_able_to(:manage, Person.new(owners: [@user])) # person
   end
 
