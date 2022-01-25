@@ -21,7 +21,7 @@ RSpec.describe "/locations", type: :request do
 
   let(:valid_attributes) do
     Location.new(name: "cafe", details: "cafe-details", location_longitude: 3.5, location_latitude: 1.5,
-                 user: create(:user)).attributes
+                 users: [create(:user)]).attributes
   end
 
   let(:invalid_attributes) do

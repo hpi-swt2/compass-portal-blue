@@ -3,8 +3,8 @@ require "date"
 # The model representing a user who can log in
 class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
-  has_many :location
-  has_many :building
+  has_and_belongs_to_many :location
+  has_and_belongs_to_many :building
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,

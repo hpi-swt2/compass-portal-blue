@@ -21,12 +21,12 @@ RSpec.describe "/buildings", type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) do
     Building.new(name: "Main Building", location_longitude: -180, location_latitude: -90,
-                 user: create(:user)).attributes
+                 users: [create(:user)]).attributes
   end
 
   let(:invalid_attributes) do
     Building.new(name: "does not exist", location_longitude: -1000, location_latitude: 500,
-                 user: create(:user)).attributes
+                 users: [create(:user)]).attributes
   end
 
   describe "GET /index" do
