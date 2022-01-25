@@ -27,11 +27,6 @@ class Event < ApplicationRecord
     rrule_yaml
   end
 
-  def self.find_room(location_string)
-    room = Room.find_by(name: location_string)
-    room ? room : nil
-  end
-
   def self.import(file)
     calendars = Icalendar::Calendar.parse(file)
     calendars.each do |calendar|
@@ -43,7 +38,7 @@ class Event < ApplicationRecord
           description:  (parse_event.description.nil?) ? ""
                         : parse_event.description.force_encoding("UTF-8"),
           recurring:    ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
-          room:         find_room(parse_event.location.to_s)
+          room:         Room.find_by(name: parse_event.location.to_s)
         )
       end
     end
