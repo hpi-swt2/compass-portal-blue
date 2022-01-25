@@ -9,8 +9,8 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.present?
-      can :manage, Location, :users => { id: user.id }
-      can :manage, Building, :users => { id: user.id }
+      can :manage, Location, users: { id: user.id }
+      can :manage, Building, users: { id: user.id }
       can :read, :all
     else
       can :read, :all
