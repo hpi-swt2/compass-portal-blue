@@ -1,9 +1,12 @@
+require 'ice_cube'
+
 FactoryBot.define do
   factory :event do
-    name { "MyString" }
-    description { "MyText" }
-    d_start { "2022-01-12 10:58:13" }
-    d_end { "2022-01-12 10:58:13" }
-    recurring { "MyText" }
+    association :room
+    name { "BA Mathematik III Übung" }
+    description { "Teaching mathematics" }
+    d_start { "2021-10-25 13:15:00" }
+    d_end { "2021-10-25 14:45:00" }
+    recurring { IceCube::Rule.weekly.day(:monday).to_yaml }
   end
 end

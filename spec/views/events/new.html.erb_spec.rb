@@ -25,7 +25,7 @@ RSpec.describe "events/new", type: :view do
         assert_select "select[name=?]", "event[d_end(#{i}i)]"
       end
 
-      assert_select "select[name=?]", "event[room]"
+      assert_select "select[name=?]", "event[room_id]"
     end
   end
 end
