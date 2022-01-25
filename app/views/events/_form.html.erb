@@ -21,13 +21,13 @@
     <%= form.text_area :description %>
   </div>
   
-    <div>
-      <%= form.label :room %>
-        <%= form.select 'room',
-            options_from_collection_for_select(Room.all, :id, :name),
-            {},
-            multiple: false %>
-    </div>
+  <div>
+    <%= form.label :room %>
+    <%= form.select 'room_id',
+        options_from_collection_for_select(Room.all, :id, :name, event.room.nil?? 1: event.room.id),
+        {},
+        multiple: false %>
+  </div>
 
   <div class="field">
     <%= form.label "Start Date" %>

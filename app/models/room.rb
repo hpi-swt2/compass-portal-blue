@@ -8,19 +8,12 @@ class Room < ApplicationRecord
   validates :floor, presence: true, numericality: { only_integer: true }
 
   def free?
-    now = Time.now() - 1.hours
-    now = now.in_time_zone(0)
-
     room_events = Event.where room: self
-
-    free = true
     room_events.each do |event|
-      schedule = event.schedule
-      if schedule.occurring_at?(now)
-        free = false
-        break
+      if event.schedule.occurring_at?(Time.now)
+        return false
       end
     end
-    return free
+    return true
   end
 end
