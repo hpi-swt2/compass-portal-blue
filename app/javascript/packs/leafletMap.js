@@ -50,14 +50,17 @@ export async function setupMap() {
     addMarkers(buildingMarkers);
 
     // display indoor information eg. rooms, labels
-    await loadGeoJsonFile("/assets/ABC-Building-0.geojson");
-    await loadGeoJsonFile("/assets/ABC-Building-1.geojson");
-    await loadGeoJsonFile("/assets/ABC-Building-2.geojson");
-    await loadGeoJsonFile("/assets/H_0.geojson");
-    await loadGeoJsonFile("/assets/H_1.geojson");
-    await loadGeoJsonFile("/assets/H_2.geojson");
-    await loadGeoJsonFile("/assets/HS_0.geojson");
-    await loadGeoJsonFile("/assets/HG_-1.geojson");
+    await Promise.all([
+        loadGeoJsonFile("/assets/ABC-Building-0.geojson"),
+        loadGeoJsonFile("/assets/ABC-Building-1.geojson"),
+        loadGeoJsonFile("/assets/ABC-Building-2.geojson"),
+        loadGeoJsonFile("/assets/H_0.geojson"),
+        loadGeoJsonFile("/assets/H_1.geojson"),
+        loadGeoJsonFile("/assets/H_2.geojson"),
+        loadGeoJsonFile("/assets/H_3.geojson"),
+        loadGeoJsonFile("/assets/HS_0.geojson"),
+        loadGeoJsonFile("/assets/HG_-1.geojson"),
+    ]);
     map.on("zoomend", recalculateTooltipVisibility);
     map.on("baselayerchange", (event) => {
         currentFloor = parseInt(event.name);
@@ -252,7 +255,7 @@ function setupGeoJsonFeature(feature, layer) {
     // lower value -> higher precision
     const markerPositionPrecision = 0.000001;
     const markerPosition = polylabel(
-        feature.geometry.type == "Polygon"? feature.geometry.coordinates : feature.geometry.coordinates[0],
+        feature.geometry.type === "Polygon" ? feature.geometry.coordinates : feature.geometry.coordinates[0],
         markerPositionPrecision
     );
 
