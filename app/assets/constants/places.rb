@@ -31,7 +31,7 @@ module Places
     "Haus G" => {
       location: "52.3947488,13.1248368"
     },
-    "Haus I (früher Haus 4)" => {
+    "Haus K (früher Haus 4)" => {
       location: "52.3935641,13.1303853"
     },
     "Hörsaalgebäude" => {
