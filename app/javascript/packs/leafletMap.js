@@ -28,7 +28,7 @@ const floors = {};
 
 export async function setupMap() {
     global.map = L.map("map");
-    layerControl = L.control.layers({}, {}, { position: "topleft" }).addTo(map);
+    layerControl = L.control.layers({}, {}, { position: "topleft", sortLayers: true }).addTo(map);
     // add a title to the leaflet layer control
     $("<h6>Floors</h6>").insertBefore("div.leaflet-control-layers-base");
 
