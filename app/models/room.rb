@@ -11,13 +11,11 @@ class Room < ApplicationRecord
     now = Time.now() - 1.hours
     now = now.in_time_zone(0)
 
-    room_events = Event.where room_id: self.id
-    p now
+    room_events = Event.where room: self
 
     free = true
     room_events.each do |event|
       schedule = event.schedule
-      
       if schedule.occurring_at?(now)
         free = false
         break
