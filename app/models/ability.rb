@@ -14,18 +14,18 @@ class Ability
       initialize_guest
     end
   end
-  
+
   def initialize_admin
     can :manage, :all
   end
-  
-  def initialize_user user
+
+  def initialize_user(user)
     can :manage, Location, owners: { id: user.id }
     can :manage, Building, owners: { id: user.id }
     can :manage, Person, owners: { id: user.id }
     can :read, :all
   end
-  
+
   def initialize_guest
     can :read, :all
   end
