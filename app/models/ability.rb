@@ -7,14 +7,26 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     if user.admin?
-      can :manage, :all
+      initialize_admin
     elsif user.present?
-      can :manage, Location, owners: { id: user.id }
-      can :manage, Building, owners: { id: user.id }
-      can :manage, Person, owners: { id: user.id }
-      can :read, :all
+      initialize_user user
     else
-      can :read, :all
+      initialize_guest
     end
+  end
+  
+  def initialize_admin
+    can :manage, :all
+  end
+  
+  def initialize_user user
+    can :manage, Location, owners: { id: user.id }
+    can :manage, Building, owners: { id: user.id }
+    can :manage, Person, owners: { id: user.id }
+    can :read, :all
+  end
+  
+  def initialize_guest
+    can :read, :all
   end
 end
