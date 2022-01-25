@@ -11,7 +11,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13215067347,
@@ -87,7 +87,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13215584655,
@@ -154,7 +154,7 @@
                 "name": "HS 1"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13279171820,
@@ -199,7 +199,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13198835304,
@@ -308,7 +308,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13248134969,
@@ -395,7 +395,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13225053403,
@@ -428,7 +428,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13214776357,
@@ -465,7 +465,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13216549923,
@@ -525,7 +525,7 @@
                 "name": "HS 2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13219788886,
@@ -608,7 +608,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13225393424,

@@ -13,7 +13,7 @@
                 "level_name": "-1"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13219416721,
@@ -50,7 +50,7 @@
                 "level_name": "-1"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13238100188,
@@ -137,7 +137,7 @@
                 "level_name": "-1"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13225074452,
@@ -172,7 +172,7 @@
                 "level_name": "-1"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13207924232,

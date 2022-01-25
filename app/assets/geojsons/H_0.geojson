@@ -11,7 +11,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13327886097,
@@ -63,7 +63,7 @@
                 "name": "H-E.35 Büro"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13341162965,
@@ -146,7 +146,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13287317618,
@@ -431,7 +431,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13306149053,
@@ -472,7 +472,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13329294190,
@@ -547,7 +547,7 @@
                 "name": "H-E.11 Aufenthaltsraum"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13316249141,
@@ -599,7 +599,7 @@
                 "name": "H-E.27 Büro"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13315105244,
@@ -636,7 +636,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13346168184,
@@ -673,7 +673,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13299468058,
@@ -770,7 +770,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13339687817,
@@ -837,7 +837,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13287317618,
@@ -876,7 +876,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13324309919,
@@ -913,7 +913,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13291507107,
@@ -969,7 +969,7 @@
                 "name": "H-E.15 Lager"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13299277817,
@@ -1006,7 +1006,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13304686736,
@@ -1043,7 +1043,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13351824746,
@@ -1080,7 +1080,7 @@
                 "name": "H-E.5 Aufenthaltsraum"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13332164524,
@@ -1162,7 +1162,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13330098853,
@@ -1210,7 +1210,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13349142604,
@@ -1273,7 +1273,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13292964423,
@@ -1325,7 +1325,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13292964423,
@@ -1396,7 +1396,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13335988002,
@@ -1437,7 +1437,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13311052058,
@@ -1474,7 +1474,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13333116404,
@@ -1544,7 +1544,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13326984487,
@@ -1581,7 +1581,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13328489528,
@@ -1633,7 +1633,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13304686736,
@@ -1677,7 +1677,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13333116404,
@@ -1835,7 +1835,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13338078491,
@@ -1946,7 +1946,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13319119597,
@@ -1998,7 +1998,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13354238733,
@@ -2039,7 +2039,7 @@
                 "name": "H-E.32 Dusche"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13329694277,
@@ -2076,7 +2076,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13321468878,
@@ -2143,7 +2143,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13321616089,
@@ -2195,7 +2195,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13361413710,
@@ -2231,7 +2231,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13350953095,
@@ -2382,7 +2382,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13357122108,
@@ -2442,7 +2442,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13332490718,
@@ -2479,7 +2479,7 @@
                 "name": "H-E.7/6 Aufenthaltsraum"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13322337812,
@@ -2539,7 +2539,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13317358360,
@@ -2587,7 +2587,7 @@
                 "level_name": "0"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13308501365,
@@ -2628,7 +2628,7 @@
                 "name": "H-E. 43 Seminarraum"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13359402053,

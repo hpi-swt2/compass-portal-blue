@@ -11,7 +11,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13324466281,
@@ -67,7 +67,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13315780846,
@@ -106,7 +106,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13325732999,
@@ -188,7 +188,7 @@
                 "name": "H-2.8 Büro"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13327483699,
@@ -240,7 +240,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13339084320,
@@ -289,7 +289,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13361681931,
@@ -364,7 +364,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13292011485,
@@ -435,7 +435,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13335396282,
@@ -518,7 +518,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13354708188,
@@ -568,7 +568,7 @@
                 "name": "H-2.52"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13318699532,
@@ -604,7 +604,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13350483641,
@@ -652,7 +652,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13323166107,
@@ -704,7 +704,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13347265057,
@@ -981,7 +981,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13338078491,
@@ -1070,7 +1070,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13338614933,
@@ -1147,7 +1147,7 @@
                 "name": "H-2.30"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13328449457,
@@ -1198,7 +1198,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13351020083,
@@ -1353,7 +1353,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13356988065,
@@ -1396,7 +1396,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13351020083,
@@ -1521,7 +1521,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13333921067,
@@ -1573,7 +1573,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13315064346,
@@ -1640,7 +1640,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13323527440,
@@ -1722,7 +1722,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13295366142,
@@ -1774,7 +1774,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13345052235,
@@ -1815,7 +1815,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13345186278,
@@ -1867,7 +1867,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13331037692,
@@ -1904,7 +1904,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13362218373,
@@ -2022,7 +2022,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13324417770,
@@ -2074,7 +2074,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13310317105,
@@ -2111,7 +2111,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13300236560,
@@ -2148,7 +2148,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13293339211,
@@ -2185,7 +2185,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13333049349,
@@ -2260,7 +2260,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13308888310,
@@ -2297,7 +2297,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13299879182,
@@ -2353,7 +2353,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13361883096,
@@ -2394,7 +2394,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13339620762,
@@ -2517,7 +2517,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13352361254,
@@ -2558,7 +2558,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13292013557,
@@ -2598,7 +2598,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13335396282,
@@ -2773,7 +2773,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13333615390,
@@ -2810,7 +2810,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13318439597,
@@ -2847,7 +2847,7 @@
                 "name": "H-2.53/54 Technikraum"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13307166032,
@@ -2903,7 +2903,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13320216397,
@@ -2940,7 +2940,7 @@
                 "name": "H-2.45 Büro"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13359737329,
@@ -3000,7 +3000,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13342034683,
@@ -3056,7 +3056,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13354104690,
@@ -3128,7 +3128,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13330946772,
@@ -3210,7 +3210,7 @@
                 "name": "H-2.25 Büro"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13308888310,
@@ -3281,7 +3281,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13337543300,
@@ -3322,7 +3322,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13329294257,
@@ -3382,7 +3382,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13304957649,
@@ -3434,7 +3434,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13356317513,
@@ -3471,7 +3471,7 @@
                 "level_name": "2"
             },
             "geometry": {
-                "type": "LineString",
+                "type": "Polygon",
                 "coordinates": [
                     [
                         13.13303304635,
