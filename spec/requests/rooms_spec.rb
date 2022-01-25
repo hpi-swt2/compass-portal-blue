@@ -17,7 +17,7 @@ RSpec.describe "/rooms", type: :request do
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Room.new(name: "H-2.57", floor: 2, room_type: "Seminar", building: FactoryBot.create(:building)).attributes
+    Room.new(name: "H-2.57", floor: 2, room_type: "Seminar", building: create(:building)).attributes
   end
 
   let(:invalid_attributes) do

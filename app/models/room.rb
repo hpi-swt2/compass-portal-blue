@@ -1,7 +1,7 @@
 # The model representing a room at HPI
 class Room < ApplicationRecord
   belongs_to :building
-  has_many :events
+  has_many :events, dependent: :destroy 
   has_and_belongs_to_many :people
   validates :name, presence: true
   validates :room_type, presence: true
@@ -10,10 +10,8 @@ class Room < ApplicationRecord
   def free?
     room_events = Event.where room: self
     room_events.each do |event|
-      if event.schedule.occurring_at?(Time.now)
-        return false
-      end
+      return false if event.schedule.occurring_at?(Time.zone.now)
     end
-    return true
+    true
   end
 end

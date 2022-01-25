@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Person Show Page", type: :feature do
   it "displays a persons' information" do
-    @person_details = FactoryBot.create :person
+    @person_details = create :person
     visit person_path(@person_details)
 
     expect(page).to have_text @person_details.first_name

@@ -20,7 +20,7 @@ RSpec.describe "/openingtimes", type: :request do
     Openingtime.new(day: 6,
                     opens: Tod::TimeOfDay(8),
                     closes: Tod::TimeOfDay(17),
-                    timeable: FactoryBot.create(:building)).attributes
+                    timeable: create(:building)).attributes
   end
 
   let(:invalid_attributes) do

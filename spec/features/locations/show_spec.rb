@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "Location Show Page", type: :feature do
   it "displays a locations' information" do
-    @location = FactoryBot.create :location
-    @openingtime = FactoryBot.create(:openingtime, timeable: @location)
+    @location = create :location
+    @openingtime = create(:openingtime, timeable: @location)
 
     visit location_path(@location)
 

@@ -16,22 +16,16 @@ FactoryBot.define do
       d_end { 30.minutes.from_now }
     end
 
-    # trait :with_room
-    #   transient do
-    #     title { 'Room 1' }
-    #   end
-    #   after(:build) do | event, evaluator |
-    #     event.room = FactoryBot.create(:room, title: evaluator.title)
-    #   end
-    # end
-
     name { "Test event in room 1" }
-    description { "This event is incredible and a lot of people are going to be there. But sice there is still a pandemic going aroud, please all wear masks." }
-    recurring { "---
-                :validations: {}
-                :rule_type: IceCube::DailyRule
-                :interval: 1
-                " }
+    description do
+      "This event is incredible and a lot of people are going to be there. But sice there is still a pandemic going aroud, please all wear masks."
+    end
+    recurring do
+      "---
+      :validations: {}
+      :rule_type: IceCube::DailyRule
+      :interval: 1"
+    end
 
   end
 end

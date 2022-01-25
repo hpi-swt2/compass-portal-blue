@@ -15,9 +15,9 @@ RSpec.describe Room, type: :model do
 
   it "can be querried about its occupancy status" do
     room = FactoryBot.create :room
-    future_event = FactoryBot.create(:event, :in_one_hour, room: room)
+    FactoryBot.create(:event, :in_one_hour, room: room)
     expect(room.free?).to be true
-    current_event = FactoryBot.create(:event, :right_now, room: room)
+    FactoryBot.create(:event, :right_now, room: room)
     expect(room.free?).to be false
   end
 
