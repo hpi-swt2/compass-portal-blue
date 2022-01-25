@@ -11,6 +11,7 @@ class Ability
     elsif user.present?
       can :manage, Location, users: { id: user.id }
       can :manage, Building, users: { id: user.id }
+      can :manage, Person, owners: { id: user.id }
       can :read, :all
     else
       can :read, :all

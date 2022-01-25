@@ -5,6 +5,7 @@ class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
   has_and_belongs_to_many :location
   has_and_belongs_to_many :building
+  has_and_belongs_to_many :owned_people, class_name: 'Person', join_table: 'person_owner'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -17,10 +18,11 @@ class User < ApplicationRecord
 
   def initialize(attributes = {})
     super(attributes)
-    return unless person.nil?
-
-    self.person = Person.new
-    person.email = email
+    if person.nil?
+      self.person = Person.new
+      person.email = email
+    end
+    person.owners = [self]
   end
 
   def roles=(roles)
