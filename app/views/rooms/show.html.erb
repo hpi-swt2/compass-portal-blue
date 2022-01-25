@@ -1,16 +1,31 @@
-<p id="notice"><%= notice %></p>
-
 <h2 class="mb-3 fw-light"><%= @room.name %></h2>
 
-<p>
-  <strong>Floor:</strong>
-  <%= @room.floor %>
-</p>
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Name:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @room.name %>
+  </p>
+</div>
 
-<p>
-  <strong>Room type:</strong>
-  <%= @room.room_type %>
-</p>
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Floor:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @room.floor %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Room type:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= Room.room_type_to_external_mapping[@room.room_type] %>
+  </p>
+</div>
 
 <script id="_latlonginfo" type="application/json">
 [<%= @room.building.location_latitude %>,<%= @room.building.location_longitude %>]

@@ -10,8 +10,6 @@
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>
 
-    <h5 class="fw-light mt-3">User Details</h5>
-
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -57,13 +55,13 @@
       </div>
     <% end %>
 
+    <%= link_to "Edit linked person", edit_person_path(resource.person), class: 'btn btn-secondary link-btn' %>
+
     <h3 class="fw-light mt-5">Logout Account</h3>
 
-     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
-            <i class="fas fa-sign-out-alt"></i> Sign out
-     <% end%>
-
-    <%= link_to "Edit linked person", edit_person_path(resource.person) %>
+    <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
+      <i class="fas fa-sign-out-alt"></i> Sign out
+    <% end%>
 
     <h3 class="fw-light mt-5">Cancel Account</h3>
 

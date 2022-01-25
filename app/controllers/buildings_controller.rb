@@ -23,8 +23,8 @@ class BuildingsController < ApplicationController
 
     respond_to do |format|
       if @building.save
-        format.html { redirect_to @building, notice: "Building was successfully created." }
-        format.json { render :show, status: :created, location: @building }
+        format.html { redirect_to edit_building_path(@building), notice: "Building was successfully created." }
+        format.json { render :edit, status: :created, location: @building }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @building.errors, status: :unprocessable_entity }
@@ -36,8 +36,8 @@ class BuildingsController < ApplicationController
   def update
     respond_to do |format|
       if @building.update(building_params)
-        format.html { redirect_to @building, notice: "Building was successfully updated." }
-        format.json { render :show, status: :ok, location: @building }
+        format.html { redirect_to edit_building_path(@building), notice: "Building was successfully updated." }
+        format.json { render :edit, status: :ok, location: @building }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @building.errors, status: :unprocessable_entity }

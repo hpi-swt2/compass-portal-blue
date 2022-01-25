@@ -20,7 +20,7 @@ RSpec.describe "/openingtimes", type: :request do
     Openingtime.new(day: 6,
                     opens: Tod::TimeOfDay(8),
                     closes: Tod::TimeOfDay(17),
-                    timeable: FactoryBot.create(:building)).attributes
+                    timeable: create(:building)).attributes
   end
 
   let(:invalid_attributes) do
@@ -68,7 +68,7 @@ RSpec.describe "/openingtimes", type: :request do
 
       it "redirects to the created openingtime" do
         post openingtimes_url, params: { openingtime: valid_attributes }
-        expect(response).to redirect_to(openingtime_url(Openingtime.last))
+        expect(response).to redirect_to(edit_openingtime_url(Openingtime.last))
       end
     end
 
@@ -88,10 +88,12 @@ RSpec.describe "/openingtimes", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_openingtime = Openingtime.new(day: 3,
-                                        opens: Tod::TimeOfDay(10),
-                                        closes: Tod::TimeOfDay(12),
-                                        timeable: FactoryBot.create(:building))
+      let(:new_openingtime) do
+        Openingtime.new(day: 3,
+                        opens: Tod::TimeOfDay(10),
+                        closes: Tod::TimeOfDay(12),
+                        timeable: create(:building))
+      end
       let(:new_attributes) do
         new_openingtime.attributes
       end
@@ -109,7 +111,7 @@ RSpec.describe "/openingtimes", type: :request do
         openingtime = Openingtime.create! valid_attributes
         patch openingtime_url(openingtime), params: { openingtime: new_attributes }
         openingtime.reload
-        expect(response).to redirect_to(openingtime_url(openingtime))
+        expect(response).to redirect_to(edit_openingtime_url(openingtime))
       end
     end
 

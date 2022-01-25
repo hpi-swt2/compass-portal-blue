@@ -1,6 +1,10 @@
-<h1>Editing Openingtime</h1>
+<div class="row pb-1">
+  <div class="col-lg-6 col-md-6 mx-auto">
+    <h2 class="fw-light">Edit Openingtime</h2>
 
-<%= render 'form', openingtime: @openingtime %>
+    <%= render 'form', openingtime: @openingtime %>
 
-<%= link_to 'Show', @openingtime %> |
-<%= link_to 'Back', openingtimes_path %>
+    <%= link_to 'Back', openingtimes_path, class: "btn btn-secondary link-btn" %>
+    <%= link_to 'Show', @openingtime, class: "btn btn-secondary link-btn" %>
+  </div>
+</div>

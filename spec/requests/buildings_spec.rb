@@ -65,7 +65,7 @@ RSpec.describe "/buildings", type: :request do
 
       it "redirects to the created building" do
         post buildings_url, params: { building: valid_attributes }
-        expect(response).to redirect_to(building_url(Building.last))
+        expect(response).to redirect_to(edit_building_url(Building.last))
       end
     end
 
@@ -103,7 +103,7 @@ RSpec.describe "/buildings", type: :request do
         building = Building.create! valid_attributes
         patch building_url(building), params: { building: new_attributes }
         building.reload
-        expect(response).to redirect_to(building_url(building))
+        expect(response).to redirect_to(edit_building_url(building))
       end
     end
 

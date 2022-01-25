@@ -23,8 +23,8 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: "location was successfully created." }
-        format.json { render :show, status: :created, location: @location }
+        format.html { redirect_to edit_location_path(@location), notice: "location was successfully created." }
+        format.json { render :edit, status: :created, location: @location }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @location.errors, status: :unprocessable_entity }
@@ -36,8 +36,8 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to @location, notice: "location was successfully updated." }
-        format.json { render :show, status: :ok, location: @location }
+        format.html { redirect_to edit_location_path(@location), notice: "location was successfully updated." }
+        format.json { render :edit, status: :ok, location: @location }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @location.errors, status: :unprocessable_entity }
