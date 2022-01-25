@@ -22,7 +22,7 @@ class LocationsController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def create
     @location = Location.new(location_params)
-    @location.user_id = current_user.id
+    @location.users = [current_user]
     respond_to do |format|
       if @location.save
         format.html { redirect_to edit_location_path(@location), notice: "location was successfully created." }

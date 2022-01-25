@@ -22,7 +22,7 @@ class BuildingsController < ApplicationController
   # rubocop:disable Metrics/MethodLength
   def create
     @building = Building.new(building_params)
-    @building.user_id = current_user.id
+    @building.users = [current_user]
     respond_to do |format|
       if @building.save
         format.html { redirect_to edit_building_path(@building), notice: "Building was successfully created." }
