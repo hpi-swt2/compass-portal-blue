@@ -17,8 +17,9 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>D start</th>
-      <th>D end</th>
+      <th>Room</th>
+      <th>Start Date</th>
+      <th>End Date</th>
       <th>Recurring</th>
       <th colspan="3"></th>
     </tr>
@@ -29,9 +30,14 @@
       <tr>
         <td><%= event.name %></td>
         <td><%= event.description %></td>
+        <% if event.room.nil? then %>
+          <td><%= "No Room" %></td>
+        <% else %>
+          <td><%= link_to event.room.name, room_path(event.room) %></td>
+        <% end %>
         <td><%= event.d_start %></td>
         <td><%= event.d_end %></td>
-        <td><%= event.recurring %></td>
+        <td><%= event.rule %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>

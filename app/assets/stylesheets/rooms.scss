@@ -8,6 +8,7 @@
     text-align: center;
     border-radius: 5px;
     padding: 0 5px 0 5px;
+    width: 100px;
 }
 
 .occupancy.free {
@@ -22,6 +23,57 @@
     font-size: xx-large;
 }
 
-td {
-    vertical-align: top;
+
+
+@import "simple_calendar";
+
+table.roomsList #roomName {
+    padding-left: 150px;
+    padding-right: 15px;
 }
+table.roomsList #normalRow {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+header{
+    font-size: large;
+}
+
+collapse{
+    height: auto;
+}
+
+.simple-calendar {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: x-large;
+    .day {
+        font-family: helvetica;
+        font-size: large;
+    }
+    .content{
+        font-size: medium;
+    }
+
+    .wday-0 {}
+    .wday-1 {}
+    .wday-2 {}
+    .wday-3 {}
+    .wday-4 {}
+    .wday-5 {}
+    .wday-6 {}
+  
+    .today {
+        background-color: cornflowerblue;
+    }
+    .past {}
+    .future {}
+  
+    .start-date {}
+  
+    .prev-month {}
+    .next-month { }
+    .current-month {}
+  
+    .has-events {}
+  }

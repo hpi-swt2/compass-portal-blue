@@ -4,28 +4,20 @@ RSpec.describe "rooms/index", type: :view do
   before do
     @building = create :building
     @people = [(create :person)]
-    assign(:rooms, [
-             Room.create!(
-               name: "Name",
-               floor: -2,
-               room_type: "Room Type",
-               people: @people,
-               building: @building
-             ),
-             Room.create!(
-               name: "Name",
-               floor: -2,
-               room_type: "Room Type",
-               people: @people,
-               building: @building
-             )
-           ])
+    @rooms = Room.create([{ name: "Hörsaal1", floor: 0, room_type: "Hörsaal" },
+                          { name: "H.257", floor: 2, room_type: "Seminarraum" }]) do |u|
+      u.people = @people
+      u.building = @building
+    end
   end
 
   it "renders a list of rooms" do
     render
-    assert_select "tr>td", text: "Name".to_s, count: 2
-    assert_select "tr>td", text: "-2".to_s, count: 2
-    assert_select "tr>td", text: "Room Type".to_s, count: 2
+    expect(rendered).to have_text("Seminar Rooms")
+    expect(rendered).to have_text("H.257")
+    expect(rendered).to have_text("Lecture Halls")
+    expect(rendered).to have_text("Hörsaal1")
+    expect(rendered).to have_text("Pool Rooms")
+    expect(rendered).to have_text("Conference Rooms")
   end
 end

@@ -1,6 +1,7 @@
 # The model representing a room at HPI
 class Room < ApplicationRecord
   belongs_to :building
+  has_many :events
   has_and_belongs_to_many :people
   validates :name, presence: true
   validates :room_type, presence: true

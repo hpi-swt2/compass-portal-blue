@@ -20,14 +20,22 @@
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
+  
+    <div>
+      <%= form.label :room %>
+        <%= form.select 'room',
+            options_from_collection_for_select(Room.all, :id, :name),
+            {},
+            multiple: false %>
+    </div>
 
   <div class="field">
-    <%= form.label :d_start %>
+    <%= form.label "Start Date" %>
     <%= form.datetime_select :d_start %>
   </div>
 
   <div class="field">
-    <%= form.label :d_end %>
+    <%= form.label "End Date" %>
     <%= form.datetime_select :d_end %>
   </div>
 

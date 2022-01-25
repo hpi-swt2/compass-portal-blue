@@ -1,3 +1,6 @@
+require 'time'
+require 'date'
+
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[show edit update destroy]
 
@@ -16,6 +19,15 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1/edit
   def edit; end
+
+  def calendar
+    @room = Room.find(params[:id])
+    
+    @month = Date::MONTHNAMES[Date.today.month]
+    @year = Time.now.year
+    @events = @room.events
+    # Event.generate_calendar_events(@events, start_date, end_date)
+  end
 
   # POST /rooms or /rooms.json
   def create

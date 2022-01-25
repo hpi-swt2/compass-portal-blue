@@ -13,7 +13,7 @@ class EventsController < ApplicationController
     end
 
     file = params[:file].tempfile
-    if file.path.split('.').last.casecmp? "ics" then
+    if File.extname(file.path) == ".ics" then
       Event.import(file)
       redirect_to events_url, notice: "Imported Events from ICS"
     else
@@ -81,6 +81,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring)
+      params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room)
     end
 end
