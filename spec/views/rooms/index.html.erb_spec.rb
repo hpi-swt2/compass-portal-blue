@@ -4,13 +4,8 @@ RSpec.describe "rooms/index", type: :view do
   before do
     @building = create :building
     @people = [(create :person)]
-<<<<<<< HEAD
-    @rooms = Room.create([{ name: "Hörsaal1", floor: 0, room_type: "Hörsaal" },
-                          { name: "H.257", floor: 2, room_type: "Seminarraum" }]) do |u|
-=======
     @rooms = Room.create([{ name: "Lecture hall 1", floor: 0, room_type: "lecture-hall" },
                           { name: "H-2.57", floor: 2, room_type: "seminar-room" }]) do |u|
->>>>>>> dev
       u.people = @people
       u.building = @building
     end
