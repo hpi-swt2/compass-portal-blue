@@ -16,7 +16,7 @@ RSpec.describe "openingtimes/edit", type: :view do
 
     assert_select "form[action=?][method=?]", openingtime_path(@openingtime), "post" do
 
-      assert_select "input[name=?]", "openingtime[day]"
+      assert_select "select[name=?]", "openingtime[day]"
     end
   end
 end

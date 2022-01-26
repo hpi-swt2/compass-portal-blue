@@ -17,7 +17,7 @@ RSpec.describe "/rooms", type: :request do
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Room.new(name: "H-2.57", floor: 2, room_type: "Seminar", building: FactoryBot.create(:building)).attributes
+    Room.new(name: "H-2.57", floor: 2, room_type: "seminar-room", building: create(:building)).attributes
   end
 
   let(:invalid_attributes) do
@@ -65,7 +65,7 @@ RSpec.describe "/rooms", type: :request do
 
       it "redirects to the created room" do
         post rooms_url, params: { room: valid_attributes }
-        expect(response).to redirect_to(room_url(Room.last))
+        expect(response).to redirect_to(edit_room_url(Room.last))
       end
     end
 
@@ -85,7 +85,9 @@ RSpec.describe "/rooms", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_room = Room.new(name: "H-E.51", floor: "E", room_type: "Seminar", building: FactoryBot.create(:building))
+      let(:new_room) do
+        Room.new(name: "H-E.51", floor: "E", room_type: "seminar-room", building: create(:building))
+      end
       let(:new_attributes) do
         new_room.attributes
       end
@@ -104,7 +106,7 @@ RSpec.describe "/rooms", type: :request do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: new_attributes }
         room.reload
-        expect(response).to redirect_to(room_url(room))
+        expect(response).to redirect_to(edit_room_url(room))
       end
     end
 

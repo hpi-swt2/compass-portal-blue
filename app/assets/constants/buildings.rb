@@ -278,7 +278,7 @@ module Buildings
   HPI_LETTERS = [
     {
       coordinate: [52.39364, 13.1300582],
-      letter: 'I'
+      letter: 'K'
     },
     {
       coordinate: [52.394252, 13.1319832],
@@ -335,9 +335,9 @@ module Buildings
     hpi_letters.map do |hpi_letter|
       {
         latlng: hpi_letter[:coordinate],
-        div_icon: {
+        divIcon: {
           html: hpi_letter[:letter],
-          class_name: "building-icon"
+          className: "building-icon"
         }
       }
     end

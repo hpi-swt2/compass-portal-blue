@@ -66,7 +66,7 @@ RSpec.describe "/people", type: :request do
 
       it "redirects to the created person" do
         post people_url, params: { person: valid_attributes }
-        expect(response).to redirect_to(person_url(Person.last))
+        expect(response).to redirect_to(edit_person_url(Person.last))
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe "/people", type: :request do
         person = Person.create! valid_attributes
         patch person_url(person), params: { person: new_attributes }
         person.reload
-        expect(response).to redirect_to(person_url(person))
+        expect(response).to redirect_to(edit_person_url(person))
       end
     end
 

@@ -8,10 +8,9 @@ RSpec.describe "welcome/index", type: :feature do
     expect(page).to have_field("search")
   end
 
-  it "has a top bar with the navigator logo and a login option" do
+  it "has a top bar with a login option" do
     visit root_path
     expect(page).to have_css('.topbar-custom')
-    expect(page).to have_css('.topbar-custom .navbar-brand')
     expect(page).to have_link(href: login_path)
   end
 

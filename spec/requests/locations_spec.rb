@@ -65,7 +65,7 @@ RSpec.describe "/locations", type: :request do
 
       it "redirects to the created location" do
         post locations_url, params: { location: valid_attributes }
-        expect(response).to redirect_to(location_url(Location.last))
+        expect(response).to redirect_to(edit_location_url(Location.last))
       end
     end
 
@@ -105,7 +105,7 @@ RSpec.describe "/locations", type: :request do
         location = Location.create! valid_attributes
         patch location_url(location), params: { location: new_attributes }
         location.reload
-        expect(response).to redirect_to(location_url(location))
+        expect(response).to redirect_to(edit_location_url(location))
       end
     end
 
