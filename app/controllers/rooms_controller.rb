@@ -23,8 +23,8 @@ class RoomsController < ApplicationController
   def calendar
     @room = Room.find(params[:id])
 
-    @month = Date::MONTHNAMES[Date.today.month]
-    @year = Time.now.year
+    @month = Date::MONTHNAMES[Time.zone.today.month]
+    @year = Time.zone.now.year
     events = @room.events
     @events = Event.generate_calendar_events(events, "2022-01-01 08:00:13", "2022-01-30 08:00:13")
   end

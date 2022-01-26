@@ -1,7 +1,7 @@
 # the model representing a room
 class Room < ApplicationRecord
-  belongs_to :building
-  has_many :events
+  belongs_to :building , dependent: nil
+  has_many :events 
   has_and_belongs_to_many :people
   validates :name, presence: true
   validates :floor, presence: true, numericality: { only_integer: true }
