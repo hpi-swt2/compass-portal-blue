@@ -150,7 +150,7 @@ const syncUserPositionWithServerImpl = async (location) => {
 const syncUserPositionWithServer = rateLimit(syncUserPositionWithServerImpl, 10000);
 
 let watcherId;
-const positionIcon = L.icon({ iconUrl: "assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
+const positionIcon = L.icon({ iconUrl: "../assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
 const positionMarker = L.marker([0, 0], { icon: positionIcon });
 positionMarker.bindPopup("Your position");
 
