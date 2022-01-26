@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "buildings/index", type: :view do
   before do
     assign(:buildings, [
-             (create :building),
-             (create :building)
+             create(:building),
+             create(:building)
            ])
   end
 

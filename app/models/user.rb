@@ -25,6 +25,7 @@ class User < ApplicationRecord
     person.owners = [self]
   end
 
+  # Allow multiple roles per user by storing roles using a bitmask
   def roles=(roles)
     roles = [*roles].map(&:to_sym)
     self.roles_mask = (roles & ROLES).sum { |r| 2**ROLES.index(r) }

@@ -3,7 +3,6 @@ require 'rails_helper'
 describe "location edit page", type: :feature do
   before do
     @location = create :location
-    @user = create :user
     sign_in(create(:user, admin: true))
   end
 
