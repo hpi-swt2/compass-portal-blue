@@ -90,6 +90,37 @@ RSpec.describe "/events", type: :request do
     end
   end
 
+  describe "POST /import" do
+    context "without a file parameter" do
+      before do
+        post import_events_path
+      end
+
+      it "redirects to the index page" do
+        expect(response).to redirect_to(events_url)
+      end
+      
+      it "alerts that a ICS file has to be chosen first" do
+        expect(flash[:alert]).to eq("Please choose an ICS file to import")
+      end
+    end
+
+    context "with a non ICS file parameter" do
+      before do
+        non_ics_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/routing/events_routing_spec.rb")
+        post import_events_path, params: { file: non_ics_file }
+      end
+
+      it "redirects to the index page" do
+        expect(response).to redirect_to(events_url)
+      end
+
+      it "alerts that only ICS files can be imported" do
+        expect(flash[:alert]).to eq("Only ICS files can be imported")
+      end
+    end
+  end
+
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_event) do
