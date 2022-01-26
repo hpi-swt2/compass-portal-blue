@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "/users/geo_location", type: :request do
   before do
-    @user = FactoryBot.create(:user)
+    @user = create(:user)
   end
 
   describe "PUT /users/geo_location" do
