@@ -86,7 +86,7 @@ class Event < ApplicationRecord
       [self] if (start_date..end_date).cover?(d_start) or (start_date..end_date).cover?(d_end)
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
-        Event.new(id: id, name: name, description: description, d_start: occurrence.start_date_time, d_end: occurrence.end_time)
+        Event.new(id: id, name: name, description: description, d_start: occurrence.start_time, d_end: occurrence.end_time)
       end
     end
   end

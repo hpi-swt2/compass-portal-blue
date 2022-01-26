@@ -25,8 +25,14 @@ class RoomsController < ApplicationController
 
     @month = Date::MONTHNAMES[Date.today.month]
     @year = Time.now.year
-    @events = @room.events
-    # Event.generate_calendar_events(@events, start_date, end_date)
+    events = @room.events
+    # puts "Events:"
+    # puts events
+    # start_date = Date.today
+    # start_date = start_date.beginning_of_month.beginning_of_week
+    # end_date = Date.today
+    # end_date = start_date.end_of_month.end_of_week
+    @events = Event.generate_calendar_events(events, "2022-01-01 08:00:13", "2022-01-30 08:00:13")
   end
 
   # POST /rooms or /rooms.json

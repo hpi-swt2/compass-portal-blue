@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Finn-HPI/leaflet-rails.git
+  revision: 340f65cbc163dcc3523c43592831d43a65381296
+  specs:
+    leaflet-rails (1.7.4)
+      rails (>= 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -370,6 +377,7 @@ DEPENDENCIES
   icalendar
   ice_cube
   jbuilder (~> 2.7)
+  leaflet-rails!
   listen (~> 3.3)
   omniauth
   omniauth_openid_connect
