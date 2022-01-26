@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
 
   def calendar
     @room = Room.find(params[:id])
-    
+
     @month = Date::MONTHNAMES[Date.today.month]
     @year = Time.now.year
     @events = @room.events

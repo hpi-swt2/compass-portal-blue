@@ -13,7 +13,7 @@ RSpec.describe "rooms/calendar", type: :view do
                             people: @people,
                             building: @building
                           ))
-    @events = [Event.create!(name: "Test Event", description: "CG", d_start: Time.now, d_end: Time.now, recurring: "",  room_id: @room.id)]
+    @events = [Event.create!(name: "Test Event", description: "CG", d_start: Time.now, d_end: Time.now, recurring: "", room_id: @room.id)]
     @date = Time.now
     @month = Date::MONTHNAMES[Date.today.month]
     @year = Time.now.year

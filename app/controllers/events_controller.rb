@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[show edit update destroy]
 
   # GET /events or /events.json
   def index
@@ -7,13 +7,13 @@ class EventsController < ApplicationController
   end
 
   def import
-    if params[:file].nil? then
+    if params[:file].nil?
       redirect_to events_url, alert: "Please choose an ICS file to import"
       return
     end
 
     file = params[:file].tempfile
-    if File.extname(file.path) == ".ics" then
+    if File.extname(file.path) == ".ics"
       Event.import(file)
       redirect_to events_url, notice: "Imported Events from ICS"
     else
@@ -23,8 +23,7 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1 or /events/1.json
-  def show
-  end
+  def show; end
 
   # GET /events/new
   def new
@@ -32,8 +31,7 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /events or /events.json
   def create
@@ -74,13 +72,14 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room)
+  end
 end
