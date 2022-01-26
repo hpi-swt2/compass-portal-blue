@@ -38,21 +38,20 @@ class Event < ApplicationRecord
     calendars = Icalendar::Calendar.parse(file)
     calendars.each do |calendar|
       calendar.events.each do |parse_event|
-        event = Event.create(
-          name:         parse_event.summary.force_encoding("UTF-8"),
-          d_start:      parse_event.dtstart,
-          d_end:        parse_event.dtend,
-          description:  (parse_event.description.nil?) ? ""
-                        : parse_event.description.force_encoding("UTF-8"),
-          recurring:    ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
-          room:         Room.find_by(name: parse_event.location.to_s)
+        Event.create(
+          name: parse_event.summary.force_encoding("UTF-8"),
+          d_start: parse_event.dtstart,
+          d_end: parse_event.dtend,
+          description: parse_event.description.nil? ? "" : parse_event.description.force_encoding("UTF-8"),
+          recurring: ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
+          room: Room.find_by(name: parse_event.location.to_s)
         )
       end
     end
   end
 
   def self.generate_calendar_events(events, start_date, end_date)
-    events.flat_map { |event| event.calendar_events(start_date, end_date)}
+    events.flat_map { |event| event.calendar_events(start_date, end_date) }
   end
 
   def start_hour_minute
@@ -72,7 +71,7 @@ class Event < ApplicationRecord
   end
 
   def rule
-    IceCube::Rule.from_yaml(recurring) if !recurring.blank?
+    IceCube::Rule.from_yaml(recurring) if recurring.present?
   end
 
   def schedule
@@ -82,11 +81,12 @@ class Event < ApplicationRecord
   end
 
   def calendar_events(start_date, end_date)
-    if recurring.blank? then
-      [self] if (start_date..end_date).cover?(d_start) or (start_date..end_date).cover?(d_end)
+    if recurring.blank?
+      [self] if (start_date..end_date).cover?(d_start) || (start_date..end_date).cover?(d_end)
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
-        Event.new(id: id, name: name, description: description, d_start: occurrence.start_time, d_end: occurrence.end_time)
+        Event.new(id: id, name: name, description: description, d_start: occurrence.start_time,
+                  d_end: occurrence.end_time)
       end
     end
   end
