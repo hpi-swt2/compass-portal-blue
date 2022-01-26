@@ -2,16 +2,16 @@ require 'rails_helper'
 require 'ice_cube'
 
 RSpec.describe "events/show", type: :view do
-  before(:each) do
+  before do
     @start_time = Time.current
-    @end_time = Time.current + 3.days
+    @end_time = 3.days.from_now
     @event = assign(:event, Event.create!(
-      name: "Name",
-      description: "A Description",
-      d_start: @start_time,
-      d_end: @end_time,
-      recurring: IceCube::Rule.weekly.day(:monday).to_yaml
-    ))
+                              name: "Name",
+                              description: "A Description",
+                              d_start: @start_time,
+                              d_end: @end_time,
+                              recurring: IceCube::Rule.weekly.day(:monday).to_yaml
+                            ))
   end
 
   it "renders attributes in <p>" do

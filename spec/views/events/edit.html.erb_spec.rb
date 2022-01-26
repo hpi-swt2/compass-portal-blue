@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "events/edit", type: :view do
-  before(:each) do
+  before do
     @event = assign(:event, Event.create!(
-      name: "MyString",
-      description: "MyText",
-      recurring: "MyText"
-    ))
+                              name: "MyString",
+                              description: "MyText",
+                              recurring: "MyText"
+                            ))
   end
 
   it "renders the edit event form" do
@@ -19,8 +19,8 @@ RSpec.describe "events/edit", type: :view do
       assert_select "textarea[name=?]", "event[description]"
 
       assert_select "textarea[name=?]", "event[recurring]"
-      
-      for i in 1..5 do
+
+      (1..5).each do |i|
         assert_select "select[name=?]", "event[d_start(#{i}i)]"
         assert_select "select[name=?]", "event[d_end(#{i}i)]"
       end
