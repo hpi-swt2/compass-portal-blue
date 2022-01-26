@@ -4,7 +4,7 @@ import {
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
 import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
-import { lazyInit, ratelimit } from "./utils.js";
+import { lazyInit, rateLimit } from "./utils.js";
 
 // FIXME: this should probably be in application.js or something similarly
 // global, but it didn't work when we put it there
@@ -147,7 +147,7 @@ const syncUserPositionWithServerImpl = async (location) => {
   );
   console.assert(response.status === 204); // HTTP "No content"
 };
-const syncUserPositionWithServer = ratelimit(syncUserPositionWithServerImpl, 10000);
+const syncUserPositionWithServer = rateLimit(syncUserPositionWithServerImpl, 10000);
 
 let watcherId;
 const positionIcon = L.icon({ iconUrl: "assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
