@@ -1,34 +1,51 @@
 @import "colors";
 
 .topbar-custom {
-  background-color: $hpi-blue;
   padding: 0.5rem 2rem;
   flex-wrap: nowrap !important;
   position: fixed !important;
   top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 99;
-  height: 4rem;
+  right: 0;
+  z-index: 401;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 
   .navbar-brand {
-    color: white;
+    color: $hpi-blue;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
 
-    & > span {
-      margin-left: 0.5rem;
-      @media only screen and (max-width: 270px) {
+    @media only screen and (max-width: 350px) {
+      & > span {
         display: none;
       }
     }
   }
 
   .user-area {
+    background-color: white;
+    padding: 0.2rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 2.5rem;
+
+    &:hover {
+      transform: scale(1.02);
+      transform-origin: center;
+    }
+
     a {
-      color: white;
+      color: $hpi-blue;
       display: flex;
       flex-direction: row;
       align-items: center;
       text-decoration: none;
+
+      &:hover {
+        background-color: transparent !important;
+      }
 
       & > span {
         margin-right: 1rem;
@@ -40,9 +57,9 @@
     }
 
     .profile-picture-container {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 1rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
       overflow: hidden;
       border: 0.1rem solid white;
 

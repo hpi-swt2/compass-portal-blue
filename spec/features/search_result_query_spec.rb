@@ -3,17 +3,21 @@ require 'rails_helper'
 RSpec.describe "Search result list page", type: :feature do
 
   before do
-    @building_abc = FactoryBot.create :building, name: "Building ABC"
-    @abc_building = FactoryBot.create :building, name: "ABC Building"
-    @building_xyz = FactoryBot.create :building, name: "Building XYZ"
+    @building_abc = create :building, name: "Building ABC"
+    @abc_building = create :building, name: "ABC Building"
+    @building_xyz = create :building, name: "Building XYZ"
 
-    @room_abc = FactoryBot.create :room, name: "Room ABC"
-    @abc_room = FactoryBot.create :room, name: "ABC Room"
-    @room_xyz = FactoryBot.create :room, name: "Room X.YZ"
+    @room_abc = create :room, name: "Room ABC"
+    @abc_room = create :room, name: "ABC Room"
+    @room_xyz = create :room, name: "Room X.YZ"
 
-    @curie = FactoryBot.create :person, first_name: "Marie", last_name: "Curie"
-    @riemann = FactoryBot.create :person, first_name: "Bernhard", last_name: "Riemann"
-    @bernoulli = FactoryBot.create :person, first_name: "Daniel", last_name: "Bernoulli"
+    @bank = create :location, name: "Bank", details: "bank-details"
+    @pavillon = create :location, name: "Pavillon", details: "pavillon-details"
+    @kocktail_bar = create :location, name: "Kocktail Bar", details: "kocktail bar-details"
+
+    @curie = create :person, first_name: "Marie", last_name: "Curie"
+    @riemann = create :person, first_name: "Bernhard", last_name: "Riemann"
+    @bernoulli = create :person, first_name: "Daniel", last_name: "Bernoulli"
   end
 
   it "shows buildings matching the query" do
@@ -43,6 +47,34 @@ RSpec.describe "Search result list page", type: :feature do
 
     visit search_results_path(query: "build")
     expect(page.body.index(@building_abc.name)).to be < page.body.index(@abc_building.name)
+  end
+
+  it "shows locations matching the query" do
+    visit search_results_path(query: "vill")
+    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon), count: 1)
+
+    visit search_results_path(query: "Ban")
+    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+  end
+
+  it "does not show locations not matching the query" do
+    visit search_results_path(query: "Ban")
+    expect(page).not_to have_text(@pavillon.name)
+    expect(page).not_to have_link(href: location_path(@pavillon))
+    expect(page).not_to have_text(@kocktail_bar.name)
+    expect(page).not_to have_link(href: location_path(@kocktail_bar))
+
+    visit search_results_path(query: "vill")
+    expect(page).not_to have_text(@bank.name)
+    expect(page).not_to have_link(href: location_path(@bank))
+  end
+
+  it "lists locations starting with the query before other found locations" do
+    visit search_results_path(query: "ba")
+    expect(page.body.index(@bank.name)).to be < page.body.index(@kocktail_bar.name)
+
+    visit search_results_path(query: "k")
+    expect(page.body.index(@kocktail_bar.name)).to be < page.body.index(@bank.name)
   end
 
   it "shows rooms matching the query" do

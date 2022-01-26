@@ -14,13 +14,13 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/events", type: :request do
-  
+
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     Event.new(name: "BA Mathematik III Übung",
               description: "Teaching mathematics",
-              room: FactoryBot.create(:room),
+              room: create(:room),
               d_start: "2021-10-25 13:15:00",
               d_end: "2021-10-25 14:45:00",
               recurring: IceCube::Rule.weekly.day(:monday).to_yaml
@@ -92,12 +92,14 @@ RSpec.describe "/events", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      new_event = Event.new(name: "MA Combinatorial Optimization / Friedrich",
-                            description: "MA Combinatorial Optimization by Friedrich",
-                            room: FactoryBot.create(:room),
-                            d_start: "2021-10-28 09:00:00",
-                            d_end: "2021-10-28 10:30:00",
-                            recurring: IceCube::Rule.weekly.day(:thursday).to_yaml)
+      let(:new_event) do
+        Event.new(name: "MA Combinatorial Optimization / Friedrich",
+                  description: "MA Combinatorial Optimization by Friedrich",
+                  room: create(:room),
+                  d_start: "2021-10-28 09:00:00",
+                  d_end: "2021-10-28 10:30:00",
+                  recurring: IceCube::Rule.weekly.day(:thursday).to_yaml)
+      end
       let(:new_attributes) do
         new_event.attributes
       end

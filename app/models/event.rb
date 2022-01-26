@@ -29,6 +29,11 @@ class Event < ApplicationRecord
     rrule_yaml
   end
 
+  def self.find_room(location_string)
+    room = Room.find_by(name: location_string)
+    room || nil
+  end
+
   def self.import(file)
     calendars = Icalendar::Calendar.parse(file)
     calendars.each do |calendar|

@@ -5,7 +5,7 @@ RSpec.describe "rooms/new", type: :view do
     assign(:room, Room.new(
                     name: "MyString",
                     floor: -1,
-                    room_type: "MyString"
+                    room_type: "seminar-room"
                   ))
   end
 
@@ -18,7 +18,7 @@ RSpec.describe "rooms/new", type: :view do
 
       assert_select "input[name=?]", "room[floor]"
 
-      assert_select "input[name=?]", "room[room_type]"
+      assert_select "select[name=?]", "room[room_type]"
     end
   end
 end

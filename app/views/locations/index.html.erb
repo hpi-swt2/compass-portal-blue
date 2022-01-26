@@ -1,34 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Locations</h1>
+<h1 class="fw-light">Locations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Photo</th>
-      <th colspan="3"></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @locations.each do |location| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= location.name %></td>
-        <td><% if location.location_photo.attached? %>
-              <img src="<%=(url_for(location.location_photo))%>" alt="<%= location.location_photo.filename %>" height="30"/>
-            <% else %>
-              <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo" height="30">
-            <% end %></td>
-        <td><%= link_to 'Show', location %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Photo</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr>
+          <td><%= location.name %></td>
+          <td><% if location.location_photo.attached? %>
+            <img src="<%=(url_for(location.location_photo))%>" alt="<%= location.location_photo.filename %>" height="30"/>
+          <% else %>
+            <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo" height="30">
+          <% end %></td>
+          <td class="td-btn"><%= link_to 'Show', location, class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><%= link_to 'Edit', edit_location_path(location), class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Location', new_location_path %>
+<%= link_to 'New Location', new_location_path, class: "btn btn-primary link-btn" %>
