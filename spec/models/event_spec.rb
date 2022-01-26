@@ -3,8 +3,8 @@ require 'ice_cube'
 
 RSpec.describe Event, type: :model do
   it "has name, description, d_start, d_room, room and recurrence rule" do
-    event = FactoryBot.create :event
-    room = FactoryBot.create :room
+    event = create :event
+    room = create :room
 
     expect(event.name).to eq('BA Mathematik III Übung')
     expect(event.description).to eq("Teaching mathematics")

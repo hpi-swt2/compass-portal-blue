@@ -2,29 +2,29 @@ require 'rails_helper'
 require 'ice_cube'
 
 RSpec.describe "events/index", type: :view do
-  before(:each) do
+  before do
 
     @room = create :room
     @room.name = "A1.1"
     @start_time = Time.current
-    @end_time = Time.current + 3.days
+    @end_time = 3.days.from_now
     assign(:events, [
-      Event.create!(
-        name: "Name",
-        description: "A Description",
-        d_start: @start_time,
-        d_end: @end_time,
-        recurring: ""
-      ),
-      Event.create!(
-        name: "Name",
-        description: "A Description",
-        recurring: IceCube::Rule.weekly.day(:monday).to_yaml,
-        d_start: @start_time,
-        d_end: @end_time,
-        room: @room
-      )
-    ])
+             Event.create!(
+               name: "Name",
+               description: "A Description",
+               d_start: @start_time,
+               d_end: @end_time,
+               recurring: ""
+             ),
+             Event.create!(
+               name: "Name",
+               description: "A Description",
+               recurring: IceCube::Rule.weekly.day(:monday).to_yaml,
+               d_start: @start_time,
+               d_end: @end_time,
+               room: @room
+             )
+           ])
   end
 
   it "renders a list of events" do
