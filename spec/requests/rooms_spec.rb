@@ -13,13 +13,16 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/rooms", type: :request do
+
   before do
     sign_in(create(:user, admin: true))
   end
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
+
   let(:valid_attributes) do
-    Room.new(name: "H-2.57", floor: 2, room_type: "seminar-room", building: create(:building), owners: [create(:user)]).attributes
+    Room.new(name: "H-2.57", floor: 2, room_type: "seminar-room", building: create(:building),
+             owners: [create(:user)]).attributes
   end
 
   let(:invalid_attributes) do

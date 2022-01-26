@@ -33,7 +33,7 @@ class RoomsController < ApplicationController
       end
     end
   end
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /rooms/1 or /rooms/1.json
   def update

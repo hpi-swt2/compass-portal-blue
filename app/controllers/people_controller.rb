@@ -18,6 +18,7 @@ class PeopleController < ApplicationController
   def edit; end
 
   # POST /people or /people.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @person = Person.new(person_params)
     @person.owners = [current_user]
@@ -31,6 +32,7 @@ class PeopleController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /people/1 or /people/1.json
   def update
