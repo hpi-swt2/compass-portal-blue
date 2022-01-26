@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "events/edit", type: :view do
   before do
-    @event = assign(:event, FactoryBot.create(:event))
+    now = Time.zone.now
+    @event = assign(:event,
+                    Event.create!(name: "MyString", d_start: now, d_end: now + 1.day, description: "MyText",
+                                  recurring: "MyText"))
   end
 
   it "renders the edit event form" do
