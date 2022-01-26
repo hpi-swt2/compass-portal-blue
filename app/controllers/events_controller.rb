@@ -77,9 +77,8 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
-
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room)
+    params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room_id)
   end
 end

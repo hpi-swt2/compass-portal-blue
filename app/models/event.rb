@@ -4,8 +4,10 @@ require 'json'
 require 'yaml'
 require 'date'
 require 'time'
+
 class Event < ApplicationRecord
   belongs_to :room, optional: true
+  validates :name, :d_start, :d_end, presence: true
 
   def self.ical_rule_to_ice_cube_yaml(icalendar_rrule)
     rrule_yaml = ""
@@ -37,16 +39,13 @@ class Event < ApplicationRecord
     calendars.each do |calendar|
       calendar.events.each do |parse_event|
         event = Event.create(
-          name: parse_event.summary.force_encoding("UTF-8"),
-          d_start: parse_event.dtstart,
-          d_end: parse_event.dtend,
-          description: if parse_event.description.nil?
-                         ""
-                       else
-                         parse_event.description.force_encoding("UTF-8")
-end,
-          recurring: ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
-          room: find_room(parse_event.location.to_s)
+          name:         parse_event.summary.force_encoding("UTF-8"),
+          d_start:      parse_event.dtstart,
+          d_end:        parse_event.dtend,
+          description:  (parse_event.description.nil?) ? ""
+                        : parse_event.description.force_encoding("UTF-8"),
+          recurring:    ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
+          room:         Room.find_by(name: parse_event.location.to_s)
         )
       end
     end
@@ -73,7 +72,7 @@ end,
   end
 
   def rule
-    IceCube::Rule.from_yaml(recurring) unless recurring.empty?
+    IceCube::Rule.from_yaml(recurring) if !recurring.blank?
   end
 
   def schedule
@@ -83,8 +82,8 @@ end,
   end
 
   def calendar_events(start_date, end_date)
-    if recurring.empty?
-      [self] if (start_date..end_date).cover?(d_start) || (start_date..end_date).cover?(d_end)
+    if recurring.blank? then
+      [self] if (start_date..end_date).cover?(d_start) or (start_date..end_date).cover?(d_end)
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
         Event.new(id: id, name: name, description: description, d_start: occurrence.start_date_time, d_end: occurrence.end_time)
