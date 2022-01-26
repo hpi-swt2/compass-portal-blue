@@ -1,3 +1,5 @@
+require "date"
+
 # The model representing a user who can log in
 class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
@@ -45,6 +47,30 @@ class User < ApplicationRecord
   #     end
   #   end
   # end
+
+  # FIXME: this should be cleaned every now and then
+  # Maps from user ids to (location, timestamp) tuples
+  @locations = Concurrent::Hash.new
+
+  class << self
+    attr_accessor :locations
+  end
+
+  def update_last_known_location(location)
+    self.class.locations[id] = [location, DateTime.now]
+  end
+
+  def last_known_location_with_timestamp
+    self.class.locations[id]
+  end
+
+  def last_known_location
+    last_known_location_with_timestamp&.at(0)
+  end
+
+  def delete_last_known_location
+    self.class.locations.delete id
+  end
 
   private
 
