@@ -13,11 +13,11 @@ RSpec.describe "rooms/index", type: :view do
 
   it "renders a list of rooms" do
     render
-    expect(rendered).to have_text("Seminar Rooms")
-    expect(rendered).to have_text("H.257")
-    expect(rendered).to have_text("Lecture Halls")
-    expect(rendered).to have_text("Hörsaal1")
-    expect(rendered).to have_text("Pool Rooms")
-    expect(rendered).to have_text("Conference Rooms")
+    expect(rendered).to have_text("Seminar rooms")
+    expect(rendered).to have_text("H-2.57")
+    expect(rendered).to have_text("Lecture halls")
+    expect(rendered).to have_text("Lecture hall 1")
+    expect(rendered).to have_text("Pool rooms")
+    expect(rendered).to have_text("Conference rooms")
   end
 end
