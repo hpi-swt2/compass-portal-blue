@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
   # POST /people or /people.json
   def create
     @person = Person.new(person_params)
-
+    @person.owners = [current_user]
     respond_to do |format|
       if @person.save
         format.html { redirect_to edit_person_path(@person), notice: "Person was successfully created." }

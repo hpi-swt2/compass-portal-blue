@@ -30,4 +30,6 @@
 
 <br>
 
-<%= link_to 'New Building', new_building_path, class: "btn btn-primary link-btn" %>
+<% if can? :create, Building%>
+  <%= link_to 'New Building', new_building_path, class: "btn btn-primary link-btn" %>
+<% end %>
