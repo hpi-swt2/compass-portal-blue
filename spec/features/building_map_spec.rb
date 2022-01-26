@@ -3,8 +3,8 @@ require "rails_helper"
 describe "Building Map page", type: :feature do
   it "contains a map", js: true do
     visit root_path
+    find(".leaflet-container")
     expect(page).to have_css("#map")
-    expect(page).to have_css(".leaflet-container")
   end
 
   it "highlights buildings on the map", js: true do
