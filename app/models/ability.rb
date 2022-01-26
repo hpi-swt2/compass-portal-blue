@@ -22,6 +22,7 @@ class Ability
   def initialize_user(user)
     can :manage, Location, owners: { id: user.id }
     can :manage, Building, owners: { id: user.id }
+    can :manage, Room, owners: { id: user.id }
     can :manage, Person, owners: { id: user.id }
     can :read, :all
   end
