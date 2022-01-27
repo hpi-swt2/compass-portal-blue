@@ -75,6 +75,8 @@ group :development, :test do
   gem 'rspec-github', require: false # https://github.com/Drieam/rspec-github
   # Easy working with HTTP Requests
   gem 'httparty'
+  # Priority queue for Dijkstra (Indoor Routing)
+  gem 'algorithms'
 end
 
 group :development do
