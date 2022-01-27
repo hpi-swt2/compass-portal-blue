@@ -14,14 +14,7 @@ class Event < ApplicationRecord
     calendars = Icalendar::Calendar.parse(file.read.force_encoding("UTF-8"))
     calendars.each do |calendar|
       calendar.events.each do |parse_event|
-        Event.create(
-          name: parse_event.summary,
-          d_start: parse_event.dtstart,
-          d_end: parse_event.dtend,
-          description: parse_event.description.nil? ? "" : parse_event.description,
-          recurring: ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
-          room: Room.find_by(name: parse_event.location.to_s)
-        )
+        create_from_icalendar(parse_event)
       end
     end
   end
@@ -98,5 +91,14 @@ class Event < ApplicationRecord
       rrule_ics << ";#{string}=#{value.join(',')}" unless value.nil?
     end
     rrule_ics
+  end
+
+  def self.create_from_icalendar(event)
+    create( name: event.summary,
+            d_start: event.dtstart,
+            d_end: event.dtend,
+            description: event.description.nil? ? "" : event.description,
+            recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
+            room: Room.find_by(name: event.location.to_s))
   end
 end
