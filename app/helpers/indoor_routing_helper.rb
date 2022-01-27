@@ -3,6 +3,26 @@ include Containers
 
 module IndoorRoutingHelper
 
+    def self.closest_door_node(latlng, building)
+        graph = IndoorGraph::INDOOR_GRAPHS[building]
+        min = Float::MAX
+        door = nil
+        IndoorGraph::DOOR_NODES[building].each {|door_id|
+            dist = distance(graph[door_id]["latlng"], latlng)
+            if dist < min
+                min = dist
+                door = door_id
+            end
+        }
+        door
+    end
+
+    def self.distance(latlng1, latlng2)
+        dy = 111.3 * (latlng1[0] - latlng2[0])
+        dx = 71.5 * (latlng1[1] - latlng2[1])
+        Math.sqrt(dx * dx + dy * dy) * 1000
+    end
+
     def self.calculate_route(from_id, to_id, building)
         puts "Debugging Output here:"
         graph = IndoorGraph::INDOOR_GRAPHS[building]

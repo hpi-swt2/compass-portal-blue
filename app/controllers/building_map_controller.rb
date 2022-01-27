@@ -14,6 +14,7 @@ class BuildingMapController < ApplicationController
 
   def view
     IndoorRoutingHelper.calculate_route("1160", "1168", 'HausABC')
+    puts IndoorRoutingHelper.closest_door_node([52.39346,13.13129], "HausABC")
     view = BuildingMapHelper.leaflet_center
     respond_to do |format|
       format.json { render json: view }
@@ -30,6 +31,8 @@ class BuildingMapController < ApplicationController
   def route
     start = RoutingHelper.resolve_coordinates(params[:start])
     dest = RoutingHelper.resolve_coordinates(params[:dest])
+    puts params[:start]
+    puts params[:dest]
     route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
 
     result = { polyline: RoutingHelper.transform_route_to_polyline(route),
