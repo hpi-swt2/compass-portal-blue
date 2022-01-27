@@ -14,10 +14,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :person, allow_destroy: true
   after_find :sync_user_email
 
-  # Favourite recipes of user
-  has_many :favourite_rooms # just the 'relationships'
-  has_many :favourites, through: :favourite_rooms, source: :room # the actual recipes a user favourites 
-
+  has_many :favourite_rooms
+  has_many :favourites, through: :favourite_rooms, source: :room
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
