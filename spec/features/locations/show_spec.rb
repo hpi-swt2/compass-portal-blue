@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Location Show Page", type: :feature do
   it "displays a locations' information" do
     @location = create :location
-    @openingtime = create(:openingtime, timeable: @location)
+    @openingtime = create :openingtime, timeable: @location
 
     visit location_path(@location)
 

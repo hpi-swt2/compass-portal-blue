@@ -4,7 +4,6 @@ class Room < ApplicationRecord
   has_many :events, dependent: :destroy 
   has_and_belongs_to_many :people
   validates :name, presence: true
-  validates :room_type, presence: true
   validates :floor, presence: true, numericality: { only_integer: true }
 
   def free?
