@@ -1,7 +1,7 @@
 module IndoorGraph
     INDOOR_GRAPHS = Hash.new
     DOOR_NODES = Hash.new
-
+    ENTRY_NODES = Hash.new
     BUILDINGS = ["HausABC"].freeze
 
     def self.load_graphs()
@@ -11,5 +11,6 @@ module IndoorGraph
         }
         INDOOR_GRAPHS.freeze
         DOOR_NODES.freeze
+        ENTRY_NODES.freeze
     end
 end

@@ -3,7 +3,7 @@ include Containers
 
 module IndoorRoutingHelper
 
-    def self.closest_door_node(latlng, buildings, maxDist)
+    def self.closest_door_node(latlng, buildings, maxDist, level)
         min = Float::MAX
         door = nil
         building = nil
@@ -11,6 +11,7 @@ module IndoorRoutingHelper
         buildings.each {|b| 
             graph = IndoorGraph::INDOOR_GRAPHS[b]
             IndoorGraph::DOOR_NODES[b].each {|door_id|
+                next unless graph[door_id]["floor"] == level
                 dist = distance(graph[door_id]["latlng"], latlng)
                 if dist < min
                     min = dist
