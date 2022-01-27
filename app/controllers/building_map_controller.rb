@@ -13,8 +13,6 @@ class BuildingMapController < ApplicationController
   end
 
   def view
-    IndoorRoutingHelper.calculate_route("1160", "1168", 'HausABC')
-    puts IndoorRoutingHelper.closest_door_node([52.39346,13.13129], "HausABC")
     view = BuildingMapHelper.leaflet_center
     respond_to do |format|
       format.json { render json: view }

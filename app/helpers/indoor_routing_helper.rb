@@ -2,19 +2,29 @@ require 'algorithms'
 include Containers
 
 module IndoorRoutingHelper
-
-    def self.closest_door_node(latlng, building)
-        graph = IndoorGraph::INDOOR_GRAPHS[building]
+    
+    def self.closest_door_node(latlng, buildings, maxDist)
         min = Float::MAX
         door = nil
-        IndoorGraph::DOOR_NODES[building].each {|door_id|
-            dist = distance(graph[door_id]["latlng"], latlng)
-            if dist < min
-                min = dist
-                door = door_id
-            end
+        building = nil
+
+        buildings.each {|b| 
+            graph = IndoorGraph::INDOOR_GRAPHS[b]
+            IndoorGraph::DOOR_NODES[b].each {|door_id|
+                dist = distance(graph[door_id]["latlng"], latlng)
+                if dist < min
+                    min = dist
+                    door = door_id
+                    building = b
+                end
+            }
         }
-        door
+        return nil if min > maxDist
+        {
+            door: door,
+            distance: min,
+            building: building,
+        } 
     end
 
     def self.distance(latlng1, latlng2)
