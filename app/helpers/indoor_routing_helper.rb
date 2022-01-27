@@ -2,7 +2,7 @@ require 'algorithms'
 include Containers
 
 module IndoorRoutingHelper
-    
+
     def self.closest_door_node(latlng, buildings, maxDist)
         min = Float::MAX
         door = nil

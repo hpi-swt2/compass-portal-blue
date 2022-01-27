@@ -2,6 +2,7 @@ class BuildingMapController < ApplicationController
   YOUR_LOCATION_MAGIC_STRING = "Your location".freeze # TODO: This is currenty hard coded in the building_map.js file
   PIN_1_MAGIC_STRING = "Pin 1".freeze
   PIN_2_MAGIC_STRING = "Pin 2".freeze
+  MAX_INDOOR_DIST = 10.freeze
 
   def _index; end
 
@@ -27,10 +28,23 @@ class BuildingMapController < ApplicationController
   end
 
   def route
+    return unless params[:start].present? && params[:dest].present?
     start = RoutingHelper.resolve_coordinates(params[:start])
     dest = RoutingHelper.resolve_coordinates(params[:dest])
-    route = OutdoorRoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
+    start_indoor = RoutingHelper.building(params[:start], MAX_INDOOR_DIST)
+    dest_indoor = RoutingHelper.building(params[:dest], MAX_INDOOR_DIST)
 
+    return outdoorRoute(start, dest) if !start_indoor && !dest_indoor
+
+    # Fall 2: 1 indoor, 1 outdoor
+
+    # Fall 3.1: 2 indoor, gleiches Gebäude
+
+    # Fall 3.2: 2 indoor, anderes Gebäude
+  end
+
+  def outdoorRoute(start, dest)
+    route = OutdoorRoutingHelper.calculate_route(start, dest)
     result = { polyline: OutdoorRoutingHelper.transform_route_to_polyline(route),
                marker: OutdoorRoutingHelper.transform_route_to_time_marker(route) }
     respond_to do |format|
