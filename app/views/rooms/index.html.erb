@@ -16,7 +16,7 @@
     <tbody>
       <% Room.room_type_to_external_mapping.each do |internal,external| %>
       <tr>
-        <th colspan="6"><b><%= external.pluralize() %>:</b></th>
+        <th colspan="7"><b><%= external.pluralize() %>:</b></th>
       </tr>
       <% @rooms.each do |room| %>
         <% if room.room_type == internal %>
