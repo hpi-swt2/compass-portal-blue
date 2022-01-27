@@ -35,14 +35,14 @@ class Event < ApplicationRecord
   end
 
   def self.import(file)
-    calendars = Icalendar::Calendar.parse(file)
+    calendars = Icalendar::Calendar.parse(file.read.force_encoding("UTF-8"))
     calendars.each do |calendar|
       calendar.events.each do |parse_event|
         Event.create(
-          name: parse_event.summary.force_encoding("UTF-8"),
+          name: parse_event.summary,
           d_start: parse_event.dtstart,
           d_end: parse_event.dtend,
-          description: parse_event.description.nil? ? "" : parse_event.description.force_encoding("UTF-8"),
+          description: parse_event.description.nil? ? "" : parse_event.description,
           recurring: ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
           room: Room.find_by(name: parse_event.location.to_s)
         )

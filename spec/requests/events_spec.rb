@@ -100,7 +100,7 @@ RSpec.describe "/events", type: :request do
         expect(response).to redirect_to(events_url)
       end
       
-      it "alerts that a ICS file has to be chosen first" do
+      it "shows an alert that an ICS file has to be chosen first" do
         expect(flash[:alert]).to eq("Please choose an ICS file to import")
       end
     end
@@ -115,8 +115,47 @@ RSpec.describe "/events", type: :request do
         expect(response).to redirect_to(events_url)
       end
 
-      it "alerts that only ICS files can be imported" do
+      it "shows an alert that only ICS files can be imported" do
         expect(flash[:alert]).to eq("Only ICS files can be imported")
+      end
+    end
+
+    context "with an ICS file parameter" do
+      let(:empty_ics_file) do
+        Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/empty_calendar.ics")
+      end
+
+      it "redirects to the index page" do
+        post import_events_path, params: { file: empty_ics_file }
+        expect(response).to redirect_to(events_url)
+      end
+
+      it "shows a notice that events from the file have been imported" do
+        post import_events_path, params: { file: empty_ics_file }
+        expect(flash[:notice]).to eq("Imported Events from ICS")
+      end
+
+      it "calls the import method for events" do
+        expect(Event).to receive(:import)
+        post import_events_path, params: { file: empty_ics_file }
+      end
+
+      it "creates events from the imported calendar" do
+        expect {
+          post import_events_path, params: { file: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics") }
+        }.to change{Event.count}.by(2)
+        
+        event1 = Event.find_by name: "First Event"
+        event2 = Event.find_by name: "Second Event"
+
+        expect(event1.description).to eq("This is an imported single time event")
+        expect(event2.description).to eq("This is an imported weekly occuring event")
+        expect(event1.rule).to be_blank
+        expect(event2.rule.to_s).to eq("Weekly on Wednesdays")
+        expect(event1.d_start).to eq("2022-01-12 13:00:00 UTC")
+        expect(event2.d_start).to eq("2021-11-10 10:00:00 UTC")
+        expect(event1.d_end).to eq("2021-01-12 14:00:00 UTC")
+        expect(event2.d_end).to eq("2021-11-10 11:30:00 UTC")
       end
     end
   end
