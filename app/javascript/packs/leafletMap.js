@@ -160,6 +160,10 @@ export function addMarker(marker, layer = map) {
   L.marker(marker["latlng"], { icon: icon }).addTo(layer);
 }
 
+export function addAnyMarker(marker, layer = map) {
+  marker.addTo(layer);
+}
+
 export function addPolylines(polylines, layer = map) {
   polylines.forEach((polyline) => {
     addPolyline(polyline, layer);

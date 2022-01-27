@@ -355,6 +355,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   codecov
+  concurrent-ruby (~> 1.1)
   devise
   devise-bootstrap-views
   devise-i18n
@@ -393,4 +394,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.32
+   2.2.33
