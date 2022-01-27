@@ -142,10 +142,6 @@ GEM
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    little-plugger (1.1.4)
-    logging (2.3.0)
-      little-plugger (~> 1.1)
-      multi_json (~> 1.14)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -161,7 +157,6 @@ GEM
     mini_portile2 (2.7.1)
     minitest (5.15.0)
     msgpack (1.4.2)
-    multi_json (1.15.0)
     multi_xml (0.6.0)
     nio4r (2.5.8)
     nokogiri (1.13.0)
@@ -283,7 +278,6 @@ GEM
     rubocop-rspec (2.7.0)
       rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
-    rubyntlm (0.6.3)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -338,11 +332,6 @@ GEM
     validate_url (1.0.13)
       activemodel (>= 3.0.0)
       public_suffix
-    viewpoint (1.1.1)
-      httpclient
-      logging
-      nokogiri
-      rubyntlm
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -413,7 +402,6 @@ DEPENDENCIES
   tod
   turbolinks (~> 5)
   tzinfo-data
-  viewpoint
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
