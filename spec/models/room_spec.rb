@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  it "has name, floor, building, room type and person" do
+  it "has name, floor, coordinates, building, room type and person" do
     room = FactoryBot.create :room
     building = FactoryBot.create :building
     person = FactoryBot.create :person
@@ -9,6 +9,8 @@ RSpec.describe Room, type: :model do
     expect(room.name).to eq('C.2.4')
     expect(room.floor).to eq(2)
     expect(room.building.name).to eq(building.name)
+    expect(room.location_latitude).to eq(1.5)
+    expect(room.location_longitude).to eq(3.5)
     expect(room.room_type).to eq('Bachelorproject office')
     expect(room.people.first.email).to eq(person.email)
   end

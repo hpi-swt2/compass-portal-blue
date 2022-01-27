@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.float "location_longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -56,7 +55,6 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "location_latitude"
     t.float "location_longitude"
-    t.integer "user_id"
   end
 
   create_table "openingtimes", force: :cascade do |t|
@@ -110,7 +108,6 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.string "uid"
     t.string "username"
     t.integer "person_id"
-    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
