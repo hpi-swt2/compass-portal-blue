@@ -1,141 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
+<h1 class="fw-light">Rooms</h1>
 
-<div class="container">
-  <div class="d-flex justify-content-end">
-    <div class="col-3 header ">
-      Name
-    </div>
-    <div class="col-3 ">
-      Floor
-    </div>
-    <div class="col-3">
-      Occupancy
-    </div>
-    <div class="col-3">
-      Calendar
-    </div>
-    <div class="col-0">
-      Show
-    </div>
-  </div>
-  <div>
-    Seminar Rooms
-  </div>
-  <% @rooms.each do |room| %>
-    <div class="d-flex justify-content-end" >
-      <% if room.room_type == "Seminarraum" %>
-        <div class="col-3">
-          <%= room.name %>
-        </div>
-        <div class="col-3 ">
-          <%= room.floor %>
-        </div>
-        <div class="col-3 ">
-          <% if room.free? %>
-            <p class="occupancy free">free</p>
-          <% else %>
-            <p class="occupancy occupied">occupied</p>
-          <% end %>
-        </div>
-        <div class="col-3">
-          <%= link_to 'Calendar', calendar_path(id: room.id) %>
-        </div>
-        <div class="col-0">
-          <%= link_to 'Show', room %>
-        </div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Floor</th>
+        <th>Occupancy</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% Room.room_type_to_external_mapping.each do |internal,external| %>
+      <tr>
+        <th colspan="6"><b><%= external.pluralize() %>:</b></th>
+      </tr>
+      <% @rooms.each do |room| %>
+        <% if room.room_type == internal %>
+          <tr>
+            <td><%= room.name %></td>
+            <td><%= room.floor %></td>
+            <td>
+              <% if room.free? %>
+                <p class="occupancy free">free</p>
+              <% else %>
+                <p class="occupancy occupied">occupied</p>
+              <% end %>
+            </td>
+            <td class="td-btn"><%= link_to 'Calendar', calendar_path(id: room.id), class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+          </tr>
+        <% end %>
       <% end %>
-    </div>
-  <% end %>
-  <div>
-    Lecture Halls
-  </div>
-  <% @rooms.each do |room| %>
-    <div class="d-flex justify-content-end">
-      <% if room.room_type == "Hörsaal" %>
-        <div class="col-3">
-          <%= room.name %>
-        </div>
-        <div class="col-3 ">
-          <%= room.floor %>
-        </div>
-        <div class="col-3 ">
-          <% if room.free? %>
-            <p class="occupancy free">free</p>
-          <% else %>
-            <p class="occupancy occupied">occupied</p>
-          <% end %>
-        </div>
-        <div class="col-3">
-          <%= link_to 'Calendar', calendar_path(id: room.id) %>
-        </div>
-        <div class="col-0">
-          <%= link_to 'Show', room %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-  <div>
-    Pool Rooms
-  </div>
-  <% @rooms.each do |room| %>
-    <div class="d-flex justify-content-end">
-      <% if room.room_type == "Poolraum" %>
-        <div class="col-3">
-          <%= room.name %>
-        </div>
-        <div class="col-3 ">
-          <%= room.floor %>
-        </div>
-        <div class="col-3 ">
-          <% if room.free? %>
-            <p class="occupancy free">free</p>
-          <% else %>
-            <p class="occupancy occupied">occupied</p>
-          <% end %>
-        </div>
-        <div class="col-3">
-          <%= link_to 'Calendar', calendar_path(id: room.id) %>
-        </div>
-        <div class="col-0">
-          <%= link_to 'Show', room %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-  <div>
-    Conference Rooms
-  </div>
-  <% @rooms.each do |room| %>
-    <div class="d-flex justify-content-end">
-      <% if room.room_type == "Konfrenzraum" %>
-        <div class="col-3">
-          <%= room.name %>
-        </div>
-        <div class="col-3 ">
-          <%= room.floor %>
-        </div>
-        <div class="col-3 ">
-          <% if room.free? %>
-            <p class="occupancy free">free</p>
-          <% else %>
-            <p class="occupancy occupied">occupied</p>
-          <% end %>
-        </div>
-        <div class="col-3">
-          <%= link_to 'Calendar', calendar_path(id: room.id) %>
-        </div>
-        <div class="col-0">
-          <%= link_to 'Show', room %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
 
-
-  
-
-
+<%= link_to 'New Room', new_room_path, class: "btn btn-primary link-btn" %>

@@ -3,43 +3,43 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 #offcanvas {
-  top: 4rem;
-  height: calc(100% - 4rem - 4rem);
+  top: 0;
+  height: 100%;
   width: 25%;
 }
 
 #map {
   position: absolute;
-  top: 4rem;
   left: 0;
-  height: calc(100% - 4rem - 4rem);
+  top: 0;
+  height: 100%;
   width: 100%;
 }
 
 .accordion-item {
-  background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #F4F4F4 !important;
-    box-shadow: 0 0 0 0 !important;
+  background-color: #f4f4f4 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 
 .accordion-button:focus {
-    box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 
 .route-start-icon {
-    color: green
+  color: green;
 }
 
 .route-end-icon {
-    color: red
+  color: red;
 }
 
 .directions-icon {
-    color: #007A9E;
-    font-size: xx-large;
+  color: #007a9e;
+  font-size: xx-large;
 }
 
 .building-icon {
@@ -51,6 +51,36 @@
   border: 2px solid #eb34de;
   color: #fff;
   text-align: center;
+}
+
+.pin-icon1, .pin-icon2 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 50% 0;
+  background: #CA091A;
+  position: absolute;
+  transform: rotate(-45deg)  translate(9px, -20px);
+  left: 50%;
+  top: 50%;
+}
+
+.pin-icon1::before, .pin-icon2::before {
+  width: 14px;
+  height: 14px;
+  margin: 3px 0 0 3px;
+  background: #fff;
+  position: absolute;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  text-align: center;
+}
+
+.pin-icon1::before {
+  content: '1';
+}
+
+.pin-icon2::before {
+  content: '2';
 }
 
 .indoor-label{
@@ -69,10 +99,10 @@
 }
 
 .target-pin {
-    img {
-        width: 2rem;
-        transform: translate(-1.1rem, -2.6rem);
-    }
+  img {
+    width: 2rem;
+    transform: translate(-1.1rem, -2.6rem);
+  }
 }
 
 @media screen and (max-width: 800px) {

@@ -29,4 +29,22 @@ RSpec.describe "User details page", type: :feature do
     visit edit_user_registration_path
     expect(page).to have_field('user[email]')
   end
+
+  it "includes a link-button to add a new person" do
+    sign_in @user
+    visit edit_user_registration_path
+    expect(page).to have_link 'Add new person', href: new_person_path
+  end
+
+  it "includes a link-button to add a new location" do
+    sign_in @user
+    visit edit_user_registration_path
+    expect(page).to have_link 'Add new location', href: new_location_path
+  end
+
+  it "includes a link-button to add a new building" do
+    sign_in @user
+    visit edit_user_registration_path
+    expect(page).to have_link 'Add new building', href: new_building_path
+  end
 end

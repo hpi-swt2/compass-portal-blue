@@ -1,20 +1,16 @@
-<p id="notice"><%= notice %></p>
+<h2 class="mb-3 fw-light"><%= @building.name %></h2>
 
-<p>
-  <strong>Name:</strong>
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Name:</strong>
+  </label>
+  <p class="form-control-static">
   <%= @building.name %>
-</p>
+  </p>
+</div>
 
-<p>
-  <strong>Location latitude:</strong>
-  <%= @building.location_latitude %>
-</p>
+<a class='btn btn-primary' href="/route?dest=<%= @building.name %>"><i class="fas fa-route"></i><span>Directions</span></a>
 
-<p>
-  <strong>Location longitude:</strong>
-  <%= @building.location_longitude %>
-</p>
-
-<%= link_to 'Edit', edit_building_path(@building) %> |
-<%= link_to 'Back', buildings_path %> |
-<%= link_to 'Map', building_map_path(target: "#{@building.location_latitude},#{@building.location_longitude}")%>
+<script id="_latlonginfo" type="application/json">
+[<%= @building.location_latitude %>,<%= @building.location_longitude %>]
+</script>

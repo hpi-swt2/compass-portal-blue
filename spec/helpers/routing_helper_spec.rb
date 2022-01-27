@@ -54,6 +54,11 @@ describe "Routing helper", type: :helper do
     end
 
     it "looks up the locations of buildings" do
+      Building.create!(
+        name: 'Haus G',
+        location_latitude: "52.3947488",
+        location_longitude: "13.1248368"
+      )
       expect(RoutingHelper.resolve_coordinates("Haus G")).to eq "52.3947488,13.1248368"
     end
 

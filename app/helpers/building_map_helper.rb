@@ -1,9 +1,7 @@
 module BuildingMapHelper
-  def self.leaflet_center(start_coordinates)
-    center = start_coordinates.nil? ? %w[52.39339 13.13208] : start_coordinates.split(",")
-
+  def self.leaflet_center
     {
-      latlng: center,
+      latlng: %w[52.39339 13.13208],
       zoom: 17
     }
   end
@@ -13,13 +11,13 @@ module BuildingMapHelper
       Buildings.transform_leaflet_buildings(Buildings::HPI_POLYGONS, Buildings::HPI_STYLING)
   end
 
-  def self.leaflet_polylines(route)
-    route.present? ? [RoutingHelper.transform_route_to_polyline(route)] : []
-  end
-
-  def self.leaflet_markers(route, target)
-    Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS) +
-      RoutingHelper.transform_route_to_time_marker(route) +
-      RoutingHelper.transform_target_to_marker(target)
+  def self.destinations
+    buildings = Building.all.to_h do |building|
+      [ building.name, "#{building.location_latitude},#{building.location_longitude}" ]
+    end
+    locations = Location.all.to_h do |location|
+      [ location.name, "#{location.location_latitude},#{location.location_longitude}" ]
+    end
+    buildings.merge(locations)
   end
 end

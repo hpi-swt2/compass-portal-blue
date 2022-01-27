@@ -1,8 +1,10 @@
+require 'ice_cube'
+
 FactoryBot.define do
   factory :event do
 
-    d_start { "2022-01-12 10:58:13" }
-    d_end { "2022-01-12 11:58:13" }
+    d_start { "2021-10-25 13:15:00" }
+    d_end { "2021-10-25 14:45:00" }
 
     trait :in_one_hour do
       name { "Future Event" }
@@ -16,16 +18,9 @@ FactoryBot.define do
       d_end { 30.minutes.from_now }
     end
 
-    name { "Test event in room 1" }
-    description do
-      "This event is incredible and a lot of people are going to be there. But sice there is still a pandemic going aroud, please all wear masks."
-    end
-    recurring do
-      "---
-      :validations: {}
-      :rule_type: IceCube::DailyRule
-      :interval: 1"
-    end
+    name { "BA Mathematik III Übung" }
+    description { "Teaching mathematics" }
+    recurring { IceCube::Rule.weekly.day(:monday).to_yaml }
 
   end
 end
