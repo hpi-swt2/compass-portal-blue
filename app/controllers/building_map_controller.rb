@@ -29,8 +29,6 @@ class BuildingMapController < ApplicationController
   def route
     start = RoutingHelper.resolve_coordinates(params[:start])
     dest = RoutingHelper.resolve_coordinates(params[:dest])
-    puts params[:start]
-    puts params[:dest]
     route = OutdoorRoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
 
     result = { polyline: OutdoorRoutingHelper.transform_route_to_polyline(route),
