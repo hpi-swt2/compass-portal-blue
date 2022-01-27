@@ -4,7 +4,13 @@ class Room < ApplicationRecord
   belongs_to :building
   has_many :events, dependent: nil
   has_and_belongs_to_many :people
+  has_many :favourite_rooms
+  has_many :favourited_by, through: :favourite_rooms, source: :user
+
   include Locateable
+
+  validates :name, presence: true
+  validates :floor, presence: true, numericality: { only_integer: true }
   validates :name, presence: true
   validates :floor, presence: true, numericality: { only_integer: true }
 
@@ -15,6 +21,7 @@ class Room < ApplicationRecord
     end
     true
   end
+
 
   def self.room_type_to_internal_mapping
     {

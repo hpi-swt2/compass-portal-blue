@@ -65,6 +65,13 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.index ["room_id"], name: "index_events_on_room_id"
   end
 
+  create_table "favourite_rooms", force: :cascade do |t|
+    t.integer "room_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "location_owner", id: false, force: :cascade do |t|
     t.integer "location_id", null: false
     t.integer "user_id", null: false

@@ -70,6 +70,23 @@ class RoomsController < ApplicationController
     end
   end
 
+  def favourite
+    @room = Room.find(params[:id])
+    type = params[:type]
+    if type == "favourite"
+      current_user.favourites << @room
+      redirect_to rooms_url, notice: "You favourited #{@room.name}"
+
+    elsif type == "unfavourite"
+      current_user.favourites.delete(@room)
+      redirect_to rooms_url, notice: "Unfavourited #{@room.name}"
+
+    else
+      # Type missing, nothing happens
+      redirect_to rooms_url, notice: "Nothing happened."
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
