@@ -64,9 +64,7 @@ RSpec.describe "/events", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Event" do
-        expect {
-          post events_url, params: { event: valid_attributes }
-        }.to change(Event, :count).by(1)
+        expect { post events_url, params: { event: valid_attributes }}.to change(Event, :count).by(1)
       end
 
       it "redirects to the created event" do
@@ -77,9 +75,7 @@ RSpec.describe "/events", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Event" do
-        expect {
-          post events_url, params: { event: invalid_attributes }
-        }.to change(Event, :count).by(0)
+        expect { post events_url, params: { event: invalid_attributes }}.to change(Event, :count).by(0)
       end
 
       it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
@@ -120,30 +116,23 @@ RSpec.describe "/events", type: :request do
     end
 
     context "with an ICS file parameter" do
-      let(:empty_ics_file) do
-        Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/empty_calendar.ics")
+      before do
+        empty_ics_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/empty_calendar.ics")
+        post import_events_path, params: { file: empty_ics_file }
       end
 
       it "redirects to the index page" do
-        post import_events_path, params: { file: empty_ics_file }
         expect(response).to redirect_to(events_url)
       end
 
       it "shows a notice that events from the file have been imported" do
-        post import_events_path, params: { file: empty_ics_file }
         expect(flash[:notice]).to eq("Imported Events from ICS")
       end
 
-      it "calls the import method for events" do
-        expect(Event).to receive(:import)
-        post import_events_path, params: { file: empty_ics_file }
-      end
-
       it "creates events from the imported calendar" do
-        expect {
-          post import_events_path, params: { file: Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics") }
-        }.to change(Event, :count).by(2)
-
+        calendar_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics")
+        expect{ post import_events_path, params: { file: calendar_file }}.to change{Event, :count}.by(2)
+        
         event1 = Event.find_by name: "First Event"
         event2 = Event.find_by name: "Second Event"
 
@@ -205,9 +194,7 @@ RSpec.describe "/events", type: :request do
   describe "DELETE /destroy" do
     it "destroys the requested event" do
       event = Event.create! valid_attributes
-      expect {
-        delete event_url(event)
-      }.to change(Event, :count).by(-1)
+      expect{ delete event_url(event) }.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do
