@@ -113,6 +113,8 @@ end
 group :production do
   # https://devcenter.heroku.com/articles/sqlite3
   gem 'pg' # production database runs on postgres
+  # Easy working with HTTP Requests
+  gem 'httparty'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
