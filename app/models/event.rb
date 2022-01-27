@@ -5,7 +5,7 @@ require 'yaml'
 require 'date'
 require 'time'
 
-#the model representing an event in the calendar
+# the model representing an event in the calendar
 class Event < ApplicationRecord
   belongs_to :room, optional: true
   validates :name, :d_start, :d_end, presence: true
@@ -67,8 +67,6 @@ class Event < ApplicationRecord
     end
   end
 
-  private
-
   def self.ical_rule_to_ice_cube_yaml(rrule)
     rrule_yaml = ""
     unless rrule.nil?
@@ -82,8 +80,8 @@ class Event < ApplicationRecord
 
   def self.single_parameter_ics_values(rrule)
     values = rrule.to_h.fetch_values :interval, :count, :until, :week_start
-    strings = ["INTERVAL", "COUNT", "UNTIL", "WKST"]
-    
+    strings = %w[INTERVAL COUNT UNTIL WKST]
+
     rrule_ics = ""
     values.zip(strings).each do |value, string|
       rrule_ics << ";#{string}=#{value}" unless value.nil?
@@ -93,8 +91,8 @@ class Event < ApplicationRecord
 
   def self.multi_parameter_ics_values(rrule)
     values = rrule.to_h.fetch_values :by_second, :by_minute, :by_hour, :by_day, :by_month_day, :by_month, :by_year_day
-    strings = ["BYSECOND", "BYMINUTE", "BYHOUR", "BYDAY", "BYMONTHDAY", "BYMONTH", "BYYEARDAY"]
-    
+    strings = %w[BYSECOND BYMINUTE BYHOUR BYDAY BYMONTHDAY BYMONTH BYYEARDAY]
+
     rrule_ics = ""
     values.zip(strings).each do |value, string|
       rrule_ics << ";#{string}=#{value.join(',')}" unless value.nil?

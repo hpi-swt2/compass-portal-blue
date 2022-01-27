@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "events/edit", type: :view do
   before do
-    @event = assign(:event, FactoryBot.create(:event))
+    @event = assign(:event, create(:event))
   end
 
   it "renders the edit event form" do
