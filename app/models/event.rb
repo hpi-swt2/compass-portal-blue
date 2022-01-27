@@ -94,11 +94,11 @@ class Event < ApplicationRecord
   end
 
   def self.create_from_icalendar(event)
-    create( name: event.summary,
-            d_start: event.dtstart,
-            d_end: event.dtend,
-            description: event.description.nil? ? "" : event.description,
-            recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
-            room: Room.find_by(name: event.location.to_s))
+    create(name: event.summary,
+           d_start: event.dtstart,
+           d_end: event.dtend,
+           description: event.description.nil? ? "" : event.description,
+           recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
+           room: Room.find_by(name: event.location.to_s))
   end
 end
