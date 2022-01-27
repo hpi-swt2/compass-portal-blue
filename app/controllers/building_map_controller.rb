@@ -31,10 +31,10 @@ class BuildingMapController < ApplicationController
     dest = RoutingHelper.resolve_coordinates(params[:dest])
     puts params[:start]
     puts params[:dest]
-    route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
+    route = OutdoorRoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
 
-    result = { polyline: RoutingHelper.transform_route_to_polyline(route),
-               marker: RoutingHelper.transform_route_to_time_marker(route) }
+    result = { polyline: OutdoorRoutingHelper.transform_route_to_polyline(route),
+               marker: OutdoorRoutingHelper.transform_route_to_time_marker(route) }
     respond_to do |format|
       format.json { render json: result }
     end
