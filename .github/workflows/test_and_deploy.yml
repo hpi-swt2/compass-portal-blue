@@ -31,7 +31,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      # https://github.com/ruby/setup-ruby
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
