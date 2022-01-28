@@ -18,6 +18,12 @@ global.ajaxCall = (
     $("#browse-outlet a").each(function () {
       const link = $(this);
       const href = link.attr("href");
+      if (href.startsWith("mailto:")){
+        return;
+      }
+      if (href.startsWith("tel:")){
+        return;
+      }
       // Remove the original href of the link:
       link.attr("href", "#");
       const [baseLink, queryParams] = href.split(/\?(.+)/);
@@ -30,7 +36,7 @@ global.ajaxCall = (
   /** Special handling of all /map/route paths so that instead of loading another page,
    * the route navigation screen is shown on in the browse outlet so that a navigation can be started.
    */
-  if (target === "/route") {
+   if (target === "/route") {
     $("#browse-outlet-container").addClass("navigation");
     const params = new URLSearchParams(valuesToSubmit);
     // Copy the start and dest from the url into the corresponding form fields.
