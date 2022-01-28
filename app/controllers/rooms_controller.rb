@@ -73,17 +73,37 @@ class RoomsController < ApplicationController
   def favourite
     @room = Room.find(params[:id])
     type = params[:type]
+    url = params[:url]
+
     if type == "favourite"
       current_user.favourites << @room
-      redirect_to rooms_url, notice: "You favourited #{@room.name}"
+      if url == "rooms"
+        redirect_to rooms_url, notice: "You favourited #{@room.name}"
+      elsif url == "favouriteroomlist"
+        redirect_to favouriteroomlist_url, notice: "You favourited #{@room.name}"
+      else
+        redirect_to rooms_url, notice: "You favourited #{@room.name}"
+      end
 
     elsif type == "unfavourite"
       current_user.favourites.delete(@room)
-      redirect_to rooms_url, notice: "Unfavourited #{@room.name}"
+      if url == "rooms"
+        redirect_to rooms_url, notice: "You unfavourited #{@room.name}"
+      elsif url == "favouriteroomlist"
+        redirect_to favouriteroomlist_url, notice: "You unfavourited #{@room.name}"
+      else
+        redirect_to rooms_url, notice: "You unfavourited #{@room.name}"
+      end
 
     else
       # Type missing, nothing happens
       redirect_to rooms_url, notice: "Nothing happened."
+    end
+  end
+
+  def favouriteroomlist
+    if current_user
+      @favourite_rooms = current_user.favourite_rooms
     end
   end
 

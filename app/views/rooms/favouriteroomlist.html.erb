@@ -1,0 +1,18 @@
+<h2 class="mb-3 fw-light"><%= 'These are your favourite rooms:' %></h2>
+
+<% if current_user %>
+    <% @favourite_rooms.each do |favourite_room| %>
+        <ul>
+            <li>
+                <%= link_to favourite_room.room.name, room_path(favourite_room.room) %>
+                <td class="td-btn"><%= link_to 'Remove it from your favourite list', favourite_room_path(favourite_room.room, type: "unfavourite", url: "favouriteroomlist"), method: :put, class: "btn btn-secondary link-btn" %></td>
+            </li>
+        </ul>
+    <% end %>
+<% else %>
+    <p> Login to see your favourite list. </p>
+<% end %>
+
+<br>
+
+<%= link_to 'Back', rooms_path, class: "btn btn-secondary link-btn" %>

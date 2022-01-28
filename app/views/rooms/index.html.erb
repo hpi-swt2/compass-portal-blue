@@ -34,6 +34,7 @@
             <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><% if can? :update, room %><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn"  %><%end%></td>
             <td class="td-btn"><% if can? :destroy, room %><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
+            <td class="td-btn"><% if current_user %><% if current_user.favourites.include? room %><%= link_to 'Make it unfavourite', favourite_room_path(room, type: "unfavourite", url: "rooms"), method: :put, class: "btn btn-secondary link-btn" %><% else %><%= link_to 'Make it favourite', favourite_room_path(room, type: "favourite", url: "rooms"), method: :put, class: "btn btn-secondary link-btn" %><% end %><% end %></td>
           </tr>
         <% end %>
       <% end %>
@@ -43,6 +44,11 @@
 </div>
 
 
+<<<<<<< HEAD
 <% if can? :create, Room %>
   <%= link_to 'New Room', new_room_path, class: "btn btn-primary link-btn" %>
 <% end %>
+=======
+<%= link_to 'New Room', new_room_path, class: "btn btn-primary link-btn" %>
+<% if current_user %><%= link_to 'Show Favourite Rooms', favouriteroomlist_path, class: "btn btn-primary link-btn" %><% end %>
+>>>>>>> added an extra page for all favourite rooms

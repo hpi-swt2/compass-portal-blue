@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   # '/login'
   get '/login', to: 'welcome#login'
 
+  get '/favouriteroomlist', to: 'rooms#favouriteroomlist'
+
   # '/building/map'
   get '/building_map/route', to: 'building_map#route'
   get '/building_map/view', to: 'building_map#view'
