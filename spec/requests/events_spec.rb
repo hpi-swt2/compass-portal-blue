@@ -64,7 +64,7 @@ RSpec.describe "/events", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Event" do
-        expect { post events_url, params: { event: valid_attributes }}.to change(Event, :count).by(1)
+        expect { post events_url, params: { event: valid_attributes } }.to change(Event, :count).by(1)
       end
 
       it "redirects to the created event" do
@@ -75,7 +75,7 @@ RSpec.describe "/events", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Event" do
-        expect { post events_url, params: { event: invalid_attributes }}.to change(Event, :count).by(0)
+        expect { post events_url, params: { event: invalid_attributes } }.to change(Event, :count).by(0)
       end
 
       it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
@@ -131,7 +131,7 @@ RSpec.describe "/events", type: :request do
 
       it "creates events from the imported calendar" do
         calendar_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics")
-        expect{ post import_events_path, params: { file: calendar_file }}.to change(Event, :count).by(2)
+        expect{ post import_events_path, params: { file: calendar_file } }.to change(Event, :count).by(2)
         
         event1 = Event.find_by name: "First Event"
         event2 = Event.find_by name: "Second Event"

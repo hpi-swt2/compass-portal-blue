@@ -10,7 +10,7 @@ class EventsController < ApplicationController
     if params[:file].nil?
       redirect_to events_url, alert: "Please choose an ICS file to import"
     else
-      import_ics(file = params[:file].tempfile)
+      import_ics(params[:file].tempfile)
     end
   end
 
