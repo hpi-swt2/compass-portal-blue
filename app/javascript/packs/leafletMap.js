@@ -15,12 +15,12 @@ let pinIcons = [
 ];
 
 export let pins = [];
-
+export let pin_floors = [];
 let layerControl;
 /**
  * defines the floor that is currently displayed
  */
-let currentFloor = 0;
+export let currentFloor = 0;
 /**
  * object that contains for each existing floor two layer groups, one for rooms and one for labels
  */
@@ -70,11 +70,13 @@ function addPin(e, pinNumber) {
   pins[pinNumber].on("click", function (e) {
     removePin(pinNumber);
   });
+  pin_floors[pinNumber] = currentFloor;
 }
 
 function removePin(pinNumber) {
   pins[pinNumber].remove();
   pins[pinNumber] = null;
+  pin_floors[pinNumber] = null;
 }
 
 function removeAllPins() {
@@ -174,11 +176,11 @@ export function addPolyline(polyline, layer = map) {
   return L.polyline(polyline["latlngs"], polyline["options"]).addTo(layer);
 }
 
-export async function displayRoute(start, dest) {
+export async function displayRoute(start, start_floor, dest, dest_floor) {
   const route = await $.ajax({
     type: "GET",
     url: "/building_map/route",
-    data: `start=${start}&dest=${dest}`,
+    data: `start=${start}&dest=${dest}&start_floor=${start_floor}&dest_floor=${dest_floor}`,
     dataType: "json",
   });
   if (global.routeLayer) routeLayer.clearLayers();

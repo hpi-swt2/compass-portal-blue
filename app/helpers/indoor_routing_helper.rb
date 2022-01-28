@@ -64,15 +64,29 @@ module IndoorRoutingHelper
                 end
             }
         end
-        path = []
+        polylines = []
         curr = dest
-        path.push({:latlng => graph[curr]['latlng'], :floor => graph[curr]['floor']}) unless nodes[curr][:prev].nil?
+        last_floor = graph[curr]['floor']
+        polylines.push({
+            :floor => last_floor,
+            :polyline => [graph[curr]['latlng']]
+        }) unless nodes[curr][:prev].nil?
+
         while (!nodes[curr][:prev].nil?)
             curr = nodes[curr][:prev]
-            path.push({:latlng => graph[curr]['latlng'], :floor => graph[curr]['floor']})
+            current_floor = graph[curr]['floor']
+            if last_floor == graph[curr]['floor']
+                polylines.last[:polyline].push(graph[curr]['latlng'])
+            else
+                last_floor = current_floor
+                polylines.push({
+                    :floor => last_floor,
+                    :polyline => [graph[curr]['latlng']]
+                })
+            end
         end
         {
-            path: path,
+            polylines: polylines,
             dist: nodes[dest][:prev]? nodes[dest][:dist] : -1
         }
     end
