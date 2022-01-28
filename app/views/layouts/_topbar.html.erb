@@ -24,11 +24,11 @@
             <% end %>
         <% end %> <%# user_signed_in?%>
     </div>
-    <div class="language-area ms-3">
-        <%= link_to request.path + "?locale=en", class: 'btn btn-outline-secondary border-0 text-light' + ("#{locale}" == 'en'? ' active' : '')  do %>
+    <div class="language-area ms-3 d-flex flex-row">
+        <%= link_to request.path + "?locale=en", class: 'btn border-0' + ("#{locale}" == 'en'? ' text-muted' : '')  do %>
             EN
         <% end %>
-        <%= link_to request.path + "?locale=de", class: 'btn btn-outline-secondary border-0 text-light' + ("#{locale}" == 'de'? ' active' : '')  do %>
+        <%= link_to request.path + "?locale=de", class: 'btn border-0' + ("#{locale}" == 'de'? ' text-muted' : '')  do %>
             DE
         <% end %>
     </div>
