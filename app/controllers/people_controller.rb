@@ -46,10 +46,6 @@ class PeopleController < ApplicationController
       end
     end
   end
-  #
-  # def update_user
-  #   user.update_resource(user, :user_params)
-  # end
 
   # DELETE /people/1 or /people/1.json
   def destroy
@@ -70,6 +66,6 @@ class PeopleController < ApplicationController
   # Only allow a list of trusted parameters through.
   def person_params
     params.require(:person).permit(:phone_number, :first_name, :last_name, :email, { room_ids: [] }, :profile_picture,
-                                   { openingtimes_attributes: [:id, :day, :opens, :closes] }, { user_attributes: [:id, :username,:email] })
+                                   { openingtimes_attributes: [:id, :day, :opens, :closes] })
   end
 end

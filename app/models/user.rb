@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :owned_buildings, class_name: 'Building', join_table: 'building_owner'
   has_and_belongs_to_many :owned_rooms, class_name: 'Room', join_table: 'room_owner'
   has_and_belongs_to_many :owned_people, class_name: 'Person', join_table: 'person_owner'
-  
+
   accepts_nested_attributes_for :person, allow_destroy: true
   #has_one :person
 
@@ -32,11 +32,6 @@ class User < ApplicationRecord
     end
     person.owners = [self]
   end
-
-  # def update_person_attributes
-  #   logger.debug "BAUMIBAUM#{}"
-  #   Person.update(person.id, person_attributes)
-  # end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
