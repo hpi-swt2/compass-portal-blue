@@ -25,6 +25,7 @@ export let currentFloor = 0;
  * object that contains for each existing floor two layer groups, one for rooms and one for labels
  */
 const floors = {};
+var markerLayer;
 
 export async function setupMap() {
   global.map = L.map("map");
@@ -159,7 +160,7 @@ export function addMarker(marker, layer = map) {
   marker["divIcon"]["iconAnchor"] = [0, 0];
   marker["divIcon"]["popupAnchor"] = [0, 0];
   const icon = L.divIcon(marker["divIcon"]);
-  L.marker(marker["latlng"], { icon: icon }).addTo(layer);
+  return L.marker(marker["latlng"], { icon: icon }).addTo(layer);
 }
 
 export function addAnyMarker(marker, layer = map) {
@@ -173,7 +174,8 @@ export function addPolylines(polylines, layer = map) {
 }
 
 export function addPolyline(polyline, layer = map) {
-  return L.polyline(polyline["latlngs"], polyline["options"]).addTo(layer);
+  console.log(polyline);
+  return L.polyline(polyline, { className: "routing-path", color: "#eb34b4"}).addTo(layer);
 }
 
 export async function displayRoute(start, start_floor, dest, dest_floor) {
@@ -183,11 +185,25 @@ export async function displayRoute(start, start_floor, dest, dest_floor) {
     data: `start=${start}&dest=${dest}&start_floor=${start_floor}&dest_floor=${dest_floor}`,
     dataType: "json",
   });
-  if (global.routeLayer) routeLayer.clearLayers();
-  else global.routeLayer = L.layerGroup();
-  const polyline = addPolyline(route["polyline"], routeLayer);
-  addMarkers([route["marker"]], routeLayer);
-  routeLayer.addTo(map);
+
+  let completeLine = []
+
+  Object.keys(floors).forEach(floor => {
+    floors[floor]['paths'].clearLayers();
+  });
+
+  route["polylines"].forEach(line => {
+    addPolyline(line["polyline"],  floors[line['floor']]['paths']);
+    completeLine = completeLine.concat(line["polyline"]);
+  });
+
+  if(markerLayer) markerLayer.clearLayers();
+  else markerLayer = L.layerGroup();
+  addMarker(route["marker"]).addTo(markerLayer);
+  markerLayer.addTo(map);
+
+  if (completeLine.length === 0) return
+  const polyline = L.polyline(completeLine)
   const uiPadding = getUIPadding();
   map.fitBounds(polyline.getBounds(), {
     paddingTopLeft: [uiPadding[0], 0],
@@ -234,8 +250,8 @@ function setupGeoJsonFeature(feature, layer) {
   }
 
   if (!floors[level]) {
-    floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup() };
-    const newLayer = L.layerGroup([floors[level].rooms, floors[level].labels]);
+    floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup(), paths: L.layerGroup()};
+    const newLayer = L.layerGroup([floors[level].rooms, floors[level].labels, floors[level].paths]);
     layerControl.addBaseLayer(newLayer, feature.properties.level_name);
     // We add the current floor to the map here so that the map and layer control reference the same object
     // now the layer control will select the correct check box automatically

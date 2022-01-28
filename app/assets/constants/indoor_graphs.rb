@@ -8,6 +8,7 @@ module IndoorGraph
         BUILDINGS.each {|building| 
             INDOOR_GRAPHS.merge!(building => JSON.parse(File.read('./app/assets/graphs/' << building << ".json")))
             DOOR_NODES.merge!(building => INDOOR_GRAPHS[building].select { |key, node| node['door']}.map {|key, value| key})
+            ENTRY_NODES.merge!(building => INDOOR_GRAPHS[building].select { |key, node| node['entry']}.map {|key, value| key})
         }
         INDOOR_GRAPHS.freeze
         DOOR_NODES.freeze

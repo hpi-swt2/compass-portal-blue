@@ -28,6 +28,10 @@ module IndoorRoutingHelper
         } 
     end
 
+    def self.entries(building)
+        IndoorGraph::ENTRY_NODES[building].map {|key| {:id => key, :latlng => IndoorGraph::INDOOR_GRAPHS[building][key]['latlng']}}
+    end
+
     def self.distance(latlng1, latlng2)
         dy = 111.3 * (latlng1[0] - latlng2[0])
         dx = 71.5 * (latlng1[1] - latlng2[1])
@@ -87,7 +91,11 @@ module IndoorRoutingHelper
         end
         {
             polylines: polylines,
-            dist: nodes[dest][:prev]? nodes[dest][:dist] : -1
+            walktime: walk_time(nodes[dest][:prev]? nodes[dest][:dist] : Float::MAX)
         }
+    end
+
+    def self.walk_time(dist)
+        dist / 1.38889
     end
 end

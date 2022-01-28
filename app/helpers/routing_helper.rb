@@ -6,11 +6,11 @@ module RoutingHelper
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
 
-  def self.room_building(input, max_indoor_dist)
+  def self.room_building(input, floor, max_indoor_dist)
     if (valid_coordinates?(input) || BuildingMapHelper.location?(input))
       (start_lat, start_long) = resolve_coordinates(input).split(',')
       coords = [start_lat.to_f, start_long.to_f]
-      door = IndoorRoutingHelper.closest_door_node(coords, IndoorGraph::BUILDINGS, max_indoor_dist, 0)
+      door = IndoorRoutingHelper.closest_door_node(coords, IndoorGraph::BUILDINGS, max_indoor_dist, floor)
       return {indoor: false, building: nil, door: nil} if door.nil?
       return {indoor: true, building: door[:building], door: door[:door]}
     end
@@ -23,9 +23,21 @@ module RoutingHelper
     end
   end
 
+  def self.routing_marker(latlng, walkingtime)
+    walkingtime = format_seconds_as_minsec(walkingtime)
+    {
+      latlng: latlng,
+      divIcon: {
+        html: walkingtime,
+        className: "time-icon"
+      }
+    }
+  end
+
   def self.resolve_coordinates(input)
     return input if valid_coordinates?(input)
-
+    puts 'destinations'
+    puts BuildingMapHelper.destinations
     BuildingMapHelper.destinations[input]
   end
 
