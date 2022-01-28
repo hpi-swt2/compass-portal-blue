@@ -1,31 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Buildings</h1>
+<h1 class="fw-light">Buildings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Location latitude</th>
-      <th>Location longitude</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @buildings.each do |building| %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= building.name %></td>
-        <td><%= building.location_latitude %></td>
-        <td><%= building.location_longitude %></td>
-        <td><%= link_to 'Show', building %></td>
-        <td><%= link_to 'Edit', edit_building_path(building) %></td>
-        <td><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Location latitude</th>
+        <th>Location longitude</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @buildings.each do |building| %>
+        <tr>
+          <td><%= building.name %></td>
+          <td><%= building.location_latitude %></td>
+          <td><%= building.location_longitude %></td>
+          <td class="td-btn"><%= link_to 'Show', building, class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><%= link_to 'Edit', edit_building_path(building), class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Building', new_building_path %>
+<%= link_to 'New Building', new_building_path, class: "btn btn-primary link-btn" %>

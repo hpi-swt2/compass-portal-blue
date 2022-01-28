@@ -9,13 +9,13 @@ module RoutingHelper
   def self.resolve_coordinates(input)
     return input if valid_coordinates?(input)
 
-    Places::DESTINATIONS.dig(input, :location)
+    BuildingMapHelper.destinations[input]
   end
 
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
-    regex = /^-?\d{1,2}(\.\d{1,8})?,-?\d{1,2}(\.\d{1,8})?$/
+    regex = /^-?\d{1,2}(\.\d+)?,-?\d{1,2}(\.\d+)?$/
     coordinates.match(regex)
   end
 

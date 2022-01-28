@@ -1,75 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
+<h1 class="fw-light">Rooms</h1>
 
-<table class="roomsList">
-  <thead>
-    <tr>
-      <th id=roomName>Name</th>
-      <th id=normalRow>Floor</th>
-      <th id=normalRow>Room type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td id="Seminarraum"><b>Seminarräume:</b></td>
-    <% @rooms.each do |room| %>
-      <% if room.room_type == "Seminarraum" %>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td id=roomName><%= room.name %></td>
-        <td id=normalRow><%= room.floor %></td>
-        <td id=normalRow><%= room.room_type %></td>
-        <td><%= link_to 'Show', room %></td>
+        <th>Name</th>
+        <th>Floor</th>
+        <th colspan="3"></th>
       </tr>
+    </thead>
+
+    <tbody>
+      <% Room.room_type_to_external_mapping.each do |internal,external| %>
+      <tr>
+        <th colspan="6"><b><%= external.pluralize() %>:</b></th>
+      </tr>
+      <% @rooms.each do |room| %>
+        <% if room.room_type == internal %>
+          <tr>
+            <td><%= room.name %></td>
+            <td><%= room.floor %></td>
+            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+          </tr>
+        <% end %>
       <% end %>
     <% end %>
-    </tr>
-
-    <tr>
-      <td id="Hörsaal"><b>Hörsäle:</b></td>
-    <% @rooms.each do |room| %>
-      <% if room.room_type == "Hörsaal" %>
-      <tr>
-        <td id=roomName><%= room.name %></td>
-        <td id=normalRow><%= room.floor %></td>
-        <td id=normalRow><%= room.room_type %></td>
-        <td><%= link_to 'Show', room %></td>
-      </tr>
-      <% end %>
-    <% end %>
-    </tr>
-
-    <tr>
-      <td id="Poolraum"><b>Poolräume:</b></td>
-    <% @rooms.each do |room| %>
-      <% if room.room_type == "Poolraum" %>
-      <tr>
-        <td id=roomName><%= room.name %></td>
-        <td id=normalRow><%= room.floor %></td>
-        <td id=normalRow><%= room.room_type %></td>
-        <td><%= link_to 'Show', room %></td>
-      </tr>
-      <% end %>
-    <% end %>
-    </tr>
-    <tr>
-      <td id="Konferenzraum"><b>Konferenzräume:</b></td>
-    <% @rooms.each do |room| %>
-      <% if room.room_type == "Konferenzraum" %>
-      <tr>
-        <td id=roomName><%= room.name %></td>
-        <td id=normalRow><%= room.floor %></td>
-        <td id=normalRow><%= room.room_type %></td>
-        <td><%= link_to 'Show', room %></td>
-      </tr>
-      <% end %>
-    <% end %>
-    </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
+<%= link_to 'New Room', new_room_path, class: "btn btn-primary link-btn" %>

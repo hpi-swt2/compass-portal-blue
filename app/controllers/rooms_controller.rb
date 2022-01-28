@@ -23,8 +23,8 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
-        format.html { redirect_to @room, notice: "Room was successfully created." }
-        format.json { render :show, status: :created, location: @room }
+        format.html { redirect_to edit_room_path(@room), notice: "Room was successfully created." }
+        format.json { render :edit, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @room.errors, status: :unprocessable_entity }
@@ -36,8 +36,8 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to @room, notice: "Room was successfully updated." }
-        format.json { render :show, status: :ok, location: @room }
+        format.html { redirect_to edit_room_path(@room), notice: "Room was successfully updated." }
+        format.json { render :edit, status: :ok, location: @room }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @room.errors, status: :unprocessable_entity }

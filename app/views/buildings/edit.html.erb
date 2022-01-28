@@ -1,6 +1,10 @@
-<h1>Editing Building</h1>
+<div class="row pb-1">
+  <div class="col-lg-6 col-md-6 mx-auto">
+    <h2 class="fw-light">Edit Building</h2>
 
-<%= render 'form', building: @building %>
+    <%= render 'form', building: @building %>
 
-<%= link_to 'Show', @building %> |
-<%= link_to 'Back', buildings_path %>
+    <%= link_to 'Back', buildings_path, class: "btn btn-secondary link-btn" %>
+    <%= link_to 'Show', @building, class: "btn btn-secondary link-btn" %>
+  </div>
+</div>

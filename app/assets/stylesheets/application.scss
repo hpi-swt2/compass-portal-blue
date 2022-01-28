@@ -33,6 +33,9 @@ $border-radius: 2px;
 $border-radius-lg: 2px;
 $border-radius-sm: 2px;
 
+// Responsive settings
+$mobile-break-point: 750px;
+
 /*
 External libraries
 */
@@ -46,13 +49,146 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "@fortawesome/fontawesome-free/scss/brands";
 @import "@fortawesome/fontawesome-free/scss/v4-shims";
 
-// CSS partials
-@import "components/navbar";
+.app-overlay-bottom {
+  z-index: 401;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 450px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-height: calc(100% - 6rem);
+  transform: translateY(calc(100% - 6rem));
+  transition: transform 0.5s;
+  filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.3));
 
-body {
-  padding: 4rem 0;
+  &.open {
+    transform: translateY(0);
+  }
+
+  & > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    #toggle-overlay {
+      margin-left: 0.4rem;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 1.5rem;
+      transition: transform 0.3s;
+      display: none;
+
+      &.visible {
+        display: flex;
+      }
+
+      &.open {
+        transform: rotate(180deg);
+      }
+    }
+
+    .search-bar {
+      flex: 1 1 0;
+      background: white;
+      display: flex;
+      flex-direction: row;
+      border-radius: 2rem;
+      overflow: hidden;
+
+      .form-control {
+        background: none;
+        border: none;
+        outline: 0 !important;
+        box-shadow: none !important;
+        padding: 1rem 1.5rem;
+      }
+
+      button {
+        margin-right: 1rem;
+
+        &#floating-back {
+          box-shadow: none !important;
+          color: $hpi-blue;
+          margin-right: 0;
+          margin-left: 1rem;
+          flex-direction: row;
+          align-items: center;
+          display: none;
+
+          &.visible {
+            display: flex;
+          }
+
+          span {
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  #browse-outlet-container {
+    background: white;
+    padding: 1.5rem;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    overflow: auto;
+
+    &.navigation {
+      #browse-outlet {
+        display: none;
+      }
+
+      #navigation-area {
+        display: block;
+      }
+    }
+  }
+
+  #navigation-area {
+    display: none;
+  }
+
+  #browse-outlet {
+    width: 100%;
+  }
+
+  @media only screen and (max-width: $mobile-break-point) {
+    width: calc(100% - 1rem);
+    left: 0.5rem;
+    max-height: 75vh;
+    padding: 1rem 0.25rem;
+  }
 }
 
-.custom-container-padding {
-  padding-bottom: 5rem;
+.loading {
+  color: $hpi-blue;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .fa-compass {
+    height: 2rem;
+    width: 2rem;
+
+    animation: loading-rotate 1s linear;
+
+    @keyframes loading-rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
 }

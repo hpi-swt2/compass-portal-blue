@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Openingtimes</h1>
+<h1 class="fw-light">Openingtimes</h1>
 
-<table>
+<div class="table-responsive">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Opens</th>
@@ -18,14 +19,15 @@
         <td><%= openingtime.opens %></td>
         <td><%= openingtime.closes %></td>
         <td><%= openingtime.day %></td>
-        <td><%= link_to 'Show', openingtime %></td>
-        <td><%= link_to 'Edit', edit_openingtime_path(openingtime) %></td>
-        <td><%= link_to 'Destroy', openingtime, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="td-btn"><%= link_to 'Show', openingtime, class: "btn btn-secondary link-btn" %></td>
+        <td class="td-btn"><%= link_to 'Edit', edit_openingtime_path(openingtime), class: "btn btn-secondary link-btn" %></td>
+        <td class="td-btn"><%= link_to 'Destroy', openingtime, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
-<%= link_to 'New Openingtime', new_openingtime_path %>
+<%= link_to 'New Openingtime', new_openingtime_path, class: "btn btn-primary link-btn" %>

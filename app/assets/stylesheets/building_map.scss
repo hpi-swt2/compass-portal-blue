@@ -3,43 +3,43 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 #offcanvas {
-  top: 4rem;
-  height: calc(100% - 4rem - 4rem);
+  top: 0;
+  height: 100%;
   width: 25%;
 }
 
 #map {
   position: absolute;
-  top: 4rem;
   left: 0;
-  height: calc(100% - 4rem - 4rem);
+  top: 0;
+  height: 100%;
   width: 100%;
 }
 
 .accordion-item {
-  background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: #F4F4F4 !important;
-    box-shadow: 0 0 0 0 !important;
+  background-color: #f4f4f4 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 
 .accordion-button:focus {
-    box-shadow: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 
 .route-start-icon {
-    color: green
+  color: green;
 }
 
 .route-end-icon {
-    color: red
+  color: red;
 }
 
 .directions-icon {
-    color: #007A9E;
-    font-size: xx-large;
+  color: #007a9e;
+  font-size: xx-large;
 }
 
 .building-icon {
@@ -99,10 +99,10 @@
 }
 
 .target-pin {
-    img {
-        width: 2rem;
-        transform: translate(-1.1rem, -2.6rem);
-    }
+  img {
+    width: 2rem;
+    transform: translate(-1.1rem, -2.6rem);
+  }
 }
 
 @media screen and (max-width: 800px) {

@@ -12,38 +12,41 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :floor %>
-    <%= form.text_field :floor %>
+    <%= form.label :floor, class: "form-label" %>
+    <%= form.text_field :floor, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :room_type %>
-    <%= form.text_field :room_type %>
+    <%= form.label :room_type, class: "form-label" %>
+    <!--<%= form.text_field :room_type, class: "form-control" %>-->
+    <%= form.select 'room_type',
+      options_for_select(Room.room_type_to_internal_mapping, room.room_type),
+      {},
+      multiple: false, class: "form-control form-inline" %>
   </div>
 
     <div>
-      <%= form.label :building_id %>
+      <%= form.label :building_id, class: "form-label" %>
         <%= form.select 'building_id',
             options_from_collection_for_select(Building.all, :id, :name),
             {},
-            multiple: false %>
+            multiple: false, class: "form-control" %>
     </div>
 
     <div>
-      <%= form.label :people %>
+      <%= form.label :people, class: "form-label" %>
         <%= form.select 'person_ids',
             options_from_collection_for_select(Person.all, :id, :name, room.person_ids),
             {},
-            multiple: true %>
+            multiple: true, class: "form-control" %>
     </div>
 
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions mt-3">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
