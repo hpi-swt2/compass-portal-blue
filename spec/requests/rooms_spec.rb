@@ -17,7 +17,7 @@ RSpec.describe "/rooms", type: :request do
   # Room. As you add validations to Room, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Room.new(name: "H-2.57", floor: 2, room_type: "seminar-room", building: create(:building)).attributes
+    Room.new(name: "H-2.57", floor: 2, room_type: "seminar-room", location_longitude: 3.5, location_latitude: 1.5, building: create(:building)).attributes
   end
 
   let(:invalid_attributes) do
@@ -86,7 +86,7 @@ RSpec.describe "/rooms", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_room) do
-        Room.new(name: "H-E.51", floor: "E", room_type: "seminar-room", building: create(:building))
+        Room.new(name: "H-E.51", floor: "E", room_type: "seminar-room", location_longitude: 3.5, location_latitude: 1.5, building: create(:building))
       end
       let(:new_attributes) do
         new_room.attributes
