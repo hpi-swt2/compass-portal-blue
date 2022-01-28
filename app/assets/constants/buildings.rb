@@ -8,7 +8,7 @@ module Buildings
     color: "#eb34de",
     className: "hpi-building building"
   }.freeze
-  UNIPOTSDAM_POLYONGS = [
+  UNIPOTSDAM_POLYGONS = [
     [
       [52.3936124, 13.1279245],
       [52.3934552, 13.1278758],
@@ -330,26 +330,5 @@ module Buildings
     }
 
   ].freeze
-
-  def self.transform_leaflet_letters(hpi_letters)
-    hpi_letters.map do |hpi_letter|
-      {
-        latlng: hpi_letter[:coordinate],
-        divIcon: {
-          html: hpi_letter[:letter],
-          className: "building-icon"
-        }
-      }
-    end
-  end
-
-  def self.transform_leaflet_buildings(geometries, options)
-    geometries.map do |polygon|
-      {
-        latlngs: polygon,
-        options: options
-      }
-    end
-  end
 end
 # rubocop:enable Metrics/ModuleLength

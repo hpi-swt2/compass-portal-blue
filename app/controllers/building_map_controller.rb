@@ -20,7 +20,7 @@ class BuildingMapController < ApplicationController
   end
 
   def markers
-    markers = Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS)
+    markers = BuildingMapHelper.leaflet_letters
     respond_to do |format|
       format.json { render json: markers }
     end
