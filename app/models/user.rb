@@ -9,10 +9,6 @@ class User < ApplicationRecord
   has_and_belongs_to_many :owned_people, class_name: 'Person', join_table: 'person_owner'
 
   accepts_nested_attributes_for :person, allow_destroy: true
-  #has_one :person
-
-  #after_update :update_person_attributes
-
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
