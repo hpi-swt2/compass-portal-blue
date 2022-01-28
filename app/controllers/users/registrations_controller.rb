@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, person_params: [:id, :phone_number, :first_name, :last_name, :email, { room_ids: [] }, :profile_picture, { openingtimes_attributes: [:id, :day, :opens, :closes]}])
+    params.require(:user).permit(:username, :email, {person_attributes: [:id, :phone_number, :first_name, :last_name, :email, { room_ids: [] }, :profile_picture, { openingtimes_attributes: [:id, :day, :opens, :closes]}]})
   end
 
 end
