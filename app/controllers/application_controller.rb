@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # Add additional allowed params for Users. Only include this code in devise controllers
   # This is a convenient way to customize devise controllers without creating a new ones
   before_action :configure_permitted_parameters, if: :devise_controller?
-  around_action :set_locale
+  around_action :change_locale
 
   protected
 
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_locale(&action)
+  def change_locale(&action)
     locale = params[:locale] || I18n.default_locale
     I18n.with_locale(locale, &action)
   end
