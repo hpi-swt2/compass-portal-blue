@@ -5,44 +5,20 @@ require 'yaml'
 require 'date'
 require 'time'
 
+#the model representing an event in the calendar
 class Event < ApplicationRecord
   belongs_to :room, optional: true
   validates :name, :d_start, :d_end, presence: true
 
-  def self.ical_rule_to_ice_cube_yaml(icalendar_rrule)
-    rrule_yaml = ""
-    unless icalendar_rrule.nil?
-      rrule_ics = "FREQ=#{icalendar_rrule.frequency}"
-      rrule_ics << ";INTERVAL=#{icalendar_rrule.interval}"                   unless icalendar_rrule.interval.nil?
-      rrule_ics << ";COUNT=#{icalendar_rrule.count}"                         unless icalendar_rrule.count.nil?
-      rrule_ics << ";UNTIL=#{icalendar_rrule.until}"                         unless icalendar_rrule.until.nil?
-      rrule_ics << ";WKST=#{icalendar_rrule.week_start}"                     unless icalendar_rrule.week_start.nil?
-      rrule_ics << ";BYSECOND=#{icalendar_rrule.by_second.join(',')}"        unless icalendar_rrule.by_second.nil?
-      rrule_ics << ";BYMINUTE=#{icalendar_rrule.by_minute.join(',')}"        unless icalendar_rrule.by_minute.nil?
-      rrule_ics << ";BYHOUR=#{icalendar_rrule.by_hour.join(',')}"            unless icalendar_rrule.by_hour.nil?
-      rrule_ics << ";BYDAY=#{icalendar_rrule.by_day.join(',')}"              unless icalendar_rrule.by_day.nil?
-      rrule_ics << ";BYBYMONTHDAY=#{icalendar_rrule.by_month_day.join(',')}" unless icalendar_rrule.by_month_day.nil?
-      rrule_ics << ";BYMONTH=#{icalendar_rrule.by_month.join(',')}"          unless icalendar_rrule.by_month.nil?
-      rrule_ics << ";BYYEARDAY=#{icalendar_rrule.by_year_day.join(',')}"     unless icalendar_rrule.by_year_day.nil?
-      rrule_yaml = IceCube::Rule.from_ical(rrule_ics).to_yaml
-    end
-    rrule_yaml
-  end
-
-  def self.find_room(location_string)
-    room = Room.find_by(name: location_string)
-    room || nil
-  end
-
   def self.import(file)
-    calendars = Icalendar::Calendar.parse(file)
+    calendars = Icalendar::Calendar.parse(file.read.force_encoding("UTF-8"))
     calendars.each do |calendar|
       calendar.events.each do |parse_event|
         Event.create(
-          name: parse_event.summary.force_encoding("UTF-8"),
+          name: parse_event.summary,
           d_start: parse_event.dtstart,
           d_end: parse_event.dtend,
-          description: parse_event.description.nil? ? "" : parse_event.description.force_encoding("UTF-8"),
+          description: parse_event.description.nil? ? "" : parse_event.description,
           recurring: ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
           room: Room.find_by(name: parse_event.location.to_s)
         )
@@ -89,5 +65,40 @@ class Event < ApplicationRecord
                   d_end: occurrence.end_time)
       end
     end
+  end
+
+  private
+
+  def self.ical_rule_to_ice_cube_yaml(rrule)
+    rrule_yaml = ""
+    unless rrule.nil?
+      rrule_ics = "FREQ=#{rrule.frequency}"
+      rrule_ics << single_parameter_ics_values(rrule)
+      rrule_ics << multi_parameter_ics_values(rrule)
+      rrule_yaml = IceCube::Rule.from_ical(rrule_ics).to_yaml
+    end
+    rrule_yaml
+  end
+
+  def self.single_parameter_ics_values(rrule)
+    values = rrule.to_h.fetch_values :interval, :count, :until, :week_start
+    strings = ["INTERVAL", "COUNT", "UNTIL", "WKST"]
+    
+    rrule_ics = ""
+    values.zip(strings).each do |value, string|
+      rrule_ics << ";#{string}=#{value}" unless value.nil?
+    end
+    rrule_ics
+  end
+
+  def self.multi_parameter_ics_values(rrule)
+    values = rrule.to_h.fetch_values :by_second, :by_minute, :by_hour, :by_day, :by_month_day, :by_month, :by_year_day
+    strings = ["BYSECOND", "BYMINUTE", "BYHOUR", "BYDAY", "BYMONTHDAY", "BYMONTH", "BYYEARDAY"]
+    
+    rrule_ics = ""
+    values.zip(strings).each do |value, string|
+      rrule_ics << ";#{string}=#{value.join(',')}" unless value.nil?
+    end
+    rrule_ics
   end
 end
