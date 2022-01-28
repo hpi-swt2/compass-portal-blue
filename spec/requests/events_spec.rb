@@ -132,7 +132,7 @@ RSpec.describe "/events", type: :request do
       it "creates events from the imported calendar" do
         calendar_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics")
         expect { post import_events_path, params: { file: calendar_file } }.to change(Event, :count).by(2)
-        
+
         event1 = Event.find_by name: "First Event"
         event2 = Event.find_by name: "Second Event"
 

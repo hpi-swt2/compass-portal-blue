@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get '/search_results', to: 'search_results#index'
 
   get '/calendar', to: 'rooms#calendar'
-  
+
   put '/users/geo_location', to: 'users/geo_locations#update'
   delete '/users/geo_location', to: 'users/geo_locations#delete'
 
