@@ -12,6 +12,8 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   def new
     @room = Room.new
+    @latitude = params[:lat]
+    @longitude = params[:long]
   end
 
   # GET /rooms/1/edit
