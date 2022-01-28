@@ -64,12 +64,18 @@ export async function setupMap() {
   map.on("click", onClick);
 }
 
-let pinPopupContent = "<ul>"+
-  "<li><a href=\"default.asp\">Add Room</a></li>"+
-  "<li><a href=\"news.asp\">Add Building</a></li>"+
-  "<li><a href=\"contact.asp\">Add Location</a></li>"+
+function parsePosition(position){
+  return "?long="+position.lng+"&lat="+position.lat
+}
+
+function pinPopupContent(position) {
+  return "<ul>"+
+  "<li><a href=\"/rooms/new\">Add Room</a></li>"+
+  "<li><a href=\"/buildings/new"+parsePosition(position)+"\">Add Building</a></li>"+
+  "<li><a href=\"/locations/new"+parsePosition(position)+"\">Add Location</a></li>"+
   "<li><a id=\"deletepin\" \" href=\"javascript:void(0);\" >Delete Pin</a></li>"+
   "</ul>";
+}
 
 function addPin(e, pinNumber) {
   pins[pinNumber] = L.marker(e.latlng, { icon: pinIcons[pinNumber] });
@@ -82,7 +88,7 @@ function addPin(e, pinNumber) {
 function pinOnClick(pinNumber, position){
   var popup = L.popup()
     .setLatLng(position)
-    .setContent(pinPopupContent)
+    .setContent(pinPopupContent(position))
     .openOn(map);
   document.getElementById("deletepin").addEventListener("click", function(e) {
     removePinAndPopup(pinNumber, popup);
