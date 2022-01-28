@@ -55,7 +55,7 @@ class Event < ApplicationRecord
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
         Event.new(id: id, name: name, description: description, d_start: occurrence.start_time,
-                  d_end: occurrence.end_time)
+                  d_end: occurrence.end_time, room: room)
       end
     end
   end
