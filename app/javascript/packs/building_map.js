@@ -1,13 +1,23 @@
-import { displayRoute, setupMap, pins } from "./leafletMap.js";
 import {
   PIN_1_MAGIC_STRING,
   PIN_2_MAGIC_STRING,
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
+import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
+import { lazyInit, rateLimit } from "./utils.js";
+
+// FIXME: this should probably be in application.js or something similarly
+// global, but it didn't work when we put it there
+// The `lazyinit` is needed, because the `querySelector` seems to, somewhat
+// randomly, block the execution of the script in our tests. This is a
+// workaround, until a real solution is found.
+const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
 
 let currentLocation;
 
 setupMap();
+const trackingSwitch = document.getElementById("trackingSwitch");
+trackingSwitch.addEventListener("click", trackingHandler);
 
 const mapElement = $("#map")[0];
 mapElement.addEventListener("click", () => {
@@ -121,4 +131,44 @@ function requestLocation(inputField) {
       }
     }
   );
+}
+
+const syncUserPositionWithServerImpl = async (location) => {
+  const body = new URLSearchParams({ location });
+  const response = await fetch(
+    "/users/geo_location",
+    {
+      method: "PUT",
+      body,
+      headers: {
+        "X-CSRF-TOKEN": csrfToken(),
+      },
+    }
+  );
+  console.assert(response.status === 204); // HTTP "No content"
+};
+const syncUserPositionWithServer = rateLimit(syncUserPositionWithServerImpl, 10000);
+
+let watcherId;
+const positionIcon = L.icon({ iconUrl: "../assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
+const positionMarker = L.marker([0, 0], { icon: positionIcon });
+positionMarker.bindPopup("Your position");
+
+function trackingHandler() {
+  if (trackingSwitch.checked) {
+    addAnyMarker(positionMarker);
+    watcherId = navigator.geolocation.watchPosition(
+      (pos) => {
+        currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
+        positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
+        syncUserPositionWithServer(currentLocation);
+      },
+      (error) => {
+        alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
+      }
+    );
+  } else {
+    navigator.geolocation.clearWatch(watcherId);
+    positionMarker.remove();
+  }
 }

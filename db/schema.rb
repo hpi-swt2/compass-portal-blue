@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_125451) do
+ActiveRecord::Schema.define(version: 2022_01_27_162451) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "building_id"
     t.integer "user_id"
+    t.float "location_latitude"
+    t.float "location_longitude"
     t.index ["building_id"], name: "index_rooms_on_building_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
