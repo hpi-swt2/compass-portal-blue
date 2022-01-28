@@ -12,8 +12,8 @@ describe "Person Show Page", type: :feature do
     
     expect(page).to have_text @person.first_name
     expect(page).to have_text @person.last_name
-    expect(page).to have_link @person.email, href: "mailto: #{@person.email}"
-    expect(page).to have_link @person.phone_number, href: "tel: #{@person.phone_number}"
+    expect(page).to have_link @person.email, href:"mailto:#{@person.email}"
+    expect(page).to have_link @person.phone_number, href:"tel:#{@person.phone_number}"
   end
 
   it "displays the rooms where the person can be found" do
