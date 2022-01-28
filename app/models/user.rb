@@ -26,18 +26,6 @@ class User < ApplicationRecord
     person.owners = [self]
   end
 
-  # Allow multiple roles per user by storing roles using a bitmask
-  def roles=(roles)
-    roles = [*roles].map(&:to_sym)
-    self.roles_mask = (roles & ROLES).sum { |r| 2**ROLES.index(r) }
-  end
-
-  def roles
-    ROLES.reject do |r|
-      ((roles_mask.to_i || 0) & (2**ROLES.index(r))).zero?
-    end
-  end
-
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
   def self.from_omniauth(auth)
