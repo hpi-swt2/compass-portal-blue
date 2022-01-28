@@ -14,6 +14,6 @@ describe "Locations Index page", type: :feature do
   it "contains a link to add new locations" do
     index_path = "/locations"
     visit index_path
-    expect(page).to have_link 'New', href: new_location_path
+    expect(page).to have_link 'New', href: new_location_path(locale: I18n.locale)
   end
 end

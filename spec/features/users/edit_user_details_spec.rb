@@ -8,7 +8,7 @@ RSpec.describe "User details page", type: :feature do
   it "is not viewable when not logged in" do
     visit edit_user_registration_path
     expect(page).to have_css('.alert-danger')
-    expect(page).not_to have_current_path(edit_user_registration_path)
+    expect(page).not_to have_current_path(edit_user_registration_path(locale: I18n.locale))
   end
 
   it "is viewable after login" do
@@ -33,25 +33,25 @@ RSpec.describe "User details page", type: :feature do
   it "includes a link-button to add a new person" do
     sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_link 'Add new person', href: new_person_path
+    expect(page).to have_link 'Add new person', href: new_person_path(locale: I18n.locale)
   end
 
   it "includes a link-button to add a new location" do
     sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_link 'Add new location', href: new_location_path
+    expect(page).to have_link 'Add new location', href: new_location_path(locale: I18n.locale)
   end
 
   it "includes a link-button to add a new room" do
     sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_link 'Add new room', href: new_room_path
+    expect(page).to have_link 'Add new room', href: new_room_path(locale: I18n.locale)
   end
 
   it "includes a link-button to add a new building" do
     sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_link 'Add new building', href: new_building_path
+    expect(page).to have_link 'Add new building', href: new_building_path(locale: I18n.locale)
   end
 
 end
