@@ -16,7 +16,7 @@
       <%= form.fields_for :person, resource.person do |person_fields| %>
         <% if resource.person.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+            <h2><%= pluralize(resource.person.errors.count, "error") %> prohibited this person from being saved:</h2>
 
             <ul>
               <% resource.person.errors.each do |error| %>

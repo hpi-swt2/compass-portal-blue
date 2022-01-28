@@ -58,10 +58,9 @@ end
 
 describe "User with person details page", type: :feature do
   before do
-    @personuser = create(:user)
-    @personuser.person = create(:person)
+    @user = create(:user)
 
-    @personuser.person.profile_picture.attach(
+    @user.person.profile_picture.attach(
       io: File.open('app/assets/images/default-profile-picture.png'),
       filename: 'default-profile-picture.png',
       content_type: 'image/png'
@@ -69,26 +68,26 @@ describe "User with person details page", type: :feature do
   end
 
   it "includes profile picture input" do
-    sign_in @personuser
+    sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_field 'person[profile_picture]'
+    expect(page).to have_field 'user[person_attributes][profile_picture]'
   end
 
   it "includes profile picture view" do
-    sign_in @personuser
+    sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_css "img[alt='#{@personuser.person.profile_picture.filename}']"
+    expect(page).to have_css "img[alt='#{@user.person.profile_picture.filename}']"
   end
 
   it "can update profile picture" do
-    sign_in @personuser
-    filename = @personuser.person.profile_picture.filename
-    @personuser.person.profile_picture.detach
+    sign_in @user
+    filename = @user.person.profile_picture.filename
+    @user.person.profile_picture.detach
 
     visit edit_user_registration_path
     expect(page).not_to have_css "img[alt='#{filename}']"
 
-    page.attach_file('person[profile_picture]', 'app/assets/images/default-profile-picture.png')
+    page.attach_file('user[person_attributes][profile_picture]', 'app/assets/images/default-profile-picture.png')
     page.find('input[type=submit][name=commit]').click
 
     visit edit_user_registration_path
@@ -96,122 +95,122 @@ describe "User with person details page", type: :feature do
   end
 
   it "includes an input field to change the first name" do
-    sign_in @personuser
+    sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_field('person[first_name]')
+    expect(page).to have_field('user[person_attributes][first_name]')
   end
 
   it "can update first name" do
-    sign_in @personuser
-    old_first_name = @personuser.person.first_name
+    sign_in @user
+    old_first_name = @user.person.first_name
     new_first_name = 'Peter'
 
     visit edit_user_registration_path
-    fill_in 'person_first_name', with: new_first_name
+    fill_in 'user[person_attributes][first_name]', with: new_first_name
     page.find('input[type=submit][name=commit]').click
 
     visit edit_user_registration_path
-    expect(page).to have_field('person[first_name]', with: new_first_name)
-    expect(page).not_to have_field('person[first_name]', with: old_first_name)
+    expect(page).to have_field('user[person_attributes][first_name]', with: new_first_name)
+    expect(page).not_to have_field('user[person_attributes][first_name]', with: old_first_name)
   end
 
   it "includes an input field to change the last name" do
-    sign_in @personuser
+    sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_field('person[last_name]')
+    expect(page).to have_field('user[person_attributes][last_name]')
   end
 
   it "can update last name" do
-    sign_in @personuser
-    old_last_name = @personuser.person.last_name
+    sign_in @user
+    old_last_name = @user.person.last_name
     new_last_name = 'Peterson'
 
     visit edit_user_registration_path
-    fill_in 'person[last_name]', with: new_last_name
+    fill_in 'user[person_attributes][last_name]', with: new_last_name
     page.find('input[type=submit][name=commit]').click
 
     visit edit_user_registration_path
-    expect(page).to have_field('person[last_name]', with: new_last_name)
-    expect(page).not_to have_field('person[last_name]', with: old_last_name)
+    expect(page).to have_field('user[person_attributes][last_name]', with: new_last_name)
+    expect(page).not_to have_field('user[person_attributes][last_name]', with: old_last_name)
   end
 
   it "includes an input field to change the email address" do
-    sign_in @personuser
+    sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_field('person[email]')
+    expect(page).to have_field('user[person_attributes][email]')
   end
 
   it "can update emails address" do
-    sign_in @personuser
-    old_email_address = @personuser.email
+    sign_in @user
+    old_email_address = @user.email
     new_email_address = 'peter@peterson.de'
 
     visit edit_user_registration_path
-    fill_in 'person[email]', with: new_email_address
+    fill_in 'user[person_attributes][email]', with: new_email_address
     page.find('input[type=submit][name=commit]').click
 
     visit edit_user_registration_path
-    expect(page).to have_field('person[email]', with: new_email_address)
-    expect(page).not_to have_field('person[email]', with: old_email_address)
+    expect(page).to have_field('user[person_attributes][email]', with: new_email_address)
+    expect(page).not_to have_field('user[person_attributes][email]', with: old_email_address)
   end
 
   it "includes an input field to change the phone number" do
-    sign_in @personuser
+    sign_in @user
     visit edit_user_registration_path
-    expect(page).to have_field('person[phone_number]')
+    expect(page).to have_field('user[person_attributes][phone_number]')
   end
 
   it "can update phone number" do
-    sign_in @personuser
-    old_phone_number = @personuser.person.phone_number
+    sign_in @user
+    old_phone_number = @user.person.phone_number
     new_phone_number = '+4933155090'
 
     visit edit_user_registration_path
-    fill_in 'person[phone_number]', with: new_phone_number
+    fill_in 'user[person_attributes][phone_number]', with: new_phone_number
     page.find('input[type=submit][name=commit]').click
 
     visit edit_user_registration_path
-    expect(page).to have_field('person[phone_number]', with: new_phone_number)
-    expect(page).not_to have_field('person[phone_number]', with: old_phone_number)
+    expect(page).to have_field('user[person_attributes][phone_number]', with: new_phone_number)
+    expect(page).not_to have_field('user[person_attributes][phone_number]', with: old_phone_number)
   end
 
   it "show phone number validation error message" do
-    sign_in @personuser
+    sign_in @user
     invalid_phone_number = 'abcd'
     visit edit_user_registration_path
-    fill_in 'person[phone_number]', with: invalid_phone_number
+    fill_in 'user[person_attributes][phone_number]', with: invalid_phone_number
     page.find('input[type=submit][name=commit]').click
     expect(page).to have_text('error')
 
   end
 
   it "includes an input field to change the room where the person can be found" do
-    sign_in @personuser
+    sign_in @user
     @room = create :room
     visit edit_user_registration_path
-    expect(page).to have_select('person[room_ids][]', with_options: [@room.name])
+    expect(page).to have_select('user[person_attributes][room_ids][]', with_options: [@room.name])
   end
 
   it "can update rooms" do
-    sign_in @personuser
+    sign_in @user
     room1 = create :room
     room2 = create :room, name: "C.2.3"
-    @personuser.person.rooms = [room1]
+    @user.person.rooms = [room1]
     visit edit_user_registration_path
-    select room2.name, from: 'person[room_ids][]'
-    unselect room1.name, from: 'person[room_ids][]'
+    select room2.name, from: 'user[person_attributes][room_ids][]'
+    unselect room1.name, from: 'user[person_attributes][room_ids][]'
     page.find('input[type=submit][name=commit]').click
     visit edit_user_registration_path
-    expect(page).to have_select('person[room_ids][]', selected: [room2.name])
+    expect(page).to have_select('user[person_attributes][room_ids][]', selected: [room2.name])
   end
 
   it "includes a select field to change the day of an openingtime" do
-    sign_in @personuser
+    sign_in @user
     @openingtime = create :openingtime
-    @personuser.person.openingtimes = [@openingtime]
+    @user.person.openingtimes = [@openingtime]
     visit edit_user_registration_path
-    expect(@personuser.person.openingtimes).to include(@openingtime)
-    expect(page).to have_select('person[openingtimes_attributes][0][day]')
+    expect(@user.person.openingtimes).to include(@openingtime)
+    expect(page).to have_select('user[person_attributes][openingtimes_attributes][0][day]')
   end
 
 end
