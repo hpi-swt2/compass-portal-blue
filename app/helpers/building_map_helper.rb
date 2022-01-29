@@ -38,7 +38,7 @@ module BuildingMapHelper
   end
 
   def self.building?(building)
-    not self.buildings[building].nil?
+    !self.buildings[building].nil?
   end
 
   def self.map_building_name_to_graph(name)
@@ -50,10 +50,10 @@ module BuildingMapHelper
   end
 
   def self.location?(location)
-    not self.locations[location].nil?
+    !self.locations[location].nil?
   end
 
   def self.room?(room)
-    not self.rooms[room].nil? 
+    !self.rooms[room].nil?
   end
 end
