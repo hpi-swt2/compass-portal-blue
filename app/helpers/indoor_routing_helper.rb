@@ -42,8 +42,6 @@ module IndoorRoutingHelper
   def self.calculate_route(from_id, to_id, building)
     Rails.logger.debug "Debugging Output here:"
     graph = IndoorGraph::INDOOR_GRAPHS[building]
-    start = graph[from_id]
-    dest = graph[to_id]
     dijkstra(from_id, to_id, graph)
   end
 
