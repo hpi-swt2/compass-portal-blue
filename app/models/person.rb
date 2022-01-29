@@ -6,6 +6,7 @@ class Person < ApplicationRecord
   before_save :normalize_phone_number
   has_one_attached :profile_picture
   has_and_belongs_to_many :rooms
+  has_and_belongs_to_many :owners, class_name: 'User', join_table: 'person_owner'
 
   accepts_nested_attributes_for :openingtimes, allow_destroy: true
 

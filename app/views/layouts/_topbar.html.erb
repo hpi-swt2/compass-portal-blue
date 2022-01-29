@@ -1,5 +1,11 @@
 <div class='topbar-custom'>
     <%# devise helper: https://github.com/heartcombo/devise#controller-filters-and-helpers %>
+    <div class="settings-area">
+      <div class="form-check form-switch ms-2 me-2">
+        <input class="form-check-input" type="checkbox" role="switch" id="trackingSwitch" />
+        <label class="form-check-label" for="trackingSwitch"> Position tracking </label>
+      </div>
+    </div>
     <span class="navbar-brand"><i class="fas fa-compass"></i><span>HPI Navigator</span></span>
     <div class='user-area'>
         <% if user_signed_in? %>

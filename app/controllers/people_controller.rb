@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[show edit update destroy]
-
+  load_and_authorize_resource
   # GET /people or /people.json
   def index
     @people = Person.all
@@ -18,9 +18,10 @@ class PeopleController < ApplicationController
   def edit; end
 
   # POST /people or /people.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @person = Person.new(person_params)
-
+    @person.owners = [current_user]
     respond_to do |format|
       if @person.save
         format.html { redirect_to edit_person_path(@person), notice: "Person was successfully created." }
@@ -31,6 +32,7 @@ class PeopleController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /people/1 or /people/1.json
   def update
