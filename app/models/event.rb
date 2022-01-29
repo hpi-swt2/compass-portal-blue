@@ -5,7 +5,7 @@ require 'yaml'
 require 'date'
 require 'time'
 
-#the model representing an event in the calendar
+# the model representing an event in the calendar
 class Event < ApplicationRecord
   belongs_to :room, optional: true
   validates :name, :d_start, :d_end, presence: true
@@ -14,14 +14,7 @@ class Event < ApplicationRecord
     calendars = Icalendar::Calendar.parse(file.read.force_encoding("UTF-8"))
     calendars.each do |calendar|
       calendar.events.each do |parse_event|
-        Event.create(
-          name: parse_event.summary,
-          d_start: parse_event.dtstart,
-          d_end: parse_event.dtend,
-          description: parse_event.description.nil? ? "" : parse_event.description,
-          recurring: ical_rule_to_ice_cube_yaml(parse_event.rrule.first),
-          room: Room.find_by(name: parse_event.location.to_s)
-        )
+        create_from_icalendar(parse_event)
       end
     end
   end
@@ -62,12 +55,10 @@ class Event < ApplicationRecord
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
         Event.new(id: id, name: name, description: description, d_start: occurrence.start_time,
-                  d_end: occurrence.end_time)
+                  d_end: occurrence.end_time, room: room)
       end
     end
   end
-
-  private
 
   def self.ical_rule_to_ice_cube_yaml(rrule)
     rrule_yaml = ""
@@ -82,8 +73,8 @@ class Event < ApplicationRecord
 
   def self.single_parameter_ics_values(rrule)
     values = rrule.to_h.fetch_values :interval, :count, :until, :week_start
-    strings = ["INTERVAL", "COUNT", "UNTIL", "WKST"]
-    
+    strings = %w[INTERVAL COUNT UNTIL WKST]
+
     rrule_ics = ""
     values.zip(strings).each do |value, string|
       rrule_ics << ";#{string}=#{value}" unless value.nil?
@@ -93,12 +84,21 @@ class Event < ApplicationRecord
 
   def self.multi_parameter_ics_values(rrule)
     values = rrule.to_h.fetch_values :by_second, :by_minute, :by_hour, :by_day, :by_month_day, :by_month, :by_year_day
-    strings = ["BYSECOND", "BYMINUTE", "BYHOUR", "BYDAY", "BYMONTHDAY", "BYMONTH", "BYYEARDAY"]
-    
+    strings = %w[BYSECOND BYMINUTE BYHOUR BYDAY BYMONTHDAY BYMONTH BYYEARDAY]
+
     rrule_ics = ""
     values.zip(strings).each do |value, string|
       rrule_ics << ";#{string}=#{value.join(',')}" unless value.nil?
     end
     rrule_ics
+  end
+
+  def self.create_from_icalendar(event)
+    create(name: event.summary,
+           d_start: event.dtstart,
+           d_end: event.dtend,
+           description: event.description.nil? ? "" : event.description,
+           recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
+           room: Room.find_by(name: event.location.to_s))
   end
 end

@@ -31,6 +31,9 @@ require 'rspec/rails'
 require Rails.root.join('spec/support/factory_bot')
 require Rails.root.join('spec/support/devise')
 
+Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.ignore_hidden_elements = false
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -85,4 +88,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # This allows us to use `sign_in` in `:request` specs.
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

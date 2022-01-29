@@ -23,8 +23,7 @@ RSpec.describe "/events", type: :request do
               room: create(:room),
               d_start: "2021-10-25 13:15:00",
               d_end: "2021-10-25 14:45:00",
-              recurring: IceCube::Rule.weekly.day(:monday).to_yaml
-            ).attributes
+              recurring: IceCube::Rule.weekly.day(:monday).to_yaml).attributes
   end
 
   let(:invalid_attributes) do
@@ -99,7 +98,7 @@ RSpec.describe "/events", type: :request do
       it "redirects to the index page" do
         expect(response).to redirect_to(events_url)
       end
-      
+
       it "shows an alert that an ICS file has to be chosen first" do
         expect(flash[:alert]).to eq("Please choose an ICS file to import")
       end
@@ -136,8 +135,8 @@ RSpec.describe "/events", type: :request do
 
       it "creates events from the imported calendar" do
         calendar_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics")
-        expect{ post import_events_path, params: { file: calendar_file }}.to change{Event.count}.by(2)
-        
+        expect { post import_events_path, params: { file: calendar_file } }.to change(Event, :count).by(2)
+
         event1 = Event.find_by name: "First Event"
         event2 = Event.find_by name: "Second Event"
 

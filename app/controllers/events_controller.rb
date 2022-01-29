@@ -9,17 +9,9 @@ class EventsController < ApplicationController
   def import
     if params[:file].nil?
       redirect_to events_url, alert: "Please choose an ICS file to import"
-      return
-    end
-
-    file = params[:file].tempfile
-    if File.extname(file.path) == ".ics"
-      Event.import(file)
-      redirect_to events_url, notice: "Imported Events from ICS"
     else
-      redirect_to events_url, alert: "Only ICS files can be imported"
+      import_ics(params[:file].tempfile)
     end
-    file.close!
   end
 
   # GET /events/1 or /events/1.json
@@ -81,5 +73,15 @@ class EventsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room_id)
+  end
+
+  def import_ics(file)
+    if File.extname(file.path) == ".ics"
+      Event.import(file)
+      redirect_to events_url, notice: "Imported Events from ICS"
+    else
+      redirect_to events_url, alert: "Only ICS files can be imported"
+    end
+    file.close!
   end
 end
