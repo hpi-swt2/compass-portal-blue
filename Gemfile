@@ -73,10 +73,6 @@ group :development, :test do
   gem 'rubocop-performance', require: false # https://github.com/rubocop-hq/rubocop-performance
   # RSpec formatter compatible with GitHub Action's annotations
   gem 'rspec-github', require: false # https://github.com/Drieam/rspec-github
-  # Easy working with HTTP Requests
-  gem 'httparty'
-  # Priority queue for Dijkstra (Indoor Routing)
-  gem 'algorithms'
 end
 
 group :development do
@@ -121,3 +117,12 @@ gem "phonelib"
 
 # Provides the class `Concurrent::Hash` which is needed to keep user location data in a thread-safe way.
 gem "concurrent-ruby", "~> 1.1"
+
+# Authentication for permission system
+gem 'cancancan'
+
+# Easy working with HTTP Requests
+gem 'httparty'
+
+# Priority queue for Dijkstra (Indoor Routing)
+gem 'algorithms'

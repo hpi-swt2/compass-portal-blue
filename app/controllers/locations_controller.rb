@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_location, only: %i[show edit update destroy]
 
   # GET /locations or /locations.json
@@ -18,9 +19,10 @@ class LocationsController < ApplicationController
   def edit; end
 
   # POST /locations or /locations.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @location = Location.new(location_params)
-
+    @location.owners = [current_user]
     respond_to do |format|
       if @location.save
         format.html { redirect_to edit_location_path(@location), notice: "location was successfully created." }
@@ -31,6 +33,7 @@ class LocationsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /locations/1 or /locations/1.json
   def update

@@ -20,11 +20,44 @@
 
 <div class="field mb-3">
   <label class="form-label">
+    <strong>Longitude:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @room.location_longitude %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Latitude:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @room.location_latitude %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
     <strong>Room type:</strong>
   </label>
   <p class="form-control-static">
     <%= Room.room_type_to_external_mapping[@room.room_type] %>
   </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    </label><strong><%= t('people') %>:</strong>
+  </label>
+  <ul>
+    <p class="form-control-static">
+      <% @room.people.each do | person | %>
+        <li>
+          <%= link_to person.name, person_path(person) %>
+        </li>
+      <% end %>
+    </p>
+  </ul>
 </div>
 
 <script id="_latlonginfo" type="application/json">
