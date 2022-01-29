@@ -13,15 +13,20 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/buildings", type: :request do
+  before do
+    sign_in(create(:user, admin: true))
+  end
 
   # Building. As you add validations to Building, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    Building.new(name: "Main Building", location_longitude: -180, location_latitude: -90).attributes
+    Building.new(name: "Main Building", location_longitude: -180, location_latitude: -90,
+                 owners: [create(:user)]).attributes
   end
 
   let(:invalid_attributes) do
-    Building.new(name: "does not exist", location_longitude: -1000, location_latitude: 500).attributes
+    Building.new(name: "does not exist", location_longitude: -1000, location_latitude: 500,
+                 owners: [create(:user)]).attributes
   end
 
   describe "GET /index" do

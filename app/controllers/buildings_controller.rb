@@ -1,4 +1,5 @@
 class BuildingsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_building, only: %i[show edit update destroy]
 
   # GET /buildings or /buildings.json
@@ -18,9 +19,10 @@ class BuildingsController < ApplicationController
   def edit; end
 
   # POST /buildings or /buildings.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @building = Building.new(building_params)
-
+    @building.owners = [current_user]
     respond_to do |format|
       if @building.save
         format.html { redirect_to edit_building_path(@building), notice: "Building was successfully created." }
@@ -31,6 +33,7 @@ class BuildingsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /buildings/1 or /buildings/1.json
   def update

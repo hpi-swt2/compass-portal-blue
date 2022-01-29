@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "Person Show Page", type: :feature do
   before do
     @person = create :person
+    sign_in(create(:user, admin: true))
   end
 
   it "displays a persons' information" do
