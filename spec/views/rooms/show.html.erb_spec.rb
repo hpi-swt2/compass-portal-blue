@@ -22,6 +22,7 @@ RSpec.describe "rooms/show", type: :view do
     expect(rendered).to match(/Latitude/)
     expect(rendered).to match(/Longitude/)
     expect(rendered).to match(/Floor/)
+    expect(rendered).to match(/People/)
   end
 
 end
