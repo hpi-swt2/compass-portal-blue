@@ -13,6 +13,7 @@ describe "Locations Index page", type: :feature do
 
   it "contains a link to add new locations" do
     index_path = "/locations"
+    sign_in(create(:user, admin: true))
     visit index_path
     expect(page).to have_link 'New', href: new_location_path
   end

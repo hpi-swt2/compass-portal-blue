@@ -3,7 +3,10 @@ require "date"
 # The model representing a user who can log in
 class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
-
+  has_and_belongs_to_many :owned_locations, class_name: 'Location', join_table: 'location_owner'
+  has_and_belongs_to_many :owned_buildings, class_name: 'Building', join_table: 'building_owner'
+  has_and_belongs_to_many :owned_rooms, class_name: 'Room', join_table: 'room_owner'
+  has_and_belongs_to_many :owned_people, class_name: 'Person', join_table: 'person_owner'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -16,10 +19,11 @@ class User < ApplicationRecord
 
   def initialize(attributes = {})
     super(attributes)
-    return unless person.nil?
-
-    self.person = Person.new
-    person.email = email
+    if person.nil?
+      self.person = Person.new
+      person.email = email
+    end
+    person.owners = [self]
   end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb

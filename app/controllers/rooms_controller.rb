@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_room, only: %i[show edit update destroy]
 
   # GET /rooms or /rooms.json
@@ -18,9 +19,10 @@ class RoomsController < ApplicationController
   def edit; end
 
   # POST /rooms or /rooms.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @room = Room.new(room_params)
-
+    @room.owners = [current_user]
     respond_to do |format|
       if @room.save
         format.html { redirect_to edit_room_path(@room), notice: "Room was successfully created." }
@@ -31,6 +33,7 @@ class RoomsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /rooms/1 or /rooms/1.json
   def update

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_125451) do
+ActiveRecord::Schema.define(version: 2022_01_26_162613) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,12 +40,22 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "building_owner", id: false, force: :cascade do |t|
+    t.integer "building_id", null: false
+    t.integer "user_id", null: false
+  end
+
   create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.float "location_latitude"
     t.float "location_longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "location_owner", id: false, force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "locations", force: :cascade do |t|
@@ -82,6 +92,16 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.integer "room_id", null: false
   end
 
+  create_table "person_owner", id: false, force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  create_table "room_owner", id: false, force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.integer "floor"
@@ -106,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_125451) do
     t.string "uid"
     t.string "username"
     t.integer "person_id"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
