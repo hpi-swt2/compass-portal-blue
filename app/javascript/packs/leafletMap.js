@@ -35,7 +35,7 @@ export async function setupMap() {
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
     maxZoom: 22,
     maxNativeZoom: 19,
   }).addTo(map);
@@ -167,15 +167,9 @@ export function addAnyMarker(marker, layer = map) {
   marker.addTo(layer);
 }
 
-export function addPolylines(polylines, layer = map) {
-  polylines.forEach((polyline) => {
-    addPolyline(polyline, layer);
-  });
-}
-
-export function addPolyline(polyline, layer = map) {
-  console.log(polyline);
-  return L.polyline(polyline, { className: "routing-path", color: "#eb34b4"}).addTo(layer);
+export function addRoutePolyline(polyline, layer = map, style = {}) {
+  const styling = Object.assign({ className: "routing-path" }, style);
+  return L.polyline(polyline, styling).addTo(layer);
 }
 
 export async function displayRoute(start, start_floor, dest, dest_floor) {
@@ -189,11 +183,15 @@ export async function displayRoute(start, start_floor, dest, dest_floor) {
   let completeLine = []
 
   Object.keys(floors).forEach(floor => {
-    floors[floor]['paths'].clearLayers();
+    floors[floor]["paths"].clearLayers();
   });
 
   route["polylines"].forEach(line => {
-    addPolyline(line["polyline"],  floors[line['floor']]['paths']);
+    addRoutePolyline(line["polyline"],  floors[line["floor"]]["paths"], {color: line["color"]});
+    Object.keys(floors).forEach(floor => {
+      if(floor == line["floor"]) return;
+      addRoutePolyline(line["polyline"],  floors[floor]["paths"], {color: line["color"], dashArray: "5, 5", dashOffset: "5", opacity: 0.5, weight: 1});
+    });
     completeLine = completeLine.concat(line["polyline"]);
   });
 

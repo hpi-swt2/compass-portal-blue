@@ -10,7 +10,7 @@ module IndoorRoutingHelper
 
         buildings.each {|b| 
             graph = IndoorGraph::INDOOR_GRAPHS[b]
-            IndoorGraph::DOOR_NODES[b].each {|door_id|
+            IndoorGraph::NODES[b].each {|door_id|
                 next unless graph[door_id]["floor"] == level
                 dist = distance(graph[door_id]["latlng"], latlng)
                 if dist < min
@@ -64,15 +64,17 @@ module IndoorRoutingHelper
                 if nodes[v][:dist] + weight < nodes[u][:dist]
                     nodes[u][:dist] = nodes[v][:dist] + weight
                     nodes[u][:prev] = v;
-                    q.push(u, nodes[u][:dist])
+                    q.push(u, -1 * nodes[u][:dist]) # negative because the queue pops highest weight
                 end
             }
         end
         polylines = []
         curr = dest
+        color = '#000000'
         last_floor = graph[curr]['floor']
         polylines.push({
             :floor => last_floor,
+            :color => color,
             :polyline => [graph[curr]['latlng']]
         }) unless nodes[curr][:prev].nil?
 
@@ -85,6 +87,7 @@ module IndoorRoutingHelper
                 last_floor = current_floor
                 polylines.push({
                     :floor => last_floor,
+                    :color => color,
                     :polyline => [graph[curr]['latlng']]
                 })
             end

@@ -42,6 +42,7 @@ class BuildingMapController < ApplicationController
       result = OutdoorRoutingHelper.calculate_route(start, dest);
       polylines.concat([{
         :floor => 0,
+        :color => '#346eeb',
         :polyline => OutdoorRoutingHelper.transform_route_to_polyline(result)
       }])
       walktime += result["duration"]
@@ -49,7 +50,6 @@ class BuildingMapController < ApplicationController
       if start_building[:building] == dest_building[:building]
         result = IndoorRoutingHelper.calculate_route(start_building[:door], dest_building[:door], start_building[:building])
         polylines.concat(result[:polylines])
-        puts 
         walktime += result[:walktime]
       end
     end
