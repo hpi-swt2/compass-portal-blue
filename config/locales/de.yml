@@ -1,2 +1,5 @@
 de:
     people: 'Personen'
+    title-en: 'Englisch'
+    title-de: 'Deutsch'
+    locale-test: 'Das sollte auf Deutsch sein'

@@ -152,7 +152,7 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "ignores excessive spaces in the query" do
     visit search_results_path(query: "  Marie \t  \nCurie   ")
-    expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale, locale: I18n.locale), count: 1)
+    expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale), count: 1)
   end
 
   it "accepts spaces instead of punctuation in query" do
