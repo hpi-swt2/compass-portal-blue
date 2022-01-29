@@ -123,4 +123,3 @@ gem 'cancancan'
 
 # Easy working with HTTP Requests
 gem 'httparty'
-
