@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe "I18n", type: :feature do
-  
-  it "should have english as the default language", js: true do
+
+  it "has english as the default language", js: true do
     visit root_path
     # on the server (ruby)
     # This doesn't work: `expect(I18n.locale).to eq :en`
@@ -14,10 +14,10 @@ describe "I18n", type: :feature do
     # on the client (js)
     expect(evaluate_script('window.I18n.locale')).to eq 'en'
   end
-  
+
   describe "switch language", type: :feature do
 
-    it "should change the language to german when clicking the button", js: true do
+    it "changes the language to german when clicking the button", js: true do
       visit root_path
       click_on('DE')
       expect(evaluate_script('window.location.search')).to eq '?locale=de'
@@ -25,7 +25,7 @@ describe "I18n", type: :feature do
       # expect(evaluate_script('I18n.locale')).to eq 'de'
     end
 
-    it "should correctly change the language switch", js: true do
+    it "correctly changes the language switch", js: true do
       visit root_path
       click_on('DE')
       expect(page).to have_selector('#language-switch-button-de.active')
@@ -35,7 +35,7 @@ describe "I18n", type: :feature do
     end
   end
 
-  it "should respect the language set via the locale query param", js: true do
+  it "respects the language set via the locale query param", js: true do
     visit root_path(locale: 'de')
     expect(page).to have_selector('#language-switch-button-de.active')
     expect(evaluate_script('window.location.search')).to eq '?locale=de'

@@ -37,10 +37,12 @@ Capybara.ignore_hidden_elements = false
 # Automatically add the locale query param (e.g. `?locale=en`) to all requests
 # Same as in application_controller.rb
 # Has to be specified seperately in the test environment
-module ActionDispatch::Integration
-  class Session
-    def default_url_options(options = {})
-      { locale: I18n.locale }.merge options
+module ActionDispatch
+  class Integration
+    class Session
+      def default_url_options(options = {})
+        { locale: I18n.locale }.merge options
+      end
     end
   end
 end
