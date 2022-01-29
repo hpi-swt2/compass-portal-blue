@@ -12,11 +12,11 @@ module BuildingMapHelper
   end
 
   def self.destinations
-    self.buildings.merge(self.locations)
+    buildings.merge(locations)
   end
 
   def self.buildings
-    buildings = Building.all.to_h do |building|
+    Building.all.to_h do |building|
       [ building.name, "#{building.location_latitude},#{building.location_longitude}" ]
     end
   end
@@ -26,19 +26,19 @@ module BuildingMapHelper
   end
 
   def self.locations
-    locations = Location.all.to_h do |location|
+    Location.all.to_h do |location|
       [ location.name, "#{location.location_latitude},#{location.location_longitude}" ]
     end
   end
 
   def self.rooms
-    rooms = Room.all.to_h do |room|
+    Room.all.to_h do |room|
       [ room.name, "" ] # "#{room.location_latitude},#{room.location_longitude}"
     end
   end
 
   def self.building?(building)
-    !self.buildings[building].nil?
+    !buildings[building].nil?
   end
 
   def self.map_building_name_to_graph(name)
@@ -50,10 +50,10 @@ module BuildingMapHelper
   end
 
   def self.location?(location)
-    !self.locations[location].nil?
+    !locations[location].nil?
   end
 
   def self.room?(room)
-    !self.rooms[room].nil?
+    !rooms[room].nil?
   end
 end

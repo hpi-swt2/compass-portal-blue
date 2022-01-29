@@ -1,15 +1,16 @@
 require 'algorithms'
-include Containers
 
 module IndoorRoutingHelper
-  def self.closest_door_node(latlng, buildings, maxDist, level)
+  include Containers
+  
+  def self.closest_door_node(latlng, buildings, max_dist, level)
     min = Float::MAX
     door = nil
     building = nil
 
-    buildings.each {|b|
+    buildings.each { |b|
       graph = IndoorGraph::INDOOR_GRAPHS[b]
-      IndoorGraph::NODES[b].each {|door_id|
+      IndoorGraph::NODES[b].each { |door_id|
         next unless graph[door_id]["floor"] == level
 
         dist = distance(graph[door_id]["latlng"], latlng)
@@ -20,7 +21,7 @@ module IndoorRoutingHelper
         building = b
       }
     }
-    return nil if min > maxDist
+    return nil if min > max_dist
 
     {
       door: door,
@@ -30,7 +31,7 @@ module IndoorRoutingHelper
   end
 
   def self.entries(building)
-    IndoorGraph::ENTRY_NODES[building].map {|key| { id: key, latlng: IndoorGraph::INDOOR_GRAPHS[building][key]['latlng'] }}
+    IndoorGraph::ENTRY_NODES[building].map { |key| { id: key, latlng: IndoorGraph::INDOOR_GRAPHS[building][key]['latlng'] } }
   end
 
   def self.distance(latlng1, latlng2)
@@ -58,13 +59,13 @@ module IndoorRoutingHelper
       v = q.pop
       break if v == dest
 
-      graph[v]["adj"].each {|edge|
+      graph[v]["adj"].each { |edge|
         u = edge["node"]
         weight = edge["weight"]
         next unless nodes[v][:dist] + weight < nodes[u][:dist]
 
         nodes[u][:dist] = nodes[v][:dist] + weight
-        nodes[u][:prev] = v;
+        nodes[u][:prev] = v
         q.push(u, -1 * nodes[u][:dist]) # negative because the queue pops highest weight
       }
     end
