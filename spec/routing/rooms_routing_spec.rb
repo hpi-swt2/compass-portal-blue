@@ -17,7 +17,7 @@ RSpec.describe RoomsController, type: :routing do
     @month = Date::MONTHNAMES[Time.zone.today.month]
     @year = Time.zone.now.year
   end
-  
+
   describe "routing" do
     it "routes to #index" do
       expect(get: "/rooms").to route_to("rooms#index")

@@ -26,9 +26,7 @@ class RoomsController < ApplicationController
     @month = Date::MONTHNAMES[start_date.month]
     @year = start_date.year
     @events = Event.generate_calendar_events(@room.events, start_date, start_date.end_of_week)
-    if @events.all? { |event| event.nil? == true }
-      @events = []
-    end
+    @events = [] if @events.all? { |event| event.nil? == true }
   end
 
   # POST /rooms or /rooms.json
