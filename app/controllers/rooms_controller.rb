@@ -22,17 +22,20 @@ class RoomsController < ApplicationController
 
   def calendar
     @room = Room.find(params[:id])
-
-    @month = Date::MONTHNAMES[Time.zone.today.month]
-    @year = Time.zone.now.year
+    start_date = params[:start_date].to_date
+    @month = Date::MONTHNAMES[start_date.month]
+    @year = start_date.year
     events = @room.events
-    @events = Event.generate_calendar_events(events, "2022-01-01 08:00:13", "2022-01-30 08:00:13")
+   
+    @events = Event.generate_calendar_events(events, start_date.beginning_of_month.beginning_of_week, start_date.end_of_month.end_of_week)
+    if @events.all? {|event| event.nil? == true}
+      @events = []
+    end
   end
 
   # POST /rooms or /rooms.json
   def create
     @room = Room.new(room_params)
-
     respond_to do |format|
       if @room.save
         format.html { redirect_to edit_room_path(@room), notice: "Room was successfully created." }

@@ -22,7 +22,7 @@
           <tr>
             <td><%= room.name %></td>
             <td><%= room.floor %></td>
-            <td class="td-btn"><%= link_to 'Calendar', calendar_path(id: room.id), class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to 'Calendar', calendar_path(id: room.id, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
