@@ -20,8 +20,9 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit; end
 
+  # GET /rooms/1/calendar
   def calendar
-    @room = Room.find(params[:id])
+    @room = Room.find(params[:room_id])
     start_date = params[:start_date].to_date
     @month = Date::MONTHNAMES[start_date.month]
     @year = start_date.year

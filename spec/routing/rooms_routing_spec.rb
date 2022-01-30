@@ -35,7 +35,7 @@ RSpec.describe RoomsController, type: :routing do
     end
 
     it "routes to #calendar" do
-      expect(get: "/calendar").to route_to("rooms#calendar")
+      expect(get: "/rooms/1/calendar").to route_to("rooms#calendar", room_id: "1")
     end
   end
 end

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   resources :people
-  resources :rooms
+  resources :rooms do
+    get 'calendar'
+  end
   resources :openingtimes
   resources :buildings
   resources :locations
@@ -28,8 +30,6 @@ Rails.application.routes.draw do
 
   # '/search_results'
   get '/search_results', to: 'search_results#index'
-
-  get '/calendar', to: 'rooms#calendar'
 
   put '/users/geo_location', to: 'users/geo_locations#update'
   delete '/users/geo_location', to: 'users/geo_locations#delete'

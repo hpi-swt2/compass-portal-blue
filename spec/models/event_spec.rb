@@ -55,17 +55,27 @@ RSpec.describe Event, type: :model do
     it "generates calendar events for all occurences in a time frame" do
       calendar_events = event.calendar_events("2021-10-20 00:00:00", "2022-01-25 00:00:00")
       expect(calendar_events.length).to eq 3
-      occurence_start_times = ["2021-10-25 13:15:00 +0000", "2021-11-01 13:15:00 +0000", "2021-11-08 13:15:00 +0000"]
-      occurence_end_times = ["2021-10-25 14:45:00 +0000", "2021-11-01 14:45:00 +0000", "2021-11-08 14:45:00 +0000"]
+      occurence_start_times = ["2021-10-25 13:15:00 UTC", "2021-11-01 13:15:00 UTC", "2021-11-08 13:15:00 UTC"]
+      occurence_end_times = ["2021-10-25 14:45:00 UTC", "2021-11-01 14:45:00 UTC", "2021-11-08 14:45:00 UTC"]
 
       calendar_events.zip(occurence_start_times, occurence_end_times).each do |calendar_event, start_time, end_time|
         expect(calendar_event.id).to eq event.id
         expect(calendar_event.name).to eq event.name
         expect(calendar_event.description).to eq event.description
         expect(calendar_event.room).to eq event.room
-        expect(calendar_event.d_start).to eq start_time.to_time
-        expect(calendar_event.d_end).to eq end_time.to_time
+        expect(calendar_event.d_start).to eq start_time
+        expect(calendar_event.d_end).to eq end_time
       end
     end
+  end
+
+  it "can return the time of the day it starts at" do
+    event = create :event
+    expect(event.start_hour_minute).to eq "13:15"
+  end
+
+  it "can return the time of the day it ends at" do
+    event = create :event
+    expect(event.end_hour_minute).to eq "14:45"
   end
 end

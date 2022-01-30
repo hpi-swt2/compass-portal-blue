@@ -13,6 +13,7 @@ RSpec.describe "rooms/calendar", type: :view do
                             people: @people,
                             building: @building
                           ))
+    @room_id = 1
     @events = [Event.create!(name: "Test Event", description: "CG", d_start: Time.zone.now,
                              d_end: Time.zone.now, recurring: "", room_id: @room.id)]
     @date = Time.zone.now
