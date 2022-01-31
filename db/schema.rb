@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_161253) do
+ActiveRecord::Schema.define(version: 2022_01_27_162451) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 2022_01_23_161253) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "building_owner", id: false, force: :cascade do |t|
+    t.integer "building_id", null: false
+    t.integer "user_id", null: false
+  end
+
   create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.float "location_latitude"
@@ -58,6 +63,11 @@ ActiveRecord::Schema.define(version: 2022_01_23_161253) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "room_id"
     t.index ["room_id"], name: "index_events_on_room_id"
+  end
+  
+  create_table "location_owner", id: false, force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "locations", force: :cascade do |t|
@@ -94,6 +104,16 @@ ActiveRecord::Schema.define(version: 2022_01_23_161253) do
     t.integer "room_id", null: false
   end
 
+  create_table "person_owner", id: false, force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  create_table "room_owner", id: false, force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.integer "floor"
@@ -102,6 +122,8 @@ ActiveRecord::Schema.define(version: 2022_01_23_161253) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "building_id"
     t.integer "user_id"
+    t.float "location_latitude"
+    t.float "location_longitude"
     t.index ["building_id"], name: "index_rooms_on_building_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
@@ -118,6 +140,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_161253) do
     t.string "uid"
     t.string "username"
     t.integer "person_id"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

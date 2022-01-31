@@ -1,5 +1,6 @@
 # the model representing a location of interest
 class Location < ApplicationRecord
+  has_and_belongs_to_many :owners, class_name: 'User', join_table: 'location_owner'
   include Timeable
   include Locateable
 

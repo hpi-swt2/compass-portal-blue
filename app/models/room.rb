@@ -1,8 +1,10 @@
 # the model representing a room
 class Room < ApplicationRecord
+  has_and_belongs_to_many :owners, class_name: 'User', join_table: 'room_owner'
   belongs_to :building
   has_many :events, dependent: nil
   has_and_belongs_to_many :people
+  include Locateable
   validates :name, presence: true
   validates :floor, presence: true, numericality: { only_integer: true }
 

@@ -2,13 +2,15 @@ require "rails_helper"
 
 RSpec.describe "Person edit details page", type: :feature do
   before do
-    @person = FactoryBot.create(:person)
+    @person = create(:person)
 
     @person.profile_picture.attach(
       io: File.open('app/assets/images/default-profile-picture.png'),
       filename: 'default-profile-picture.png',
       content_type: 'image/png'
     )
+
+    sign_in(create(:user, admin: true))
   end
 
   it "includes profile picture input" do
@@ -21,7 +23,7 @@ RSpec.describe "Person edit details page", type: :feature do
     expect(page).to have_css "img[alt='#{@person.profile_picture.filename}']"
   end
 
-  it "can update profile picture" do
+  it "can update profile picture and show it immediately", js: true do
     filename = @person.profile_picture.filename
     @person.profile_picture.detach
 
@@ -29,6 +31,9 @@ RSpec.describe "Person edit details page", type: :feature do
     expect(page).not_to have_css "img[alt='#{filename}']"
 
     page.attach_file('person[profile_picture]', 'app/assets/images/default-profile-picture.png')
+
+    expect(page).to have_css "img[alt='#{filename}']"
+
     page.find('input[type=submit][name=commit]').click
 
     visit edit_person_path(@person)
