@@ -35,7 +35,7 @@ describe "I18n", type: :feature do
     end
   end
 
-  it "respects the language set via the locale query param", js: true do
+  it "uses the language set via the locale query param", js: true do
     visit root_path(locale: 'de')
     expect(page).to have_selector('#language-switch-button-de.active')
     expect(evaluate_script('window.location.search')).to eq '?locale=de'
