@@ -10,6 +10,8 @@ RSpec.describe "rooms/calendar", type: :view do
                             name: "Seminarraum 1",
                             floor: 0,
                             room_type: "seminar-room",
+                            location_latitude: 1.5,
+                            location_longitude: 3.5,
                             people: @people,
                             building: @building
                           ))
