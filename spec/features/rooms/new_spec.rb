@@ -12,5 +12,3 @@ describe "New rooms page", type: :feature do
     expect(page).to have_field('room[location_longitude]', with: 13)
   end
 end
-
-
