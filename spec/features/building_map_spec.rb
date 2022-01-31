@@ -78,12 +78,47 @@ describe "Building Map page", type: :feature do
     expect(page).not_to have_css(".pin-icon2")
   end
 
-  it "removes a pin when clicked again", js: true do
+  it "opens links when a pin is clicked", js: true do
+    visit root_path
+    find("#map").click(x: 50, y: 50)
+    find("#map").click(x: 50, y: 50)
+    expect(page).to have_content("Add Room")
+    expect(page).to have_content("Add Building")
+    expect(page).to have_content("Add Location")
+    expect(page).to have_content("Delete Pin")
+  end
+
+  it "removes a pin when delete pin is clicked", js: true do
     visit root_path
     find("#map").click(x: 50, y: 50)
     expect(page).to have_css(".pin-icon1")
     find("#map").click(x: 50, y: 50)
+    find("#deletepin").click
     expect(page).not_to have_css(".pin-icon1")
+  end
+
+  it "calls the new_room route when Add Room is clicked", js: true do
+    visit root_path
+    find("#map").click(x: 50, y: 50)
+    find("#map").click(x: 50, y: 50)
+    click_on "Add Room"
+    expect(page).to have_content("New Room")
+  end
+
+  it "calls the new_building route when Add Building is clicked", js: true do
+    visit root_path
+    find("#map").click(x: 50, y: 50)
+    find("#map").click(x: 50, y: 50)
+    click_on "Add Building"
+    expect(page).to have_content("New Building")
+  end
+
+  it "calls the new_location route when Add Location is clicked", js: true do
+    visit root_path
+    find("#map").click(x: 50, y: 50)
+    find("#map").click(x: 50, y: 50)
+    click_on "Add Location"
+    expect(page).to have_content("New Location")
   end
 
   # Following tests might be inconsistent when run on GitHub Actions.

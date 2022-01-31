@@ -27,4 +27,11 @@ describe "New location page", type: :feature do
                           location_longitude: 10.0)).to exist
   end
 
+  it "fills the coordinate fields with the params" do
+    visit '/locations/new?lat=51&long=13'
+
+    expect(page).to have_field('location[location_latitude]', with: 51)
+    expect(page).to have_field('location[location_longitude]', with: 13)
+  end
+
 end
