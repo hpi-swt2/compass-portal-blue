@@ -2,15 +2,15 @@ require 'algorithms'
 
 module IndoorRoutingHelper
   include Containers
-  
+
   def self.closest_door_node(latlng, buildings, max_dist, level)
     min = Float::MAX
     door = nil
     building = nil
 
-    buildings.each { |b|
+    buildings.each do |b|
       graph = IndoorGraph::INDOOR_GRAPHS[b]
-      IndoorGraph::NODES[b].each { |door_id|
+      IndoorGraph::NODES[b].each do |door_id|
         next unless graph[door_id]["floor"] == level
 
         dist = distance(graph[door_id]["latlng"], latlng)
@@ -19,8 +19,8 @@ module IndoorRoutingHelper
         min = dist
         door = door_id
         building = b
-      }
-    }
+      end
+    end
     return nil if min > max_dist
 
     {
@@ -31,7 +31,9 @@ module IndoorRoutingHelper
   end
 
   def self.entries(building)
-    IndoorGraph::ENTRY_NODES[building].map { |key| { id: key, latlng: IndoorGraph::INDOOR_GRAPHS[building][key]['latlng'] } }
+    IndoorGraph::ENTRY_NODES[building].map do |key|
+      { id: key, latlng: IndoorGraph::INDOOR_GRAPHS[building][key]['latlng'] }
+    end
   end
 
   def self.distance(latlng1, latlng2)
@@ -59,7 +61,7 @@ module IndoorRoutingHelper
       v = q.pop
       break if v == dest
 
-      graph[v]["adj"].each { |edge|
+      graph[v]["adj"].each do |edge|
         u = edge["node"]
         weight = edge["weight"]
         next unless nodes[v][:dist] + weight < nodes[u][:dist]
@@ -67,30 +69,35 @@ module IndoorRoutingHelper
         nodes[u][:dist] = nodes[v][:dist] + weight
         nodes[u][:prev] = v
         q.push(u, -1 * nodes[u][:dist]) # negative because the queue pops highest weight
-      }
+      end
     end
     polylines = []
     curr = dest
     color = '#000000'
     last_floor = graph[curr]['floor']
-    polylines.push({
-                     floor: last_floor,
-                     color: color,
-                     polyline: [graph[curr]['latlng']]
-                   }) unless nodes[curr][:prev].nil?
+    unless nodes[curr][:prev].nil?
+      polylines.push({
+                       floor: last_floor,
+                       color: color,
+                       polyline: [graph[curr]['latlng']]
+                     })
+    end
 
+    last_latlng = []
     until nodes[curr][:prev].nil?
       curr = nodes[curr][:prev]
       current_floor = graph[curr]['floor']
       if last_floor == graph[curr]['floor']
-        polylines.last[:polyline].push(graph[curr]['latlng'])
+        last_latlng = graph[curr]['latlng']
+        polylines.last[:polyline].push(last_latlng)
       else
         last_floor = current_floor
         polylines.push({
                          floor: last_floor,
                          color: color,
-                         polyline: [graph[curr]['latlng']]
+                         polyline: [last_latlng, graph[curr]['latlng']]
                        })
+        last_latlng = graph[curr]['latlng']
       end
     end
     {
