@@ -9,6 +9,8 @@ RSpec.describe "Person edit details page", type: :feature do
       filename: 'default-profile-picture.png',
       content_type: 'image/png'
     )
+
+    sign_in(create(:user, admin: true))
   end
 
   it "includes profile picture input" do

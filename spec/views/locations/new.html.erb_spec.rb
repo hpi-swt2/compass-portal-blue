@@ -25,8 +25,6 @@ RSpec.describe "locations/new", type: :view do
       assert_select "input[name=?]", "location[location_latitude]"
 
       assert_select "input[name=?]", "location[location_longitude]"
-
-      assert_select "input[name=?]", "location[location_longitude]"
     end
   end
 end
