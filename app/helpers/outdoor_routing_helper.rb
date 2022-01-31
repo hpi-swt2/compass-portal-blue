@@ -2,10 +2,8 @@ require 'httparty'
 require 'json'
 
 module OutdoorRoutingHelper
-  def self.routing_url(start, destination)
-    (start_lat, start_long) = start.split(",")
-    (dest_lat, dest_long) = destination.split(",")
-    "http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start_long},#{start_lat};#{dest_long},#{dest_lat}?overview=full&geometries=geojson"
+  def self.routing_url(start, dest)
+    "http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start[1]},#{start[0]};#{dest[1]},#{dest[0]}?overview=full&geometries=geojson"
   end
 
   def self.calculate_route(start, destination)

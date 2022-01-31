@@ -13,7 +13,7 @@ module IndoorRoutingHelper
       IndoorGraph::NODES[b].each do |door_id|
         next unless graph[door_id]["floor"] == level
 
-        dist = distance(graph[door_id]["latlng"], latlng)
+        dist = RoutingHelper.distance(graph[door_id]["latlng"], latlng)
         next unless dist < min
 
         min = dist
@@ -34,12 +34,6 @@ module IndoorRoutingHelper
     IndoorGraph::ENTRY_NODES[building].map do |key|
       { id: key, latlng: IndoorGraph::INDOOR_GRAPHS[building][key]['latlng'] }
     end
-  end
-
-  def self.distance(latlng1, latlng2)
-    dy = 111.3 * (latlng1[0] - latlng2[0])
-    dx = 71.5 * (latlng1[1] - latlng2[1])
-    Math.sqrt((dx * dx) + (dy * dy)) * 1000
   end
 
   def self.calculate_route(from_id, to_id, building)
