@@ -20,8 +20,8 @@
           <td><%= building.location_latitude %></td>
           <td><%= building.location_longitude %></td>
           <td class="td-btn"><%= link_to 'Show', building, class: "btn btn-secondary link-btn" %></td>
-          <td class="td-btn"><%= link_to 'Edit', edit_building_path(building), class: "btn btn-secondary link-btn" %></td>
-          <td class="td-btn"><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><% if can? :update, building %><%= link_to 'Edit', edit_building_path(building), class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><% if can? :destroy, building %><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
         </tr>
       <% end %>
     </tbody>
@@ -30,4 +30,6 @@
 
 <br>
 
-<%= link_to 'New Building', new_building_path, class: "btn btn-primary link-btn" %>
+<% if can? :create, Building%>
+  <%= link_to 'New Building', new_building_path, class: "btn btn-primary link-btn" %>
+<% end %>

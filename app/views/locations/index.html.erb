@@ -22,8 +22,8 @@
             <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo" height="30">
           <% end %></td>
           <td class="td-btn"><%= link_to 'Show', location, class: "btn btn-secondary link-btn" %></td>
-          <td class="td-btn"><%= link_to 'Edit', edit_location_path(location), class: "btn btn-secondary link-btn" %></td>
-          <td class="td-btn"><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><% if can? :update, location %><td class="td-btn"><%= link_to 'Edit', edit_location_path(location), class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><% if can? :destroy, location %><td class="td-btn"><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
         </tr>
       <% end %>
     </tbody>
@@ -32,4 +32,6 @@
 
 <br>
 
-<%= link_to 'New Location', new_location_path, class: "btn btn-primary link-btn" %>
+<% if can? :create, Location %>
+  <%= link_to 'New Location', new_location_path, class: "btn btn-primary link-btn" %>
+<% end %>
