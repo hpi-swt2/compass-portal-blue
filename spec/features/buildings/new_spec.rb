@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe "New buildings page", type: :feature do
+  before do
+    sign_in(create(:user, admin: true))
+  end
+
   it "exists at 'new_location_path' and render withour error" do
     visit new_building_path
   end

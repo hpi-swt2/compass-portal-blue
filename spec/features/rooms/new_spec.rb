@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe "New rooms page", type: :feature do
+  before do
+    sign_in(create(:user, admin: true))
+  end
+
   it "exists at 'new_room_path' and render withour error" do
     visit new_room_path
   end

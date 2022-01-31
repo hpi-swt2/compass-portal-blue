@@ -98,6 +98,7 @@ describe "Building Map page", type: :feature do
   end
 
   it "calls the new_room route when Add Room is clicked", js: true do
+    sign_in(create(:user, admin: true))
     visit root_path
     find("#map").click(x: 50, y: 50)
     find("#map").click(x: 50, y: 50)
@@ -106,6 +107,7 @@ describe "Building Map page", type: :feature do
   end
 
   it "calls the new_building route when Add Building is clicked", js: true do
+    sign_in(create(:user, admin: true))
     visit root_path
     find("#map").click(x: 50, y: 50)
     find("#map").click(x: 50, y: 50)
@@ -114,6 +116,7 @@ describe "Building Map page", type: :feature do
   end
 
   it "calls the new_location route when Add Location is clicked", js: true do
+    sign_in(create(:user, admin: true))
     visit root_path
     find("#map").click(x: 50, y: 50)
     find("#map").click(x: 50, y: 50)
