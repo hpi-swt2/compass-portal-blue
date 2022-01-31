@@ -71,9 +71,14 @@ module IndoorRoutingHelper
         q.push(u, -1 * nodes[u][:dist]) # negative because the queue pops highest weight
       end
     end
+    {
+      polylines: retrieve_polylines(nodes, dest, graph, '#000000'),
+      walktime: walk_time(nodes[dest][:prev] ? nodes[dest][:dist] : Float::MAX)
+    }
+  end
+
+  def self.retrieve_polylines(nodes, curr, graph, color)
     polylines = []
-    curr = dest
-    color = '#000000'
     last_floor = graph[curr]['floor']
     unless nodes[curr][:prev].nil?
       polylines.push({
@@ -87,7 +92,7 @@ module IndoorRoutingHelper
     until nodes[curr][:prev].nil?
       curr = nodes[curr][:prev]
       current_floor = graph[curr]['floor']
-      if last_floor == graph[curr]['floor']
+      if last_floor == current_floor
         last_latlng = graph[curr]['latlng']
         polylines.last[:polyline].push(last_latlng)
       else
@@ -100,10 +105,7 @@ module IndoorRoutingHelper
         last_latlng = graph[curr]['latlng']
       end
     end
-    {
-      polylines: polylines,
-      walktime: walk_time(nodes[dest][:prev] ? nodes[dest][:dist] : Float::MAX)
-    }
+    polylines
   end
 
   def self.walk_time(dist)

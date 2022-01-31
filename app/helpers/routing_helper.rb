@@ -8,21 +8,25 @@ module RoutingHelper
 
   def self.room_building(input, floor, max_indoor_dist)
     if valid_coordinates?(input) || BuildingMapHelper.location?(input)
-      (start_lat, start_long) = resolve_coordinates(input).split(',')
-      coords = [start_lat.to_f, start_long.to_f]
-      door = IndoorRoutingHelper.closest_door_node(coords, IndoorGraph::BUILDINGS, max_indoor_dist, floor)
-      return { indoor: false, building: nil, door: nil } if door.nil?
-
-      return { indoor: true, building: door[:building], door: door[:door] }
+      return room_building_from_coords(input, floor, max_indoor_dist)
     end
     if BuildingMapHelper.building?(input) # in this case we only use outside routing
       return { indoor: false, building: BuildingMapHelper.map_building_name_to_graph(input), door: nil }
     end
 
-    if BuildingMapHelper.room?(input)
-      building_name = BuildingMapHelper.find_room(input).building.name
-      { indoor: true, building: BuildingMapHelper.map_building_name_to_graph(building_name), door: nil }
-    end
+    return { indoor: false, building: nil, door: nil } unless BuildingMapHelper.room?(input)
+
+    building_name = BuildingMapHelper.find_room(input).building.name
+    { indoor: true, building: BuildingMapHelper.map_building_name_to_graph(building_name), door: nil }
+  end
+
+  def self.room_building_from_coords(input, floor, max_indoor_dist)
+    (start_lat, start_long) = resolve_coordinates(input).split(',')
+    coords = [start_lat.to_f, start_long.to_f]
+    door = IndoorRoutingHelper.closest_door_node(coords, IndoorGraph::BUILDINGS, max_indoor_dist, floor)
+    return { indoor: false, building: nil, door: nil } if door.nil?
+
+    { indoor: true, building: door[:building], door: door[:door] }
   end
 
   def self.routing_marker(latlng, walkingtime)
