@@ -67,7 +67,7 @@ module IndoorRoutingHelper
     end
     {
       polylines: retrieve_polylines(nodes, dest, graph, '#000000'),
-      walktime: walk_time(nodes[dest][:prev] ? nodes[dest][:dist] : Float::MAX)
+      walktime: walk_time(nodes[dest][:prev] ? nodes[dest][:dist] : 0)
     }
   end
 
