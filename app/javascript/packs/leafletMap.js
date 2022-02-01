@@ -28,9 +28,9 @@ const floors = {};
 
 export async function setupMap() {
   global.map = L.map("map");
-    layerControl = L.control.layers({}, {}, { position: "topleft", sortLayers: true }).addTo(map);
-    // add a title to the leaflet layer control
-    $("<h6>Floors</h6>").insertBefore("div.leaflet-control-layers-base");
+  layerControl = L.control.layers({}, {}, { position: "topleft", sortLayers: true }).addTo(map);
+  // add a title to the leaflet layer control
+  $("<h6>Floors</h6>").insertBefore("div.leaflet-control-layers-base");
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
