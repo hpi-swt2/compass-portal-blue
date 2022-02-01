@@ -8,20 +8,28 @@
       <tr>
         <th>Name</th>
         <th>Floor</th>
-        <th colspan="3"></th>
+        <th>Occupancy</th>
+        <th colspan="4"></th>
       </tr>
     </thead>
 
     <tbody>
       <% Room.room_type_to_external_mapping.each do |internal,external| %>
       <tr>
-        <th colspan="6"><b><%= external.pluralize() %>:</b></th>
+        <th colspan="7"><b><%= external.pluralize() %>:</b></th>
       </tr>
       <% @rooms.each do |room| %>
         <% if room.room_type == internal %>
           <tr>
             <td><%= room.name %></td>
             <td><%= room.floor %></td>
+            <td>
+              <% if room.free? %>
+                <p class="occupancy free">free</p>
+              <% else %>
+                <p class="occupancy occupied">occupied</p>
+              <% end %>
+            </td>
             <td class="td-btn"><%= link_to 'Calendar', calendar_path(id: room.id), class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn" %></td>

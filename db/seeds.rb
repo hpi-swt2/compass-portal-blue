@@ -10,10 +10,10 @@ require 'ice_cube'
 lecture_building = Building.create!(name: "Hoersaalgebäude", location_latitude: 0.5321, location_longitude: 0.8763)
 main_building = Building.create!(name: "Hauptgebäude", location_latitude: 0.1674, location_longitude: 0.2345)
 building_a = Building.create!(name: "Haus A", location_latitude: 0, location_longitude: 0)
-Room.create!(name: "Hoersaal1", floor: 0, room_type: "Hoersaal", building: lecture_building)
-Room.create!(name: "A1.1", floor: 1, room_type: "Seminarraum", building: building_a)
-lecture_hall_two = Room.create!(name: "Hörsaal2", floor: 0, room_type: "Hörsaal", building: lecture_building)
-seminar_room = Room.create!(name: "H.257", floor: 2, room_type: "Seminarraum", building: main_building)
+Room.create!(name: "Hoersaal1", floor: 0, room_type: "lecture-hall", building: lecture_building)
+Room.create!(name: "A1.1", floor: 1, room_type: "seminar-room", building: building_a)
+lecture_hall_two = Room.create!(name: "Hörsaal2", floor: 0, room_type: "lecture-hall", building: lecture_building)
+seminar_room = Room.create!(name: "H.257", floor: 2, room_type: "seminar-room", building: main_building)
 Event.create!(name: "Mathe 1", description: "Mathe 1 Vorlesung bei Meinel", d_start: "2022-01-23 10:58:13",
               d_end: "2022-01-23 11:58:13", recurring: "", room: seminar_room)
 Event.create!(name: "Betriebssysteme", description: "BS", d_start: "2022-01-03 08:00:13", d_end: "2022-01-03 9:58:13",

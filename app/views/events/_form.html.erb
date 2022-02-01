@@ -23,10 +23,10 @@
 
     <div>
       <%= form.label :room %>
-        <%= form.select 'room_id',
-            options_from_collection_for_select(Room.all, :id, :name, event.room.nil? ? 1 : event.room.id) + options_for_select([["No Room", nil]]),
-            {},
-            multiple: false %>
+      <%= form.select 'room_id',
+          options_from_collection_for_select(Room.all, :id, :name, event.room.nil? ? 1 : event.room.id) + options_for_select([["No Room", nil]]),
+          {},
+          multiple: false %>
     </div>
 
   <div class="field">

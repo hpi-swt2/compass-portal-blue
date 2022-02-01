@@ -22,7 +22,7 @@ RSpec.describe "rooms/calendar", type: :view do
 
   it "renders current month name and year" do
     render
-    expect(rendered).to have_text(Date::MONTHNAMES[Time.Zone.today.month])
+    expect(rendered).to have_text(Date::MONTHNAMES[Time.zone.today.month])
     expect(rendered).to have_text(Time.zone.now.year)
   end
 

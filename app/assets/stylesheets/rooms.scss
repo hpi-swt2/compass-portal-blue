@@ -1,6 +1,30 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+@import "colors";
+
+.occupancy {
+    text-align: center;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+    width: 100px;
+}
+
+.occupancy.free {
+    background-color: $green;
+}
+
+.occupancy.occupied {
+    background-color: $pink;
+}
+
+.name {
+    font-size: xx-large;
+}
+
+
+
 @import "simple_calendar";
 
 table.roomsList #roomName {
