@@ -52,6 +52,9 @@ export async function setupMap() {
   // display indoor information eg. rooms, labels
   await loadGeoJsonFile("/assets/ABC-Building-0.geojson");
   await loadGeoJsonFile("/assets/ABC-Building-1.geojson");
+  await loadGeoJsonFile("/assets/G-0.geojson");
+  await loadGeoJsonFile("/assets/G-1.geojson");
+  await loadGeoJsonFile("/assets/G-U.geojson");
   map.on("zoomend", recalculateTooltipVisibility);
   map.on("baselayerchange", (event) => {
     currentFloor = parseInt(event.name);
