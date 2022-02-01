@@ -2,7 +2,7 @@ module IndoorGraph
   INDOOR_GRAPHS = {}
   NODES = {}
   ENTRY_NODES = {}
-  BUILDINGS = ["HausABC"].freeze
+  BUILDINGS = ["HausABC", "Hörsaalgebäude"].freeze
 
   def self.load_graphs
     BUILDINGS.each { |building|
