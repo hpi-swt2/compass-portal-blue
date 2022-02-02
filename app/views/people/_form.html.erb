@@ -82,7 +82,7 @@
   </div>
 
   <script defer>
-    $('input[name="user[profile_picture]"]').change(function () {
+    $('input[name="person[profile_picture]"]').change(function () {
           const file = $(this).prop('files')[0] || null;
           if (!file) {return; }
           const url = URL.createObjectURL(file);
