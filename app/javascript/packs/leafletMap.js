@@ -244,7 +244,7 @@ function setupGeoJsonFeatureOutdoor(feature) {
 }
 
 function getBuildingStyle(feature) {
-  return {className: feature.properties.type};
+  return {className: "building " + feature.properties.type};
 }
 
 function getRoomStyle() {
