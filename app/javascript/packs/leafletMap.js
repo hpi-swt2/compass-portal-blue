@@ -44,7 +44,7 @@ export async function setupMap() {
 
   // display indoor information eg. rooms, labels
   await Promise.all([
-    loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true);
+    loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
     loadGeoJsonFile("/assets/ABC-Building-0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
     loadGeoJsonFile("/assets/ABC-Building-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
     loadGeoJsonFile("/assets/ABC-Building-2.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
