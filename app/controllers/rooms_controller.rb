@@ -25,7 +25,7 @@ class RoomsController < ApplicationController
     @month = Date::MONTHNAMES[start_date.month]
     @year = start_date.year
     @events = Event.generate_calendar_events(@room.events,
-                                             start_date.beginning_of_month.beginning_of_week, 
+                                             start_date.beginning_of_month.beginning_of_week,
                                              start_date.end_of_month.end_of_week).compact
   end
 
