@@ -64,7 +64,9 @@ RSpec.describe "/events", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Event" do
-        expect { post events_url, params: { event: valid_attributes } }.to change(Event, :count).by(1)
+        expect do
+          post events_url, params: { event: valid_attributes }
+        end.to change(Event, :count).by(1)
       end
 
       it "redirects to the created event" do
@@ -75,7 +77,9 @@ RSpec.describe "/events", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Event" do
-        expect { post events_url, params: { event: invalid_attributes } }.to change(Event, :count).by(0)
+        expect do
+          post events_url, params: { event: invalid_attributes }
+        end.to change(Event, :count).by(0)
       end
 
       it "renders an unprocessable_entity response (i.e. to display the 'new' template)" do
@@ -194,7 +198,9 @@ RSpec.describe "/events", type: :request do
   describe "DELETE /destroy" do
     it "destroys the requested event" do
       event = Event.create! valid_attributes
-      expect { delete event_url(event) }.to change(Event, :count).by(-1)
+      expect do
+        delete event_url(event)
+      end.to change(Event, :count).by(-1)
     end
 
     it "redirects to the events list" do

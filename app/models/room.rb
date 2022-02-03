@@ -8,6 +8,14 @@ class Room < ApplicationRecord
   validates :name, presence: true
   validates :floor, presence: true, numericality: { only_integer: true }
 
+  def free?
+    room_events = Event.where room: self
+    room_events.each do |event|
+      return false if event.schedule.occurring_at?(Time.zone.now)
+    end
+    true
+  end
+  
   def self.room_type_to_internal_mapping
     {
       'Lecture hall' => 'lecture-hall',

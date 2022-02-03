@@ -1,4 +1,15 @@
-<h2 class="mb-3 fw-light"><%= @room.name %></h2>
+<div class="row">
+    <div class="col-md-4">
+        <h2 class="mb-3 fw-light"><%= @room.name %></h2>
+    </div>
+    <div class="col-md-8 align-self-center">
+        <% if @room.free? %>
+          <p class="occupancy free">free</p>
+        <% else %>
+          <p class="occupancy occupied">occupied</p>
+        <% end %>
+    </div>
+</div>
 
 <div class="field mb-3">
   <label class="form-label">
