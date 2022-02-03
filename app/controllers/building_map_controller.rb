@@ -28,7 +28,7 @@ class BuildingMapController < ApplicationController
 
   def route
     return unless params[:start].present? && params[:dest].present?
-    
+
     (start, dest, start_building, dest_building, res) = RoutingHelper.init_routing(params)
     RoutingHelper.calculate_route(start, dest, start_building, dest_building, res)
     respond(res[:polylines], start, res[:walktime])
