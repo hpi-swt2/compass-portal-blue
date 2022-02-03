@@ -5,24 +5,10 @@ class BuildingMapController < ApplicationController
 
   def _index; end
 
-  def buildings
-    polygons = BuildingMapHelper.leaflet_polygons
-    respond_to do |format|
-      format.json { render json: polygons }
-    end
-  end
-
   def view
     view = BuildingMapHelper.leaflet_center
     respond_to do |format|
       format.json { render json: view }
-    end
-  end
-
-  def markers
-    markers = BuildingMapHelper.leaflet_letters
-    respond_to do |format|
-      format.json { render json: markers }
     end
   end
 

@@ -39,19 +39,13 @@ export async function setupMap() {
     maxNativeZoom: 19,
   }).addTo(map);
 
-  const [view, buildingPolygons, buildingMarkers] = await Promise.all([
-    getView(),
-    getBuildings(),
-    getBuildingMarkers(),
-  ]);
-
+  const view = await getView();
   setView(view);
-  addPolygons(buildingPolygons);
-  addMarkers(buildingMarkers);
 
   // display indoor information eg. rooms, labels
-  await loadGeoJsonFile("/assets/ABC-Building-0.geojson");
-  await loadGeoJsonFile("/assets/ABC-Building-1.geojson");
+  await loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true);
+  await loadGeoJsonFile("/assets/ABC-Building-0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle);
+  await loadGeoJsonFile("/assets/ABC-Building-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle);
   map.on("zoomend", recalculateTooltipVisibility);
   map.on("baselayerchange", (event) => {
     currentFloor = parseInt(event.name);
@@ -140,12 +134,6 @@ export function setView(view) {
   map.setView(view["latlng"], view["zoom"]);
 }
 
-export function addPolygons(polygons) {
-  polygons.forEach((polygon) => {
-    L.polygon(polygon["latlngs"], polygon["options"]).addTo(map);
-  });
-}
-
 export function addMarkers(markers, layer = map) {
   markers.forEach((marker) => {
     addMarker(marker, layer);
@@ -158,12 +146,6 @@ export function addMarker(marker, layer = map) {
   marker["divIcon"]["popupAnchor"] = [0, 0];
   const icon = L.divIcon(marker["divIcon"]);
   L.marker(marker["latlng"], { icon: icon }).addTo(layer);
-}
-
-export function addPolylines(polylines, layer = map) {
-  polylines.forEach((polyline) => {
-    addPolyline(polyline, layer);
-  });
 }
 
 export function addPolyline(polyline, layer = map) {
@@ -191,22 +173,6 @@ export async function displayRoute(start, dest) {
   });
 }
 
-async function getBuildings() {
-  return $.ajax({
-    type: "GET",
-    url: "/building_map/buildings",
-    dataType: "json",
-  });
-}
-
-async function getBuildingMarkers() {
-  return $.ajax({
-    type: "GET",
-    url: "/building_map/markers",
-    dataType: "json",
-  });
-}
-
 async function getView() {
   return $.ajax({
     type: "GET",
@@ -215,7 +181,7 @@ async function getView() {
   });
 }
 
-function setupGeoJsonFeature(feature, layer) {
+function setupGeoJsonFeatureIndoor(feature, layer) {
   const level = parseInt(feature.properties.level_name);
 
   if (isNaN(level)) {
@@ -265,14 +231,36 @@ function setupGeoJsonFeature(feature, layer) {
   label.closeTooltip();
 }
 
-async function loadGeoJsonFile(filename) {
+function setupGeoJsonFeatureOutdoor(feature) {
+  if(feature.properties.type === "uni-potsdam-building") return;
+  const marker = {
+    latlng: feature.properties.letter_coordinate.reverse(),
+    divIcon: {
+      html: feature.properties.letter,
+      className: "building-icon"
+    }
+  };
+  addMarker(marker);
+}
+
+function getBuildingStyle(feature) {
+  return {className: feature.properties.type};
+}
+
+function getRoomStyle() {
+  return {className: "hpi-room"};
+}
+
+async function loadGeoJsonFile(filename, featureCallback, styleCallback, addToMap = false) {
   const file = await fetch(filename);
   const geojsonFeatureCollection = await file.json();
-  // the gejson files contain points for certain properties eg. doors, however we have not implemented the visualization of those and filter them here
-  L.geoJSON(geojsonFeatureCollection, {
-    onEachFeature: setupGeoJsonFeature,
+  // the geojson files contain points for certain properties eg. doors, however we have not implemented the visualization of those and filter them here
+  const geojson = L.geoJSON(geojsonFeatureCollection, {
+    onEachFeature: featureCallback,
+    style: styleCallback,
     filter: (feature) => feature.geometry.type != "Point",
   });
+  if(addToMap) geojson.addTo(map);
 }
 
 function recalculateTooltipVisibility() {
@@ -283,7 +271,7 @@ function recalculateTooltipVisibility() {
     floors[currentFloor].labels.eachLayer((layer) => layer.closeTooltip());
   }
 
-  if (zoomLevel <= 17) {
+  if (zoomLevel <= 18) {
     floors[currentFloor].rooms.removeFrom(map);
   } else {
     floors[currentFloor].rooms.addTo(map);
