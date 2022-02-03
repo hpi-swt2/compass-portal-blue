@@ -79,7 +79,7 @@ describe "User Edit Page", type: :feature do
       expect(page).to have_css "img[alt='#{@user.person.profile_picture.filename}']"
     end
 
-    it "can update profile picture" do
+    it "can update profile picture and show it immediately", js: true do
       sign_in @user
       filename = @user.person.profile_picture.filename
       @user.person.profile_picture.detach
@@ -88,6 +88,9 @@ describe "User Edit Page", type: :feature do
       expect(page).not_to have_css "img[alt='#{filename}']"
 
       page.attach_file('user[person_attributes][profile_picture]', 'app/assets/images/default-profile-picture.png')
+
+      expect(page).to have_css "img[alt='#{filename}']"
+
       page.find('input[type=submit][name=commit]').click
 
       visit edit_user_registration_path
