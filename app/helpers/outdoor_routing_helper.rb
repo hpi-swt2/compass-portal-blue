@@ -15,6 +15,17 @@ module OutdoorRoutingHelper
     # OPTIMIZE: give User feedback
   end
 
+  def self.route_outdoor(start, dest, res)
+    result = OutdoorRoutingHelper.calculate_route(start, dest)
+    res[:polylines].concat([{
+                             floor: 0,
+                             color: '#346eeb',
+                             polyline: OutdoorRoutingHelper.transform_route_to_polyline(result)
+                           }])
+    res[:walktime] += result["duration"]
+    res
+  end
+
   def self.transform_route_to_polyline(route)
     route["geometry"]["coordinates"].map do |(long, lat)|
       [lat, long]

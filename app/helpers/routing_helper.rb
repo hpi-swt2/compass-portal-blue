@@ -2,8 +2,6 @@ require 'httparty'
 require 'json'
 
 module RoutingHelper
-  MAX_INDOOR_DIST = 10
-
   def self.format_seconds_as_minsec(sec)
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
@@ -11,8 +9,8 @@ module RoutingHelper
   def self.init_routing(params)
     start = coordinates_from_string(resolve_coordinates(params[:start]))
     dest = coordinates_from_string(resolve_coordinates(params[:dest]))
-    start_building = room_building(params[:start], params[:start_floor].to_i, MAX_INDOOR_DIST)
-    dest_building = room_building(params[:dest], params[:dest_floor].to_i, MAX_INDOOR_DIST)
+    start_building = room_building(params[:start], params[:start_floor].to_i, IndoorGraph::MAX_INDOOR_DIST)
+    dest_building = room_building(params[:dest], params[:dest_floor].to_i, IndoorGraph::MAX_INDOOR_DIST)
     res = { polylines: [], walktime: 0 }
     [start, dest, start_building, dest_building, res]
   end
@@ -20,34 +18,12 @@ module RoutingHelper
   def self.handle_start_indoor_cases(dest, start_building, dest_building, res)
     exit_door = best_entry(start_building[:building], dest)
     if start_building[:building] == dest_building[:building] # Indoor same building
-      route_indoor(start_building[:door], dest_building[:door], start_building[:building], res)
+      IndoorRoutingHelper.route_indoor(start_building[:door], dest_building[:door], start_building[:building], res)
     elsif !dest_building[:indoor] # indoor to outdoor
-      route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
-      route_outdoor(exit_door[:latlng], dest, res)
+      IndoorRoutingHelper.route_indoor_outdoor(start_building, dest, exit_door, res)
     else # Indoor -> Indoor (other building)
-      route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
-      entrance = best_entry(dest_building[:building], exit_door[:latlng])
-      route_outdoor(exit_door[:latlng], entrance[:latlng], res)
-      route_indoor(entrance[:id], dest_building[:door], dest_building[:building], res)
+      IndoorRoutingHelper.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
     end
-  end
-
-  def self.route_indoor(start, dest, building, res)
-    result = IndoorRoutingHelper.calculate_route(start, dest, building)
-    res[:polylines].concat(result[:polylines])
-    res[:walktime] += result[:walktime]
-    res
-  end
-
-  def self.route_outdoor(start, dest, res)
-    result = OutdoorRoutingHelper.calculate_route(start, dest)
-    res[:polylines].concat([{
-                             floor: 0,
-                             color: '#346eeb',
-                             polyline: OutdoorRoutingHelper.transform_route_to_polyline(result)
-                           }])
-    res[:walktime] += result["duration"]
-    res
   end
 
   def self.room_building(input, floor, max_indoor_dist)

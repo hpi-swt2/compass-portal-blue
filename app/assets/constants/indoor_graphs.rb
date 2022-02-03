@@ -3,6 +3,7 @@ module IndoorGraph
   @nodes = {}
   @entry_nodes = {}
   BUILDINGS = %w[HausABC Hörsaalgebäude].freeze
+  MAX_INDOOR_DIST = 10
 
   def self.load_building(building)
     @indoor_graphs[building] = JSON.parse(File.read('./app/assets/graphs/' << building << ".json"))

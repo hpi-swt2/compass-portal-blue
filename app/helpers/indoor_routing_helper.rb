@@ -102,6 +102,25 @@ module IndoorRoutingHelper
     polylines
   end
 
+  def self.route_indoor(start, dest, building, res)
+    result = IndoorRoutingHelper.calculate_route(start, dest, building)
+    res[:polylines].concat(result[:polylines])
+    res[:walktime] += result[:walktime]
+    res
+  end
+
+  def self.route_indoor_outdoor(start_building, dest, exit_door, res)
+    route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
+    OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], dest, res)
+  end
+
+  def self.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
+    entry_door = best_entry(dest_building[:building], exit_door[:latlng])
+    route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
+    OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], entry_door[:latlng], res)
+    route_indoor(entry_door[:id], dest_building[:door], dest_building[:building], res)
+  end
+
   def self.walk_time(dist)
     dist / 1.38889
   end
