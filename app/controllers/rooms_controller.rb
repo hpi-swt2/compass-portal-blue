@@ -81,16 +81,21 @@ class RoomsController < ApplicationController
         redirect_to rooms_url, notice: "You favourited #{@room.name}"
       elsif url == "favouriteroomlist"
         redirect_to favouriteroomlist_url, notice: "You favourited #{@room.name}"
+      elsif url == "show"
+        redirect_to @room, notice: "You favourited #{@room.name}"
       else
         redirect_to rooms_url, notice: "You favourited #{@room.name}"
       end
 
     elsif type == "unfavourite"
       current_user.favourites.delete(@room)
+
       if url == "rooms"
         redirect_to rooms_url, notice: "You unfavourited #{@room.name}"
       elsif url == "favouriteroomlist"
         redirect_to favouriteroomlist_url, notice: "You unfavourited #{@room.name}"
+      elsif url == "show"
+        redirect_to @room, notice: "You unfavourited #{@room.name}"
       else
         redirect_to rooms_url, notice: "You unfavourited #{@room.name}"
       end
