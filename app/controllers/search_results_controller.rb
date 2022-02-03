@@ -63,10 +63,10 @@ class SearchResultsController < ApplicationController
     buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
     rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ?
                         AND NOT LOWER(name) || LOWER(room_type) LIKE ?",
-                        "%#{query}%", "#{query}%")
+                       "%#{query}%", "#{query}%")
     locations = Location.where("LOWER(name) || LOWER(details) LIKE ?
                               AND NOT LOWER(name) || LOWER(details) LIKE ?",
-                              "%#{query}%", "#{query}%")
+                               "%#{query}%", "#{query}%")
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(last_name) LIKE ?",
