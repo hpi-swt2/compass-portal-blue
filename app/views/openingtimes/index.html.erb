@@ -30,4 +30,6 @@
 
 <br>
 
-<%= link_to 'New Openingtime', new_openingtime_path, class: "btn btn-primary link-btn" %>
+<% if can? :create, Openingtime %>
+  <%= link_to 'New Openingtime', new_openingtime_path, class: "btn btn-primary link-btn" %>
+<% end %>

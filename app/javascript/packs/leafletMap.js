@@ -28,7 +28,7 @@ const floors = {};
 
 export async function setupMap() {
   global.map = L.map("map");
-  layerControl = L.control.layers({}, {}, { position: "topleft" }).addTo(map);
+  layerControl = L.control.layers({}, {}, { position: "topleft", sortLayers: true }).addTo(map);
   // add a title to the leaflet layer control
   $("<h6>Floors</h6>").insertBefore("div.leaflet-control-layers-base");
 
@@ -43,9 +43,18 @@ export async function setupMap() {
   setView(view);
 
   // display indoor information eg. rooms, labels
-  await loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true);
-  await loadGeoJsonFile("/assets/ABC-Building-0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle);
-  await loadGeoJsonFile("/assets/ABC-Building-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle);
+  await Promise.all([
+    loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true);
+    loadGeoJsonFile("/assets/ABC-Building-0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/ABC-Building-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/ABC-Building-2.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/H_0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/H_1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/H_2.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/H_3.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/HS_0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    loadGeoJsonFile("/assets/HG_-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+  ]);
   map.on("zoomend", recalculateTooltipVisibility);
   map.on("baselayerchange", (event) => {
     currentFloor = parseInt(event.name);
@@ -148,6 +157,16 @@ export function addMarker(marker, layer = map) {
   L.marker(marker["latlng"], { icon: icon }).addTo(layer);
 }
 
+export function addAnyMarker(marker, layer = map) {
+  marker.addTo(layer);
+}
+
+export function addPolylines(polylines, layer = map) {
+  polylines.forEach((polyline) => {
+    addPolyline(polyline, layer);
+  });
+}
+
 export function addPolyline(polyline, layer = map) {
   return L.polyline(polyline["latlngs"], polyline["options"]).addTo(layer);
 }
@@ -214,7 +233,7 @@ function setupGeoJsonFeatureIndoor(feature, layer) {
   // lower value -> higher precision
   const markerPositionPrecision = 0.000001;
   const markerPosition = polylabel(
-    feature.geometry.coordinates,
+    feature.geometry.type === "Polygon" ? feature.geometry.coordinates : feature.geometry.coordinates[0],
     markerPositionPrecision
   );
 

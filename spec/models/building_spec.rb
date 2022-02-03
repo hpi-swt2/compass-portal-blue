@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Building, type: :model do
   before do
-    @building = FactoryBot.create :building
-    @openingtime = FactoryBot.create(:openingtime, timeable: @building)
+    @building = create :building
+    @openingtime = create(:openingtime, timeable: @building)
   end
 
   it "has name, location_latitude, location_longitude" do

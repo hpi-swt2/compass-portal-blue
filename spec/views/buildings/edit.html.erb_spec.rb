@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "buildings/edit", type: :view do
   before do
-    @building = assign(:building, Building.create!(
-                                    name: "MyString",
-                                    location_latitude: 1.5,
-                                    location_longitude: 1.5
-                                  ))
+    @building = create :building
   end
 
   it "renders the edit building form" do
