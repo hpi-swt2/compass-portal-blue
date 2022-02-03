@@ -55,25 +55,53 @@ collapse{
         font-size: small;
     }
 
-    .wday-0 {}
-    .wday-1 {}
-    .wday-2 {}
-    .wday-3 {}
-    .wday-4 {}
-    .wday-5 {}
-    .wday-6 {}
+    .wday-0 {
+        font-size: small;
+    }
+    .wday-1 {
+        font-size: small;
+    }
+    .wday-2 {
+        font-size: small;
+    }
+    .wday-3 {
+        font-size: small;
+    }
+    .wday-4 {
+        font-size: small;
+    }
+    .wday-5 {
+        font-size: small;
+    }
+    .wday-6 {
+        font-size: small;
+    }
   
     .today {
         background-color: cornflowerblue;
     }
-    .past {}
-    .future {}
+    .past {
+        font-size: small;
+    }
+    .future {
+        font-size: small;
+    }
   
-    .start-date {}
+    .start-date {
+        font-size: small;
+    }
   
-    .prev-month {}
-    .next-month { }
-    .current-month {}
+    .prev-month {
+        font-size: small;
+    }
+    .next-month {
+        font-size: small;
+    }
+    .current-month {
+        font-size: small;
+    }
   
-    .has-events {}
+    .has-events {
+        font-size: small;
+    }
   }

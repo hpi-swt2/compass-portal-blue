@@ -15,8 +15,8 @@ RSpec.describe "events/edit", type: :view do
       assert_select "textarea[name=?]", "event[recurring]"
 
       5.times do |i|
-        assert_select "select[name=?]", "event[d_start(#{i + 1}i)]"
-        assert_select "select[name=?]", "event[d_end(#{i + 1}i)]"
+        assert_select "select[name=?]", "event[start_time(#{i + 1}i)]"
+        assert_select "select[name=?]", "event[end_time(#{i + 1}i)]"
       end
 
       assert_select "select[name=?]", "event[room_id]"

@@ -3,15 +3,15 @@ require 'ice_cube'
 require 'time'
 
 RSpec.describe Event, type: :model do
-  it "has name, description, d_start, d_end, room, and recurrence rule" do
+  it "has name, description, start_time, end_time, room, and recurrence rule" do
     event = create :event
     room = create :room
 
     expect(event.name).to eq('BA Mathematik III Übung')
     expect(event.description).to eq("Teaching mathematics")
     expect(event.room.name).to eq(room.name)
-    expect(event.d_start).to eq("2021-10-25 13:15:00")
-    expect(event.d_end).to eq("2021-10-25 14:45:00")
+    expect(event.start_time).to eq("2021-10-25 13:15:00")
+    expect(event.end_time).to eq("2021-10-25 14:45:00")
     expect(event.rule).to eq(IceCube::Rule.weekly.day(:monday))
   end
 
@@ -63,8 +63,8 @@ RSpec.describe Event, type: :model do
         expect(calendar_event.name).to eq event.name
         expect(calendar_event.description).to eq event.description
         expect(calendar_event.room).to eq event.room
-        expect(calendar_event.d_start).to eq start_time
-        expect(calendar_event.d_end).to eq end_time
+        expect(calendar_event.start_time).to eq start_time
+        expect(calendar_event.end_time).to eq end_time
       end
     end
   end

@@ -15,9 +15,9 @@ hs2 = Room.create!(name: "Hörsaal2", floor: 0, room_type: "lecture-hall", build
                    location_longitude: 0.9764)
 h257 = Room.create!(name: "H.257", floor: 2, room_type: "seminar-room", building: hptg, location_latitude: 0.5122,
                     location_longitude: 0.8754)
-Event.create!(name: "Mathe 1", description: "Mathe 1 Vorlesung bei Meinel", d_start: "2022-01-23 10:58:13",
-              d_end: "2022-01-23 11:58:13", recurring: "", room: hs1)
-Event.create!(name: "Betriebssysteme", description: "BS", d_start: "2022-01-03 08:00:13", d_end: "2022-01-03 9:58:13",
+Event.create!(name: "Mathe 1", description: "Mathe 1 Vorlesung bei Meinel", start_time: "2022-01-23 10:58:13",
+              end_time: "2022-01-23 11:58:13", recurring: "", room: hs1)
+Event.create!(name: "Betriebssysteme", description: "BS", start_time: "2022-01-03 08:00:13", end_time: "2022-01-03 9:58:13",
               recurring: IceCube::Rule.weekly.day(:monday).to_yaml, room: hs2)
-Event.create!(name: "CG", description: "CG", d_start: "2022-01-21 10:58:13", d_end: "2022-01-21 11:58:13",
+Event.create!(name: "CG", description: "CG", start_time: "2022-01-21 10:58:13", end_time: "2022-01-21 11:58:13",
               recurring: "", room: h257)

@@ -1,6 +1,3 @@
-require 'time'
-require 'date'
-
 class RoomsController < ApplicationController
   load_and_authorize_resource
   before_action :set_room, only: %i[show edit update destroy]
@@ -27,8 +24,8 @@ class RoomsController < ApplicationController
     start_date = params[:start_date].to_date
     @month = Date::MONTHNAMES[start_date.month]
     @year = start_date.year
-    @events = Event.generate_calendar_events(@room.events, start_date.beginning_of_month, start_date.end_of_month)
-    @events = [] if @events.all? { |event| event.nil? == true }
+    @events = Event.generate_calendar_events(@room.events, start_date.beginning_of_month.beginning_of_week, start_date.end_of_month.end_of_week)
+    @events = @events.compact
   end
 
   # POST /rooms or /rooms.json

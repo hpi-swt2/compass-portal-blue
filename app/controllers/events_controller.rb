@@ -72,7 +72,7 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:name, :description, :d_start, :d_end, :recurring, :room_id)
+    params.require(:event).permit(:name, :description, :start_time, :end_time, :recurring, :room_id)
   end
 
   def import_ics(file)

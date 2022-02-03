@@ -8,7 +8,7 @@ require 'time'
 # the model representing an event in the calendar
 class Event < ApplicationRecord
   belongs_to :room, optional: true
-  validates :name, :d_start, :d_end, presence: true
+  validates :name, :start_time, :end_time, presence: true
 
   def self.import(file)
     calendars = Icalendar::Calendar.parse(file.read.force_encoding("UTF-8"))
@@ -24,19 +24,11 @@ class Event < ApplicationRecord
   end
 
   def start_hour_minute
-    d_start.strftime('%H:%M')
-  end
-
-  def start_time
-    d_start
-  end
-
-  def end_time
-    d_end
+    start_time.strftime('%H:%M')
   end
 
   def end_hour_minute
-    d_end.strftime('%H:%M')
+    end_time.strftime('%H:%M')
   end
 
   def rule
@@ -44,18 +36,18 @@ class Event < ApplicationRecord
   end
 
   def schedule
-    schedule = IceCube::Schedule.new(d_start, end_time: d_end)
+    schedule = IceCube::Schedule.new(start_time, end_time: end_time)
     schedule.add_recurrence_rule(rule)
     schedule
   end
 
   def calendar_events(start_date, end_date)
     if recurring.blank?
-      [self] if (start_date..end_date).cover?(d_start) || (start_date..end_date).cover?(d_end)
+      [self] if (start_date..end_date).cover?(start_time) || (start_date..end_date).cover?(end_time)
     else
       schedule.occurrences_between(start_date, end_date).map do |occurrence|
-        Event.new(id: id, name: name, description: description, d_start: occurrence.start_time,
-                  d_end: occurrence.end_time, room: room)
+        Event.new(id: id, name: name, description: description, start_time: occurrence.start_time,
+                  end_time: occurrence.end_time, room: room)
       end
     end
   end
@@ -95,8 +87,8 @@ class Event < ApplicationRecord
 
   def self.create_from_icalendar(event)
     create(name: event.summary,
-           d_start: event.dtstart,
-           d_end: event.dtend,
+           start_time: event.dtstart,
+           end_time: event.dtend,
            description: event.description.nil? ? "" : event.description,
            recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
            room: Room.find_by(name: event.location.to_s))

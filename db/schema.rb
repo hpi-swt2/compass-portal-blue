@@ -56,15 +56,15 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.datetime "d_start"
-    t.datetime "d_end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.text "recurring"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "room_id"
     t.index ["room_id"], name: "index_events_on_room_id"
   end
-  
+
   create_table "location_owner", id: false, force: :cascade do |t|
     t.integer "location_id", null: false
     t.integer "user_id", null: false

@@ -8,8 +8,8 @@ RSpec.describe "events/show", type: :view do
     @event = assign(:event, Event.create!(
                               name: "Name",
                               description: "A Description",
-                              d_start: @start_time,
-                              d_end: @end_time,
+                              start_time: @start_time,
+                              end_time: @end_time,
                               recurring: IceCube::Rule.weekly.day(:monday).to_yaml
                             ))
   end
