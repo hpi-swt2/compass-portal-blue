@@ -91,14 +91,14 @@ module RoutingHelper
   def self.best_entry(building, latlng)
     entry_id = nil
     min_dist = Float::MAX
-    IndoorGraph::ENTRY_NODES[building].each do |id|
-      distance = distance(IndoorGraph::INDOOR_GRAPHS[building][id]['latlng'], latlng)
+    IndoorGraph.entry_nodes[building].each do |id|
+      distance = distance(IndoorGraph.indoor_graphs[building][id]['latlng'], latlng)
       if distance < min_dist
         entry_id = id
         min_dist = distance
       end
     end
-    { id: entry_id, latlng: IndoorGraph::INDOOR_GRAPHS[building][entry_id]['latlng'] }
+    { id: entry_id, latlng: IndoorGraph.indoor_graphs[building][entry_id]['latlng'] }
   end
 
   def self.distance(latlng1, latlng2)

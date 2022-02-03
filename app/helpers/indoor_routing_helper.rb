@@ -9,8 +9,8 @@ module IndoorRoutingHelper
     building = nil
 
     buildings.each do |b|
-      graph = IndoorGraph::INDOOR_GRAPHS[b]
-      IndoorGraph::NODES[b].each do |door_id|
+      graph = IndoorGraph.indoor_graphs[b]
+      IndoorGraph.nodes[b].each do |door_id|
         next unless graph[door_id]["floor"] == level
 
         dist = RoutingHelper.distance(graph[door_id]["latlng"], latlng)
@@ -31,14 +31,14 @@ module IndoorRoutingHelper
   end
 
   def self.entries(building)
-    IndoorGraph::ENTRY_NODES[building].map do |key|
-      { id: key, latlng: IndoorGraph::INDOOR_GRAPHS[building][key]['latlng'] }
+    IndoorGraph.entry_nodes[building].map do |key|
+      { id: key, latlng: IndoorGraph.indoor_graphs[building][key]['latlng'] }
     end
   end
 
   def self.calculate_route(from_id, to_id, building)
     Rails.logger.debug "Debugging Output here:"
-    graph = IndoorGraph::INDOOR_GRAPHS[building]
+    graph = IndoorGraph.indoor_graphs[building]
     dijkstra(from_id, to_id, graph)
   end
 

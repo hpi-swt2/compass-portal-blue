@@ -7,14 +7,12 @@ module OutdoorRoutingHelper
   end
 
   def self.calculate_route(start, destination)
-    begin
-      response = HTTParty.get(routing_url(start, destination))
-      return unless response.code == 200 # OPTIMIZE: give User feedback
+    response = HTTParty.get(routing_url(start, destination))
+    return unless response.code == 200 # OPTIMIZE: give User feedback
 
-      JSON.parse(response.body)["routes"][0]
-    rescue StandardError
-      # OPTIMIZE: give User feedback
-    end
+    JSON.parse(response.body)["routes"][0]
+  rescue StandardError
+    # OPTIMIZE: give User feedback
   end
 
   def self.transform_route_to_polyline(route)
