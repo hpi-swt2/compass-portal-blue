@@ -6,6 +6,16 @@ module RoutingHelper
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
   end
 
+  def self.calculate_route(start, dest, start_building, dest_building, res)
+    if !start_building[:indoor] && !dest_building[:indoor] # outdoor - outdoor
+      RoutingHelper.route_outdoor(start, dest, res)
+    elsif start_building[:indoor]
+      RoutingHelper.handle_start_indoor_cases(dest, start_building, dest_building, res)
+    else
+      OutdoorRoutingHelper.handle_outdoor_indoor_case(dest_building)
+    end
+  end
+
   def self.init_routing(params)
     start = coordinates_from_string(resolve_coordinates(params[:start]))
     dest = coordinates_from_string(resolve_coordinates(params[:dest]))

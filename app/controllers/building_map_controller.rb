@@ -28,18 +28,9 @@ class BuildingMapController < ApplicationController
 
   def route
     return unless params[:start].present? && params[:dest].present?
-
+    
     (start, dest, start_building, dest_building, res) = RoutingHelper.init_routing(params)
-
-    if !start_building[:indoor] && !dest_building[:indoor] # outdoor - outdoor
-      RoutingHelper.route_outdoor(start, dest, res)
-    elsif start_building[:indoor]
-      RoutingHelper.handle_start_indoor_cases(dest, start_building, dest_building, res)
-    else
-      entrance = RoutingHelper.best_entry(dest_building[:building], start)
-      RoutingHelper.route_indoor(dest_building[:door], entrance[:id], dest_building[:building], res)
-      RoutingHelper.route_outdoor(entrance[:latlng], start, res)
-    end
+    RoutingHelper.calculate_route(start, dest, start_building, dest_building, res)
     respond(res[:polylines], start, res[:walktime])
   end
 
