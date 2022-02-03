@@ -15,7 +15,7 @@ class Room < ApplicationRecord
     end
     true
   end
-  
+
   def self.room_type_to_internal_mapping
     {
       'Lecture hall' => 'lecture-hall',
