@@ -12,7 +12,7 @@ module RoutingHelper
     elsif start_building[:indoor]
       RoutingHelper.handle_start_indoor_cases(dest, start_building, dest_building, res)
     else
-      OutdoorRoutingHelper.handle_outdoor_indoor_case(dest_building)
+      OutdoorRoutingHelper.handle_outdoor_indoor_case(start, dest_building, res)
     end
   end
 
@@ -43,11 +43,12 @@ module RoutingHelper
     if BuildingMapHelper.building?(input) # in this case we only use outside routing
       return { indoor: false, building: BuildingMapHelper.map_building_name_to_graph(input), door: nil }
     end
-
     return { indoor: false, building: nil, door: nil } unless BuildingMapHelper.room?(input)
 
-    building_name = BuildingMapHelper.find_room(input).building.name
-    { indoor: true, building: BuildingMapHelper.map_building_name_to_graph(building_name), door: nil }
+    room = BuildingMapHelper.find_room(input)
+    door = IndoorRoutingHelper.closest_door_node([room.location_latitude, room.location_longitude],
+                                                 IndoorGraph::BUILDINGS, max_indoor_dist, floor)
+    { indoor: true, building: door[:building], door: door[:door] }
   end
 
   def self.room_building_from_coords(input, floor, max_indoor_dist)

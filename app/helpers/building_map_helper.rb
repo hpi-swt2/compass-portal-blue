@@ -12,7 +12,7 @@ module BuildingMapHelper
   end
 
   def self.destinations
-    buildings.merge(locations)
+    buildings.merge(locations).merge(rooms)
   end
 
   def self.buildings

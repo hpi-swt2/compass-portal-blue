@@ -8,8 +8,8 @@ module OutdoorRoutingHelper
 
   def self.handle_outdoor_indoor_case(start, dest_building, res)
     entrance = RoutingHelper.best_entry(dest_building[:building], start)
-    RoutingHelper.route_outdoor(entrance[:latlng], start, res)
-    RoutingHelper.route_indoor(dest_building[:door], entrance[:id], dest_building[:building], res)
+    route_outdoor(entrance[:latlng], start, res)
+    IndoorRoutingHelper.route_indoor(dest_building[:door], entrance[:id], dest_building[:building], res)
   end
 
   def self.calculate_route(start, destination)

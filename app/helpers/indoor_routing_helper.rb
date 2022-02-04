@@ -1,13 +1,8 @@
-require 'algorithms'
-
 module IndoorRoutingHelper
-  include Containers
-
   def self.closest_door_node(latlng, buildings, max_dist, level)
     min = Float::MAX
     door = nil
     building = nil
-
     buildings.each do |b|
       graph = IndoorGraph.indoor_graphs[b]
       IndoorGraph.nodes[b].each do |door_id|
@@ -39,67 +34,7 @@ module IndoorRoutingHelper
   def self.calculate_route(from_id, to_id, building)
     Rails.logger.debug "Debugging Output here:"
     graph = IndoorGraph.indoor_graphs[building]
-    dijkstra(from_id, to_id, graph)
-  end
-
-  def self.dijkstra(start, dest, graph)
-    q = PriorityQueue.new
-    nodes = {}
-    graph.each do |key, _value|
-      nodes.merge!(key => { dist: Float::INFINITY, prev: nil })
-    end
-    nodes[start][:dist] = 0
-    q.push(start, 0)
-
-    until q.empty?
-      v = q.pop
-      break if v == dest
-
-      graph[v]["adj"].each do |edge|
-        u = edge["node"]
-        weight = edge["weight"]
-        next unless nodes[v][:dist] + weight < nodes[u][:dist]
-
-        nodes[u][:dist] = nodes[v][:dist] + weight
-        nodes[u][:prev] = v
-        q.push(u, -1 * nodes[u][:dist]) # negative because the queue pops highest weight
-      end
-    end
-    {
-      polylines: retrieve_polylines(nodes, dest, graph, '#000000'),
-      walktime: walk_time(nodes[dest][:prev] ? nodes[dest][:dist] : 0)
-    }
-  end
-
-  def self.retrieve_polylines(nodes, curr, graph, color)
-    polylines = []
-    last_floor = graph[curr]['floor']
-    unless nodes[curr][:prev].nil?
-      polylines.push({
-                       floor: last_floor,
-                       color: color,
-                       polyline: [graph[curr]['latlng']]
-                     })
-    end
-
-    last_latlng = []
-    until nodes[curr][:prev].nil?
-      curr = nodes[curr][:prev]
-      current_floor = graph[curr]['floor']
-      if last_floor == current_floor
-        last_latlng = graph[curr]['latlng']
-        polylines.last[:polyline].push(last_latlng)
-      else
-        last_floor = current_floor
-        polylines.push({
-                         floor: last_floor,
-                         color: color,
-                         polyline: [last_latlng, graph[curr]['latlng']]
-                       })
-        last_latlng = graph[curr]['latlng']
-      end
-    end
-    polylines
+    DijkstraHelper.dijkstra(from_id, to_id, graph)
   end
 
   def self.route_indoor(start, dest, building, res)
@@ -115,7 +50,7 @@ module IndoorRoutingHelper
   end
 
   def self.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
-    entry_door = best_entry(dest_building[:building], exit_door[:latlng])
+    entry_door = RoutingHelper.best_entry(dest_building[:building], exit_door[:latlng])
     route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
     OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], entry_door[:latlng], res)
     route_indoor(entry_door[:id], dest_building[:door], dest_building[:building], res)
