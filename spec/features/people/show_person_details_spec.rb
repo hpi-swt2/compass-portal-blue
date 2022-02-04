@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'people_helper'
 
 describe "Person Show Page", type: :feature do
   before do
@@ -6,13 +7,13 @@ describe "Person Show Page", type: :feature do
     sign_in(create(:user, admin: true))
   end
 
-  it "displays a persons' information" do
+  it "displays a person's information" do
     visit person_path(@person)
 
     expect(page).to have_text @person.first_name
     expect(page).to have_text @person.last_name
-    expect(page).to have_text @person.email
-    expect(page).to have_text @person.phone_number
+    expect(page).to have_link @person.email, href: "mailto:#{@person.email}"
+    expect(page).to have_link @person.phone_number, href: "tel:#{@person.phone_number}"
   end
 
   it "displays the rooms where the person can be found" do

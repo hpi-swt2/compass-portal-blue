@@ -12,7 +12,7 @@ class Person < ApplicationRecord
 
   def formatted_phone_number
     parsed_phone = Phonelib.parse(phone_number)
-    return phone_number if parsed_phone.invalid?
+    return number_to_phone(phone_number) if parsed_phone.invalid?
 
     parsed_phone.full_international
   end
