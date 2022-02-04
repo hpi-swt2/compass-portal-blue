@@ -17,22 +17,24 @@
         <%= render 'people/form_fields', form: person_subform, person: resource.person %>
       <% end %>
 
+      <h4 class="fw-light mt-4 mb-3">Login Details</h4>
+
       <div class="field mb-3">
-        <%= form.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
+        <%= form.label :username, class: 'form-label' %>
         <%= form.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
       </div>
 
-      <div class="field mb-3">
-        <%= form.label :email, class: 'form-label' %>
-        <%= form.text_field :email, class: 'form-control', autocomplete: "email" %>
-      </div>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
       <%# If provider is nil, i.e. not set to 'openid_connect', then it's an account with local pw %>
       <% if resource.provider.nil? %>
+        <div class="field mb-3">
+          <%= form.label :email, class: 'form-label' %>
+          <%= form.text_field :email, class: 'form-control', autocomplete: "email" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
         <h5 class="fw-light mt-3">Login Password</h5>
 
         <div class="field mb-1">
