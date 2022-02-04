@@ -3,11 +3,11 @@ class UsersController < ApplicationController
     @users = User.all
   end
   
-  # PATCH/PUT /buildings/1 or /buildings/1.json
+  # PATCH/PUT /users/1/roles
   def update_roles
-    puts "user id", params['id']
-    puts "should become admin?", roles_params['admin']
-    # TODO
+    user = User.find(params[:id])
+    user.admin = roles_params[:admin]
+    user.save
   end
 
   # Only allow a list of trusted parameters through.
