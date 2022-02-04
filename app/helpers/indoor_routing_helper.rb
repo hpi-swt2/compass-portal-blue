@@ -1,28 +1,26 @@
 module IndoorRoutingHelper
-  def self.closest_door_node(latlng, buildings, max_dist, level)
-    min = Float::MAX
-    door = nil
-    building = nil
+  def self.update_nearest_node_result(door_id, dist, building, result)
+    result[:door] = door_id
+    result[:distance] = dist
+    result[:building] = building
+  end
+
+  def self.find_nearest_node(latlng, buildings, level, result)
     buildings.each do |b|
       graph = IndoorGraph.indoor_graphs[b]
       IndoorGraph.nodes[b].each do |door_id|
         next unless graph[door_id]["floor"] == level
 
         dist = RoutingHelper.distance(graph[door_id]["latlng"], latlng)
-        next unless dist < min
-
-        min = dist
-        door = door_id
-        building = b
+        update_nearest_node_result(door_id, dist, b, result) if dist < result[:distance]
       end
     end
-    return nil if min > max_dist
+  end
 
-    {
-      door: door,
-      distance: min,
-      building: building
-    }
+  def self.closest_node(latlng, buildings, max_dist, level)
+    result = { door: nil, distance: Float::MAX, building: nil }
+    find_nearest_node(latlng, buildings, level, result)
+    result if result[:distance] < max_dist
   end
 
   def self.entries(building)

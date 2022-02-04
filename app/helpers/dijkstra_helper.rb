@@ -3,15 +3,20 @@ require 'algorithms'
 module DijkstraHelper
   include Containers
 
-  def self.dijkstra(start, dest, graph)
-    q = PriorityQueue.new
-    nodes = {}
+  def self.init_dijkstra(queue, nodes, start, graph)
     graph.each do |key, _value|
       nodes.merge!(key => { dist: Float::INFINITY, prev: nil })
     end
     nodes[start][:dist] = 0
-    q.push(start, 0)
+    queue.push(start, 0)
+  end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  def self.dijkstra(start, dest, graph)
+    q = PriorityQueue.new
+    nodes = {}
+    init_dijkstra(q, nodes, start, graph)
     until q.empty?
       v = q.pop
       break if v == dest
@@ -32,18 +37,6 @@ module DijkstraHelper
     }
   end
 
-  def self.add_to_polylines(floor, color, polyline, polylines)
-    polylines.push({ floor: floor, color: color, polyline: polyline })
-  end
-
-  def self.init_polylines(nodes, curr, graph, color)
-    polylines = []
-    last_latlng = []
-    last_floor = graph[curr]['floor']
-    add_to_polylines(last_floor, color, [graph[curr]['latlng']], polylines) unless nodes[curr][:prev].nil?
-    [polylines, last_floor, last_latlng]
-  end
-
   def self.retrieve_polylines(nodes, curr, graph, color)
     (polylines, last_floor, last_latlng) = init_polylines(nodes, curr, graph, color)
     until (curr = nodes[curr][:prev]).nil?
@@ -56,5 +49,19 @@ module DijkstraHelper
       last_latlng = graph[curr]['latlng']
     end
     polylines
+  end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
+
+  def self.add_to_polylines(floor, color, polyline, polylines)
+    polylines.push({ floor: floor, color: color, polyline: polyline })
+  end
+
+  def self.init_polylines(nodes, curr, graph, color)
+    polylines = []
+    last_latlng = []
+    last_floor = graph[curr]['floor']
+    add_to_polylines(last_floor, color, [graph[curr]['latlng']], polylines) unless nodes[curr][:prev].nil?
+    [polylines, last_floor, last_latlng]
   end
 end
