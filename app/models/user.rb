@@ -31,10 +31,10 @@ class User < ApplicationRecord
   end
 
   def sync_user_email
+    return if provider.nil?
+
     # Only sync if the user was registered via openid-connect
-    unless provider.nil?
-      self.email = person.email
-    end
+    self.email = person.email
   end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
