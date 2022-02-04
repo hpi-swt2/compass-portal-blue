@@ -18,6 +18,9 @@ global.ajaxCall = (
     $("#browse-outlet a").each(function () {
       const link = $(this);
       const href = link.attr("href");
+      if (href.match(/(mailto|tel):(.*)/)) {
+        return;
+      }
       // Remove the original href of the link:
       link.attr("href", "#");
       const [baseLink, queryParams] = href.split(/\?(.+)/);
