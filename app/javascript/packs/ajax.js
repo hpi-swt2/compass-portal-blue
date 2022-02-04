@@ -36,7 +36,7 @@ global.ajaxCall = (
   /** Special handling of all /map/route paths so that instead of loading another page,
    * the route navigation screen is shown on in the browse outlet so that a navigation can be started.
    */
-   if (target === "/route") {
+  if (target === "/route") {
     $("#browse-outlet-container").addClass("navigation");
     const params = new URLSearchParams(valuesToSubmit);
     // Copy the start and dest from the url into the corresponding form fields.
