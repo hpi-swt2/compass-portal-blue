@@ -14,6 +14,18 @@ let pinIcons = [
   }),
 ];
 
+let geoJsonLayerFiles = [
+  "/assets/ABC-Building-0.geojson",
+  "/assets/ABC-Building-1.geojson",
+  "/assets/ABC-Building-2.geojson",
+  "/assets/H_0.geojson",
+  "/assets/H_1.geojson",
+  "/assets/H_2.geojson",
+  "/assets/H_3.geojson",
+  "/assets/HS_0.geojson",
+  "/assets/HG_-1.geojson"
+];
+
 export let pins = [];
 
 let layerControl;
@@ -45,15 +57,7 @@ export async function setupMap() {
   // display indoor information eg. rooms, labels
   await Promise.all([
     loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
-    loadGeoJsonFile("/assets/ABC-Building-0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/ABC-Building-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/ABC-Building-2.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/H_0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/H_1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/H_2.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/H_3.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/HS_0.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
-    loadGeoJsonFile("/assets/HG_-1.geojson", setupGeoJsonFeatureIndoor, getRoomStyle),
+    Promise.all(geoJsonLayerFiles.map((filename) => loadGeoJsonFile(filename, setupGeoJsonFeatureIndoor, getRoomStyle)))
   ]);
   map.on("zoomend", recalculateTooltipVisibility);
   map.on("baselayerchange", (event) => {
@@ -251,15 +255,15 @@ function setupGeoJsonFeatureIndoor(feature, layer) {
 }
 
 function setupGeoJsonFeatureOutdoor(feature) {
-  if(feature.properties.type === "uni-potsdam-building") return;
-  const marker = {
-    latlng: feature.properties.letter_coordinate.reverse(),
-    divIcon: {
-      html: feature.properties.letter,
-      className: "building-icon"
-    }
-  };
-  addMarker(marker);
+  if(feature.properties.type === "hpi-building") {
+    addMarker({
+      latlng: feature.properties.letter_coordinate.reverse(),
+      divIcon: {
+        html: feature.properties.letter,
+        className: "building-icon"
+      }
+    });
+  }
 }
 
 function getBuildingStyle(feature) {
@@ -274,12 +278,12 @@ async function loadGeoJsonFile(filename, featureCallback, styleCallback, addToMa
   const file = await fetch(filename);
   const geojsonFeatureCollection = await file.json();
   // the geojson files contain points for certain properties eg. doors, however we have not implemented the visualization of those and filter them here
-  const geojson = L.geoJSON(geojsonFeatureCollection, {
+  const geojsonLayer = L.geoJSON(geojsonFeatureCollection, {
     onEachFeature: featureCallback,
     style: styleCallback,
     filter: (feature) => feature.geometry.type != "Point",
   });
-  if(addToMap) geojson.addTo(map);
+  if(addToMap) geojsonLayer.addTo(map);
 }
 
 function recalculateTooltipVisibility() {
@@ -290,7 +294,7 @@ function recalculateTooltipVisibility() {
     floors[currentFloor].labels.eachLayer((layer) => layer.closeTooltip());
   }
 
-  if (zoomLevel <= 18) {
+  if (zoomLevel <= 17) {
     floors[currentFloor].rooms.removeFrom(map);
   } else {
     floors[currentFloor].rooms.addTo(map);
