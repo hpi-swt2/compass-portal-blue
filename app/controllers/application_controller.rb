@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   # This is a convenient way to customize devise controllers without creating a new ones
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to error_show_path, alert: "#{exception} Please log in or create an user to edit."
+  end
+
   protected
 
   def configure_permitted_parameters
