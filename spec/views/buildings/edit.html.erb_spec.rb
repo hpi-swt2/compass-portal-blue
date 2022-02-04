@@ -12,6 +12,8 @@ RSpec.describe "buildings/edit", type: :view do
 
       assert_select "input[name=?]", "building[name]"
 
+      assert_select "input[name=?]", "building[name_de]"
+
       assert_select "input[name=?]", "building[location_latitude]"
 
       assert_select "input[name=?]", "building[location_longitude]"

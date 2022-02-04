@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_162451) do
+ActiveRecord::Schema.define(version: 2022_02_04_104141) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.float "location_longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_de"
   end
 
   create_table "location_owner", id: false, force: :cascade do |t|
@@ -65,6 +66,8 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "location_latitude"
     t.float "location_longitude"
+    t.string "name_de"
+    t.text "details_de"
   end
 
   create_table "openingtimes", force: :cascade do |t|
@@ -112,6 +115,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_162451) do
     t.integer "user_id"
     t.float "location_latitude"
     t.float "location_longitude"
+    t.string "name_de"
     t.index ["building_id"], name: "index_rooms_on_building_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end

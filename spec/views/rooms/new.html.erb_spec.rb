@@ -18,6 +18,8 @@ RSpec.describe "rooms/new", type: :view do
 
       assert_select "input[name=?]", "room[name]"
 
+      assert_select "input[name=?]", "room[name_de]"
+
       assert_select "input[name=?]", "room[floor]"
 
       assert_select "input[name=?]", "room[location_latitude]"

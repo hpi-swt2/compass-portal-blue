@@ -3,17 +3,17 @@ require 'rails_helper'
 RSpec.describe "Search result list page", type: :feature do
 
   before do
-    @building_abc = create :building, name: "Building ABC"
-    @abc_building = create :building, name: "ABC Building"
-    @building_xyz = create :building, name: "Building XYZ"
+    @building_abc = create :building, name: "Building ABC", name_de: "Gebäude ABC"
+    @abc_building = create :building, name: "ABC Building", name_de: "ABC Gebäude"
+    @building_xyz = create :building, name: "Building XYZ", name_de: "Gebäude XYZ"
 
-    @room_abc = create :room, name: "Room ABC", room_type: "Pool room"
-    @abc_room = create :room, name: "ABC Room", room_type: "Lecture hall"
+    @room_abc = create :room, name: "Room ABC", name_de: "Raum ABC", room_type: "Pool room"
+    @abc_room = create :room, name: "ABC Room", name_de: "ABC Raum", room_type: "Lecture hall"
     @room_xyz = create :room, name: "Room X.YZ", room_type: "Conference room"
-
-    @bank = create :location, name: "Bank", details: "bank-details-abc"
-    @pavillon = create :location, name: "Pavillon", details: "pavillon-details-def"
-    @kocktail_bar = create :location, name: "Kocktail Bar", details: "kocktail bar-details-ghi"
+    
+    @bank = create :location, name: "Bank", name_de:"BankDE", details: "bank-details-abc", details_de:"bank-details-abc-DE"
+    @pavillon = create :location, name: "Pavillon",  name_de:"PavillionDE", details: "pavillon-details-def", details_de: "pavillon-details-def-DE"
+    @kocktail_bar = create :location, name: "Kocktail Bar", name_de: "Kocktail Bar DE", details: "kocktail bar-details-ghi", details_de: "kocktail bar-details-ghi-DE"
 
     @curie = create :person, first_name: "Marie", last_name: "Curie"
     @riemann = create :person, first_name: "Bernhard", last_name: "Riemann"
@@ -39,6 +39,11 @@ RSpec.describe "Search result list page", type: :feature do
     visit search_results_path(query: "ABC")
     expect(page).not_to have_text(@building_xyz.name)
     expect(page).not_to have_link(href: building_path(@building_xyz))
+  end
+
+  it "does show the right building when looking for the german name of the building" do
+    visit search_results_path(query: "Gebäude ABC")
+    expect(page).to have_link(@building_abc.name, href: building_path(@building_abc), count: 1)
   end
 
   it "lists buildings starting with the query before other found buildings" do
@@ -83,6 +88,14 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).not_to have_link(href: location_path(@kocktail_bar))
   end
 
+  it "shows locations when looking for the german details or name" do
+    visit search_results_path(query: "BankDE")
+    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+
+    visit search_results_path(query: "bank-details-abc-DE")
+    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+  end
+
   it "lists locations starting with the query before other found locations" do
     visit search_results_path(query: "ba")
     expect(page.body.index(@bank.name)).to be < page.body.index(@kocktail_bar.name)
@@ -100,6 +113,11 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_link(@abc_room.name, href: room_path(@abc_room), count: 1)
   end
 
+  it "shows the right room when looking for the german name" do
+    visit search_results_path(query: "Raum ABC")
+    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
+  end
+
   it "shows rooms whose type matches the query" do
     visit search_results_path(query: "Lecture")
     expect(page).to have_link(@abc_room.name, href: room_path(@abc_room), count: 1)
@@ -108,6 +126,7 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
     expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
   end
+  
 
   it "does not show rooms whose name and type does not match the query" do
     visit search_results_path(query: "x.yz")
@@ -198,4 +217,6 @@ RSpec.describe "Search result list page", type: :feature do
     visit search_results_path(query: "  \n. \t")
     expect(page).to have_css('div#no_results_message')
   end
+
+  
 end
