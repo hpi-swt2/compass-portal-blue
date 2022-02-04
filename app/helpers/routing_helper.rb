@@ -8,7 +8,7 @@ module RoutingHelper
 
   def self.calculate_route(start, dest, start_building, dest_building, res)
     if !start_building[:indoor] && !dest_building[:indoor] # outdoor - outdoor
-      RoutingHelper.route_outdoor(start, dest, res)
+      OutdoorRoutingHelper.route_outdoor(start, dest, res)
     elsif start_building[:indoor]
       RoutingHelper.handle_start_indoor_cases(dest, start_building, dest_building, res)
     else
@@ -51,8 +51,7 @@ module RoutingHelper
   end
 
   def self.room_building_from_coords(input, floor, max_indoor_dist)
-    (start_lat, start_long) = resolve_coordinates(input).split(',')
-    coords = [start_lat.to_f, start_long.to_f]
+    coords = coordinates_from_string(resolve_coordinates(input))
     door = IndoorRoutingHelper.closest_door_node(coords, IndoorGraph::BUILDINGS, max_indoor_dist, floor)
     return { indoor: false, building: nil, door: nil } if door.nil?
 

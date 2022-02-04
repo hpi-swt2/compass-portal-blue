@@ -2,7 +2,7 @@ module IndoorGraph
   @indoor_graphs = {}
   @nodes = {}
   @entry_nodes = {}
-  BUILDINGS = %w[HausABC HS H].freeze
+  BUILDINGS = %w[ABC HS H].freeze
   MAX_INDOOR_DIST = 10
 
   def self.load_building(building)

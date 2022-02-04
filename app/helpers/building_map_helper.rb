@@ -44,7 +44,7 @@ module BuildingMapHelper
   def self.map_building_name_to_graph(name)
     case name
     when 'Haus A', 'Haus B', 'Haus C'
-      return 'HausABC'
+      return 'ABC'
     end
     name
   end
