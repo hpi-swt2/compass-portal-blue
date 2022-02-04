@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
+
   def roles
     @users = User.all
   end
