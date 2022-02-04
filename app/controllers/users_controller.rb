@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def roles
     @users = User.all
   end
-  
+
   # PATCH/PUT /users/1/roles
   def update_roles
     user = User.find(params[:id])
