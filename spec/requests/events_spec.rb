@@ -21,10 +21,9 @@ RSpec.describe "/events", type: :request do
     Event.new(name: "BA Mathematik III Übung",
               description: "Teaching mathematics",
               room: create(:room),
-              d_start: "2021-10-25 13:15:00",
-              d_end: "2021-10-25 14:45:00",
-              recurring: IceCube::Rule.weekly.day(:monday).to_yaml
-            ).attributes
+              start_time: "2021-10-25 13:15:00",
+              end_time: "2021-10-25 14:45:00",
+              recurring: IceCube::Rule.weekly.day(:monday).to_yaml).attributes
   end
 
   let(:invalid_attributes) do
@@ -99,7 +98,7 @@ RSpec.describe "/events", type: :request do
       it "redirects to the index page" do
         expect(response).to redirect_to(events_url)
       end
-      
+
       it "shows an alert that an ICS file has to be chosen first" do
         expect(flash[:alert]).to eq("Please choose an ICS file to import")
       end
@@ -136,8 +135,8 @@ RSpec.describe "/events", type: :request do
 
       it "creates events from the imported calendar" do
         calendar_file = Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/test_calendar.ics")
-        expect{ post import_events_path, params: { file: calendar_file }}.to change{Event.count}.by(2)
-        
+        expect { post import_events_path, params: { file: calendar_file } }.to change(Event, :count).by(2)
+
         event1 = Event.find_by name: "First Event"
         event2 = Event.find_by name: "Second Event"
 
@@ -145,10 +144,10 @@ RSpec.describe "/events", type: :request do
         expect(event2.description).to eq("This is an imported weekly occuring event")
         expect(event1.rule).to be_blank
         expect(event2.rule.to_s).to eq("Weekly on Wednesdays")
-        expect(event1.d_start).to eq("2022-01-12 13:00:00 UTC")
-        expect(event2.d_start).to eq("2021-11-10 10:00:00 UTC")
-        expect(event1.d_end).to eq("2021-01-12 14:00:00 UTC")
-        expect(event2.d_end).to eq("2021-11-10 11:30:00 UTC")
+        expect(event1.start_time).to eq("2022-01-12 13:00:00 UTC")
+        expect(event2.start_time).to eq("2021-11-10 10:00:00 UTC")
+        expect(event1.end_time).to eq("2021-01-12 14:00:00 UTC")
+        expect(event2.end_time).to eq("2021-11-10 11:30:00 UTC")
       end
     end
   end
@@ -159,8 +158,8 @@ RSpec.describe "/events", type: :request do
         Event.new(name: "MA Combinatorial Optimization / Friedrich",
                   description: "MA Combinatorial Optimization by Friedrich",
                   room: create(:room),
-                  d_start: "2021-10-28 09:00:00",
-                  d_end: "2021-10-28 10:30:00",
+                  start_time: "2021-10-28 09:00:00",
+                  end_time: "2021-10-28 10:30:00",
                   recurring: IceCube::Rule.weekly.day(:thursday).to_yaml)
       end
       let(:new_attributes) do
@@ -174,8 +173,8 @@ RSpec.describe "/events", type: :request do
         expect(event.name).to eq(new_event.name)
         expect(event.description).to eq(new_event.description)
         expect(event.room).to eq(new_event.room)
-        expect(event.d_start).to eq(new_event.d_start)
-        expect(event.d_end).to eq(new_event.d_end)
+        expect(event.start_time).to eq(new_event.start_time)
+        expect(event.end_time).to eq(new_event.end_time)
         expect(event.rule).to eq(new_event.rule)
       end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "events/edit", type: :view do
   before do
-    @event = assign(:event, FactoryBot.create(:event))
+    @event = assign(:event, create(:event))
   end
 
   it "renders the edit event form" do
@@ -15,8 +15,8 @@ RSpec.describe "events/edit", type: :view do
       assert_select "textarea[name=?]", "event[recurring]"
 
       5.times do |i|
-        assert_select "select[name=?]", "event[d_start(#{i + 1}i)]"
-        assert_select "select[name=?]", "event[d_end(#{i + 1}i)]"
+        assert_select "select[name=?]", "event[start_time(#{i + 1}i)]"
+        assert_select "select[name=?]", "event[end_time(#{i + 1}i)]"
       end
 
       assert_select "select[name=?]", "event[room_id]"

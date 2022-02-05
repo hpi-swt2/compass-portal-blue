@@ -9,12 +9,15 @@ RSpec.describe "rooms/calendar", type: :view do
     @room = assign(:room, Room.create!(
                             name: "Seminarraum 1",
                             floor: 0,
-                            room_type: "Seminarraum",
+                            room_type: "seminar-room",
+                            location_latitude: 1.5,
+                            location_longitude: 3.5,
                             people: @people,
                             building: @building
                           ))
-    @events = [Event.create!(name: "Test Event", description: "CG", d_start: Time.zone.now,
-                             d_end: Time.zone.now, recurring: "", room_id: @room.id)]
+    @room_id = 1
+    @events = [Event.create!(name: "Test Event", description: "CG", start_time: Time.zone.now,
+                             end_time: Time.zone.now, recurring: "", room_id: @room.id)]
     @date = Time.zone.now
     @month = Date::MONTHNAMES[Time.zone.today.month]
     @year = Time.zone.now.year

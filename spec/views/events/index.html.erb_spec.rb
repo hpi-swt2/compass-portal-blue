@@ -12,16 +12,16 @@ RSpec.describe "events/index", type: :view do
              Event.create!(
                name: "Name",
                description: "A Description",
-               d_start: @start_time,
-               d_end: @end_time,
+               start_time: @start_time,
+               end_time: @end_time,
                recurring: ""
              ),
              Event.create!(
                name: "Name",
                description: "A Description",
                recurring: IceCube::Rule.weekly.day(:monday).to_yaml,
-               d_start: @start_time,
-               d_end: @end_time,
+               start_time: @start_time,
+               end_time: @end_time,
                room: @room
              )
            ])

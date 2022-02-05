@@ -1,7 +1,5 @@
-require 'time'
-require 'date'
-
 class RoomsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_room, only: %i[show edit update destroy]
 
   # GET /rooms or /rooms.json
@@ -20,19 +18,22 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit; end
 
+  # GET /rooms/1/calendar
   def calendar
-    @room = Room.find(params[:id])
-
-    @month = Date::MONTHNAMES[Time.zone.today.month]
-    @year = Time.zone.now.year
-    events = @room.events
-    @events = Event.generate_calendar_events(events, "2022-01-01 08:00:13", "2022-01-30 08:00:13")
+    @room = Room.find(params[:room_id])
+    start_date = params[:start_date].to_date
+    @month = Date::MONTHNAMES[start_date.month]
+    @year = start_date.year
+    @events = Event.generate_calendar_events(@room.events,
+                                             start_date.beginning_of_month.beginning_of_week,
+                                             start_date.end_of_month.end_of_week).compact
   end
 
   # POST /rooms or /rooms.json
+  # rubocop:disable Metrics/MethodLength
   def create
     @room = Room.new(room_params)
-
+    @room.owners = [current_user]
     respond_to do |format|
       if @room.save
         format.html { redirect_to edit_room_path(@room), notice: "Room was successfully created." }
@@ -43,6 +44,7 @@ class RoomsController < ApplicationController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # PATCH/PUT /rooms/1 or /rooms/1.json
   def update
@@ -75,6 +77,7 @@ class RoomsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def room_params
-    params.require(:room).permit(:name, :floor, :room_type, :building_id, person_ids: [])
+    params.require(:room).permit(:name, :floor, :room_type, :building_id,
+                                 :location_latitude, :location_longitude, person_ids: [])
   end
 end

@@ -25,7 +25,7 @@
     <strong>Start Date:</strong>
   </label>
   <p class="form-control-static">
-    <%= @event.d_start %>
+    <%= @event.start_time %>
   </p>
 </div>
 
@@ -34,7 +34,7 @@
     <strong>End Date:</strong>
   </label>
   <p class="form-control-static">
-    <%= @event.d_end %>
+    <%= @event.end_time %>
   </p>
 </div>
 
@@ -59,9 +59,6 @@
     <%= @event.rule %>
   </p>
 </div>
-
-<%= link_to 'Edit', edit_event_path(@event), class: "btn btn-secondary link-btn" %> |
-<%= link_to 'Back', events_path, class: "btn btn-secondary link-btn" %>
 
 <% if @event.room %>
   <script id="_latlonginfo" type="application/json">

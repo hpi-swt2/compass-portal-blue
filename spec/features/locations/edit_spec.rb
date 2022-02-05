@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "location edit page", type: :feature do
   before do
     @location = create :location
+    sign_in(create(:user, admin: true))
   end
 
   it "exists at 'edit_author_path' and render without error" do
