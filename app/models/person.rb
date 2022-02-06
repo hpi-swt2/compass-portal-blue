@@ -6,12 +6,13 @@ class Person < ApplicationRecord
   before_save :normalize_phone_number
   has_one_attached :profile_picture
   has_and_belongs_to_many :rooms
+  has_and_belongs_to_many :owners, class_name: 'User', join_table: 'person_owner'
 
   accepts_nested_attributes_for :openingtimes, allow_destroy: true
 
   def formatted_phone_number
     parsed_phone = Phonelib.parse(phone_number)
-    return phone_number if parsed_phone.invalid?
+    return number_to_phone(phone_number) if parsed_phone.invalid?
 
     parsed_phone.full_international
   end
