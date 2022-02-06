@@ -228,6 +228,18 @@ async function getView() {
   });
 }
 
+function showRoomInfo(e) {
+  const roomName = e.target.options.name;
+  // center and zoom in on element
+  map.flyTo(e.latlng, 21);
+  // TODO: because there is no relation between a the a room's visualization and database entry we search for the room and do not show the detail page immediately
+  // to fix this the lealet feature needs either the id or the name needs to be a key/id for rooms
+  ajaxCall(null, "/search_results", "query=" + roomName)
+  // put the search term in the input field and open the overlay
+  $("#search").val(roomName)
+  $("#_overlay").addClass('open');
+}
+
 function setupGeoJsonFeature(feature, layer) {
   const level = parseInt(feature.properties.level_name);
 
@@ -252,6 +264,11 @@ function setupGeoJsonFeature(feature, layer) {
   }
 
   floors[level].rooms.addLayer(layer);
+  // we give the layer a name so we know which room it is
+  layer.options["name"] = feature.properties.name
+  layer.on({
+    click: showRoomInfo,
+  });
 
   // find a position, create an invisible marker and bind a tooltip to it
   // we do not bind the tooltip to the room because you can only change the position of a tooltip by defining an offset
