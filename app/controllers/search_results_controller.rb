@@ -12,6 +12,13 @@ class SearchResultsController < ApplicationController
 
     search_for_entries_starting_with query
     search_for_entries_including query
+    @search_results = @search_results.sort_by{|result| result.title}
+    if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
+      #TODO: add location to search result model
+      # sort_by abs(result.location - current_user.last_known_location_with_timestamp[0])
+      @search_results = @search_results.sort_by{|result| result.location}
+    
+
   end
 
   def create
