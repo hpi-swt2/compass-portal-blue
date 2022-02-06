@@ -27,7 +27,9 @@
   <% end %>
 </p>
 
-<a class='btn btn-primary' href="/route?dest=<%= @location.name %>"><i class="fas fa-route"></i><span>Directions</span></a>
+<%= link_to map_path(path: "route", dest: @location.name), class: "btn btn-primary" do %>
+  <i class="fas fa-route"></i> Directions
+<% end %>
 
 <script id="_latlonginfo" type="application/json">
 [<%= @location.location_latitude %>,<%= @location.location_longitude %>]
