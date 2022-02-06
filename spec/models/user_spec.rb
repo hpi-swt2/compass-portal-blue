@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
   # https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md#build-strategies
 
   describe "creation using a factory" do
-    let(:user) { FactoryBot.build(:user) }
+    let(:user) { build(:user) }
 
     it "creates a valid object" do
       expect(user).to be_valid
