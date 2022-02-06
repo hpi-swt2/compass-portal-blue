@@ -5,7 +5,7 @@ RSpec.describe "search_results/index", type: :view do
 
   before do
     FactoryBot.rewind_sequences
-    assign(:search_results, FactoryBot.build_list(:search_result, number_of_results))
+    assign(:search_results, build_list(:search_result, number_of_results))
   end
 
   it "renders a list of search_results" do
