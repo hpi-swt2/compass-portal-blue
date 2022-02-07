@@ -123,6 +123,8 @@ GEM
     httpclient (2.8.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    i18n-js (3.9.0)
+      i18n (>= 0.6.6)
     jbuilder (2.11.3)
       activesupport (>= 5.0.0)
     json-jwt (1.13.0)
@@ -364,6 +366,7 @@ DEPENDENCIES
   devise-i18n-bootstrap
   factory_bot_rails
   httparty
+  i18n-js
   jbuilder (~> 2.7)
   listen (~> 3.3)
   omniauth
@@ -396,4 +399,4 @@ RUBY VERSION
    ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.33
+   2.3.5

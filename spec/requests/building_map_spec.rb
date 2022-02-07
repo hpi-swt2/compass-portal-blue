@@ -12,7 +12,7 @@ describe "Building Map api", type: :request do
       location_latitude: "52.39262",
       location_longitude: "13.12488"
     )
-    get building_map_route_path(start: 'Haus A', dest: 'Haus L'), as: :json
+    get building_map_route_path(start: 'Haus A', dest: 'Haus L', locale: I18n.locale), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
