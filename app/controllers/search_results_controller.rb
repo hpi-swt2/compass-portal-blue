@@ -11,11 +11,15 @@ class SearchResultsController < ApplicationController
     return if query.match?(/^_*$/)
 
     search_for query
+    puts(current_user.last_known_location_with_timestamp[0]) 
     @search_results = @search_results.sort_by{|result| result.title}
-    #if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
-      #TODO: add location to search result model
-      # sort_by abs(result.location - current_user.last_known_location_with_timestamp[0])
-    #  @search_results = @search_results.sort_by{|result| result.location}
+   
+    if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
+      puts(current_user.last_known_location_with_timestamp[0]) 
+      sort_by abs(result.location - current_user.last_known_location_with_timestamp[0])
+       
+       @search_results = @search_results.sort_by{|result| distance(current_user.last_known_location_with_timestamp[0], 
+        [result.location_latitude, result.location_longitude])}
 
   end
 
@@ -54,6 +58,8 @@ class SearchResultsController < ApplicationController
                                title: object.name,
                                link: polymorphic_path(object),
                                description: object.respond_to?(:search_description) ? object.search_description : "",
+                               location_latitude: object.location_latitude,
+                               location_longitude: object.location_longitude,
                                type: type
                              ))
       @result_id += 1
@@ -92,4 +98,24 @@ class SearchResultsController < ApplicationController
     locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ?", "%#{query}%", "%#{query}%")
     add_results(locations, "location")
   end
+
+  
+  
+  def distance(loc1, loc2)
+    rad_per_deg = Math::PI/180  # PI / 180
+    rkm         = 6371          # Earth radius in kilometers
+    rm          = rkm * 1000    # Radius in meters
+
+    dlat_rad    = (loc2[0]-loc1[0]) * rad_per_deg # Delta, converted to rad
+    dlon_rad    = (loc2[1]-loc1[1]) * rad_per_deg
+
+    lat1_rad    = loc1.map {|i| i * rad_per_deg }.first
+    lat2_rad    = loc2.map {|i| i * rad_per_deg }.first
+
+    a           = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
+    c           = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+
+    rm * c # Delta in meters
+  end
+
 end
