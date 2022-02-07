@@ -49,7 +49,7 @@ describe "Building Map api", type: :request do
   end
 
   it "calculates the correct route" do
-    get building_map_route_path(start: 'Haus A', dest: 'Haus L', locale: I18n.locale), as: :json
+    get building_map_route_path(start: 'Haus A', dest: 'Haus L'), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
@@ -60,7 +60,7 @@ describe "Building Map api", type: :request do
   end
 
   it "calculates a route inside the same building" do
-    get building_map_route_path(start: "A-E.7", dest: "A-2.9", locale: I18n.locale), as: :json
+    get building_map_route_path(start: "A-E.7", dest: "A-2.9"), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
@@ -71,7 +71,7 @@ describe "Building Map api", type: :request do
   end
 
   it "calculates a route from a room in one building to a room in another building" do
-    get building_map_route_path(start: "A-E.7", dest: "H-3.31", locale: I18n.locale), as: :json
+    get building_map_route_path(start: "A-E.7", dest: "H-3.31"), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
@@ -82,7 +82,7 @@ describe "Building Map api", type: :request do
   end
 
   it "calculates a route from a room in one building to a location outdoor" do
-    get building_map_route_path(start: "A-E.7", dest: "Hauptgebäude", locale: I18n.locale), as: :json
+    get building_map_route_path(start: "A-E.7", dest: "Hauptgebäude"), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
@@ -93,7 +93,7 @@ describe "Building Map api", type: :request do
   end
 
   it "calculates a route from an outdoor location to a room in a building" do
-    get building_map_route_path(start: "Mister Net", dest: "H-3.31", locale: I18n.locale), as: :json
+    get building_map_route_path(start: "Mister Net", dest: "H-3.31"), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
