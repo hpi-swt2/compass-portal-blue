@@ -14,7 +14,7 @@ let pinIcons = [
   }),
 ];
 
-let geoJsonLayerFiles = [
+const geoJsonLayerFiles = [
   "/assets/ABC-Building-0.geojson",
   "/assets/ABC-Building-1.geojson",
   "/assets/ABC-Building-2.geojson",
