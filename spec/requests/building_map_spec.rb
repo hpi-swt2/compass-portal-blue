@@ -1,32 +1,21 @@
 require "rails_helper"
 
 describe "Building Map api", type: :request do
-  it "calculates the correct route" do
-    Building.create!(
+  before do
+    a = Building.create!(
       name: 'Haus A',
       location_latitude: "52.3934534",
       location_longitude: "13.1312424"
+    )
+    main = Building.create!(
+      name: 'Hauptgebäude',
+      location_latitude: "52.39402",
+      location_longitude: "13.13342"
     )
     Building.create!(
       name: 'Haus L',
       location_latitude: "52.39262",
       location_longitude: "13.12488"
-    )
-    get building_map_route_path(start: 'Haus A', dest: 'Haus L', locale: I18n.locale), as: :json
-    expect(response).to have_http_status(:ok)
-    expect(response.content_type).to eq("application/json; charset=utf-8")
-    json = JSON.parse response.body
-    expect(json).to have_key('polylines')
-    expect(json).to have_key('marker')
-    expect(json['polylines']).not_to be_empty
-    expect(json['marker']).not_to be_empty
-  end
-
-  it "calculates a route inside the same building" do
-    a = Building.create!(
-      name: 'Haus A',
-      location_latitude: "52.3934534",
-      location_longitude: "13.1312424"
     )
     Room.create!(
       name: 'A-E.7',
@@ -44,11 +33,43 @@ describe "Building Map api", type: :request do
       room_type: "seminar-room",
       building: a
     )
-    get building_map_route_path(start: "A-E.7", dest: "A-2.9"), as: :json
+    Room.create!(
+      name: 'H-3.31',
+      location_latitude: "52.39408",
+      location_longitude: "13.13333",
+      floor: 3,
+      room_type: "seminar-room",
+      building: main
+    )
+  end
+
+  it "calculates the correct route" do
+    get building_map_route_path(start: 'Haus A', dest: 'Haus L', locale: I18n.locale), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
-    puts json
+    expect(json).to have_key('polylines')
+    expect(json).to have_key('marker')
+    expect(json['polylines']).not_to be_empty
+    expect(json['marker']).not_to be_empty
+  end
+
+  it "calculates a route inside the same building" do
+    get building_map_route_path(start: "A-E.7", dest: "A-2.9", locale: I18n.locale), as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq("application/json; charset=utf-8")
+    json = JSON.parse response.body
+    expect(json).to have_key('polylines')
+    expect(json).to have_key('marker')
+    expect(json['polylines']).not_to be_empty
+    expect(json['marker']).not_to be_empty
+  end
+
+  it "calculates a route from a room in one building to a room in another building" do
+    get building_map_route_path(start: "A-E.7", dest: "H-3.31", locale: I18n.locale), as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq("application/json; charset=utf-8")
+    json = JSON.parse response.body
     expect(json).to have_key('polylines')
     expect(json).to have_key('marker')
     expect(json['polylines']).not_to be_empty
