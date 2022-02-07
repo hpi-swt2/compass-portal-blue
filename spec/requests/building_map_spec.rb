@@ -102,4 +102,21 @@ describe "Building Map api", type: :request do
     expect(json['polylines']).not_to be_empty
     expect(json['marker']).not_to be_empty
   end
+
+  it "can find a door near a given location" do
+    # We can't simulate a pin on the map so we simulate this with a location in order to find a closest door node
+    Location.create!(
+      name: 'Simulated Marker',
+      location_latitude: "52.39334",
+      location_longitude: "13.13246"
+    )
+    get building_map_route_path(start: "Simulated Marker", dest: "A-E.7"), as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq("application/json; charset=utf-8")
+    json = JSON.parse response.body
+    expect(json).to have_key('polylines')
+    expect(json).to have_key('marker')
+    expect(json['polylines']).not_to be_empty
+    expect(json['marker']).not_to be_empty
+  end
 end
