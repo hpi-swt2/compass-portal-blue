@@ -75,4 +75,15 @@ describe "Building Map api", type: :request do
     expect(json['polylines']).not_to be_empty
     expect(json['marker']).not_to be_empty
   end
+
+  it "calculates a route from a room in one building to another location outdoor" do
+    get building_map_route_path(start: "A-E.7", dest: "Hauptgebäude", locale: I18n.locale), as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq("application/json; charset=utf-8")
+    json = JSON.parse response.body
+    expect(json).to have_key('polylines')
+    expect(json).to have_key('marker')
+    expect(json['polylines']).not_to be_empty
+    expect(json['marker']).not_to be_empty
+  end
 end
