@@ -1,7 +1,6 @@
 require_relative "boot"
 
 require "rails/all"
-require "./app/assets/constants/buildings"
 require "./app/assets/constants/indoor_graphs"
 require "./app/assets/constants/locations"
 
