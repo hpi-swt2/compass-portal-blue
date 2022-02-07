@@ -23,12 +23,6 @@ module IndoorRoutingHelper
     result if result[:distance] < max_dist
   end
 
-  def self.entries(building)
-    IndoorGraph.entry_nodes[building].map do |key|
-      { id: key, latlng: IndoorGraph.indoor_graphs[building][key]['latlng'] }
-    end
-  end
-
   def self.calculate_route(from_id, to_id, building)
     Rails.logger.debug "Debugging Output here:"
     graph = IndoorGraph.indoor_graphs[building]
