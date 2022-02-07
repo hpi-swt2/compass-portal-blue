@@ -10,14 +10,12 @@ class SearchResultsController < ApplicationController
     query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
     return if query.match?(/^_*$/)
 
-    search_for_entries_starting_with query
-    search_for_entries_including query
+    search_for query
     @search_results = @search_results.sort_by{|result| result.title}
-    if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
+    #if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
       #TODO: add location to search result model
       # sort_by abs(result.location - current_user.last_known_location_with_timestamp[0])
-      @search_results = @search_results.sort_by{|result| result.location}
-    
+    #  @search_results = @search_results.sort_by{|result| result.location}
 
   end
 
@@ -49,85 +47,49 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
-  def add_search_results(rooms, buildings, locations, people)
-    add_buildings(buildings)
-    add_rooms(rooms)
-    add_locations(locations)
-    add_people(people)
-  end
-
-  def search_for_entries_starting_with(query)
-    buildings = Building.where("LOWER(name) LIKE ?", "#{query}%")
-    rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ?", "#{query}%")
-    locations = Location.where("LOWER(name) || LOWER(details) LIKE ?", "#{query}%")
-    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          OR LOWER(last_name) LIKE ?",
-                          "#{query}%", "#{query}%")
-    add_search_results(rooms, buildings, locations, people)
-  end
-
-  def search_for_entries_including(query)
-    buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?", "%#{query}%", "#{query}%")
-    rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ?
-                        AND NOT LOWER(name) || LOWER(room_type) LIKE ?", "%#{query}%", "#{query}%")
-    locations = Location.where("LOWER(name) || LOWER(details) LIKE ?
-                              AND NOT LOWER(name) || LOWER(details) LIKE ?", "%#{query}%", "#{query}%")
-    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          AND NOT LOWER(last_name) LIKE ?",
-                          "%#{query}%", "#{query}%", "#{query}%")
-    add_search_results(rooms, buildings, locations, people)
-  end
-
-  def add_rooms(rooms)
-    rooms.each do |room|
+  def add_results(objects, type)
+    objects.each do |object|
       @search_results.append(SearchResult.new(
                                id: @result_id,
-                               title: room.name,
-                               link: room_path(room),
-                               description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}",
-                               type: "room"
+                               title: object.name,
+                               link: polymorphic_path(object),
+                               description: object.respond_to?(:search_description) ? object.search_description : "",
+                               type: type
                              ))
       @result_id += 1
     end
   end
 
-  def add_buildings(buildings)
-    buildings.each do |building|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: building.name,
-                               link: building_path(building),
-                               description: "Building",
-                               type: "building"
-                             ))
-      @result_id += 1
+  def search_for query
+    search_rooms_by_name_or_type query
+    search_people_by_full_name query
+    search_locations_by_name_or_details query
+    search_by_name query 
+  end
+
+  def search_by_name query
+    # New Models that can be searched for by name can simply be added in this collection
+    searchable_records = [Building]
+
+    searchable_records.each do |record|
+      type = record.name.downcase
+      found_objects = record.where("LOWER(name) LIKE ?", "%#{query}%")
+      add_results(found_objects, type)
     end
   end
 
-  def add_locations(locations)
-    locations.each do |location|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: location.name,
-                               link: location_path(location),
-                               description: "Location",
-                               type: "location"
-                             ))
-      @result_id += 1
-    end
+  def search_people_by_full_name query
+    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?", "%#{query}%")
+    add_results(people, "person")
   end
 
-  def add_people(people)
-    people.each do |person|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: person.name,
-                               link: person_path(person),
-                               description: "Person, E-Mail: #{person.email}",
-                               type: "person"
-                             ))
-      @result_id += 1
-    end
+  def search_rooms_by_name_or_type query
+    rooms = Room.where("LOWER(name) LIKE ? OR LOWER(room_type) LIKE ?", "%#{query}%", "%#{query}%")
+    add_results(rooms, "room")
+  end
+
+  def search_locations_by_name_or_details query
+    locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ?", "%#{query}%", "%#{query}%")
+    add_results(locations, "location")
   end
 end

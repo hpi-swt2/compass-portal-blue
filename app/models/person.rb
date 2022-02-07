@@ -29,6 +29,10 @@ class Person < ApplicationRecord
     person
   end
 
+  def search_description
+    "E-Mail: #{email}"
+  end
+
   private
 
   def normalize_phone_number
