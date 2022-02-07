@@ -18,6 +18,9 @@ global.ajaxCall = (
     $("#browse-outlet a").each(function () {
       const link = $(this);
       const href = link.attr("href");
+      if (href.match(/(mailto|tel):(.*)/)) {
+        return;
+      }
       // Remove the original href of the link:
       link.attr("href", "#");
       const [baseLink, queryParams] = href.split(/\?(.+)/);
@@ -48,7 +51,8 @@ global.ajaxCall = (
           canGetBack,
         },
         null,
-        `/map${target}?${valuesToSubmit}`
+        // TODO: do not hardcode this
+        `/map${target}?${valuesToSubmit}&locale=${I18n.locale}`
       );
     }
     return;
@@ -95,7 +99,8 @@ global.ajaxCall = (
             canGetBack,
           },
           null,
-          `/map${target}?${valuesToSubmit}`
+          // Preserve the query parameters
+          `/map${target}${target.includes('?') ? '&' : '?'}${valuesToSubmit}`
         );
       }
     },
