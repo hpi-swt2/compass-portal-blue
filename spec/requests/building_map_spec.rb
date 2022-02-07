@@ -12,6 +12,11 @@ describe "Building Map api", type: :request do
       location_latitude: "52.39402",
       location_longitude: "13.13342"
     )
+    Location.create!(
+      name: 'Mister Net',
+      location_latitude: "52.39381",
+      location_longitude: "13.13162"
+    )
     Building.create!(
       name: 'Haus L',
       location_latitude: "52.39262",
@@ -88,7 +93,7 @@ describe "Building Map api", type: :request do
   end
 
   it "calculates a route from an outdoor location to a room in a building" do
-    get building_map_route_path(start: "Haus A", dest: "H-3.31", locale: I18n.locale), as: :json
+    get building_map_route_path(start: "Mister Net", dest: "H-3.31", locale: I18n.locale), as: :json
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq("application/json; charset=utf-8")
     json = JSON.parse response.body
