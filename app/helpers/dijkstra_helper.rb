@@ -32,18 +32,18 @@ module DijkstraHelper
       end
     end
     {
-      polylines: retrieve_polylines(nodes, dest, graph, '#000000'),
+      polylines: retrieve_polylines(nodes, dest, graph),
       walktime: IndoorRoutingHelper.walk_time(nodes[dest][:prev] ? nodes[dest][:dist] : 0)
     }
   end
 
-  def self.retrieve_polylines(nodes, curr, graph, color)
-    (polylines, last_floor, last_latlng) = init_polylines(nodes, curr, graph, color)
+  def self.retrieve_polylines(nodes, curr, graph)
+    (polylines, last_floor, last_latlng) = init_polylines(nodes, curr, graph)
     until (curr = nodes[curr][:prev]).nil?
       if last_floor == graph[curr]['floor']
         polylines.last[:polyline].push(graph[curr]['latlng'])
       else
-        add_to_polylines(graph[curr]['floor'], color, [last_latlng, graph[curr]['latlng']], polylines)
+        add_to_polylines(graph[curr]['floor'], [last_latlng, graph[curr]['latlng']], polylines)
       end
       last_floor = graph[curr]['floor']
       last_latlng = graph[curr]['latlng']
@@ -53,15 +53,15 @@ module DijkstraHelper
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
 
-  def self.add_to_polylines(floor, color, polyline, polylines)
-    polylines.push({ floor: floor, color: color, polyline: polyline })
+  def self.add_to_polylines(floor, polyline, polylines)
+    polylines.push({ floor: floor, indoor: true, polyline: polyline })
   end
 
-  def self.init_polylines(nodes, curr, graph, color)
+  def self.init_polylines(nodes, curr, graph)
     polylines = []
     last_latlng = []
     last_floor = graph[curr]['floor']
-    add_to_polylines(last_floor, color, [graph[curr]['latlng']], polylines) unless nodes[curr][:prev].nil?
+    add_to_polylines(last_floor, [graph[curr]['latlng']], polylines) unless nodes[curr][:prev].nil?
     [polylines, last_floor, last_latlng]
   end
 end

@@ -25,7 +25,7 @@ module OutdoorRoutingHelper
     result = OutdoorRoutingHelper.calculate_route(start, dest)
     res[:polylines].concat([{
                              floor: 0,
-                             color: '#346eeb',
+                             indoor: false,
                              polyline: OutdoorRoutingHelper.transform_route_to_polyline(result)
                            }])
     res[:walktime] += result["duration"]

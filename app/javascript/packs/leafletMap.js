@@ -176,8 +176,9 @@ export function addAnyMarker(marker, layer = map) {
   marker.addTo(layer);
 }
 
-export function addRoutePolyline(polyline, layer = map, style = {}) {
-  const styling = Object.assign({ className: "routing-path" }, style);
+export function addRoutePolyline(polyline, isIndoor, layer = map, style = {}) {
+  const className = isIndoor? "route-path-indoor" : "route-path-outdoor";
+  const styling = Object.assign({ className: className }, style);
   return L.polyline(polyline, styling).addTo(layer);
 }
 
@@ -196,10 +197,11 @@ export async function displayRoute(start, start_floor, dest, dest_floor) {
   });
 
   route["polylines"].forEach(line => {
-    addRoutePolyline(line["polyline"],  floors[line["floor"]]["paths"], {color: line["color"]});
+    const color = line["indoor"]? "#000000": "#346eeb";
+    addRoutePolyline(line["polyline"], line["indoor"], floors[line["floor"]]["paths"], {color: color});
     Object.keys(floors).forEach(floor => {
       if(floor == line["floor"]) return;
-      addRoutePolyline(line["polyline"],  floors[floor]["paths"], {color: line["color"], dashArray: "5, 5", dashOffset: "5", opacity: 0.5, weight: 1});
+      addRoutePolyline(line["polyline"], line["indoor"], floors[floor]["paths"], {color: color, dashArray: "5, 5", dashOffset: "5", opacity: 0.5, weight: 1});
     });
     completeLine = completeLine.concat(line["polyline"]);
   });
