@@ -6,11 +6,6 @@ module BuildingMapHelper
     }
   end
 
-  def self.leaflet_polygons
-    Buildings.transform_leaflet_buildings(Buildings::UNIPOTSDAM_POLYONGS, Buildings::UNIPOTSDAM_STYLING) +
-      Buildings.transform_leaflet_buildings(Buildings::HPI_POLYGONS, Buildings::HPI_STYLING)
-  end
-
   def self.destinations
     buildings.merge(locations).merge(rooms)
   end

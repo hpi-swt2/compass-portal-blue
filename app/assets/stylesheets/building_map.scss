@@ -1,6 +1,7 @@
 // Place all the styles related to the BuildingMap controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "colors";
 
 #offcanvas {
   top: 0;
@@ -47,8 +48,8 @@
   width: 36px;
   height: 36px;
   padding: 8px;
-  background: #eb34de;
-  border: 2px solid #eb34de;
+  background: $hpi-yellow;
+  border: 2px solid $hpi-orange;
   color: #fff;
   text-align: center;
 }
@@ -103,6 +104,20 @@
     width: 2rem;
     transform: translate(-1.1rem, -2.6rem);
   }
+}
+
+.uni-potsdam-building {
+  stroke: $uni-potsdam-blue;
+  fill: $uni-potsdam-blue;
+}
+
+.hpi-building, .hpi-room {
+  stroke: $hpi-red;
+  fill: $hpi-red;
+}
+
+.hpi-room {
+  stroke-width: 2;
 }
 
 @media screen and (max-width: 800px) {

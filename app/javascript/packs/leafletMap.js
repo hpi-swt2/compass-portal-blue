@@ -14,6 +14,18 @@ let pinIcons = [
   }),
 ];
 
+const geoJsonLayerFiles = [
+  "/assets/ABC-Building-0.geojson",
+  "/assets/ABC-Building-1.geojson",
+  "/assets/ABC-Building-2.geojson",
+  "/assets/H_0.geojson",
+  "/assets/H_1.geojson",
+  "/assets/H_2.geojson",
+  "/assets/H_3.geojson",
+  "/assets/HS_0.geojson",
+  "/assets/HG_-1.geojson"
+];
+
 export let pins = [];
 export let pin_floors = [];
 let layerControl;
@@ -40,27 +52,13 @@ export async function setupMap() {
     maxNativeZoom: 19,
   }).addTo(map);
 
-  const [view, buildingPolygons, buildingMarkers] = await Promise.all([
-    getView(),
-    getBuildings(),
-    getBuildingMarkers(),
-  ]);
-
+  const view = await getView();
   setView(view);
-  addPolygons(buildingPolygons);
-  addMarkers(buildingMarkers);
 
   // display indoor information eg. rooms, labels
   await Promise.all([
-    loadGeoJsonFile("/assets/ABC-Building-0.geojson"),
-    loadGeoJsonFile("/assets/ABC-Building-1.geojson"),
-    loadGeoJsonFile("/assets/ABC-Building-2.geojson"),
-    loadGeoJsonFile("/assets/H_0.geojson"),
-    loadGeoJsonFile("/assets/H_1.geojson"),
-    loadGeoJsonFile("/assets/H_2.geojson"),
-    loadGeoJsonFile("/assets/H_3.geojson"),
-    loadGeoJsonFile("/assets/HS_0.geojson"),
-    loadGeoJsonFile("/assets/HG_-1.geojson"),
+    loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
+    Promise.all(geoJsonLayerFiles.map((filename) => loadGeoJsonFile(filename, setupGeoJsonFeatureIndoor, getRoomStyle)))
   ]);
   map.on("zoomend", recalculateTooltipVisibility);
   map.on("baselayerchange", (event) => {
@@ -152,12 +150,6 @@ export function setView(view) {
   map.setView(view["latlng"], view["zoom"]);
 }
 
-export function addPolygons(polygons) {
-  polygons.forEach((polygon) => {
-    L.polygon(polygon["latlngs"], polygon["options"]).addTo(map);
-  });
-}
-
 export function addMarkers(markers, layer = map) {
   markers.forEach((marker) => {
     addMarker(marker, layer);
@@ -222,22 +214,6 @@ export async function displayRoute(start, start_floor, dest, dest_floor) {
   });
 }
 
-async function getBuildings() {
-  return $.ajax({
-    type: "GET",
-    url: "/building_map/buildings",
-    dataType: "json",
-  });
-}
-
-async function getBuildingMarkers() {
-  return $.ajax({
-    type: "GET",
-    url: "/building_map/markers",
-    dataType: "json",
-  });
-}
-
 async function getView() {
   return $.ajax({
     type: "GET",
@@ -246,7 +222,7 @@ async function getView() {
   });
 }
 
-function setupGeoJsonFeature(feature, layer) {
+function setupGeoJsonFeatureIndoor(feature, layer) {
   const level = parseInt(feature.properties.level_name);
 
   if (isNaN(level)) {
@@ -296,14 +272,36 @@ function setupGeoJsonFeature(feature, layer) {
   label.closeTooltip();
 }
 
-async function loadGeoJsonFile(filename) {
+function setupGeoJsonFeatureOutdoor(feature) {
+  if(feature.properties.type === "hpi-building") {
+    addMarker({
+      latlng: feature.properties.letter_coordinate.reverse(),
+      divIcon: {
+        html: feature.properties.letter,
+        className: "building-icon"
+      }
+    });
+  }
+}
+
+function getBuildingStyle(feature) {
+  return {className: "building " + feature.properties.type};
+}
+
+function getRoomStyle() {
+  return {className: "hpi-room"};
+}
+
+async function loadGeoJsonFile(filename, featureCallback, styleCallback, addToMap = false) {
   const file = await fetch(filename);
   const geojsonFeatureCollection = await file.json();
-  // the gejson files contain points for certain properties eg. doors, however we have not implemented the visualization of those and filter them here
-  L.geoJSON(geojsonFeatureCollection, {
-    onEachFeature: setupGeoJsonFeature,
+  // the geojson files contain points for certain properties eg. doors, however we have not implemented the visualization of those and filter them here
+  const geojsonLayer = L.geoJSON(geojsonFeatureCollection, {
+    onEachFeature: featureCallback,
+    style: styleCallback,
     filter: (feature) => feature.geometry.type != "Point",
   });
+  if(addToMap) geojsonLayer.addTo(map);
 }
 
 function recalculateTooltipVisibility() {

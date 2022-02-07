@@ -4,7 +4,6 @@ require "rails/all"
 require "./app/assets/constants/buildings"
 require "./app/assets/constants/indoor_graphs"
 require "./app/assets/constants/locations"
-require "./app/assets/constants/places"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
