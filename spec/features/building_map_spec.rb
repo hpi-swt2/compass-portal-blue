@@ -67,13 +67,13 @@ describe "Building Map page", type: :feature do
     expect(page).to have_selector("path.uni-potsdam-building", count: 2)
   end
 
-  it "adds and removes pins on click on map", js: true do
+  it "adds pins on click on map", js: true do
     visit root_path
     find("#map").click(x: 50, y: 50)
     expect(page).to have_css(".pin-icon1")
-    find("#map").click(x: 55, y: 55)
+    find("#map").click(x: 40, y: 40)
     expect(page).to have_css(".pin-icon2")
-    find("#map").click(x: 60, y: 60)
+    find("#map").click(x: 30, y: 30)
     expect(page).not_to have_css(".pin-icon1")
     expect(page).not_to have_css(".pin-icon2")
   end
