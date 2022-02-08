@@ -23,3 +23,5 @@ export function lazyInit(initializer) {
         return value;
     };
 }
+
+export const userSignedIn = lazyInit(() => document.querySelector("meta[name='user_signed_in']") !== null);

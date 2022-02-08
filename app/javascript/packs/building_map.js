@@ -4,7 +4,7 @@ import {
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
 import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
-import { lazyInit, rateLimit } from "./utils.js";
+import { lazyInit, rateLimit, userSignedIn } from "./utils.js";
 
 // FIXME: this should probably be in application.js or something similarly
 // global, but it didn't work when we put it there
@@ -134,6 +134,9 @@ function requestLocation(inputField) {
 }
 
 const syncUserPositionWithServerImpl = async (location) => {
+  if (!userSignedIn()) {
+    return;
+  }
   const body = new URLSearchParams({ location });
   const response = await fetch(
     "/users/geo_location",
@@ -150,6 +153,9 @@ const syncUserPositionWithServerImpl = async (location) => {
 const syncUserPositionWithServer = rateLimit(syncUserPositionWithServerImpl, 10000);
 
 const clearUserPositionOnServer = async () => {
+  if (!userSignedIn()) {
+    return;
+  }
   const response = await fetch(
     "/users/geo_location",
     {
