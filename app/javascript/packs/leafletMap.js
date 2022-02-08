@@ -64,17 +64,20 @@ export async function setupMap() {
   map.on("click", onClick);
 }
 
-function parsePosition(position){
+function formatQueryParameters(position){
   return "?long="+position.lng+"&lat="+position.lat
 }
 
 function pinPopupContent(position) {
-  return "<ul>"+
-  "<li><a href=\"/rooms/new"+parsePosition(position)+"\">Add Room</a></li>"+
-  "<li><a href=\"/buildings/new"+parsePosition(position)+"\">Add Building</a></li>"+
-  "<li><a href=\"/locations/new"+parsePosition(position)+"\">Add Location</a></li>"+
-  "<li><a id=\"deletepin\" \" href=\"javascript:void(0);\" >Delete Pin</a></li>"+
-  "</ul>";
+  const params = formatQueryParameters(position);
+  return `
+    <ul class=pin-menu>
+      <li><a href="/rooms/new${params}">Add Room</a></li>
+      <li><a href="/buildings/new${params}">Add Building</a></li>
+      <li><a href="/locations/new${params}">Add Location</a></li>
+      <li><a id="deletepin" href="javascript:void(0);">Delete Pin</a></li>
+    </ul>
+  `;
 }
 
 function addPin(e, pinNumber) {
