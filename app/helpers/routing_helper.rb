@@ -98,7 +98,7 @@ module RoutingHelper
 
   def self.resolve_coordinates(input)
     return input if valid_coordinates?(input)
-    
+
     BuildingMapHelper.destinations[input]
   end
 
