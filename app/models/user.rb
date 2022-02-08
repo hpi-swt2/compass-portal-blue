@@ -65,8 +65,7 @@ class User < ApplicationRecord
   end
 
   class << self
-    attr_accessor :locations
-    attr_accessor :cleaner_task
+    attr_accessor :locations, :cleaner_task
   end
 
   def update_last_known_location(location)
