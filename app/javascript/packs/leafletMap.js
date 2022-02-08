@@ -80,11 +80,11 @@ function pinPopupContent(position) {
   `;
 }
 
-function addPin(e, pinNumber) {
-  pins[pinNumber] = L.marker(e.latlng, { icon: pinIcons[pinNumber] });
+function addPin(position, pinNumber) {
+  pins[pinNumber] = L.marker(position, { icon: pinIcons[pinNumber] });
   pins[pinNumber].addTo(map);
   pins[pinNumber].on("click", function (e) {
-    pinOnClick(pinNumber, e.latlng);
+    pinOnClick(pinNumber, position);
   });
 }
 
@@ -116,9 +116,9 @@ function removeAllPins() {
 
 function onClick(e) {
   if (!pins[0] || pins[0] === null) {
-    addPin(e, 0);
+    addPin(e.latlng, 0);
   } else if (!pins[1] || pins[1] === null) {
-    addPin(e, 1);
+    addPin(e.latlng, 1);
     $("#_overlay").addClass("open");
     $("#toggle-overlay").addClass("visible");
     $("#toggle-overlay").addClass("open");
