@@ -204,7 +204,7 @@ showPositionSwitch.addEventListener("click", () => {
 });
 
 sharePositionSwitch.addEventListener("input", () => {
-    if (!sharePositionSwitch.checked) {
-        clearUserPositionOnServer();
-    }
-})
+  if (!sharePositionSwitch.checked) {
+    clearUserPositionOnServer();
+  }
+});
