@@ -39,3 +39,10 @@ describe "New location page", type: :feature do
   end
 
 end
+
+describe "Unauthorized access to new locations page", type: :feature do:
+  it "should redirect to the login page" do
+    visit new_location_path
+    expect(page).to have_content('You are not authorized to access this page.')
+    expect(page).to have_content('Log In')
+  end

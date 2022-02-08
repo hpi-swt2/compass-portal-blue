@@ -78,7 +78,7 @@ describe "Building Map page", type: :feature do
     expect(page).not_to have_css(".pin-icon2")
   end
 
-  it "opens links when a pin is clicked", js: true do
+  it "opens links when a pin is clicked", js: true, local_only: true do
     visit root_path
     find("#map").click(x: 50, y: 50)
     find("#map").click(x: 50, y: 50)
