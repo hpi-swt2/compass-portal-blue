@@ -145,9 +145,22 @@ const syncUserPositionWithServerImpl = async (location) => {
       },
     }
   );
-  console.assert(response.status === 204); // HTTP "No content"
+  console.assert(response.ok);
 };
 const syncUserPositionWithServer = rateLimit(syncUserPositionWithServerImpl, 10000);
+
+const clearUserPositionOnServer = async () => {
+  const response = await fetch(
+    "/users/geo_location",
+    {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-TOKEN": csrfToken(),
+      },
+    }
+  );
+  console.assert(response.ok);
+};
 
 let watcherId;
 const positionIcon = L.icon({ iconUrl: "../assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
@@ -170,5 +183,6 @@ function trackingHandler() {
   } else {
     navigator.geolocation.clearWatch(watcherId);
     positionMarker.remove();
+    clearUserPositionOnServer();
   }
 }
