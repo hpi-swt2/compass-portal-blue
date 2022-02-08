@@ -16,8 +16,6 @@ const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]
 let currentLocation;
 
 setupMap();
-const trackingSwitch = document.getElementById("trackingSwitch");
-trackingSwitch.addEventListener("click", trackingHandler);
 
 const mapElement = $("#map")[0];
 mapElement.addEventListener("click", () => {
@@ -165,30 +163,48 @@ const clearUserPositionOnServer = async () => {
       },
     }
   );
-  console.assert(response.ok);
+  console.assert(response.ok || response.status === 404); // has been deleted or didn't exist at all
 };
 
-let watcherId;
+let watcherId = null;
 const positionIcon = L.icon({ iconUrl: "../assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
 const positionMarker = L.marker([0, 0], { icon: positionIcon });
 positionMarker.bindPopup("Your position");
 
-function trackingHandler() {
-  if (trackingSwitch.checked) {
+const showPositionSwitch = document.getElementById("showPositionSwitch");
+const sharePositionSwitch = document.getElementById("sharePositionSwitch");
+
+showPositionSwitch.addEventListener("click", () => {
+  sharePositionSwitch.disabled = !showPositionSwitch.checked;
+
+  if (showPositionSwitch.checked) {
     addAnyMarker(positionMarker);
+    console.assert(watcherId === null);
     watcherId = navigator.geolocation.watchPosition(
       (pos) => {
         currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
         positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
-        syncUserPositionWithServer(currentLocation);
+        if (sharePositionSwitch.checked) {
+          syncUserPositionWithServer(currentLocation);
+        }
       },
-      (error) => {
+      (_error) => {
         alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
       }
     );
   } else {
+    sharePositionSwitch.checked = false;
+    sharePositionSwitch.dispatchEvent(new Event("input"));
+
     navigator.geolocation.clearWatch(watcherId);
+    watcherId = null;
+
     positionMarker.remove();
-    clearUserPositionOnServer();
   }
-}
+});
+
+sharePositionSwitch.addEventListener("input", () => {
+    if (!sharePositionSwitch.checked) {
+        clearUserPositionOnServer();
+    }
+})
