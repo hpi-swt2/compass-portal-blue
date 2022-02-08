@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   around_action :change_locale
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to '/login', :notice => exception.message
+    redirect_to '/login', notice: exception.message
   end
 
   protected
