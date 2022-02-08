@@ -98,9 +98,7 @@ module RoutingHelper
 
   def self.resolve_coordinates(input)
     return input if valid_coordinates?(input)
-
-    Rails.logger.debug 'destinations'
-    Rails.logger.debug BuildingMapHelper.destinations
+    
     BuildingMapHelper.destinations[input]
   end
 

@@ -28,7 +28,7 @@ module BuildingMapHelper
 
   def self.rooms
     Room.all.to_h do |room|
-      [ room.name, "" ] # "#{room.location_latitude},#{room.location_longitude}"
+      [ room.name, "#{room.location_latitude},#{room.location_longitude}" ]
     end
   end
 
