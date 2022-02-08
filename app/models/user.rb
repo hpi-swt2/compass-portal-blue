@@ -55,15 +55,18 @@ class User < ApplicationRecord
   #   end
   # end
 
-  # FIXME: this should be cleaned every now and then
   # Maps from user ids to (location, timestamp) tuples
   @locations = Concurrent::Hash.new
-  @cleaner_task = Concurrent::TimerTask.execute(execution_interval: CLEANER_TASK_INTERVAL) do
-    User.clean_outdated_locations
+
+  unless Rails.env.test?
+    @cleaner_task = Concurrent::TimerTask.execute(execution_interval: CLEANER_TASK_INTERVAL) do
+      User.clean_outdated_locations
+    end
   end
 
   class << self
     attr_accessor :locations
+    attr_accessor :cleaner_task
   end
 
   def update_last_known_location(location)
@@ -83,7 +86,9 @@ class User < ApplicationRecord
   end
 
   def self.clean_outdated_locations
-    @locations.reject! do |_, (_, insertion_time)|
+    logger.info "Cleaning `User.locations` ..."
+
+    locations.reject! do |_, (_, insertion_time)|
       insertion_time < DateTime.now.advance(minutes: -CLEANER_ENTRY_TIMEOUT_MINUTES)
     end
   end
