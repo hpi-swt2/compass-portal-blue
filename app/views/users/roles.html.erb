@@ -30,7 +30,7 @@
 
 <script defer>
   $('.user-admin').change(async function (e) {
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
     let userId = e.currentTarget.value;
     let isAdmin = e.currentTarget.checked;
     const body = JSON.stringify({roles: {
