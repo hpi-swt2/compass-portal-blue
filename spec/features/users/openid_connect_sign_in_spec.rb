@@ -27,7 +27,7 @@ describe 'Sign In Page', type: :feature do
         end
 
         it 'shows a link to user profile edit page' do
-          expect(page).to have_link(nil, href: edit_user_registration_path)
+          expect(page).to have_link(nil, href: edit_user_registration_path(locale: I18n.locale))
         end
 
         it 'shows a success flash message' do
@@ -36,7 +36,7 @@ describe 'Sign In Page', type: :feature do
 
         it 'shows a logout option on the user edit page' do
           visit edit_user_registration_path
-          expect(page).to have_css(".button_to[action='#{destroy_user_session_path}']")
+          expect(page).to have_css(".button_to[action='#{destroy_user_session_path(locale: I18n.locale)}']")
         end
       end
     end
@@ -65,7 +65,7 @@ describe 'Sign In Page', type: :feature do
         end
 
         it 'shows a logout link' do
-          expect(page).not_to have_link(nil, href: destroy_user_session_path)
+          expect(page).not_to have_link(nil, href: destroy_user_session_path(locale: I18n.locale))
         end
 
         it 'shows a danger flash message' do
