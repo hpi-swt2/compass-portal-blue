@@ -3,7 +3,7 @@ import {
   PIN_2_MAGIC_STRING,
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
-import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
+import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap';
 import { lazyInit, rateLimit } from "./utils.js";
 
 // FIXME: this should probably be in application.js or something similarly
