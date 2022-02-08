@@ -71,9 +71,9 @@ describe "Building Map page", type: :feature do
     visit root_path
     find("#map").click(x: 50, y: 50)
     expect(page).to have_css(".pin-icon1")
-    find("#map").click(x: 40, y: 40)
+    find("#map").click(x: 100, y: 100)
     expect(page).to have_css(".pin-icon2")
-    find("#map").click(x: 30, y: 30)
+    find("#map").click(x: 150, y: 150)
     expect(page).not_to have_css(".pin-icon1")
     expect(page).not_to have_css(".pin-icon2")
   end
