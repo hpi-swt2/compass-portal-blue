@@ -92,7 +92,7 @@ function pinOnClick(pinNumber, position){
     .openOn(map);
   document.getElementById("deletepin").addEventListener("click", function(e) {
     removePinAndPopup(pinNumber, popup);
-    }, false);
+  }, false);
 }
 
 function removePinAndPopup(pinNumber, popup){
