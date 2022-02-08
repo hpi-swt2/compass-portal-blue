@@ -17,9 +17,10 @@ describe "New rooms page", type: :feature do
   end
 end
 
-describe "Unauthorized access to new rooms page", type: :feature do:
+describe "Unauthorized access to new rooms page", type: :feature do
   it "should redirect to the login page" do
     visit new_room_path
     expect(page).to have_content('You are not authorized to access this page.')
     expect(page).to have_content('Log In')
   end
+end
