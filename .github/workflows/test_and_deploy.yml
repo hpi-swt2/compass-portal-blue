@@ -60,7 +60,7 @@ jobs:
   # Name of the job
   deploy:
     # Deploy the main branch
-    if: github.ref == 'refs/heads/fix/apmw_212_fix-imports-for-production'
+    if: github.ref == 'refs/heads/main'
     # test job must succeed before this job is started
     needs: rspec-test
     runs-on: ubuntu-latest
