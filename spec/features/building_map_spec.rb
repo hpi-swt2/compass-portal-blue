@@ -60,9 +60,7 @@ describe "Building Map page", type: :feature do
       building: create(:building)
     )
     visit "/map#{room_path(room)}?"
-    expect(page).to have_css(".leaflet-tooltip-pane")
     find('.indoor-label', wait: 5, match: :first, visible: false).should have_content(/-2/)
-    expect(page).to have_text("C-2.4")
   end
 
   it "shows no route, if it's not requested", js: true do
