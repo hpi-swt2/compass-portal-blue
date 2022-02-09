@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :error
+  get 'error/show'
   resources :people
   resources :rooms
   resources :openingtimes
