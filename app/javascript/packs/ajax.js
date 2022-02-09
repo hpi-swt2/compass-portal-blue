@@ -81,10 +81,24 @@ global.ajaxCall = (
       // Retrieve all location info from a (possibly nonexistent) script tag on the
       // target page and show it on the map if it exists
       const latLongInfo = content.querySelector("#_latlonginfo");
+      const floorInfo = content.querySelector("#_floorinfo");
       setTimeout(() => {
         if (latLongInfo) {
           const latlong = JSON.parse(latLongInfo.innerHTML);
           showTargetMarker(latlong);
+        }
+      }, 0);
+      setTimeout(() => {
+        if (floorInfo) {
+          const floor = JSON.parse(floorInfo.innerHTML);
+          const testjq = $('input[type=radio]')
+          $('input[type=radio]').each(function(){
+            if($(this).next('span').html()==floor){
+              $(this).prop('checked',true).trigger("click");
+            }
+            else
+              $(this).prop('checked',false);
+           });
         }
       }, 0);
       applyAjaxWrap();
