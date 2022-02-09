@@ -20,7 +20,7 @@ RSpec.describe Event, type: :model do
     expect(event.macro).to eq :belongs_to
   end
 
-  context "without an recurrence rule" do
+  context "without recurrence rule" do
     let(:event) { create :event, recurring: nil }
 
     it "returns itself in calendar_events if it is in the time frame" do
@@ -49,7 +49,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  context "with a recurrence rule" do
+  context "with recurrence rule" do
     let(:event) { create :event, recurring: IceCube::Rule.weekly.day(:monday).count(3).to_yaml }
 
     it "generates calendar events for all occurences in a time frame" do
