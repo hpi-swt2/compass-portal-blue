@@ -59,13 +59,10 @@ describe "Building Map page", type: :feature do
       floor: 2,
       building: create(:building)
     )
-    visit "/map#{room_path(room)}"+"?"
-    #refresh
+    visit "/map#{room_path(room)}?"
     expect(page).to have_css(".leaflet-tooltip-pane")
     find('.indoor-label', wait: 5, match: :first, visible: false).should have_content(/-2/)
-    # expect(page).to have_text("C-2.4")
-    # find(".target-pin", wait: 5)
-    # expect(page).to have_css(".target-pin")
+    expect(page).to have_text("C-2.4")
   end
 
   it "shows no route, if it's not requested", js: true do
