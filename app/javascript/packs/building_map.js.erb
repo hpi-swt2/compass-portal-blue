@@ -15,7 +15,9 @@ const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]
 
 let currentLocation;
 
-setupMap();
+const mapLoaded = new CustomEvent('maploaded');
+let promise = setupMap();
+promise.then(document.dispatchEvent(mapLoaded));
 const trackingSwitch = document.getElementById("trackingSwitch");
 trackingSwitch.addEventListener("click", trackingHandler);
 
