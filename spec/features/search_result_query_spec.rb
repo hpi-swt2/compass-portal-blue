@@ -7,13 +7,13 @@ RSpec.describe "Search result list page", type: :feature do
     @abc_building = create :building, name: "ABC Building"
     @building_xyz = create :building, name: "Building XYZ"
 
-    @room_abc = create :room, name: "Room ABC"
-    @abc_room = create :room, name: "ABC Room"
-    @room_xyz = create :room, name: "Room X.YZ"
+    @room_abc = create :room, name: "Room ABC", room_type: "Pool room"
+    @abc_room = create :room, name: "ABC Room", room_type: "Lecture hall"
+    @room_xyz = create :room, name: "Room X.YZ", room_type: "Conference room"
 
-    @bank = create :location, name: "Bank", details: "bank-details"
-    @pavillon = create :location, name: "Pavillon", details: "pavillon-details"
-    @kocktail_bar = create :location, name: "Kocktail Bar", details: "kocktail bar-details"
+    @bank = create :location, name: "Bank", details: "bank-details-abc"
+    @pavillon = create :location, name: "Pavillon", details: "pavillon-details-def"
+    @kocktail_bar = create :location, name: "Kocktail Bar", details: "kocktail bar-details-ghi"
 
     @curie = create :person, first_name: "Marie", last_name: "Curie"
     @riemann = create :person, first_name: "Bernhard", last_name: "Riemann"
@@ -49,7 +49,7 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page.body.index(@building_abc.name)).to be < page.body.index(@abc_building.name)
   end
 
-  it "shows locations matching the query" do
+  it "shows locations whose name matches the query" do
     visit search_results_path(query: "vill")
     expect(page).to have_link(@pavillon.name, href: location_path(@pavillon), count: 1)
 
@@ -57,7 +57,15 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
   end
 
-  it "does not show locations not matching the query" do
+  it "shows locations whose details match the query" do
+    visit search_results_path(query: "abc")
+    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+
+    visit search_results_path(query: "def")
+    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon), count: 1)
+  end
+
+  it "does not show locations whose name and details do not match the query" do
     visit search_results_path(query: "Ban")
     expect(page).not_to have_text(@pavillon.name)
     expect(page).not_to have_link(href: location_path(@pavillon))
@@ -67,6 +75,12 @@ RSpec.describe "Search result list page", type: :feature do
     visit search_results_path(query: "vill")
     expect(page).not_to have_text(@bank.name)
     expect(page).not_to have_link(href: location_path(@bank))
+
+    visit search_results_path(query: "def")
+    expect(page).not_to have_text(@bank.name)
+    expect(page).not_to have_link(href: location_path(@bank))
+    expect(page).not_to have_text(@kocktail_bar.name)
+    expect(page).not_to have_link(href: location_path(@kocktail_bar))
   end
 
   it "lists locations starting with the query before other found locations" do
@@ -77,7 +91,7 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page.body.index(@kocktail_bar.name)).to be < page.body.index(@bank.name)
   end
 
-  it "shows rooms matching the query" do
+  it "shows rooms whose name matches the query" do
     visit search_results_path(query: "x.yz")
     expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
 
@@ -86,7 +100,16 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_link(@abc_room.name, href: room_path(@abc_room), count: 1)
   end
 
-  it "does not show rooms not matching the query" do
+  it "shows rooms whose type matches the query" do
+    visit search_results_path(query: "Lecture")
+    expect(page).to have_link(@abc_room.name, href: room_path(@abc_room), count: 1)
+
+    visit search_results_path(query: "room")
+    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
+    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
+  end
+
+  it "does not show rooms whose name and type does not match the query" do
     visit search_results_path(query: "x.yz")
     expect(page).not_to have_text(@room_abc.name)
     expect(page).not_to have_link(href: room_path(@room_abc))
@@ -94,6 +117,12 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).not_to have_link(href: room_path(@abc_room))
 
     visit search_results_path(query: "AB")
+    expect(page).not_to have_text(@room_xyz.name)
+    expect(page).not_to have_link(href: room_path(@room_xyz))
+
+    visit search_results_path(query: "hall")
+    expect(page).not_to have_text(@room_abc.name)
+    expect(page).not_to have_link(href: room_path(@room_abc))
     expect(page).not_to have_text(@room_xyz.name)
     expect(page).not_to have_link(href: room_path(@room_xyz))
   end
