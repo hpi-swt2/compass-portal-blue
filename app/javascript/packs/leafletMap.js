@@ -15,15 +15,18 @@ let pinIcons = [
 ];
 
 const geoJsonLayerFiles = [
-  "/assets/ABC-Building-0.geojson",
-  "/assets/ABC-Building-1.geojson",
-  "/assets/ABC-Building-2.geojson",
+  "/assets/ABC_0.geojson",
+  "/assets/ABC_1.geojson",
+  "/assets/ABC_2.geojson",
   "/assets/H_0.geojson",
   "/assets/H_1.geojson",
   "/assets/H_2.geojson",
   "/assets/H_3.geojson",
   "/assets/HS_0.geojson",
-  "/assets/HG_-1.geojson"
+  "/assets/HS_-1.geojson",
+  "/assets/G_0.geojson",
+  "/assets/G_1.geojson",
+  "/assets/G_-1.geojson"
 ];
 
 export let pins = [];
