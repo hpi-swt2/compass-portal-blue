@@ -24,4 +24,8 @@ export function lazyInit(initializer) {
   };
 }
 
-export const userSignedIn = lazyInit(() => document.querySelector("meta[name='user_signed_in']") !== null);
+// The `lazyinit` is needed, because the `querySelector` seems to, somewhat
+// randomly, block the execution of the script in our tests. This is a
+// workaround, until a real solution is found.
+export const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
+export const userSignedIn = lazyInit(() => document.querySelector('meta[name="user_signed_in"]') !== null);

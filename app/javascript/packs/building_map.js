@@ -4,14 +4,7 @@ import {
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
 import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap.js';
-import { lazyInit, rateLimit, userSignedIn } from "./utils.js";
-
-// FIXME: this should probably be in application.js or something similarly
-// global, but it didn't work when we put it there
-// The `lazyinit` is needed, because the `querySelector` seems to, somewhat
-// randomly, block the execution of the script in our tests. This is a
-// workaround, until a real solution is found.
-const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
+import { csrfToken, rateLimit, userSignedIn } from "./utils.js";
 
 let currentLocation;
 
@@ -175,7 +168,7 @@ const showPositionSwitch = document.getElementById("showPositionSwitch");
 const sharePositionSwitch = document.getElementById("sharePositionSwitch");
 
 showPositionSwitch.addEventListener("click", () => {
-  sharePositionSwitch.disabled = !showPositionSwitch.checked;
+  sharePositionSwitch.disabled = !(userSignedIn() && showPositionSwitch.checked);
 
   if (showPositionSwitch.checked) {
     addAnyMarker(positionMarker);
