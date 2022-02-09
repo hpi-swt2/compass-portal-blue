@@ -1,7 +1,7 @@
 # the model representing a room
 class Room < ApplicationRecord
   has_and_belongs_to_many :owners, class_name: 'User', join_table: 'room_owner'
-  belongs_to :building
+  belongs_to :building, dependent: nil
   has_many :events, dependent: nil
   has_and_belongs_to_many :people
   include Locateable
@@ -15,6 +15,7 @@ class Room < ApplicationRecord
     end
     true
   end
+
   def self.room_type_to_internal_mapping
     {
       'Lecture hall' => 'lecture-hall',
