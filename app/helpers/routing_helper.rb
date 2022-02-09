@@ -12,7 +12,7 @@ module RoutingHelper
     elsif start_building[:indoor]
       RoutingHelper.handle_start_indoor_cases(dest, start_building, dest_building, res)
     else
-      OutdoorRoutingHelper.handle_outdoor_indoor_case(start, dest_building, res)
+      OutdoorRoutingHelper.route_outdoor_indoor(start, dest_building, res)
     end
   end
 
