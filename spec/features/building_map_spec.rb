@@ -60,6 +60,10 @@ describe "Building Map page", type: :feature do
       building: create(:building)
     )
     visit "/map#{room_path(room)}?"
+<<<<<<< HEAD
+=======
+    expect(page).to have_css(".leaflet-tooltip-pane")
+>>>>>>> 1130377... micro fix
     find('.indoor-label', wait: 5, match: :first, visible: false).should have_content(/-2/)
   end
 
