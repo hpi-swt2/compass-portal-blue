@@ -1,9 +1,9 @@
 <div class="language-area ms-3 d-flex flex-row">
     <%#  We rely on the .active class to test wether the locale is set correctly in ruby %>
-    <%= link_to request.path + "?locale=en", class: 'btn border-0' + ("#{locale}" == 'en'? ' text-muted active' : ''), id: 'language-switch-button-en', title: t('title-en') do %>
+    <%= link_to request.path + "?locale=en", class: "btn border-0 " + ("#{locale}" == "en"? "active" : ""), id: "language-switch-button-en", title: t("title-en") do %>
         EN
     <% end %>
-    <%= link_to request.path + "?locale=de", class: 'btn border-0' + ("#{locale}" == 'de'? ' text-muted active' : ''), id: 'language-switch-button-de',  title: t('title-de') do %>
+    <%= link_to request.path + "?locale=de", class: "btn border-0 " + ("#{locale}" == "de"? "active" : ""), id: "language-switch-button-de",  title: t("title-de") do %>
         DE
     <% end %>
 </div>
