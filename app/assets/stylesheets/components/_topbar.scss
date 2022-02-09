@@ -82,4 +82,24 @@
 // or generate new button classes via the bootstrap scss utilities
 .language-area {
   @extend .user-area;
+
+  padding: 0 !important;
+
+  a.active {
+    background-color: $hpi-blue;
+    color: white;
+
+    &:hover {
+      background-color: $hpi-blue !important;
+      color: white;
+    }
+  }
+}
+
+#language-switch-button-en {
+  border-radius: 2.5rem 0 0 2.5rem;
+}
+
+#language-switch-button-de {
+  border-radius: 0 2.5rem 2.5rem 0;
 }
