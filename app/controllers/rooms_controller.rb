@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
   def calendar
     @room = Room.find(params[:room_id])
     start_date = params[:start_date].to_date
-    @month = Date::MONTHNAMES[start_date.month]
+    @month = start_date.month
     @year = start_date.year
     @events = Event.generate_calendar_events(@room.events,
                                              start_date.beginning_of_month.beginning_of_week,
