@@ -42,11 +42,12 @@ class SearchResultsController < ApplicationController
     params.require(:title, :link).permit(:description, :resource)
   end
 
-  def add_search_results(rooms, buildings, locations, people)
+  def add_search_results(rooms, buildings, locations, people, events)
     add_buildings(buildings)
     add_rooms(rooms)
     add_locations(locations)
     add_people(people)
+    add_events(events)
   end
 
   def search_for_entries_starting_with(query)
@@ -56,7 +57,8 @@ class SearchResultsController < ApplicationController
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           OR LOWER(last_name) LIKE ?",
                           "#{query}%", "#{query}%")
-    add_search_results(rooms, buildings, locations, people)
+    events = Event.where("LOWER(name) || LOWER(description) LIKE ?", "#{query}%")
+    add_search_results(rooms, buildings, locations, people, events)
   end
 
   def search_for_entries_including(query)
@@ -64,63 +66,75 @@ class SearchResultsController < ApplicationController
     rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ?
                         AND NOT LOWER(name) || LOWER(room_type) LIKE ?", "%#{query}%", "#{query}%")
     locations = Location.where("LOWER(name) || LOWER(details) LIKE ?
-                              AND NOT LOWER(name) || LOWER(details) LIKE ?", "%#{query}%", "#{query}%")
+                                AND NOT LOWER(name) || LOWER(details) LIKE ?", "%#{query}%", "#{query}%")
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          AND NOT LOWER(last_name) LIKE ?",
-                          "%#{query}%", "#{query}%", "#{query}%")
-    add_search_results(rooms, buildings, locations, people)
+                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
+                           AND NOT LOWER(last_name) LIKE ?", "%#{query}%", "#{query}%", "#{query}%")
+    events = Event.where("LOWER(name) || LOWER(description) LIKE ?
+                          AND NOT LOWER(name) || LOWER(description) LIKE ?", "%#{query}%", "#{query}%")
+    add_search_results(rooms, buildings, locations, people, events)
   end
 
   def add_rooms(rooms)
     rooms.each do |room|
       @search_results.append(SearchResult.new(
-                               id: @result_id,
+                               id: @result_id += 1,
                                title: room.name,
                                link: room_path(room),
                                description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}",
                                type: "room"
                              ))
-      @result_id += 1
     end
   end
 
   def add_buildings(buildings)
     buildings.each do |building|
       @search_results.append(SearchResult.new(
-                               id: @result_id,
+                               id: @result_id += 1,
                                title: building.name,
                                link: building_path(building),
                                description: "Building",
                                type: "building"
                              ))
-      @result_id += 1
     end
   end
 
   def add_locations(locations)
     locations.each do |location|
       @search_results.append(SearchResult.new(
-                               id: @result_id,
+                               id: @result_id += 1,
                                title: location.name,
                                link: location_path(location),
                                description: "Location",
                                type: "location"
                              ))
-      @result_id += 1
     end
   end
 
   def add_people(people)
     people.each do |person|
       @search_results.append(SearchResult.new(
-                               id: @result_id,
+                               id: @result_id += 1,
                                title: person.name,
                                link: person_path(person),
                                description: "Person, E-Mail: #{person.email}",
                                type: "person"
                              ))
-      @result_id += 1
+    end
+  end
+
+  def add_events(events)
+    events.each do |event|
+      start_date = event.schedule.next_occurrence || event.schedule.last
+      @search_results.append(SearchResult.new(
+                               id: @result_id += 1,
+                               title: event.name,
+                               link: calendar_path(event_id: event.id, start_date: start_date.start_time.to_s),
+                               description: "#{event.description} on #{event.start_time.strftime('%d.%m.%Y')} from
+                                             #{event.start_time.strftime('%H:%M:%S')} to
+                                             #{event.end_time.strftime('%H:%M:%S')}",
+                               type: "event"
+                             ))
     end
   end
 end

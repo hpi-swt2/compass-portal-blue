@@ -18,6 +18,8 @@
             <img src="<%=(url_for('/assets/location.png'))%>" height="25" width="25" alt="location_picture">
           <% elsif search_result.type == "room" %>
             <img src="<%=(url_for('/assets/room.png'))%>" height="25" width="25" alt="room_picture">
+          <% elsif search_result.type == "event" %>
+            <img src="<%=(url_for('/assets/event.png'))%>" height="25" width="25" alt="event_picture">
           <% end %>
           <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
             <% if !search_result.description.nil? %>

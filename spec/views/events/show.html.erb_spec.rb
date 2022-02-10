@@ -20,7 +20,7 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to match(/A Description/)
     expect(rendered).to match(/Weekly on Mondays/)
     expect(rendered).to match(/No Room/)
-    expect(rendered).to match(@start_time.to_s)
-    expect(rendered).to match(@end_time.to_s)
+    expect(rendered).to include(@start_time.to_s)
+    expect(rendered).to include(@end_time.to_s)
   end
 end
