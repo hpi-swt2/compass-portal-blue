@@ -10,9 +10,9 @@ module RoutingHelper
     if !start_building[:indoor] && !dest_building[:indoor] # outdoor - outdoor
       OutdoorRoutingHelper.route_outdoor(start, dest, res)
     elsif start_building[:indoor]
-      RoutingHelper.handle_start_indoor_cases(dest, start_building, dest_building, res)
+      handle_start_indoor_cases(dest, start_building, dest_building, res)
     else
-      OutdoorRoutingHelper.route_outdoor_indoor(start, dest_building, res)
+      route_outdoor_indoor(start, dest_building, res)
     end
   end
 
@@ -30,9 +30,9 @@ module RoutingHelper
     if start_building[:building] == dest_building[:building] # Indoor same building
       IndoorRoutingHelper.route_indoor(start_building[:node], dest_building[:node], start_building[:building], res)
     elsif !dest_building[:indoor] # indoor to outdoor
-      IndoorRoutingHelper.route_indoor_outdoor(start_building, dest, exit_door, res)
+      route_indoor_outdoor(start_building, dest, exit_door, res)
     else # Indoor -> Indoor (other building)
-      IndoorRoutingHelper.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
+      route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
     end
   end
 
@@ -100,6 +100,24 @@ module RoutingHelper
     return input if valid_coordinates?(input)
 
     BuildingMapHelper.destinations[input]
+  end
+
+  def self.route_outdoor_indoor(start, dest_building, res)
+    entrance = RoutingHelper.best_entry(dest_building[:building], start)
+    OutdoorRoutingHelper.route_outdoor(entrance[:latlng], start, res)
+    IndoorRoutingHelper.route_indoor(dest_building[:node], entrance[:id], dest_building[:building], res)
+  end
+
+  def self.route_indoor_outdoor(start_building, dest, exit_door, res)
+    IndoorRoutingHelper.route_indoor(start_building[:node], exit_door[:id], start_building[:building], res)
+    OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], dest, res)
+  end
+
+  def self.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
+    entry_door = RoutingHelper.best_entry(dest_building[:building], exit_door[:latlng])
+    IndoorRoutingHelper.route_indoor(start_building[:node], exit_door[:id], start_building[:building], res)
+    OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], entry_door[:latlng], res)
+    IndoorRoutingHelper.route_indoor(entry_door[:id], dest_building[:node], dest_building[:building], res)
   end
 
   def self.valid_coordinates?(coordinates)

@@ -6,12 +6,6 @@ module OutdoorRoutingHelper
     "http://routing.openstreetmap.de/routed-foot/route/v1/driving/#{start[1]},#{start[0]};#{dest[1]},#{dest[0]}?overview=full&geometries=geojson"
   end
 
-  def self.route_outdoor_indoor(start, dest_building, res)
-    entrance = RoutingHelper.best_entry(dest_building[:building], start)
-    route_outdoor(entrance[:latlng], start, res)
-    IndoorRoutingHelper.route_indoor(dest_building[:node], entrance[:id], dest_building[:building], res)
-  end
-
   def self.calculate_route(start, destination)
     response = HTTParty.get(routing_url(start, destination))
     return unless response.code == 200 # OPTIMIZE: give User feedback
@@ -22,12 +16,12 @@ module OutdoorRoutingHelper
   end
 
   def self.route_outdoor(start, dest, res)
-    result = OutdoorRoutingHelper.calculate_route(start, dest)
+    result = calculate_route(start, dest)
     res[:polylines].concat([
                              {
                                floor: 0,
                                indoor: false,
-                               polyline: OutdoorRoutingHelper.transform_route_to_polyline(result)
+                               polyline: transform_route_to_polyline(result)
                              }
                            ])
     res[:walktime] += result["duration"]
