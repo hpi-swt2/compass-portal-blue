@@ -76,12 +76,46 @@ export async function setupMap() {
   map.on("click", onClick);
 }
 
-function addPin(e, pinNumber) {
-  pins[pinNumber] = L.marker(e.latlng, { icon: pinIcons[pinNumber] });
+function formatQueryParameters(position){
+  const query = new URLSearchParams(window.location.search);
+  query.append("long", position.lng);
+  query.append("lat", position.lat);
+  return query.toString();
+}
+
+function pinPopupContent(position) {
+  const params = formatQueryParameters(position);
+  return `
+    <ul class=pin-menu>
+      <li><a href="/rooms/new?${params}">Add Room</a></li>
+      <li><a href="/buildings/new?${params}">Add Building</a></li>
+      <li><a href="/locations/new?${params}">Add Location</a></li>
+      <li><a id="deletepin" href="javascript:void(0);">Delete Pin</a></li>
+    </ul>
+  `;
+}
+
+function addPin(position, pinNumber) {
+  pins[pinNumber] = L.marker(position, { icon: pinIcons[pinNumber] });
   pins[pinNumber].addTo(map);
   pins[pinNumber].on("click", function (e) {
-    removePin(pinNumber);
+    pinOnClick(pinNumber, position);
   });
+}
+
+function pinOnClick(pinNumber, position){
+  var popup = L.popup()
+    .setLatLng(position)
+    .setContent(pinPopupContent(position))
+    .openOn(map);
+  document.getElementById("deletepin").addEventListener("click", function(e) {
+    removePinAndPopup(pinNumber, popup);
+  }, false);
+}
+
+function removePinAndPopup(pinNumber, popup){
+  removePin(pinNumber);
+  popup.remove();
 }
 
 function removePin(pinNumber) {
@@ -97,9 +131,9 @@ function removeAllPins() {
 
 function onClick(e) {
   if (!pins[0] || pins[0] === null) {
-    addPin(e, 0);
+    addPin(e.latlng, 0);
   } else if (!pins[1] || pins[1] === null) {
-    addPin(e, 1);
+    addPin(e.latlng, 1);
     $("#_overlay").addClass("open");
     $("#toggle-overlay").addClass("visible");
     $("#toggle-overlay").addClass("open");
