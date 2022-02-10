@@ -63,6 +63,7 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     aes_key_wrap (1.1.0)
+    algorithms (1.0.0)
     ast (2.4.2)
     attr_required (1.0.1)
     bcrypt (3.1.16)
@@ -358,6 +359,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  algorithms
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.4)

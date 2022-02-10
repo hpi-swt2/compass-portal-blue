@@ -32,16 +32,17 @@ const geoJsonLayerFiles = [
 ];
 
 export let pins = [];
-
+export let pinFloors = [];
 let layerControl;
 /**
  * defines the floor that is currently displayed
  */
-let currentFloor = 0;
+export let currentFloor = 0;
 /**
  * object that contains for each existing floor two layer groups, one for rooms and one for labels
  */
 const floors = {};
+let markerLayer;
 
 export async function setupMap() {
   global.map = L.map("map");
@@ -51,7 +52,7 @@ export async function setupMap() {
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
     maxZoom: 22,
     maxNativeZoom: 19,
   }).addTo(map);
@@ -101,6 +102,7 @@ function addPin(position, pinNumber) {
   pins[pinNumber].on("click", function (e) {
     pinOnClick(pinNumber, position);
   });
+  pinFloors[pinNumber] = currentFloor;
 }
 
 function pinOnClick(pinNumber, position){
@@ -121,6 +123,7 @@ function removePinAndPopup(pinNumber, popup){
 function removePin(pinNumber) {
   pins[pinNumber].remove();
   pins[pinNumber] = null;
+  pinFloors[pinNumber] = null;
 }
 
 function removeAllPins() {
@@ -197,35 +200,56 @@ export function addMarker(marker, layer = map) {
   marker["divIcon"]["iconAnchor"] = [0, 0];
   marker["divIcon"]["popupAnchor"] = [0, 0];
   const icon = L.divIcon(marker["divIcon"]);
-  L.marker(marker["latlng"], { icon: icon }).addTo(layer);
+  return L.marker(marker["latlng"], { icon }).addTo(layer);
 }
 
 export function addAnyMarker(marker, layer = map) {
   marker.addTo(layer);
 }
 
-export function addPolylines(polylines, layer = map) {
-  polylines.forEach((polyline) => {
-    addPolyline(polyline, layer);
+export function addRoutePolyline(polyline, isIndoor, layer = map, style = {}) {
+  const className = isIndoor ? "route-path-indoor" : "route-path-outdoor";
+  const styling = Object.assign({ className }, style);
+  return L.polyline(polyline, styling).addTo(layer);
+}
+
+export async function displayRoute(start_coordinates, start_floor, dest_coordinates, dest_floor) {
+  const routeParams = new URLSearchParams({
+    start: start_coordinates,
+    dest: dest_coordinates,
+    start_floor,
+    dest_floor,
   });
-}
-
-export function addPolyline(polyline, layer = map) {
-  return L.polyline(polyline["latlngs"], polyline["options"]).addTo(layer);
-}
-
-export async function displayRoute(start, dest) {
   const route = await $.ajax({
     type: "GET",
     url: "/building_map/route",
-    data: `start=${start}&dest=${dest}`,
+    data: routeParams.toString(),
     dataType: "json",
   });
-  if (global.routeLayer) routeLayer.clearLayers();
-  else global.routeLayer = L.layerGroup();
-  const polyline = addPolyline(route["polyline"], routeLayer);
-  addMarkers([route["marker"]], routeLayer);
-  routeLayer.addTo(map);
+
+  let completeLine = []
+
+  for (const floor in floors) {
+    floors[floor]["paths"].clearLayers();
+  }
+
+  route["polylines"].forEach(line => {
+    const color = line["indoor"]? "#000000": "#346eeb";
+    addRoutePolyline(line["polyline"], line["indoor"], floors[line["floor"]]["paths"], {color: color});
+    Object.keys(floors).forEach(floor => {
+      if(floor == line["floor"]) return;
+      addRoutePolyline(line["polyline"], line["indoor"], floors[floor]["paths"], {color: color, dashArray: "5, 5", dashOffset: "5", opacity: 0.5, weight: 1});
+    });
+    completeLine = completeLine.concat(line["polyline"]);
+  });
+
+  if(markerLayer) markerLayer.clearLayers();
+  else markerLayer = L.layerGroup();
+  addMarker(route["marker"]).addTo(markerLayer);
+  markerLayer.addTo(map);
+
+  if (completeLine.length === 0) return
+  const polyline = L.polyline(completeLine)
   const uiPadding = getUIPadding();
   map.fitBounds(polyline.getBounds(), {
     paddingTopLeft: [uiPadding[0], 0],
@@ -256,8 +280,8 @@ function setupGeoJsonFeatureIndoor(feature, layer) {
   }
 
   if (!floors[level]) {
-    floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup() };
-    const newLayer = L.layerGroup([floors[level].rooms, floors[level].labels]);
+    floors[level] = { rooms: L.layerGroup(), labels: L.layerGroup(), paths: L.layerGroup()};
+    const newLayer = L.layerGroup([floors[level].rooms, floors[level].labels, floors[level].paths]);
     layerControl.addBaseLayer(newLayer, feature.properties.level_name);
     // We add the current floor to the map here so that the map and layer control reference the same object
     // now the layer control will select the correct check box automatically

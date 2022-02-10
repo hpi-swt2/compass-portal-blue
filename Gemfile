@@ -131,3 +131,6 @@ gem 'cancancan'
 
 # Easy working with HTTP Requests
 gem 'httparty'
+
+# Priority queue for Dijkstra (Indoor Routing)
+gem 'algorithms'
