@@ -84,6 +84,31 @@
   content: '2';
 }
 
+ul.pin-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #ffffff;
+
+  li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+  
+
+    &:hover {
+      background-color: #555;
+      color: white;
+    }
+  }
+  
+}
+
+
+
+
 .indoor-label{
   background: rgba(255, 255, 255, 0) !important;
   border:0 !important;

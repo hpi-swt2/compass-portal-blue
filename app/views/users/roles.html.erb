@@ -1,0 +1,52 @@
+<%= csrf_meta_tags %>
+
+<p id="notice"><%= notice %></p>
+
+<h1 class="fw-light"><%=t('user-roles')%></h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%=t('email')%></th>
+      <th><%=t('username')%></th>
+      <th><%=t('admin?')%></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.username %></td>
+        <td class='text-center'>
+          <%= check_box_tag "user-admin-#{user.id}", user.id, user.admin, class: 'user-admin form-check-input' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<script defer>
+  $('.user-admin').change(async function (e) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
+    let userId = e.currentTarget.value;
+    let isAdmin = e.currentTarget.checked;
+    const body = JSON.stringify({roles: {
+      admin: isAdmin
+    }});
+    const response = await fetch(
+      `/users/${userId}/roles`,
+      {
+        method: "PUT",
+        body: body,
+        headers: {
+          "X-CSRF-TOKEN": csrfToken,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.assert(response.status === 204); // HTTP "No content"
+  })
+</script>
