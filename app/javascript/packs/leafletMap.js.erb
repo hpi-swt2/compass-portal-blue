@@ -231,7 +231,7 @@ export async function displayRoute(start_coordinates, start_floor, dest_coordina
 
   for (const floor in floors) {
     floors[floor]["paths"].clearLayers();
-  };
+  }
 
   route["polylines"].forEach(line => {
     const color = line["indoor"]? "#000000": "#346eeb";
