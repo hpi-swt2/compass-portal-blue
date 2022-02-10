@@ -18,12 +18,12 @@ module OutdoorRoutingHelper
   def self.route_outdoor(start, dest, map_data)
     result = calculate_route(start, dest)
     map_data[:polylines].concat([
-                             {
-                               floor: 0,
-                               indoor: false,
-                               polyline: transform_route_to_polyline(result)
-                             }
-                           ])
+                                  {
+                                    floor: 0,
+                                    indoor: false,
+                                    polyline: transform_route_to_polyline(result)
+                                  }
+                                ])
     map_data[:walktime] += result["duration"]
     map_data
   end

@@ -1,6 +1,7 @@
 require 'httparty'
 require 'json'
 
+# rubocop:disable Metrics/ModuleLength
 module RoutingHelper
   def self.format_seconds_as_minsec(sec)
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
@@ -127,3 +128,4 @@ module RoutingHelper
     coordinates.match(regex)
   end
 end
+# rubocop:enable Metrics/ModuleLength
