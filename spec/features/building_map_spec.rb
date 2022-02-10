@@ -69,7 +69,9 @@ describe "Building Map page", type: :feature do
 
   # Following tests might be inconsistent when run on GitHub Actions.
 
-  context "with pins", inconsistent: true, local_only: true do
+  context "with pins", inconsistent: true do
+    before { skip("Tests behave inconsistently") }
+
     it "adds pins on click on map", js: true do
       visit root_path
       find("#map").click(x: 50, y: 50)
@@ -85,7 +87,6 @@ describe "Building Map page", type: :feature do
       visit root_path
       find("#map").click(x: 50, y: 50)
       find("#map").click(x: 50, y: 50)
-      # test
       expect(page).to have_content("Add Room")
       expect(page).to have_content("Add Building")
       expect(page).to have_content("Add Location")
@@ -93,7 +94,6 @@ describe "Building Map page", type: :feature do
     end
 
     it "removes a pin when delete pin is clicked", js: true do
-      # test
       visit root_path
       find("#map").click(x: 50, y: 50)
       expect(page).to have_css(".pin-icon1")
@@ -103,7 +103,6 @@ describe "Building Map page", type: :feature do
     end
 
     it "calls the new_room route when Add Room is clicked", js: true do
-      # test
       sign_in(create(:user, admin: true))
       visit root_path
       find("#map").click(x: 50, y: 50)
@@ -113,7 +112,6 @@ describe "Building Map page", type: :feature do
     end
 
     it "calls the new_building route when Add Building is clicked", js: true do
-      # test
       sign_in(create(:user, admin: true))
       visit root_path
       find("#map").click(x: 50, y: 50)
@@ -123,7 +121,6 @@ describe "Building Map page", type: :feature do
     end
 
     it "calls the new_location route when Add Location is clicked", js: true do
-      # test
       sign_in(create(:user, admin: true))
       visit root_path
       find("#map").click(x: 50, y: 50)

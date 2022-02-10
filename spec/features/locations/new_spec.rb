@@ -25,7 +25,6 @@ describe "New location page", type: :feature do
       expect(page).to have_field('location[location_photo]')
       expect(page).to have_field('location[location_latitude]')
       expect(page).to have_field('location[location_longitude]')
-      # expect(page).to have_field('location[opens]')
     end
 
     it "has a form which creates database entries after filling out" do

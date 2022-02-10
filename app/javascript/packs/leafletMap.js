@@ -75,16 +75,19 @@ export async function setupMap() {
 }
 
 function formatQueryParameters(position){
-  return "?long="+position.lng+"&lat="+position.lat
+  const query = new URLSearchParams(window.location.search);
+  query.append("long", position.lng);
+  query.append("lat", position.lat);
+  return query.toString();
 }
 
 function pinPopupContent(position) {
   const params = formatQueryParameters(position);
   return `
     <ul class=pin-menu>
-      <li><a href="/rooms/new${params}">Add Room</a></li>
-      <li><a href="/buildings/new${params}">Add Building</a></li>
-      <li><a href="/locations/new${params}">Add Location</a></li>
+      <li><a href="/rooms/new?${params}">Add Room</a></li>
+      <li><a href="/buildings/new?${params}">Add Building</a></li>
+      <li><a href="/locations/new?${params}">Add Location</a></li>
       <li><a id="deletepin" href="javascript:void(0);">Delete Pin</a></li>
     </ul>
   `;
@@ -105,7 +108,7 @@ function pinOnClick(pinNumber, position){
     .openOn(map);
   document.getElementById("deletepin").addEventListener("click", function(e) {
     removePinAndPopup(pinNumber, popup);
-  }, false);
+  });
 }
 
 function removePinAndPopup(pinNumber, popup){
