@@ -32,4 +32,7 @@ Rails.application.routes.draw do
   root to: "welcome#index"
 
   get '/map/*path' => "welcome#index", as: 'map'
+
+  get 'users/roles'
+  put '/users/:id/roles', to: 'users#update_roles'
 end
