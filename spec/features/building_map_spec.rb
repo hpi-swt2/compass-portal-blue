@@ -61,10 +61,6 @@ describe "Building Map page", type: :feature do
     )
     visit "/map#{room_path(room)}?"
     find('.indoor-label', wait: 5, match: :first, visible: false).should have_content(/-2/)
-<<<<<<< HEAD
-=======
-
->>>>>>> 714eadf... fixed a test
   end
 
   it "shows no route, if it's not requested", js: true do
