@@ -3,6 +3,14 @@ de:
     people: 'Personen'
     title-en: 'Englisch'
     title-de: 'Deutsch'
+    date:
+        abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
+        month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+    simple_calendar:
+        week: 'Woche'
+        previous: 'Vorherige'
+        next: 'Nächste'
+    create_new_event: 'Erstelle neues Event'
     email: 'E-Mail'
     username: 'Benutzername'
     admin?: 'Administrator?'
