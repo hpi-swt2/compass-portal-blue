@@ -29,4 +29,3 @@ class BuildingMapController < ApplicationController
     end
   end
 end
-end
