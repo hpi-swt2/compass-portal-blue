@@ -51,6 +51,13 @@ gem 'tod'
 # Libraries
 #
 
+# ICalendar and Ice_cube for ics parsing and event processing
+gem 'icalendar'
+gem 'ice_cube'
+
+# gem for calendar
+gem "simple_calendar", "~> 2.4"
+
 #
 # Gems that are loaded depending on the environment (development/test/production)
 #
@@ -126,3 +133,6 @@ gem 'cancancan'
 
 # Easy working with HTTP Requests
 gem 'httparty'
+
+# Priority queue for Dijkstra (Indoor Routing)
+gem 'algorithms'

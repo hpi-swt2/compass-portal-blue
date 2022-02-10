@@ -53,7 +53,7 @@ describe "Building Map page", type: :feature do
 
   it "shows no route, if it's not requested", js: true do
     visit root_path
-    expect(page).not_to have_css(".routing-path")
+    expect(page).not_to have_css(".route-path-outdoor")
     expect(page).not_to have_css(".time-icon")
   end
 
@@ -149,29 +149,18 @@ describe "Building Map page", type: :feature do
     end
 
     it "shows no route, if it's not requested", js: true do
-      expect(page).not_to have_css(".routing-path")
+      expect(page).not_to have_css(".route-path-outdoor")
       expect(page).not_to have_css(".time-icon")
     end
 
     it "shows a calculated route", js: true do
-      find(".routing-path", wait: 15)
-      expect(page).to have_css(".routing-path")
+      find(".route-path-outdoor", wait: 15)
+      expect(page).to have_css(".route-path-outdoor")
     end
 
     it "shows the time of a calculated route", js: true do
       find(".time-icon", wait: 15)
       expect(page).to have_css(".time-icon")
     end
-
-    it "only shows one route at the time", js: true do
-      find(".routing-path", wait: 15)
-      expect(page).to have_css(".routing-path", count: 1)
-      fill_in 'start', with: 'Haus A'
-      fill_in 'dest', with: 'Location 1'
-      click_on 'Go'
-      find(".routing-path", wait: 5)
-      expect(page).to have_css(".routing-path", count: 1)
-    end
-
   end
 end
