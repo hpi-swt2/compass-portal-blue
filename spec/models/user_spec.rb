@@ -25,4 +25,19 @@ RSpec.describe User, type: :model do
       expect(user.person.email).to eq("herbert.herbertson@hpi.de")
     end
   end
+
+  describe "last known location" do
+    let(:user) { build(:user) }
+
+    it "disposes of outdated information" do
+      expect(user.last_known_location).to be_nil
+      user.update_last_known_location("13.37,47.11")
+
+      user.last_known_location_with_timestamp[1] = DateTime.parse("14th April 1954")
+
+      expect(user.last_known_location).not_to be_nil
+      described_class.clean_outdated_locations
+      expect(user.last_known_location).to be_nil
+    end
+  end
 end
