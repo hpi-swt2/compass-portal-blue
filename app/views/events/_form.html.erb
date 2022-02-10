@@ -13,40 +13,40 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
     <div>
-      <%= form.label :room %>
+      <%= form.label :room, class: "form-label" %>
       <%= form.select 'room_id',
           options_from_collection_for_select(
             Room.all, :id, :name, event.room.nil? ? 1 : event.room.id) + options_for_select([["No Room", nil]]),
           {},
-          multiple: false %>
+          multiple: false, class: "form-control" %>
     </div>
 
   <div class="field">
-    <%= form.label "Start Date" %>
-    <%= form.datetime_select :start_time %>
+    <%= form.label "Start Date", class: "form-label" %>
+    <%= form.datetime_select :start_time, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label "End Date" %>
-    <%= form.datetime_select :end_time %>
+    <%= form.label "End Date", class: "form-label" %>
+    <%= form.datetime_select :end_time, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :recurring %>
-    <%= form.text_area :recurring %>
+    <%= form.label :recurring, class: "form-label" %>
+    <%= form.text_area :recurring, class: "form-control" %>
   </div>
 
   <div class="actions mt-3">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
