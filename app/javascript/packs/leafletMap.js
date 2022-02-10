@@ -177,10 +177,10 @@ export function addRoutePolyline(polyline, isIndoor, layer = map, style = {}) {
   return L.polyline(polyline, styling).addTo(layer);
 }
 
-export async function displayRoute(start, start_floor, dest, dest_floor) {
+export async function displayRoute(start_coordinates, start_floor, dest_coordinates, dest_floor) {
   let routeParams = new URLSearchParams();
-  routeParams.append("start", start);
-  routeParams.append("dest", dest);
+  routeParams.append("start", start_coordinates);
+  routeParams.append("dest", dest_coordinates);
   routeParams.append("start_floor", start_floor);
   routeParams.append("dest_floor", dest_floor);
   const route = await $.ajax({
