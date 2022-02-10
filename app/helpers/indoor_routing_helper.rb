@@ -1,4 +1,6 @@
 module IndoorRoutingHelper
+  WALK_SPEED = 1.4 # m/s
+
   def self.update_nearest_node_result(door_id, dist, building, result)
     result[:door] = door_id
     result[:distance] = dist
@@ -48,6 +50,6 @@ module IndoorRoutingHelper
   end
 
   def self.walk_time(dist)
-    dist / 1.38889
+    dist / WALK_SPEED
   end
 end
