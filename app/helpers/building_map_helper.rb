@@ -37,14 +37,14 @@ module BuildingMapHelper
   end
 
   def self.building?(building)
-    buildings.has_key?(building)
+    buildings.key?(building)
   end
 
   def self.location?(location)
-    locations.has_key?(location)
+    locations.key?(location)
   end
 
   def self.room?(room)
-    rooms.has_key?(room)
+    rooms.key?(room)
   end
 end

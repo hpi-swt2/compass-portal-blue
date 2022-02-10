@@ -12,7 +12,7 @@ module IndoorGraph
   end
 
   def self.load_graphs
-    BUILDINGS.each(&method(:load_building))
+    BUILDINGS.each { |building| load_building(building) }
     entry_nodes.freeze
     indoor_graphs.freeze
     nodes.freeze

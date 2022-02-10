@@ -16,13 +16,13 @@ module RoutingHelper
     end
   end
 
-  def self.init_routing(params)
-    start = coordinates_from_string(resolve_coordinates(params[:start]))
-    dest = coordinates_from_string(resolve_coordinates(params[:dest]))
-    start_building = room_building(params[:start], params[:start_floor].to_i, IndoorGraph::MAX_INDOOR_DIST)
-    dest_building = room_building(params[:dest], params[:dest_floor].to_i, IndoorGraph::MAX_INDOOR_DIST)
+  def self.init_routing(start, dest, start_floor, dest_floor)
+    start_coordinates = coordinates_from_string(resolve_coordinates(start))
+    dest_coordinates = coordinates_from_string(resolve_coordinates(dest))
+    start_building = room_building(start, start_floor, IndoorGraph::MAX_INDOOR_DIST)
+    dest_building = room_building(dest, dest_floor, IndoorGraph::MAX_INDOOR_DIST)
     res = { polylines: [], walktime: 0 }
-    [start, dest, start_building, dest_building, res]
+    [start_coordinates, dest_coordinates, start_building, dest_building, res]
   end
 
   def self.handle_start_indoor_cases(dest, start_building, dest_building, res)
