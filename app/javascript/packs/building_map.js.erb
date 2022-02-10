@@ -160,7 +160,8 @@ const clearUserPositionOnServer = async () => {
 };
 
 let watcherId = null;
-const positionIcon = L.icon({ iconUrl: "../assets/current-location.svg", iconSize: [30, 30], iconAnchor: [15, 15] });
+<% helpers = ActionController::Base.helpers %>
+const positionIcon = L.icon({ iconUrl: "<%= helpers.asset_path('current-location.svg') %>", iconSize: [30, 30], iconAnchor: [15, 15] });
 const positionMarker = L.marker([0, 0], { icon: positionIcon });
 positionMarker.bindPopup("Your position");
 

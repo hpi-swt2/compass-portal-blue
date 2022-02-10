@@ -2,7 +2,7 @@
   <div class="col-lg-6 col-md-6 mx-auto">
     <h2 class="fw-light">Edit Room</h2>
 
-    <%= render 'form', room: @room %>
+    <%= render 'form', room: @room, latitude: @room.location_latitude, longitude: @room.location_longitude %>
 
     <%= link_to 'Back', rooms_path, class: "btn btn-secondary link-btn" %>
     <%= link_to 'Show', @room, class: "btn btn-secondary link-btn" %>

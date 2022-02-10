@@ -6,7 +6,7 @@
       <% if @location.location_photo.attached? %>
         <img src="<%=(url_for(@location.location_photo))%>" alt="<%= @location.location_photo.filename %>"/>
       <% else %>
-        <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo">
+        <%= image_tag "default-location-photo.png", alt: "default-location-photo"%>
       <% end %>
     </div>
 
