@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :events do
+    collection { post :import }
+  end
   resources :people
-  resources :rooms
+  resources :rooms do
+    get 'calendar'
+  end
   resources :openingtimes
   resources :buildings
   resources :locations
