@@ -30,7 +30,7 @@ const geoJsonLayerFiles = [
 ];
 
 export let pins = [];
-export let pin_floors = [];
+export let pinFloors = [];
 let layerControl;
 /**
  * defines the floor that is currently displayed
@@ -40,7 +40,7 @@ export let currentFloor = 0;
  * object that contains for each existing floor two layer groups, one for rooms and one for labels
  */
 const floors = {};
-var markerLayer;
+let markerLayer;
 
 export async function setupMap() {
   global.map = L.map("map");
@@ -81,13 +81,13 @@ function addPin(e, pinNumber) {
   pins[pinNumber].on("click", function (e) {
     removePin(pinNumber);
   });
-  pin_floors[pinNumber] = currentFloor;
+  pinFloors[pinNumber] = currentFloor;
 }
 
 function removePin(pinNumber) {
   pins[pinNumber].remove();
   pins[pinNumber] = null;
-  pin_floors[pinNumber] = null;
+  pinFloors[pinNumber] = null;
 }
 
 function removeAllPins() {
@@ -164,7 +164,7 @@ export function addMarker(marker, layer = map) {
   marker["divIcon"]["iconAnchor"] = [0, 0];
   marker["divIcon"]["popupAnchor"] = [0, 0];
   const icon = L.divIcon(marker["divIcon"]);
-  return L.marker(marker["latlng"], { icon: icon }).addTo(layer);
+  return L.marker(marker["latlng"], { icon }).addTo(layer);
 }
 
 export function addAnyMarker(marker, layer = map) {
@@ -172,16 +172,21 @@ export function addAnyMarker(marker, layer = map) {
 }
 
 export function addRoutePolyline(polyline, isIndoor, layer = map, style = {}) {
-  const className = isIndoor? "route-path-indoor" : "route-path-outdoor";
-  const styling = Object.assign({ className: className }, style);
+  const className = isIndoor ? "route-path-indoor" : "route-path-outdoor";
+  const styling = Object.assign({ className }, style);
   return L.polyline(polyline, styling).addTo(layer);
 }
 
 export async function displayRoute(start, start_floor, dest, dest_floor) {
+  let routeParams = new URLSearchParams();
+  routeParams.append("start", start);
+  routeParams.append("dest", dest);
+  routeParams.append("start_floor", start_floor);
+  routeParams.append("dest_floor", dest_floor);
   const route = await $.ajax({
     type: "GET",
     url: "/building_map/route",
-    data: `start=${start}&dest=${dest}&start_floor=${start_floor}&dest_floor=${dest_floor}`,
+    data: routeParams.toString(),
     dataType: "json",
   });
 

@@ -79,20 +79,14 @@ module RoutingHelper
   end
 
   def self.best_entry(building, latlng)
-    entry_id = nil
-    min_dist = Float::MAX
-    IndoorGraph.entry_nodes[building].each do |id|
-      distance = distance(IndoorGraph.indoor_graphs[building][id]['latlng'], latlng)
-      if distance < min_dist
-        entry_id = id
-        min_dist = distance
-      end
+    entry_id = IndoorGraph.entry_nodes[building].min_by do |id|
+      distance(IndoorGraph.indoor_graphs[building][id]['latlng'], latlng)
     end
     { id: entry_id, latlng: IndoorGraph.indoor_graphs[building][entry_id]['latlng'] }
   end
 
   def self.distance(latlng1, latlng2)
-    dy = 111.3 * (latlng1[0] - latlng2[0])
+    dy = 111.3 * (latlng1[0] - latlng2[0]) # based on https://www.kompf.de/gps/distcalc.html
     dx = 71.5 * (latlng1[1] - latlng2[1])
     Math.sqrt((dx * dx) + (dy * dy)) * 1000
   end

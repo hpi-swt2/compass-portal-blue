@@ -3,7 +3,14 @@ import {
   PIN_2_MAGIC_STRING,
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
-import { addAnyMarker, displayRoute, pins, pin_floors, currentFloor, setupMap } from './leafletMap.js';
+import {
+    addAnyMarker,
+    displayRoute,
+    pins,
+    pinFloors,
+    currentFloor,
+    setupMap,
+} from "./leafletMap.js";
 import { lazyInit, rateLimit } from "./utils.js";
 
 // FIXME: this should probably be in application.js or something similarly
@@ -58,11 +65,11 @@ $("#navigationForm")[0].addEventListener("submit", (event) => {
         break;
       case PIN_1_MAGIC_STRING:
         coordinates[i] = pinCoordinatesString(pins[0]);
-        floors[i] = pin_floors[0];
+        floors[i] = pinFloors[0];
         break;
       case PIN_2_MAGIC_STRING:
         coordinates[i] = pinCoordinatesString(pins[1]);
-        floors[i] = pin_floors[1];
+        floors[i] = pinFloors[1];
         break;
     }
   });
