@@ -13,8 +13,6 @@ class BuildingsController < ApplicationController
   # GET /buildings/new
   def new
     @building = Building.new
-    @latitude = params[:lat]
-    @longitude = params[:long]
   end
 
   # GET /buildings/1/edit

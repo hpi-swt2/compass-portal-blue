@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# An ability of a user
+# An ability of a person
 class Ability
   include CanCan::Ability
 
