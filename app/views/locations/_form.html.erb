@@ -1,0 +1,84 @@
+<%= form_with(model: location) do |form| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% @location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :details, class: "form-label" %>
+    <%= form.text_field :details, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_photo, class: "form-label" %>
+    <%= form.file_field :location_photo, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_latitude, class: "form-label" %>
+    <%= form.number_field :location_latitude, step: :any, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_longitude, class: "form-label" %>
+    <%= form.number_field :location_longitude, step: :any, class: "form-control" %>
+  </div>
+
+  <div class="field mb-3 opening-times-container">
+    <%= form.label :openingtimes, class: 'form-label' %>
+    <%= form.fields_for :openingtimes do |o| %>
+      <div class="field mb-3 input-group" id="opening-time-field-<%= o.object.id %>">
+        <%= o.select 'day',
+                     options_for_select(Openingtime.day_string_to_number_mapping, o.object.day),
+                     {},
+                     multiple: false, class: "form-control form-inline" %>
+        <%= o.time_field :opens, value: o.object.opens, class: "form-control form-inline" %>
+        <div class="input-group-text">-</div>
+        <%= o.time_field :closes, value: o.object.closes, class: "form-control form-inline" %>
+        <%= link_to(openingtime_path(o.object.id), :method => :delete, :class => 'btn btn-mini',
+                    :remote => true, :onclick =>
+                      "{$('#opening-time-field-#{o.object.id}').next().remove();
+                       $('#opening-time-field-#{o.object.id}')[0].remove()}") do %>
+          <i class="fas fa-trash"></i>
+        <% end %>
+      </div>
+    <% end %>
+    <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);">
+      <i class="fas fa-plus"></i> Add opening time
+    </button>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+  <script defer>
+      const options_html = `
+      <% Openingtime.day_number_to_string_mapping.each do |number, string| %>
+        <option value=<%= number %>><%= string %></option>
+      <% end %>`;
+
+      var opening_time_index = <%= @location.openingtimes.length %>
+      const addNewOpeningTime = (target) => {
+          $(`<div class="field mb-3 input-group" id="opening-time-field-new">
+           <select name="location[openingtimes_attributes][` + opening_time_index + `][day]" id="opening-time-field-new" class="form-control form-inline">` + options_html + `</select>
+           <input type="time" name="location[openingtimes_attributes][` + opening_time_index + `][opens]" id="opening-time-field-new" class="form-control form-inline">
+           <div class="input-group-text">-</div>
+           <input type="time" name="location[openingtimes_attributes][` + opening_time_index + `][closes]" id="opening-time-field-new" class="form-control form-inline">
+           </div>`).insertBefore(target);
+          ++opening_time_index
+      }
+  </script>
+<% end %>

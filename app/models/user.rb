@@ -1,10 +1,30 @@
+require "date"
+
 # The model representing a user who can log in
 class User < ApplicationRecord
+  belongs_to :person, dependent: :destroy
+  has_and_belongs_to_many :owned_locations, class_name: 'Location', join_table: 'location_owner'
+  has_and_belongs_to_many :owned_buildings, class_name: 'Building', join_table: 'building_owner'
+  has_and_belongs_to_many :owned_rooms, class_name: 'Room', join_table: 'room_owner'
+  has_and_belongs_to_many :owned_people, class_name: 'Person', join_table: 'person_owner'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[openid_connect]
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :validatable,
+         :omniauthable,
+         omniauth_providers: %i[openid_connect]
+
+  def initialize(attributes = {})
+    super(attributes)
+    if person.nil?
+      self.person = Person.new
+      person.email = email
+    end
+    person.owners = [self]
+  end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
   # Match OpenID Connect data to a local user object
@@ -12,17 +32,12 @@ class User < ApplicationRecord
     # Check if user with provider ('openid_connect') and uid is in db, otherwise create it
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       # All information returned by OpenID Connect is passed in `auth` param
-      user.email = auth.info.email
+
       # Generate random password, default length is 20
       # https://www.rubydoc.info/github/plataformatec/devise/Devise.friendly_token
       user.password = Devise.friendly_token[0, 20]
-      user.username = auth.info.name
-      # `first_name` & `last_name` are also available
-      # user.first_name = auth.info.first_name
-      # user.last_name = auth.info.last_name
-      # If you are using confirmable and the provider(s) you use validate emails,
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
+
+      read_auth_data_into_user(user, auth)
     end
   end
 
@@ -36,4 +51,36 @@ class User < ApplicationRecord
   #     end
   #   end
   # end
+
+  # FIXME: this should be cleaned every now and then
+  # Maps from user ids to (location, timestamp) tuples
+  @locations = Concurrent::Hash.new
+
+  class << self
+    attr_accessor :locations
+  end
+
+  def update_last_known_location(location)
+    self.class.locations[id] = [location, DateTime.now]
+  end
+
+  def last_known_location_with_timestamp
+    self.class.locations[id]
+  end
+
+  def last_known_location
+    last_known_location_with_timestamp&.at(0)
+  end
+
+  def delete_last_known_location
+    self.class.locations.delete id
+  end
+
+  private
+
+  private_class_method def self.read_auth_data_into_user(user, auth)
+    user.email = auth.info.email
+    user.username = auth.info.name
+    user.person = Person.from_omniauth(auth)
+  end
 end

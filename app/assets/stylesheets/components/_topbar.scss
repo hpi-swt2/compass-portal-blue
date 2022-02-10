@@ -1,0 +1,105 @@
+@import "colors";
+
+.topbar-custom {
+  padding: 0.5rem 2rem;
+  flex-wrap: nowrap !important;
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  z-index: 401;
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  .navbar-brand {
+    color: $hpi-blue;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
+
+    @media only screen and (max-width: 350px) {
+      & > span {
+        display: none;
+      }
+    }
+  }
+
+  .user-area, .settings-area {
+    background-color: white;
+    padding: 0.2rem;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 2.5rem;
+  }
+
+  .settings-area {
+    margin-right: 1rem;
+  }
+
+  .user-area {
+    &:hover {
+      transform: scale(1.02);
+      transform-origin: center;
+    }
+
+    a {
+      color: $hpi-blue;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-decoration: none;
+
+      &:hover {
+        background-color: transparent !important;
+      }
+
+      & > span {
+        margin-right: 1rem;
+
+        @media only screen and (max-width: 450px) {
+          display: none;
+        }
+      }
+    }
+
+    .profile-picture-container {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      border: 0.1rem solid white;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+// TODO: This is just to copy the styles from the other buttons.
+// The better way would be to either modify the bootstrap theme https://getbootstrap.com/docs/5.1/customize/overview/
+// or generate new button classes via the bootstrap scss utilities
+.language-area {
+  @extend .user-area;
+
+  padding: 0 !important;
+
+  a.active {
+    background-color: $hpi-blue;
+    color: white;
+
+    &:hover {
+      background-color: $hpi-blue !important;
+      color: white;
+    }
+  }
+}
+
+#language-switch-button-en {
+  border-radius: 2.5rem 0 0 2.5rem;
+}
+
+#language-switch-button-de {
+  border-radius: 0 2.5rem 2.5rem 0;
+}

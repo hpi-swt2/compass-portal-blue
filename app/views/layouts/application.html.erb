@@ -7,16 +7,22 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "i18n" %>
+    <%= javascript_include_tag "translations", skip_pipeline: true %>
+    <script>
+         I18n.locale = "<%= I18n.locale %>";
+    </script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+
+    </head>
 
   <body>
-    <%= render 'layouts/navbar' %>
     <%= render 'layouts/alerts' %>
     <%# https://getbootstrap.com/docs/5.0/layout/containers/ %>
     <%# https://getbootstrap.com/docs/5.0/utilities/spacing/ %>
-    <div class="container mt-5"> <%# mt-5 == margin-top: 5*spacer %>
+    <div class="container mt-2" id="app-outlet-outer"> <%# mt-2 == margin-top: 2*spacer %>
       <%= yield %>
     </div>
   </body>
 </html>
+

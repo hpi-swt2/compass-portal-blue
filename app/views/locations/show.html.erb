@@ -1,0 +1,36 @@
+<h2 class="mb-3 fw-light"><%= @location.name %></h2>
+
+<div class='edit-location-photo'>
+  <div class='location-photo-wrapper'>
+    <div class='location-photo-container'>
+      <% if @location.location_photo.attached? %>
+        <img src="<%=(url_for(@location.location_photo))%>" alt="<%= @location.location_photo.filename %>"/>
+      <% else %>
+        <%= image_tag "default-location-photo.png", alt: "default-location-photo"%>
+      <% end %>
+    </div>
+
+<p>
+  <strong>Details:</strong>
+  <%= @location.details %>
+</p>
+
+<p>
+  <strong>Opening Times:</strong>
+  <br>
+  <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
+    <%= openingtime.day_as_string %>:
+    <%= openingtime.opens %>
+    -
+    <%= openingtime.closes %>
+    <br>
+  <% end %>
+</p>
+
+<%= link_to map_path(path: "route", dest: @location.name), class: "btn btn-primary" do %>
+  <i class="fas fa-route"></i> Directions
+<% end %>
+
+<script id="_latlonginfo" type="application/json">
+[<%= @location.location_latitude %>,<%= @location.location_longitude %>]
+</script>

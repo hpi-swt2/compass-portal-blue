@@ -34,6 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 #
 # Additional core gems
 #
+gem 'i18n-js'
 
 # Use devise as an authentication solution
 gem 'devise' # https://github.com/plataformatec/devise
@@ -43,6 +44,12 @@ gem 'devise-i18n-bootstrap' # https://github.com/maximalink/devise-i18n-bootstra
 # Libraries for openID Connect authentication
 gem 'omniauth' # https://github.com/omniauth/omniauth
 gem 'omniauth_openid_connect' # https://github.com/m0n9oose/omniauth_openid_connect
+
+gem 'tod'
+
+#
+# Libraries
+#
 
 #
 # Gems that are loaded depending on the environment (development/test/production)
@@ -106,3 +113,14 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "phonelib"
+
+# Provides the class `Concurrent::Hash` which is needed to keep user location data in a thread-safe way.
+gem "concurrent-ruby", "~> 1.1"
+
+# Authentication for permission system
+gem 'cancancan'
+
+# Easy working with HTTP Requests
+gem 'httparty'

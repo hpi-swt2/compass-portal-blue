@@ -1,0 +1,48 @@
+<h2 class="mb-3 fw-light">
+  <%= @person.first_name %>
+  <%= @person.last_name %>
+</h2>
+
+<div class="mb-3 profile-picture show-profile-picture">
+  <div class='profile-picture-wrapper'>
+    <div class='profile-picture-container'>
+      <% if @person.profile_picture.attached? %>
+        <img src="<%=(url_for(@person.profile_picture))%>" alt="<%= @person.profile_picture.filename %>"/>
+      <% else %>
+        <%= image_tag "default-profile-picture.png", alt: "default-profile-picture"%>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<p>
+  <strong>Email:</strong>
+  <%= mail_to @person.email %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= tel_to @person.phone_number %>
+</p>
+
+<p>
+  <strong>Rooms:</strong>
+  <ul>
+      <% @person.rooms.each do | room | %>
+        <li>
+          <%= link_to room.name, room_path(room) %>
+        </li>
+      <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Office hours:</strong>
+  <ul>
+    <% @person.openingtimes.each do | opening_time | %>
+      <li>
+        <%= opening_time.to_string %>
+      </li>
+    <% end %>
+  </ul>
+</p>

@@ -2,7 +2,6 @@ name: Test and deploy
 
 on:
   push:
-    branches: [ main, dev ]
   # Allow manual triggering
   workflow_dispatch:
 
@@ -32,11 +31,14 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      # https://github.com/ruby/setup-ruby
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7 # Not needed with a .ruby-version file
+          ruby-version: 2.7.4 # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Setup yarn dependencies
@@ -53,7 +55,7 @@ jobs:
         run: |
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:setup
-          bundle exec rspec spec/ --format documentation --format RSpec::Github::Formatter
+          bundle exec rspec --tag ~local_only spec/ --format documentation --format RSpec::Github::Formatter
 
   # Name of the job
   deploy:
