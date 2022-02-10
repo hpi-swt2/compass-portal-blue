@@ -1,5 +1,5 @@
 class BuildingMapController < ApplicationController
-  # TODO: This is currenty hard coded in the building_map.js.erb file
+  # TODO: This is currenty hard coded in the constants.js file
   YOUR_LOCATION_MAGIC_STRING = "Your location".freeze
   PIN_1_MAGIC_STRING = "Pin 1".freeze
   PIN_2_MAGIC_STRING = "Pin 2".freeze
