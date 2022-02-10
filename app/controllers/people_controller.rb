@@ -51,7 +51,7 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
+      format.html { redirect_to edit_user_registration_path, notice: "Person was successfully destroyed." }
       format.json { head :no_content }
     end
   end

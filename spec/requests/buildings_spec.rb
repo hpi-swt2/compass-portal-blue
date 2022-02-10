@@ -68,9 +68,9 @@ RSpec.describe "/buildings", type: :request do
         end.to change(Building, :count).by(1)
       end
 
-      it "redirects to the created building" do
+      it "redirects to the user editing page" do
         post buildings_url, params: { building: valid_attributes }
-        expect(response).to redirect_to(edit_building_url(Building.last))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -104,11 +104,11 @@ RSpec.describe "/buildings", type: :request do
         expect(building.location_latitude).to eq(new_building.location_latitude)
       end
 
-      it "redirects to the building" do
+      it "redirects to the user editing page" do
         building = Building.create! valid_attributes
         patch building_url(building), params: { building: new_attributes }
         building.reload
-        expect(response).to redirect_to(edit_building_url(building))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -129,10 +129,10 @@ RSpec.describe "/buildings", type: :request do
       end.to change(Building, :count).by(-1)
     end
 
-    it "redirects to the buildings list" do
+    it "redirects to the user editing page" do
       building = Building.create! valid_attributes
       delete building_url(building)
-      expect(response).to redirect_to(buildings_url)
+      expect(response).to redirect_to(edit_user_registration_path)
     end
   end
 end
