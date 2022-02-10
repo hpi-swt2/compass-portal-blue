@@ -34,14 +34,6 @@ en:
     people: 'People'
     title-en: 'English'
     title-de: 'German'
-    date:
-        abbr_day_names: [Su, Mo, Tu, We, Th, Fr, Sa]
-        month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-    simple_calendar:
-        week: 'Week'
-        previous: 'Previous'
-        next: 'Next'
-    create_new_event: 'Create new Event'
     email: 'E-Mail'
     username: 'User name'
     admin?: 'Admin?'

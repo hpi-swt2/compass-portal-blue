@@ -15,14 +15,6 @@ RSpec.describe Room, type: :model do
     expect(room.people.first.email).to eq(person.email)
   end
 
-  it "can be querried about its occupancy status" do
-    room = create :room
-    create :event, :in_one_hour, room: room
-    expect(room.free?).to be true
-    create :event, :right_now, room: room
-    expect(room.free?).to be false
-  end
-
   it "has a building" do
     room = described_class.reflect_on_association(:building)
     expect(room.macro).to eq :belongs_to

@@ -6,12 +6,7 @@
       <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
       <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
       <%= link_to "Add new room", new_room_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new event", new_event_path, class: 'btn btn-primary link-btn' %>
-      <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-      <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
-      <%= file_field_tag :file %>
-      <% end %>
+      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>      
     </div>
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>

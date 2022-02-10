@@ -33,9 +33,5 @@ RSpec.describe RoomsController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/rooms/1").to route_to("rooms#destroy", id: "1")
     end
-
-    it "routes to #calendar" do
-      expect(get: "/rooms/1/calendar").to route_to("rooms#calendar", room_id: "1")
-    end
   end
 end
