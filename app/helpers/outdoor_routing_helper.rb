@@ -9,7 +9,7 @@ module OutdoorRoutingHelper
   def self.route_outdoor_indoor(start, dest_building, res)
     entrance = RoutingHelper.best_entry(dest_building[:building], start)
     route_outdoor(entrance[:latlng], start, res)
-    IndoorRoutingHelper.route_indoor(dest_building[:door], entrance[:id], dest_building[:building], res)
+    IndoorRoutingHelper.route_indoor(dest_building[:node], entrance[:id], dest_building[:building], res)
   end
 
   def self.calculate_route(start, destination)

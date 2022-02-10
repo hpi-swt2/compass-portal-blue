@@ -1,8 +1,8 @@
 module IndoorRoutingHelper
   WALK_SPEED = 1.4 # m/s
 
-  def self.update_nearest_node_result(door_id, dist, building, result)
-    result[:door] = door_id
+  def self.update_nearest_node_result(node_id, dist, building, result)
+    result[:node] = node_id
     result[:distance] = dist
     result[:building] = building
   end
@@ -10,17 +10,17 @@ module IndoorRoutingHelper
   def self.find_nearest_node(latlng, buildings, level, result)
     buildings.each do |b|
       graph = IndoorGraph.indoor_graphs[b]
-      IndoorGraph.nodes[b].each do |door_id|
-        next unless graph[door_id]["floor"] == level
+      IndoorGraph.nodes[b].each do |node_id|
+        next unless graph[node_id]["floor"] == level
 
-        dist = RoutingHelper.distance(graph[door_id]["latlng"], latlng)
-        update_nearest_node_result(door_id, dist, b, result) if dist < result[:distance]
+        dist = RoutingHelper.distance(graph[node_id]["latlng"], latlng)
+        update_nearest_node_result(node_id, dist, b, result) if dist < result[:distance]
       end
     end
   end
 
   def self.closest_node(latlng, buildings, max_dist, level)
-    result = { door: nil, distance: Float::MAX, building: nil }
+    result = { node: nil, distance: Float::MAX, building: nil }
     find_nearest_node(latlng, buildings, level, result)
     result if result[:distance] < max_dist
   end
@@ -38,15 +38,15 @@ module IndoorRoutingHelper
   end
 
   def self.route_indoor_outdoor(start_building, dest, exit_door, res)
-    route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
+    route_indoor(start_building[:node], exit_door[:id], start_building[:building], res)
     OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], dest, res)
   end
 
   def self.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, res)
     entry_door = RoutingHelper.best_entry(dest_building[:building], exit_door[:latlng])
-    route_indoor(start_building[:door], exit_door[:id], start_building[:building], res)
+    route_indoor(start_building[:node], exit_door[:id], start_building[:building], res)
     OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], entry_door[:latlng], res)
-    route_indoor(entry_door[:id], dest_building[:door], dest_building[:building], res)
+    route_indoor(entry_door[:id], dest_building[:node], dest_building[:building], res)
   end
 
   def self.walk_time(dist)
