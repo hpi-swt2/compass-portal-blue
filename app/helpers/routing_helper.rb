@@ -11,9 +11,9 @@ module RoutingHelper
     if !start_building[:indoor] && !dest_building[:indoor] # outdoor - outdoor
       OutdoorRoutingHelper.route_outdoor(start, dest, map_data)
     elsif start_building[:indoor]
-      handle_start_indoor_cases(dest, start_building, dest_building, map_data)
+      handle_start_indoor_cases(start, dest, start_building, dest_building, map_data)
     else
-      route_outdoor_indoor(start, dest_building, map_data)
+      route_outdoor_indoor(start, dest, dest_building, map_data)
     end
   end
 
@@ -26,14 +26,14 @@ module RoutingHelper
     [start, dest, start_building, dest_building, map_data]
   end
 
-  def self.handle_start_indoor_cases(dest, start_building, dest_building, map_data)
-    exit_door = best_entry(start_building[:building], dest)
+  def self.handle_start_indoor_cases(start, dest, start_building, dest_building, map_data)
+    exit_door = best_entry(start_building[:building], start, dest)
     if start_building[:building] == dest_building[:building] # Indoor same building
       IndoorRoutingHelper.route_indoor(start_building[:node], dest_building[:node], start_building[:building], map_data)
     elsif !dest_building[:indoor] # indoor to outdoor
       route_indoor_outdoor(start_building, dest, exit_door, map_data)
     else # Indoor -> Indoor (other building)
-      route_indoor_outdoor_indoor(start_building, dest_building, exit_door, map_data)
+      route_indoor_outdoor_indoor(start_building, dest_building, exit_door, dest, map_data)
     end
   end
 
@@ -78,9 +78,9 @@ module RoutingHelper
     [latlng_string.split(',')[0].to_f, latlng_string.split(',')[1].to_f]
   end
 
-  def self.best_entry(building, latlng)
+  def self.best_entry(building, start_latlng, dest_latlng)
     entry_id = IndoorGraph.entry_nodes[building].min_by do |id|
-      distance(IndoorGraph.indoor_graphs[building][id]['latlng'], latlng)
+      distance(IndoorGraph.indoor_graphs[building][id]['latlng'], start_latlng) + distance(IndoorGraph.indoor_graphs[building][id]['latlng'], dest_latlng)
     end
     { id: entry_id, latlng: IndoorGraph.indoor_graphs[building][entry_id]['latlng'] }
   end
@@ -97,8 +97,8 @@ module RoutingHelper
     BuildingMapHelper.destinations[input]
   end
 
-  def self.route_outdoor_indoor(start, dest_building, map_data)
-    entrance = RoutingHelper.best_entry(dest_building[:building], start)
+  def self.route_outdoor_indoor(start, dest, dest_building, map_data)
+    entrance = RoutingHelper.best_entry(dest_building[:building], start, dest)
     OutdoorRoutingHelper.route_outdoor(entrance[:latlng], start, map_data)
     IndoorRoutingHelper.route_indoor(dest_building[:node], entrance[:id], dest_building[:building], map_data)
   end
@@ -108,8 +108,8 @@ module RoutingHelper
     OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], dest, map_data)
   end
 
-  def self.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, map_data)
-    entry_door = RoutingHelper.best_entry(dest_building[:building], exit_door[:latlng])
+  def self.route_indoor_outdoor_indoor(start_building, dest_building, exit_door, dest, map_data)
+    entry_door = RoutingHelper.best_entry(dest_building[:building], exit_door[:latlng], dest)
     IndoorRoutingHelper.route_indoor(start_building[:node], exit_door[:id], start_building[:building], map_data)
     OutdoorRoutingHelper.route_outdoor(exit_door[:latlng], entry_door[:latlng], map_data)
     IndoorRoutingHelper.route_indoor(entry_door[:id], dest_building[:node], dest_building[:building], map_data)
