@@ -11,13 +11,13 @@
       <tr>
         <td class="search_result_item">
           <% if search_result.type == "person" %>
-            <img src="<%=(url_for('/assets/person.png'))%>" height="25" width="25" alt="user_picture">
+            <%= image_tag "person.png", alt: "user_picture", height: "25", width: "25"%>
           <% elsif search_result.type == "building" %>
-            <img src="<%=(url_for('/assets/building.png'))%>" height="25" width="25" alt="building_picture">
+            <%= image_tag "building.png", alt: "building_picture", height: "25", width: "25"%>
           <% elsif search_result.type == "location" %>
-            <img src="<%=(url_for('/assets/location.png'))%>" height="25" width="25" alt="location_picture">
+            <%= image_tag "location.png", alt: "location_picture", height: "25", width: "25"%>
           <% elsif search_result.type == "room" %>
-            <img src="<%=(url_for('/assets/room.png'))%>" height="25" width="25" alt="room_picture">
+            <%= image_tag "room.png", alt: "room_picture", height: "25", width: "25"%>
           <% end %>
           <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
             <% if !search_result.description.nil? %>
