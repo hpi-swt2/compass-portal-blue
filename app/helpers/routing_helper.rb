@@ -1,7 +1,6 @@
 require 'httparty'
 require 'json'
 
-# rubocop:disable Metrics/ModuleLength
 module RoutingHelper
   def self.format_seconds_as_minsec(sec)
     format("%<minutes>.2d:%<seconds>.2d", minutes: sec / 60, seconds: sec % 60)
@@ -78,12 +77,15 @@ module RoutingHelper
     [latlng_string.split(',')[0].to_f, latlng_string.split(',')[1].to_f]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def self.best_entry(building, start_latlng, dest_latlng)
     entry_id = IndoorGraph.entry_nodes[building].min_by do |id|
-      distance(IndoorGraph.indoor_graphs[building][id]['latlng'], start_latlng) + distance(IndoorGraph.indoor_graphs[building][id]['latlng'], dest_latlng)
+      distance(IndoorGraph.indoor_graphs[building][id]['latlng'],
+               start_latlng) + distance(IndoorGraph.indoor_graphs[building][id]['latlng'], dest_latlng)
     end
     { id: entry_id, latlng: IndoorGraph.indoor_graphs[building][entry_id]['latlng'] }
   end
+  # rubocop:enable Metrics/AbcSize
 
   def self.distance(latlng1, latlng2)
     dy = 111.3 * (latlng1[0] - latlng2[0]) # based on https://www.kompf.de/gps/distcalc.html
@@ -122,4 +124,3 @@ module RoutingHelper
     coordinates.match(regex)
   end
 end
-# rubocop:enable Metrics/ModuleLength
