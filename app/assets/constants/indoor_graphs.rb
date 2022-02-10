@@ -7,15 +7,15 @@ module IndoorGraph
 
   def self.load_building(building)
     indoor_graphs[building] = JSON.parse(File.read('./app/assets/graphs/' << building << ".json"))
-    entry_nodes[building] = @indoor_graphs[building].select { |_key, node| node['entry'] }.keys
-    nodes.merge!(building => @indoor_graphs[building].keys)
+    entry_nodes[building] = indoor_graphs[building].select { |_key, node| node['entry'] }.keys
+    nodes.merge!(building => indoor_graphs[building].keys)
   end
 
   def self.load_graphs
-    BUILDINGS.each { |building| load_building(building) }
-    @entry_nodes.freeze
-    @indoor_graphs.freeze
-    @nodes.freeze
+    BUILDINGS.each(&method(:load_building))
+    entry_nodes.freeze
+    indoor_graphs.freeze
+    nodes.freeze
   end
 
   class << self
