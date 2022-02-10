@@ -2,7 +2,6 @@ require_relative "boot"
 
 require "rails/all"
 require "./app/assets/constants/indoor_graphs"
-require "./app/assets/constants/locations"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
