@@ -7,7 +7,9 @@ module IndoorGraph
 
   # rubocop:disable Metrics/AbcSize
   def self.load_building(building)
-    indoor_graphs[building] = JSON.parse(File.read('./app/assets/graphs/' << building << ".json"))
+    # file_name = ActionController::Base.helpers.asset_path(building << ".json")
+    file_name = "./app/assets/graphs/" << building << ".json" # FIXME: Adapt assets path
+    indoor_graphs[building] = JSON.parse(File.read(file_name))
     entry_nodes[building] = indoor_graphs[building].select { |_key, node| node['entry'] }.keys
     nodes.merge!(building => indoor_graphs[building].keys)
   end
