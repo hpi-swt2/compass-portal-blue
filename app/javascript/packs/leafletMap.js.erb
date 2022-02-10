@@ -14,19 +14,21 @@ let pinIcons = [
   }),
 ];
 
+<% helpers = ActionController::Base.helpers %>
+
 const geoJsonLayerFiles = [
-  "/assets/ABC_0.geojson",
-  "/assets/ABC_1.geojson",
-  "/assets/ABC_2.geojson",
-  "/assets/H_0.geojson",
-  "/assets/H_1.geojson",
-  "/assets/H_2.geojson",
-  "/assets/H_3.geojson",
-  "/assets/HS_0.geojson",
-  "/assets/HS_-1.geojson",
-  "/assets/G_0.geojson",
-  "/assets/G_1.geojson",
-  "/assets/G_-1.geojson"
+  "<%= helpers.asset_path('ABC_0.geojson') %>",
+  "<%= helpers.asset_path('ABC_1.geojson') %>",
+  "<%= helpers.asset_path('ABC_2.geojson') %>",
+  "<%= helpers.asset_path('H_0.geojson') %>",
+  "<%= helpers.asset_path('H_1.geojson') %>",
+  "<%= helpers.asset_path('H_2.geojson') %>",
+  "<%= helpers.asset_path('H_3.geojson') %>",
+  "<%= helpers.asset_path('HS_0.geojson') %>",
+  "<%= helpers.asset_path('HS_-1.geojson') %>",
+  "<%= helpers.asset_path('G_0.geojson') %>",
+  "<%= helpers.asset_path('G_1.geojson') %>",
+  "<%= helpers.asset_path('G_-1.geojson') %>"
 ];
 
 export let pins = [];
