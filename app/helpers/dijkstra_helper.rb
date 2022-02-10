@@ -4,8 +4,8 @@ module DijkstraHelper
   include Containers
 
   def self.init_dijkstra(queue, nodes, start, graph)
-    graph.each do |key, _value|
-      nodes.merge!(key => { dist: Float::INFINITY, prev: nil })
+    graph.each_key do |key|
+      nodes[key] = { dist: Float::INFINITY, prev: nil }
     end
     nodes[start][:dist] = 0
     queue.push(start, 0)

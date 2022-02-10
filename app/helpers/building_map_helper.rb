@@ -16,10 +16,6 @@ module BuildingMapHelper
     end
   end
 
-  def self.find_room(name)
-    Room.find_by(name: name)
-  end
-
   def self.locations
     Location.all.to_h do |location|
       [ location.name, "#{location.location_latitude},#{location.location_longitude}" ]
@@ -32,10 +28,6 @@ module BuildingMapHelper
     end
   end
 
-  def self.building?(building)
-    !buildings[building].nil?
-  end
-
   def self.map_building_name_to_graph(name)
     case name
     when 'Haus A', 'Haus B', 'Haus C'
@@ -44,11 +36,15 @@ module BuildingMapHelper
     name
   end
 
+  def self.building?(building)
+    buildings.has_key?(building)
+  end
+
   def self.location?(location)
-    !locations[location].nil?
+    locations.has_key?(location)
   end
 
   def self.room?(room)
-    !rooms[room].nil?
+    rooms.has_key?(room)
   end
 end

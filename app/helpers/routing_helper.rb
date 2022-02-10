@@ -46,7 +46,7 @@ module RoutingHelper
     end
     return { indoor: false, building: nil, door: nil } unless BuildingMapHelper.room?(input)
 
-    room = BuildingMapHelper.find_room(input)
+    room = Room.find_by(name: input)
     floor = room.floor
     door = IndoorRoutingHelper.closest_node([room.location_latitude, room.location_longitude],
                                             IndoorGraph::BUILDINGS, max_indoor_dist, floor)
