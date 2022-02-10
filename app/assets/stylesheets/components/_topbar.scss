@@ -32,8 +32,8 @@
   }
 
   .settings-area {
-     margin-right: 1rem;
-   }
+    margin-right: 1rem;
+  }
 
   .user-area {
     &:hover {
@@ -75,4 +75,11 @@
       }
     }
   }
+}
+
+// TODO: This is just to copy the styles from the other buttons.
+// The better way would be to either modify the bootstrap theme https://getbootstrap.com/docs/5.1/customize/overview/
+// or generate new button classes via the bootstrap scss utilities
+.language-area {
+  @extend .user-area;
 }

@@ -22,23 +22,23 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows buildings matching the query" do
     visit search_results_path(query: "xy")
-    expect(page).to have_link(@building_xyz.name, href: building_path(@building_xyz), count: 1)
+    expect(page).to have_link(@building_xyz.name, href: building_path(@building_xyz, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "ABC")
-    expect(page).to have_link(@building_abc.name, href: building_path(@building_abc), count: 1)
-    expect(page).to have_link(@abc_building.name, href: building_path(@abc_building), count: 1)
+    expect(page).to have_link(@building_abc.name, href: building_path(@building_abc, locale: I18n.locale), count: 1)
+    expect(page).to have_link(@abc_building.name, href: building_path(@abc_building, locale: I18n.locale), count: 1)
   end
 
   it "does not show buildings not matching the query" do
     visit search_results_path(query: "xy")
     expect(page).not_to have_text(@building_abc.name)
-    expect(page).not_to have_link(href: building_path(@building_abc))
+    expect(page).not_to have_link(href: building_path(@building_abc, locale: I18n.locale))
     expect(page).not_to have_text(@abc_building.name)
-    expect(page).not_to have_link(href: building_path(@abc_building))
+    expect(page).not_to have_link(href: building_path(@abc_building, locale: I18n.locale))
 
     visit search_results_path(query: "ABC")
     expect(page).not_to have_text(@building_xyz.name)
-    expect(page).not_to have_link(href: building_path(@building_xyz))
+    expect(page).not_to have_link(href: building_path(@building_xyz, locale: I18n.locale))
   end
 
   it "lists buildings starting with the query before other found buildings" do
@@ -51,36 +51,36 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows locations whose name matches the query" do
     visit search_results_path(query: "vill")
-    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon), count: 1)
+    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "Ban")
-    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+    expect(page).to have_link(@bank.name, href: location_path(@bank, locale: I18n.locale), count: 1)
   end
 
   it "shows locations whose details match the query" do
     visit search_results_path(query: "abc")
-    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+    expect(page).to have_link(@bank.name, href: location_path(@bank, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "def")
-    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon), count: 1)
+    expect(page).to have_link(@pavillon.name, href: location_path(@pavillon, locale: I18n.locale), count: 1)
   end
 
   it "does not show locations whose name and details do not match the query" do
     visit search_results_path(query: "Ban")
     expect(page).not_to have_text(@pavillon.name)
-    expect(page).not_to have_link(href: location_path(@pavillon))
+    expect(page).not_to have_link(href: location_path(@pavillon, locale: I18n.locale))
     expect(page).not_to have_text(@kocktail_bar.name)
-    expect(page).not_to have_link(href: location_path(@kocktail_bar))
+    expect(page).not_to have_link(href: location_path(@kocktail_bar, locale: I18n.locale))
 
     visit search_results_path(query: "vill")
     expect(page).not_to have_text(@bank.name)
-    expect(page).not_to have_link(href: location_path(@bank))
+    expect(page).not_to have_link(href: location_path(@bank, locale: I18n.locale))
 
     visit search_results_path(query: "def")
     expect(page).not_to have_text(@bank.name)
-    expect(page).not_to have_link(href: location_path(@bank))
+    expect(page).not_to have_link(href: location_path(@bank, locale: I18n.locale))
     expect(page).not_to have_text(@kocktail_bar.name)
-    expect(page).not_to have_link(href: location_path(@kocktail_bar))
+    expect(page).not_to have_link(href: location_path(@kocktail_bar, locale: I18n.locale))
   end
 
   it "lists locations starting with the query before other found locations" do
@@ -93,38 +93,38 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows rooms whose name matches the query" do
     visit search_results_path(query: "x.yz")
-    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
+    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "AB")
-    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
-    expect(page).to have_link(@abc_room.name, href: room_path(@abc_room), count: 1)
+    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc, locale: I18n.locale), count: 1)
+    expect(page).to have_link(@abc_room.name, href: room_path(@abc_room, locale: I18n.locale), count: 1)
   end
 
   it "shows rooms whose type matches the query" do
     visit search_results_path(query: "Lecture")
-    expect(page).to have_link(@abc_room.name, href: room_path(@abc_room), count: 1)
+    expect(page).to have_link(@abc_room.name, href: room_path(@abc_room, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "room")
-    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
-    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
+    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc, locale: I18n.locale), count: 1)
+    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz, locale: I18n.locale), count: 1)
   end
 
   it "does not show rooms whose name and type does not match the query" do
     visit search_results_path(query: "x.yz")
     expect(page).not_to have_text(@room_abc.name)
-    expect(page).not_to have_link(href: room_path(@room_abc))
+    expect(page).not_to have_link(href: room_path(@room_abc, locale: I18n.locale))
     expect(page).not_to have_text(@abc_room.name)
-    expect(page).not_to have_link(href: room_path(@abc_room))
+    expect(page).not_to have_link(href: room_path(@abc_room, locale: I18n.locale))
 
     visit search_results_path(query: "AB")
     expect(page).not_to have_text(@room_xyz.name)
-    expect(page).not_to have_link(href: room_path(@room_xyz))
+    expect(page).not_to have_link(href: room_path(@room_xyz, locale: I18n.locale))
 
     visit search_results_path(query: "hall")
     expect(page).not_to have_text(@room_abc.name)
-    expect(page).not_to have_link(href: room_path(@room_abc))
+    expect(page).not_to have_link(href: room_path(@room_abc, locale: I18n.locale))
     expect(page).not_to have_text(@room_xyz.name)
-    expect(page).not_to have_link(href: room_path(@room_xyz))
+    expect(page).not_to have_link(href: room_path(@room_xyz, locale: I18n.locale))
   end
 
   it "lists rooms starting with the query before other found rooms" do
@@ -137,38 +137,38 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows people whose first name matches the query" do
     visit search_results_path(query: "marie")
-    expect(page).to have_link(@curie.name, href: person_path(@curie), count: 1)
+    expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "bern")
-    expect(page).to have_link(@bernoulli.name, href: person_path(@bernoulli), count: 1)
+    expect(page).to have_link(@bernoulli.name, href: person_path(@bernoulli, locale: I18n.locale), count: 1)
   end
 
   it "shows people whose last name matches the query" do
     visit search_results_path(query: "CUrIe")
-    expect(page).to have_link(@curie.name, href: person_path(@curie), count: 1)
+    expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "bern")
-    expect(page).to have_link(@riemann.name, href: person_path(@riemann), count: 1)
+    expect(page).to have_link(@riemann.name, href: person_path(@riemann, locale: I18n.locale), count: 1)
   end
 
   it "shows people whose full name matches the query" do
     visit search_results_path(query: "Daniel Bernoulli")
-    expect(page).to have_link(@bernoulli.name, href: person_path(@bernoulli), count: 1)
+    expect(page).to have_link(@bernoulli.name, href: person_path(@bernoulli, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "ernhard Riem")
-    expect(page).to have_link(@riemann.name, href: person_path(@riemann), count: 1)
+    expect(page).to have_link(@riemann.name, href: person_path(@riemann, locale: I18n.locale), count: 1)
   end
 
   it "does not show people whose first, last and full name do not match the query" do
     visit search_results_path(query: "marie")
     expect(page).not_to have_text(@bernoulli.name)
-    expect(page).not_to have_link(href: person_path(@bernoulli))
+    expect(page).not_to have_link(href: person_path(@bernoulli, locale: I18n.locale))
     expect(page).not_to have_text(@riemann.name)
-    expect(page).not_to have_link(href: person_path(@riemann))
+    expect(page).not_to have_link(href: person_path(@riemann, locale: I18n.locale))
 
     visit search_results_path(query: "bern")
     expect(page).not_to have_text(@curie.name)
-    expect(page).not_to have_link(href: person_path(@curie))
+    expect(page).not_to have_link(href: person_path(@curie, locale: I18n.locale))
   end
 
   it "lists people whose full name or last name starts with the query before other found people" do
@@ -181,12 +181,12 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "ignores excessive spaces in the query" do
     visit search_results_path(query: "  Marie \t  \nCurie   ")
-    expect(page).to have_link(@curie.name, href: person_path(@curie), count: 1)
+    expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale), count: 1)
   end
 
   it "accepts spaces instead of punctuation in query" do
     visit search_results_path(query: "x yz")
-    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
+    expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz, locale: I18n.locale), count: 1)
   end
 
   it "displays a message if no results were found" do
