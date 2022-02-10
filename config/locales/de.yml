@@ -11,3 +11,7 @@ de:
         previous: 'Vorherige'
         next: 'Nächste'
     create_new_event: 'Erstelle neues Event'
+    email: 'E-Mail'
+    username: 'Benutzername'
+    admin?: 'Administrator?'
+    user-roles: 'Nutzerrollen'

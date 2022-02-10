@@ -19,7 +19,7 @@
           <td><% if location.location_photo.attached? %>
             <img src="<%=(url_for(location.location_photo))%>" alt="<%= location.location_photo.filename %>" height="30"/>
           <% else %>
-            <img src="<%=(url_for('/assets/default-location-photo.png'))%>" alt="default-location-photo" height="30">
+            <%= image_tag("default-location-photo.png", alt: "default-location-photo", height: "30") %>
           <% end %></td>
           <td class="td-btn"><%= link_to 'Show', location, class: "btn btn-secondary link-btn" %></td>
           <td class="td-btn"><% if can? :update, location %><td class="td-btn"><%= link_to 'Edit', edit_location_path(location), class: "btn btn-secondary link-btn" %><%end%></td>

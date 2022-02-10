@@ -9,7 +9,7 @@
       <% if @person.profile_picture.attached? %>
         <img src="<%=(url_for(@person.profile_picture))%>" alt="<%= @person.profile_picture.filename %>"/>
       <% else %>
-        <img src="<%=(url_for('/assets/default-profile-picture.png'))%>" alt="default-profile-picture">
+        <%= image_tag "default-profile-picture.png", alt: "default-profile-picture"%>
       <% end %>
     </div>
   </div>

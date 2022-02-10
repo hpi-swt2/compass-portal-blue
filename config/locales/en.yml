@@ -42,3 +42,7 @@ en:
         previous: 'Previous'
         next: 'Next'
     create_new_event: 'Create new Event'
+    email: 'E-Mail'
+    username: 'User name'
+    admin?: 'Admin?'
+    user-roles: 'User roles'
