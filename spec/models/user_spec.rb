@@ -36,7 +36,7 @@ RSpec.describe User, type: :model do
       user.last_known_location_with_timestamp[1] = DateTime.parse("14th April 1954")
 
       expect(user.last_known_location).not_to be_nil
-      User.clean_outdated_locations
+      described_class.clean_outdated_locations
       expect(user.last_known_location).to be_nil
     end
   end
