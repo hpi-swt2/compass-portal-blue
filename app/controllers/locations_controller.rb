@@ -25,7 +25,7 @@ class LocationsController < ApplicationController
     @location.owners = [current_user]
     respond_to do |format|
       if @location.save
-        format.html { redirect_to edit_location_path(@location), notice: "location was successfully created." }
+        format.html { redirect_to edit_user_registration_path, notice: "location was successfully created." }
         format.json { render :edit, status: :created, location: @location }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to edit_location_path(@location), notice: "location was successfully updated." }
+        format.html { redirect_to edit_user_registration_path, notice: "location was successfully updated." }
         format.json { render :edit, status: :ok, location: @location }
       else
         format.html { render :edit, status: :unprocessable_entity }
