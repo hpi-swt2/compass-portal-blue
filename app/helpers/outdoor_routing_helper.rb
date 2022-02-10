@@ -15,17 +15,17 @@ module OutdoorRoutingHelper
     # OPTIMIZE: give User feedback
   end
 
-  def self.route_outdoor(start, dest, res)
+  def self.route_outdoor(start, dest, map_data)
     result = calculate_route(start, dest)
-    res[:polylines].concat([
+    map_data[:polylines].concat([
                              {
                                floor: 0,
                                indoor: false,
                                polyline: transform_route_to_polyline(result)
                              }
                            ])
-    res[:walktime] += result["duration"]
-    res
+    map_data[:walktime] += result["duration"]
+    map_data
   end
 
   def self.transform_route_to_polyline(route)

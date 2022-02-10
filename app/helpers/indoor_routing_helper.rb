@@ -29,11 +29,11 @@ module IndoorRoutingHelper
     DijkstraHelper.dijkstra(from_id, to_id, IndoorGraph.indoor_graphs[building])
   end
 
-  def self.route_indoor(start, dest, building, res)
+  def self.route_indoor(start, dest, building, map_data)
     result = calculate_route(start, dest, building)
-    res[:polylines].concat(result[:polylines])
-    res[:walktime] += result[:walktime]
-    res
+    map_data[:polylines].concat(result[:polylines])
+    map_data[:walktime] += result[:walktime]
+    map_data
   end
 
   def self.walk_time(dist)
