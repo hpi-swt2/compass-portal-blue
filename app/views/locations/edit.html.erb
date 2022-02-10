@@ -2,7 +2,7 @@
   <div class="col-lg-6 col-md-6 mx-auto">
     <h2 class="fw-light">Edit Location</h2>
 
-    <%= render 'form', location: @location %>
+    <%= render 'form', location: @location, latitude: @location.location_latitude, longitude: @location.location_longitude %>
 
     <%= link_to 'Back', locations_path, class: "btn btn-secondary link-btn" %>
     <%= link_to 'Show', @location, class: "btn btn-secondary link-btn" %>

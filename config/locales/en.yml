@@ -34,3 +34,7 @@ en:
     people: 'People'
     title-en: 'English'
     title-de: 'German'
+    email: 'E-Mail'
+    username: 'User name'
+    admin?: 'Admin?'
+    user-roles: 'User roles'

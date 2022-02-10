@@ -3,3 +3,7 @@ de:
     people: 'Personen'
     title-en: 'Englisch'
     title-de: 'Deutsch'
+    email: 'E-Mail'
+    username: 'Benutzername'
+    admin?: 'Administrator?'
+    user-roles: 'Nutzerrollen'
