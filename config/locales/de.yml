@@ -6,4 +6,4 @@ de:
     email: 'E-Mail'
     username: 'Benutzername'
     admin?: 'Administrator?'
-    user-roles: Nutzerrollen
+    user-roles: 'Nutzerrollen'
