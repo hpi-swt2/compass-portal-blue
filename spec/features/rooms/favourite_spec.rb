@@ -7,7 +7,7 @@ RSpec.describe "Favourite rooms", type: :feature do
     @room = create(:room)
   end
 
-  it "Checkboxes change admin role", js: true do
+  it "Favourite button adds room to favourite", js: true do
     visit room_path(@room)
     page.click("room-favourite")
     visit room_path(@room)
