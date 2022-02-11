@@ -69,9 +69,9 @@ RSpec.describe "/events", type: :request do
         end.to change(Event, :count).by(1)
       end
 
-      it "redirects to the created event" do
+      it "redirects to the user editing page" do
         post events_url, params: { event: valid_attributes }
-        expect(response).to redirect_to(event_url(Event.last))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -95,8 +95,8 @@ RSpec.describe "/events", type: :request do
         post import_events_path
       end
 
-      it "redirects to the index page" do
-        expect(response).to redirect_to(events_url)
+      it "redirects to the user editing page" do
+        expect(response).to redirect_to(edit_user_registration_path)
       end
 
       it "shows an alert that an ICS file has to be chosen first" do
@@ -110,8 +110,8 @@ RSpec.describe "/events", type: :request do
         post import_events_path, params: { file: non_ics_file }
       end
 
-      it "redirects to the index page" do
-        expect(response).to redirect_to(events_url)
+      it "redirects to the user editing page" do
+        expect(response).to redirect_to(edit_user_registration_path)
       end
 
       it "shows an alert that only ICS files can be imported" do
@@ -125,8 +125,8 @@ RSpec.describe "/events", type: :request do
         post import_events_path, params: { file: empty_ics_file }
       end
 
-      it "redirects to the index page" do
-        expect(response).to redirect_to(events_url)
+      it "redirects to the user editing page" do
+        expect(response).to redirect_to(edit_user_registration_path)
       end
 
       it "shows a notice that events from the file have been imported" do
@@ -178,11 +178,11 @@ RSpec.describe "/events", type: :request do
         expect(event.rule).to eq(new_event.rule)
       end
 
-      it "redirects to the event" do
+      it "redirects to the user editing page" do
         event = Event.create! valid_attributes
         patch event_url(event), params: { event: new_attributes }
         event.reload
-        expect(response).to redirect_to(event_url(event))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -203,10 +203,10 @@ RSpec.describe "/events", type: :request do
       end.to change(Event, :count).by(-1)
     end
 
-    it "redirects to the events list" do
+    it "redirects to the user editing page" do
       event = Event.create! valid_attributes
       delete event_url(event)
-      expect(response).to redirect_to(events_url)
+      expect(response).to redirect_to(edit_user_registration_path)
     end
   end
 end

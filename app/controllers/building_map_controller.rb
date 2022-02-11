@@ -1,5 +1,6 @@
 class BuildingMapController < ApplicationController
-  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze # TODO: This is currenty hard coded in the building_map.js file
+  # TODO: This is currenty hard coded in the constants.js file
+  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze
   PIN_1_MAGIC_STRING = "Pin 1".freeze
   PIN_2_MAGIC_STRING = "Pin 2".freeze
 
@@ -13,12 +14,16 @@ class BuildingMapController < ApplicationController
   end
 
   def route
-    start = RoutingHelper.resolve_coordinates(params[:start])
-    dest = RoutingHelper.resolve_coordinates(params[:dest])
-    route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
+    return unless params[:start].present? && params[:dest].present?
 
-    result = { polyline: RoutingHelper.transform_route_to_polyline(route),
-               marker: RoutingHelper.transform_route_to_time_marker(route) }
+    (start, dest, start_building, dest_building, res) = RoutingHelper.init_routing(params)
+    RoutingHelper.calculate_route(start, dest, start_building, dest_building, res)
+    respond(res[:polylines], start, res[:walktime])
+  end
+
+  def respond(polylines, start, walktime)
+    result = { polylines: polylines,
+               marker: RoutingHelper.routing_marker(start, walktime) }
     respond_to do |format|
       format.json { render json: result }
     end

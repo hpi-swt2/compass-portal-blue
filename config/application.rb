@@ -1,7 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
-require "./app/assets/constants/locations"
+require "./app/assets/constants/indoor_graphs"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,6 +11,7 @@ module Compass
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    IndoorGraph.load_graphs
 
     config.i18n.available_locales = [:de, :en]
 

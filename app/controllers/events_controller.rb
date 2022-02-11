@@ -8,7 +8,7 @@ class EventsController < ApplicationController
 
   def import
     if params[:file].nil?
-      redirect_to events_url, alert: "Please choose an ICS file to import"
+      redirect_to edit_user_registration_path, alert: "Please choose an ICS file to import"
     else
       import_ics(params[:file].tempfile)
     end
@@ -31,7 +31,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
+        format.html { redirect_to edit_user_registration_path, notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
+        format.html { redirect_to edit_user_registration_path, notice: "Event was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class EventsController < ApplicationController
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
+      format.html { redirect_to edit_user_registration_path, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -78,9 +78,9 @@ class EventsController < ApplicationController
   def import_ics(file)
     if File.extname(file.path) == ".ics"
       Event.import(file)
-      redirect_to events_url, notice: "Imported Events from ICS"
+      redirect_to edit_user_registration_path, notice: "Imported Events from ICS"
     else
-      redirect_to events_url, alert: "Only ICS files can be imported"
+      redirect_to edit_user_registration_path, alert: "Only ICS files can be imported"
     end
     file.close!
   end

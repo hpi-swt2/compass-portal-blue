@@ -19,13 +19,13 @@ RSpec.describe "rooms/calendar", type: :view do
     @events = [Event.create!(name: "Test Event", description: "CG", start_time: Time.zone.now,
                              end_time: Time.zone.now, recurring: "", room_id: @room.id)]
     @date = Time.zone.now
-    @month = Date::MONTHNAMES[Time.zone.today.month]
+    @month = Time.zone.today.month
     @year = Time.zone.now.year
   end
 
   it "renders current month name and year" do
     render
-    expect(rendered).to have_text(Date::MONTHNAMES[Time.zone.today.month])
+    expect(rendered).to have_text(t("date.month_names")[Time.zone.today.month])
     expect(rendered).to have_text(Time.zone.now.year)
   end
 
