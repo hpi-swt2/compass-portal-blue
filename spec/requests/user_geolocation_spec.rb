@@ -5,6 +5,10 @@ RSpec.describe "/users/geo_location", type: :request do
     @user = create(:user)
   end
 
+  it "isn't manipulated by the cleaner task" do
+    expect(User.cleaner_task).to be_nil
+  end
+
   describe "PUT /users/geo_location" do
     it "doesn't allow requests from unauthenticated users" do
       put users_geo_location_url, params: { location: "42.42,13.37" }
