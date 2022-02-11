@@ -49,7 +49,7 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "does show the right building when looking for the german name of the building" do
     visit search_results_path(query: "Gebäude ABC")
-    expect(page).to have_link(@building_abc.name, href: building_path(@building_abc), count: 1)
+    expect(page).to have_link(@building_abc.name, href: building_path(@building_abc, locale: I18n.locale), count: 1)
   end
 
   it "lists buildings starting with the query before other found buildings" do
@@ -96,10 +96,10 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows locations when looking for the german details or name" do
     visit search_results_path(query: "BankDE")
-    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+    expect(page).to have_link(@bank.name, href: location_path(@bank, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "bank-details-abc-DE")
-    expect(page).to have_link(@bank.name, href: location_path(@bank), count: 1)
+    expect(page).to have_link(@bank.name, href: location_path(@bank, locale: I18n.locale), count: 1)
   end
 
   it "lists locations starting with the query before other found locations" do
@@ -121,7 +121,7 @@ RSpec.describe "Search result list page", type: :feature do
 
   it "shows the right room when looking for the german name" do
     visit search_results_path(query: "Raum ABC")
-    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
+    expect(page).to have_link(@room_abc.name, href: room_path(@room_abc, locale: I18n.locale), count: 1)
   end
 
   it "shows rooms whose type matches the query" do
