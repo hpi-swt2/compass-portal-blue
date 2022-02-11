@@ -13,10 +13,10 @@ RSpec.describe "Search result list page", type: :feature do
 
     @bank = create :location, name: "Bank", name_de: "BankDE", details: "bank-details-abc",
                               details_de: "bank-details-abc-DE"
-    @pavillon = create :location, name: "Pavillon", name_de: "PavillionDE", details: "pavillon-details-def",
-                                  details_de: "pavillon-details-def-DE"
+    @pavillon = create :location, name: "Pavillon", name_de: "PavillionDE", 
+    details: "pavillon-details-def", details_de: "pavillon-details-def-DE"
     @kocktail_bar = create :location, name: "Kocktail Bar", name_de: "Kocktail Bar DE",
-                                      details: "kocktail bar-details-ghi", details_de: "kocktail bar-details-ghi-DE"
+    details: "kocktail bar-details-ghi", details_de: "kocktail bar-details-ghi-DE"
 
     @curie = create :person, first_name: "Marie", last_name: "Curie"
     @riemann = create :person, first_name: "Bernhard", last_name: "Riemann"
