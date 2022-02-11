@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to error_show_path, alert: "#{exception} Please log in or create an user to edit."
+    redirect_to error_show_path, alert: "#{exception} Please log in or sign up to edit."
   end
 
   protected
