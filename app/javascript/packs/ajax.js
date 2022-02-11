@@ -46,13 +46,14 @@ global.ajaxCall = (
       $("#navigationForm #startInput")[0].dispatchEvent(new Event("change"));
     }
     if (pushToHistory) {
+      console.log(valuesToSubmit);
       history.pushState(
         {
           canGetBack,
         },
         null,
         // TODO: do not hardcode this
-        `/map${target}?${valuesToSubmit}&locale=${I18n.locale}`
+        `/map${target}?${valuesToSubmit}${valuesToSubmit.includes('locale') ? '' : '&locale='+I18n.locale}`
       );
     }
     return;
