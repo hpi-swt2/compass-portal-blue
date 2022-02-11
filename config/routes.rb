@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get 'error/show'
+  resources :events do
+    collection { post :import }
+  end
   resources :people
-  resources :rooms
+  resources :rooms do
+    get 'calendar'
+  end
   resources :openingtimes
   resources :buildings
   resources :locations
@@ -19,8 +25,6 @@ Rails.application.routes.draw do
 
   # '/building/map'
   get '/building_map/route', to: 'building_map#route'
-  get '/building_map/markers', to: 'building_map#markers'
-  get '/building_map/buildings', to: 'building_map#buildings'
   get '/building_map/view', to: 'building_map#view'
 
   # '/search_results'
@@ -34,4 +38,7 @@ Rails.application.routes.draw do
   root to: "welcome#index"
 
   get '/map/*path' => "welcome#index", as: 'map'
+
+  get 'users/roles'
+  put '/users/:id/roles', to: 'users#update_roles'
 end

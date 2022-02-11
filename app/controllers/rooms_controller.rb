@@ -13,10 +13,23 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   def new
     @room = Room.new
+    @latitude = params[:lat]
+    @longitude = params[:long]
   end
 
   # GET /rooms/1/edit
   def edit; end
+
+  # GET /rooms/1/calendar
+  def calendar
+    @room = Room.find(params[:room_id])
+    start_date = params[:start_date].to_date
+    @month = start_date.month
+    @year = start_date.year
+    @events = Event.generate_calendar_events(@room.events,
+                                             start_date.beginning_of_month.beginning_of_week,
+                                             start_date.end_of_month.end_of_week).compact
+  end
 
   # POST /rooms or /rooms.json
   # rubocop:disable Metrics/MethodLength
@@ -25,7 +38,7 @@ class RoomsController < ApplicationController
     @room.owners = [current_user]
     respond_to do |format|
       if @room.save
-        format.html { redirect_to edit_room_path(@room), notice: "Room was successfully created." }
+        format.html { redirect_to edit_user_registration_path, notice: "Room was successfully created." }
         format.json { render :edit, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +52,7 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to edit_room_path(@room), notice: "Room was successfully updated." }
+        format.html { redirect_to edit_user_registration_path, notice: "Room was successfully updated." }
         format.json { render :edit, status: :ok, location: @room }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +65,7 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     respond_to do |format|
-      format.html { redirect_to rooms_url, notice: "Room was successfully destroyed." }
+      format.html { redirect_to edit_user_registration_path, notice: "Room was successfully destroyed." }
       format.json { head :no_content }
     end
   end

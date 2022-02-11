@@ -13,6 +13,8 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+    @latitude = params[:lat]
+    @longitude = params[:long]
   end
 
   # GET /locations/1/edit
@@ -25,7 +27,7 @@ class LocationsController < ApplicationController
     @location.owners = [current_user]
     respond_to do |format|
       if @location.save
-        format.html { redirect_to edit_location_path(@location), notice: "location was successfully created." }
+        format.html { redirect_to edit_user_registration_path, notice: "location was successfully created." }
         format.json { render :edit, status: :created, location: @location }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +41,7 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to edit_location_path(@location), notice: "location was successfully updated." }
+        format.html { redirect_to edit_user_registration_path, notice: "location was successfully updated." }
         format.json { render :edit, status: :ok, location: @location }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +54,7 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: "Location was successfully destroyed." }
+      format.html { redirect_to edit_user_registration_path, notice: "Location was successfully destroyed." }
       format.json { head :no_content }
     end
   end

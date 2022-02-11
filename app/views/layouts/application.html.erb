@@ -6,9 +6,19 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <% if user_signed_in? %>
+      <meta name="user_signed_in" content="">
+    <% end %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "i18n" %>
+    <%= javascript_include_tag "translations", skip_pipeline: true %>
+    <script>
+         I18n.locale = "<%= I18n.locale %>";
+    </script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+
+    </head>
 
   <body>
     <%= render 'layouts/alerts' %>
@@ -19,3 +29,4 @@
     </div>
   </body>
 </html>
+
