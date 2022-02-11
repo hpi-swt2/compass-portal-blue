@@ -4,9 +4,9 @@
     </div>
     <div class="col-md-8 align-self-center">
         <% if @room.free? %>
-          <p class="occupancy free">free</p>
+          <p class="occupancy free"><%= t("rooms.free") %></p>
         <% else %>
-          <p class="occupancy occupied">occupied</p>
+          <p class="occupancy occupied"><%= t("rooms.occupied") %></p>
         <% end %>
     </div>
 </div>
@@ -22,7 +22,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Floor:</strong>
+    <strong><%= t("rooms.floor")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= @room.floor %>
@@ -31,7 +31,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Longitude:</strong>
+    <strong><%= t("buildings.longitude")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= @room.location_longitude %>
@@ -40,7 +40,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Latitude:</strong>
+    <strong><%= t("buildings.latitude")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= @room.location_latitude %>
@@ -49,7 +49,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Room type:</strong>
+    <strong><%= t("rooms.type")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= Room.room_type_to_external_mapping[@room.room_type] %>

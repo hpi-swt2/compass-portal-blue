@@ -22,4 +22,14 @@ de:
         longitude: "Längengrad"
         latitude: "Breitengrad"
         directions: "Route"
+    rooms:
+        rooms: "Räume"
+        floor: "Stockwerk"
+        occupancy: "Kapazität"
+        free: "frei"
+        occupied: "besetzt"
+        type: "Raumtyp"
+        create_new: "Neuer Raum"
+        edit: "Raum bearbeiten"
+        
         

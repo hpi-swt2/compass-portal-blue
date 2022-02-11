@@ -17,22 +17,22 @@
   </div>
 
   <div class="field">
-    <%= form.label :location_latitude, class: "form-label" %>
+    <%= form.label t("buildings.latitude"), class: "form-label" %>
     <%= form.number_field :location_latitude, step: :any, class: "form-control", value: latitude %>
   </div>
 
   <div class="field">
-    <%= form.label :location_longitude, class: "form-label" %>
+    <%= form.label t("buildings.longitude"), class: "form-label" %>
     <%= form.number_field :location_longitude, step: :any, class: "form-control", value: longitude %>
   </div>
 
   <div class="field">
-    <%= form.label :floor, class: "form-label" %>
+    <%= form.label t("rooms.floor"), class: "form-label" %>
     <%= form.text_field :floor, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :room_type, class: "form-label" %>
+    <%= form.label t("rooms.type"), class: "form-label" %>
     <!--<%= form.text_field :room_type, class: "form-control" %>-->
     <%= form.select 'room_type',
       options_for_select(Room.room_type_to_internal_mapping, room.room_type),
@@ -49,7 +49,7 @@
     </div>
 
     <div>
-      <%= form.label :people, class: "form-label" %>
+      <%= form.label t("people"), class: "form-label" %>
         <%= form.select 'person_ids',
             options_from_collection_for_select(Person.all, :id, :name, room.person_ids),
             {},

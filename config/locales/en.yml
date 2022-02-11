@@ -53,4 +53,13 @@ en:
         longitude: "Longitude"
         latitude: "Latitude"
         directions: "Directions"
+    rooms:
+        rooms: "Rooms"
+        floor: "Floor"
+        occupancy: "Occupancy"
+        free: "free"
+        occupied: "occupied"
+        type: "Room Type"
+        create_new: "New Room"
+        edit: "Edit Room"
         
