@@ -8,7 +8,7 @@ RSpec.describe "FavouriteRooms", type: :request do
       room = create(:room)
       expect(@user.favourites).to eq([])
       put put_favourite_rooms_url(room), params: { favourite: true }, as: :json
-      expect(@user.favourites).to include(-> (r) { r.id == room.id })
+      expect(@user.favourites).to include(->(r) { r.id == room.id })
       put put_favourite_rooms_url(room), params: { favourite: false }, as: :json
       @user.reload
       expect(@user.favourites).to eq([])

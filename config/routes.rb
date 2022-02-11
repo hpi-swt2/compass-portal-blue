@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :rooms do
     get 'calendar'
   end
-  
+
   resources :openingtimes
   resources :buildings
   resources :locations

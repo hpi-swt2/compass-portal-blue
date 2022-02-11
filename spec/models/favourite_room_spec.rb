@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe FavouriteRoom, type: :model do
   it "has user_id and room_id" do
-    favourite_room = FactoryBot.create :favourite_room
-    room = FactoryBot.create :room
-    user = FactoryBot.create :user
+    favourite_room = create :favourite_room
+    room = create :room
+    user = create :user
 
     expect(favourite_room.room.name).to eq(room.name)
     expect(favourite_room.user.username).to eq(user.username)
