@@ -9,9 +9,9 @@
   </p>
 </div>
 
-<%= link_to map_path(path: "route", dest: @building.name), class: "btn btn-primary" do %>
-  <i class="fas fa-route"></i> Directions
-<% end %>
+<a class='btn btn-primary' href='/route?dest=<%= @building.name %>'>
+  <i class='fas fa-route'></i> Directions
+</a>
 
 <script id="_latlonginfo" type="application/json">
 [<%= @building.location_latitude %>,<%= @building.location_longitude %>]

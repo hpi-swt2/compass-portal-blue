@@ -52,7 +52,7 @@ global.ajaxCall = (
         },
         null,
         // TODO: do not hardcode this
-        `/map${target}?${valuesToSubmit}&locale=${I18n.locale}`
+        `/map${target}?${valuesToSubmit}${valuesToSubmit.includes('locale') ? '' : '&locale=' + I18n.locale}`
       );
     }
     return;

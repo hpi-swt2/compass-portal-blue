@@ -1,0 +1,65 @@
+<h2 class="mb-3 fw-light"><%= @event.name %></h2>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Name:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @event.name %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Description:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @event.description %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Start Date:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @event.start_time %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>End Date:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @event.end_time %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Room:</strong>
+  </label>
+  <p class="form-control-static">
+    <% if @event.room.nil? then %>
+      <td><%= "No Room" %></td>
+    <% else %>
+      <td><%= link_to @event.room.name, room_path(@event.room) %></td>
+    <% end %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong>Recurring:</strong>
+  </label>
+  <p class="form-control-static">
+    <%= @event.rule %>
+  </p>
+</div>
+
+<% if @event.room %>
+  <script id="_latlonginfo" type="application/json">
+  [<%= @event.room.building.location_latitude %>,<%= @event.room.building.location_longitude %>]
+  </script>
+<% end %>

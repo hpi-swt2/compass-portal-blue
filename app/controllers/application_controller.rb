@@ -5,14 +5,24 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :change_locale
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to '/login', notice: exception.message
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to error_show_path, alert: "#{exception} Please log in or sign up to edit."
+  end
+
   protected
 
   def configure_permitted_parameters
     # 'username' is an attribute not known to devise by default
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name, :phone_number])
     devise_parameter_sanitizer.permit(
-      :account_update, keys: [:username, :first_name, :last_name, :phone_number, :rooms, :profile_picture,
-                              { openingtimes_attributes: [:id, :day, :opens, :closes] }]
+      :account_update, keys: [:username, :email, { person_attributes: [
+        :id, :phone_number, :first_name, :last_name, :email, { room_ids: [] },
+        :profile_picture, { openingtimes_attributes: [:id, :day, :opens, :closes] }
+      ] }]
     )
   end
 

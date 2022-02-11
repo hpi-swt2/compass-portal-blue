@@ -24,7 +24,7 @@ class PeopleController < ApplicationController
     @person.owners = [current_user]
     respond_to do |format|
       if @person.save
-        format.html { redirect_to edit_person_path(@person), notice: "Person was successfully created." }
+        format.html { redirect_to edit_user_registration_path, notice: "Person was successfully created." }
         format.json { render :edit, status: :created, location: @person }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to edit_person_path(@person), notice: "Person was successfully updated." }
+        format.html { redirect_to edit_user_registration_path, notice: "Person was successfully updated." }
         format.json { render :edit, status: :ok, location: @person }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to people_url, notice: "Person was successfully destroyed." }
+      format.html { redirect_to edit_user_registration_path, notice: "Person was successfully destroyed." }
       format.json { head :no_content }
     end
   end
