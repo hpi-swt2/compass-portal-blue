@@ -48,7 +48,12 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "@fortawesome/fontawesome-free/scss/regular";
 @import "@fortawesome/fontawesome-free/scss/brands";
 @import "@fortawesome/fontawesome-free/scss/v4-shims";
+// Leaflet
 @import "leaflet/dist/leaflet.css";
+//Leaflet layers icon fix
+.leaflet-control-layers-toggle {
+  background-image: asset-url("leaflet/dist/images/layers.png")
+}
 
 .app-overlay-bottom {
   z-index: 401;
