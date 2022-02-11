@@ -73,6 +73,10 @@
 
 <div class="td-btn"><%= link_to 'Calendar', room_calendar_path(@room, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></div>
 
+<a class="btn btn-primary" href="/route?dest=<%= @room.name %>">
+  <i class="fas fa-route"></i> Directions
+</a>
+
 <script id="_latlonginfo" type="application/json">
 [<%= @room.building.location_latitude %>,<%= @room.building.location_longitude %>]
 </script>
