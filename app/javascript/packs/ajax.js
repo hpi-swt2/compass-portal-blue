@@ -67,61 +67,75 @@ global.ajaxCall = (
     '<div class="loading"><i class="fas fa-compass"></i></div>'
   );
   // Make a remote call to the target url (e.g. search, show, etc.)
-  $.ajax({
-    type: "GET",
-    url: target,
-    data: valuesToSubmit,
-    dataType: "html",
-    success: function (text) {
-      // Parse received text to valid DOM elements and insert them into the #browse-outlet
-      const parsed = new DOMParser().parseFromString(text, "text/html");
-      const content = parsed.querySelector("#app-outlet-outer");
-      $("#browse-outlet").html(content.innerHTML);
-
-      // Retrieve all location info from a (possibly nonexistent) script tag on the
-      // target page and show it on the map if it exists
-      const latLongInfo = content.querySelector("#_latlonginfo");
-      setTimeout(() => {
-        if (latLongInfo) {
-          const latlong = JSON.parse(latLongInfo.innerHTML);
-          showTargetMarker(latlong);
+    $.ajax({
+      type: "GET",
+      url: target,
+      data: valuesToSubmit,
+      dataType: "html",
+      success: function (text) {
+        // Parse received text to valid DOM elements and insert them into the #browse-outlet
+        const parsed = new DOMParser().parseFromString(text, "text/html");
+        const content = parsed.querySelector("#app-outlet-outer");
+        $("#browse-outlet").html(content.innerHTML);
+        // Retrieve all location info from a (possibly nonexistent) script tag on the
+        // target page and show it on the map if it exists
+        document.addEventListener('maploaded', updateFloor(content));
+        const latLongInfo = content.querySelector("#_latlonginfo");
+        setTimeout(() => {
+          if (latLongInfo) {
+            const latlong = JSON.parse(latLongInfo.innerHTML);
+            showTargetMarker(latlong);
+          }
+        }, 0);
+        applyAjaxWrap();
+        if (canGetBack) {
+          $("#floating-back").addClass("visible");
+        } else {
+          $("#floating-back").removeClass("visible");
         }
-      }, 0);
-      applyAjaxWrap();
-      if (canGetBack) {
-        $("#floating-back").addClass("visible");
-      } else {
-        $("#floating-back").removeClass("visible");
-      }
-      if (pushToHistory) {
-        history.pushState(
-          {
-            canGetBack,
-          },
-          null,
-          // Preserve the query parameters
-          `/map${target}${target.includes('?') ? '&' : '?'}${valuesToSubmit}`
-        );
+        if (pushToHistory) {
+          history.pushState(
+            {
+              canGetBack,
+            },
+            null,
+            // Preserve the query parameters
+            `/map${target}${target.includes('?') ? '&' : '?'}${valuesToSubmit}`
+          );
       }
     },
   });
 };
 
-function navigateToLocation(pushToHistory = false) {
-  $("#_overlay").addClass("open");
-  $("#toggle-overlay").addClass("visible");
-  $("#toggle-overlay").addClass("open");
-  // Slice away the /map part of the url to find the **real** target url
-  const path = location.pathname.slice(4);
-  resetTargetMarkers();
-  ajaxCall(
-    null,
-    path,
-    location.search.slice(1),
-    history?.state?.canGetBack ?? false,
-    pushToHistory
-  );
-}
+  function navigateToLocation(pushToHistory = false) {
+    $("#_overlay").addClass("open");
+    $("#toggle-overlay").addClass("visible");
+    $("#toggle-overlay").addClass("open");
+    // Slice away the /map part of the url to find the **real** target url
+    const path = location.pathname.slice(4);
+    resetTargetMarkers();
+    ajaxCall(
+      null,
+      path,
+      location.search.slice(1),
+      history?.state?.canGetBack ?? false,
+      pushToHistory
+    );
+  }
+
+function updateFloor(content){
+  const floorInfo = content.querySelector("#_floorinfo");
+  if (floorInfo) {
+    const floor = JSON.parse(floorInfo.innerHTML);
+    $('input[type=radio]').each(function(){
+      if($(this).next('span').html()==floor){
+        $(this).prop('checked',true).trigger("click");
+      }
+      else
+        $(this).prop('checked',false);
+    })
+  }
+};
 
 window.addEventListener("popstate", function (event) {
   event.preventDefault();

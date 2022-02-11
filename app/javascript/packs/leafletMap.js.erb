@@ -62,7 +62,7 @@ export async function setupMap() {
 
   // display indoor information eg. rooms, labels
   await Promise.all([
-    loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
+    loadGeoJsonFile("<%= helpers.asset_path('buildings.geojson') %>", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
     Promise.all(geoJsonLayerFiles.map((filename) => loadGeoJsonFile(filename, setupGeoJsonFeatureIndoor, getRoomStyle)))
   ]);
   map.on("zoomend", recalculateTooltipVisibility);
@@ -170,7 +170,7 @@ export function showTargetMarker(coordinates) {
   const marker = {
     latlng: coordinates,
     divIcon: {
-      html: "<img src='/assets/pin.png'>",
+      html: "<img src='<%= helpers.asset_path("pin.png") %>'>",
       className: "target-pin",
     },
   };
