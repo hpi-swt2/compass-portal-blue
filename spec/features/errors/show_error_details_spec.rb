@@ -10,7 +10,8 @@ describe "Error Show Page", type: :feature do
 
   it "displays home and login links" do
     visit new_person_path
-    expect(page).to have_link "Main Page", href: root_path
-    expect(page).to have_link "Login Page", href: login_path
+    expect(page).to have_link "Main Page"
+    expect(page).to have_link "Login Page"
   end
+
 end
