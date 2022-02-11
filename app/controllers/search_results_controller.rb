@@ -20,13 +20,10 @@ class SearchResultsController < ApplicationController
 
   # There is no need to display one singular SearchResult.
   def show; end
-
   # SearchResults are currently not stored a database so no need to edit one.
   def edit; end
-
   # SearchResults are currently not stored a database so no need to update one.
   def update; end
-
   # All SearchResult objects will be destroyed after they are no longer used.
   def destroy; end
 
@@ -52,85 +49,71 @@ class SearchResultsController < ApplicationController
   def search_for_entries_starting_with(query)
     buildings = Building.where("LOWER(name) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", query.to_s)
     rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", "#{query}%")
-    locations = Location.where(
-      "LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ?",
-      "#{query}%", "#{query}%", "#{query}%", "#{query}%"
-    )
-    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          OR LOWER(last_name) LIKE ?",
+    locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de)
+      LIKE ? OR LOWER(details_de) LIKE ?", "#{query}%", "#{query}%", "#{query}%", "#{query}%")
+    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?OR LOWER(last_name) LIKE ?",
                           "#{query}%", "#{query}%")
     add_search_results(rooms, buildings, locations, people)
   end
 
+  # Helper functions for including querys to match the max linelengths
+  def including_buildings(query)
+    Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? OR LOWER(name_de) LIKE ? AND NOT
+      LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
+  end
+
+  def including_rooms(query)
+    Room.where("LOWER(name) || LOWER(room_type) LIKE ? AND NOT LOWER(name) || LOWER(room_type) LIKE ? OR
+      LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
+  end
+
+  def including_locations(query)
+    Location.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? OR LOWER(name_de) LIKE ? AND NOT
+    LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ? AND NOT LOWER(details_de) LIKE ? OR LOWER(details) LIKE ?
+    AND NOT LOWER(details) LIKE ?", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%",
+                   "%#{query}%", "#{query}%")
+  end
+
+  def including_people(query)
+    Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ? AND NOT LOWER(first_name) || ' ' ||
+      LOWER(last_name) LIKE ? AND NOT LOWER(last_name) LIKE ?", "%#{query}%", "#{query}%", "#{query}%")
+  end
+
   def search_for_entries_including(query)
-    buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?
-                           OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ",
-                               "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
-    rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ?
-                        AND NOT LOWER(name) || LOWER(room_type) LIKE ?
-                        OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ",
-                       "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
-    locations = Location.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? OR
-                                LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? OR
-                                LOWER(details_de) LIKE ? AND NOT LOWER(details_de) LIKE ? OR
-                                LOWER(details) LIKE ? AND NOT LOWER(details) LIKE ?",
-                               "%#{query}%", "#{query}%", "%#{query}%", "#{query}%",
-                               "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
-    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
-                          AND NOT LOWER(last_name) LIKE ?",
-                          "%#{query}%", "#{query}%", "#{query}%")
-    add_search_results(rooms, buildings, locations, people)
+    add_search_results(including_rooms(query), including_buildings(query), including_locations(query),
+                       including_people(query))
   end
 
   def add_rooms(rooms)
     rooms.each do |room|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: room.name,
-                               link: room_path(room),
-                               description: "#{room.room_type} on floor #{room.floor} of #{room.building.name}",
-                               type: "room"
-                             ))
+      @search_results.append(SearchResult.new(id: @result_id, title: room.name, link: room_path(room),
+                                              description: "#{room.room_type} on floor #{room.floor} of 
+                                              #{room.building.name}", type: "room"))
       @result_id += 1
     end
   end
 
   def add_buildings(buildings)
     buildings.each do |building|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: building.name,
-                               link: building_path(building),
-                               description: "Building",
-                               type: "building"
-                             ))
+      @search_results.append(SearchResult.new(id: @result_id, title: building.name,
+                               link: building_path(building), description: "Building",
+                               type: "building"))
       @result_id += 1
     end
   end
 
   def add_locations(locations)
     locations.each do |location|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: location.name,
-                               link: location_path(location),
-                               description: "Location",
-                               type: "location"
-                             ))
+      @search_results.append(SearchResult.new(id: @result_id, title: location.name, link: location_path(location),
+                               description: "Location", type: "location"))
       @result_id += 1
     end
   end
 
   def add_people(people)
     people.each do |person|
-      @search_results.append(SearchResult.new(
-                               id: @result_id,
-                               title: person.name,
-                               link: person_path(person),
-                               description: "Person, E-Mail: #{person.email}",
-                               type: "person"
-                             ))
+      @search_results.append(SearchResult.new(id: @result_id, title: person.name, link: person_path(person),
+                                              description: "Person, E-Mail: #{person.email}", type: "person"))
       @result_id += 1
     end
   end
