@@ -51,7 +51,8 @@ global.ajaxCall = (
           canGetBack,
         },
         null,
-        `/map${target}?${valuesToSubmit}`
+        // TODO: do not hardcode this
+        `/map${target}?${valuesToSubmit}&locale=${I18n.locale}`
       );
     }
     return;
@@ -98,7 +99,8 @@ global.ajaxCall = (
             canGetBack,
           },
           null,
-          `/map${target}?${valuesToSubmit}`
+          // Preserve the query parameters
+          `/map${target}${target.includes('?') ? '&' : '?'}${valuesToSubmit}`
         );
       }
     },

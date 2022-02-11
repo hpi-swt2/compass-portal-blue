@@ -1,16 +1,10 @@
 class BuildingMapController < ApplicationController
-  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze # TODO: This is currenty hard coded in the building_map.js file
+  # TODO: This is currenty hard coded in the constants.js file
+  YOUR_LOCATION_MAGIC_STRING = "Your location".freeze
   PIN_1_MAGIC_STRING = "Pin 1".freeze
   PIN_2_MAGIC_STRING = "Pin 2".freeze
 
   def _index; end
-
-  def buildings
-    polygons = BuildingMapHelper.leaflet_polygons
-    respond_to do |format|
-      format.json { render json: polygons }
-    end
-  end
 
   def view
     view = BuildingMapHelper.leaflet_center
@@ -19,20 +13,17 @@ class BuildingMapController < ApplicationController
     end
   end
 
-  def markers
-    markers = Buildings.transform_leaflet_letters(Buildings::HPI_LETTERS)
-    respond_to do |format|
-      format.json { render json: markers }
-    end
+  def route
+    return unless params[:start].present? && params[:dest].present?
+
+    (start, dest, start_building, dest_building, res) = RoutingHelper.init_routing(params)
+    RoutingHelper.calculate_route(start, dest, start_building, dest_building, res)
+    respond(res[:polylines], start, res[:walktime])
   end
 
-  def route
-    start = RoutingHelper.resolve_coordinates(params[:start])
-    dest = RoutingHelper.resolve_coordinates(params[:dest])
-    route = RoutingHelper.calculate_route(start, dest) if start.present? && dest.present?
-
-    result = { polyline: RoutingHelper.transform_route_to_polyline(route),
-               marker: RoutingHelper.transform_route_to_time_marker(route) }
+  def respond(polylines, start, walktime)
+    result = { polylines: polylines,
+               marker: RoutingHelper.routing_marker(start, walktime) }
     respond_to do |format|
       format.json { render json: result }
     end

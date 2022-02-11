@@ -23,8 +23,8 @@ describe "Person Show Page", type: :feature do
 
     visit person_path(@person)
 
-    expect(page).to have_link room1.name, href: room_path(room1)
-    expect(page).to have_link room2.name, href: room_path(room2)
+    expect(page).to have_link room1.name, href: room_path(room1, locale: I18n.locale)
+    expect(page).to have_link room2.name, href: room_path(room2, locale: I18n.locale)
   end
 
   it "displays the office hours of the person" do

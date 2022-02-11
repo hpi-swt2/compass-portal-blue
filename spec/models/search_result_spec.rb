@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SearchResult, type: :model do
   # Returns a SearchResult instance that's not saved
-  let(:search_result) { FactoryBot.build(:search_result) }
+  let(:search_result) { build(:search_result) }
 
   describe "creation using a factory" do
 
