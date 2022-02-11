@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'error/show'
   resources :events do
     collection { post :import }
   end

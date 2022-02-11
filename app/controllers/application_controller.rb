@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     redirect_to '/login', notice: exception.message
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to error_show_path, alert: "#{exception} Please log in or sign up to edit."
+  end
+
   protected
 
   def configure_permitted_parameters
