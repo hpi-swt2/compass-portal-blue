@@ -9,7 +9,7 @@
       <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
       <%= link_to "Add new event", new_event_path, class: 'btn btn-primary link-btn' %>
       <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-      <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
+        <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
         <%= file_field_tag :file %>
       <% end %>
     </div>
