@@ -67,9 +67,9 @@ RSpec.describe "/locations", type: :request do
         end.to change(Location, :count).by(1)
       end
 
-      it "redirects to the created location" do
+      it "redirects to the user editing page" do
         post locations_url, params: { location: valid_attributes }
-        expect(response).to redirect_to(edit_location_url(Location.last))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -105,11 +105,11 @@ RSpec.describe "/locations", type: :request do
         expect(location.location_longitude).to eq(new_location.location_longitude)
       end
 
-      it "redirects to the location" do
+      it "redirects to the user editing page" do
         location = Location.create! valid_attributes
         patch location_url(location), params: { location: new_attributes }
         location.reload
-        expect(response).to redirect_to(edit_location_url(location))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -130,10 +130,10 @@ RSpec.describe "/locations", type: :request do
       end.to change(Location, :count).by(-1)
     end
 
-    it "redirects to the locations list" do
+    it "redirects to the user editing page" do
       location = Location.create! valid_attributes
       delete location_url(location)
-      expect(response).to redirect_to(locations_url)
+      expect(response).to redirect_to(edit_user_registration_path)
     end
   end
 end

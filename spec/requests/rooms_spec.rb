@@ -79,9 +79,9 @@ RSpec.describe "/rooms", type: :request do
         end.to change(Room, :count).by(1)
       end
 
-      it "redirects to the created room" do
+      it "redirects to the user editing page" do
         post rooms_url, params: { room: valid_attributes }
-        expect(response).to redirect_to(edit_room_url(Room.last))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -120,11 +120,11 @@ RSpec.describe "/rooms", type: :request do
         expect(room.building).to eq(new_room.building)
       end
 
-      it "redirects to the room" do
+      it "redirects to the user editing page" do
         room = Room.create! valid_attributes
         patch room_url(room), params: { room: new_attributes }
         room.reload
-        expect(response).to redirect_to(edit_room_url(room))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -145,10 +145,10 @@ RSpec.describe "/rooms", type: :request do
       end.to change(Room, :count).by(-1)
     end
 
-    it "redirects to the rooms list" do
+    it "redirects to the user editing page" do
       room = Room.create! valid_attributes
       delete room_url(room)
-      expect(response).to redirect_to(rooms_url)
+      expect(response).to redirect_to(edit_user_registration_path)
     end
   end
 end

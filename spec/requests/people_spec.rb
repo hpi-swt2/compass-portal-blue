@@ -67,9 +67,9 @@ RSpec.describe "/people", type: :request do
         end.to change(Person, :count).by(1)
       end
 
-      it "redirects to the created person" do
+      it "redirects to the user editing page" do
         post people_url, params: { person: valid_attributes }
-        expect(response).to redirect_to(edit_person_url(Person.last))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -105,11 +105,11 @@ RSpec.describe "/people", type: :request do
         expect(person.email).to eq(new_person.email)
       end
 
-      it "redirects to the person" do
+      it "redirects to the user editing page" do
         person = Person.create! valid_attributes
         patch person_url(person), params: { person: new_attributes }
         person.reload
-        expect(response).to redirect_to(edit_person_url(person))
+        expect(response).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -130,10 +130,10 @@ RSpec.describe "/people", type: :request do
       end.to change(Person, :count).by(-1)
     end
 
-    it "redirects to the people list" do
+    it "redirects to the user editing page" do
       person = Person.create! valid_attributes
       delete person_url(person)
-      expect(response).to redirect_to(people_url)
+      expect(response).to redirect_to(edit_user_registration_path)
     end
   end
 end
