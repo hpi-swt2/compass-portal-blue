@@ -5,7 +5,7 @@
         <ul>
             <li>
                 <%= link_to favourite_room.room.name, room_path(favourite_room.room) %>
-                <td class="td-btn"><%= link_to 'Remove it from your favourite list', favourite_room_path(favourite_room.room, type: "unfavourite", url: "favouriteroomlist"), method: :put, class: "btn btn-secondary link-btn" %></td>
+                <td class="td-btn"><% if 0==1 %><%= link_to 'Remove it from your favourite list', favourite_room_path(favourite_room.room, type: "unfavourite", url: "favouriteroomlist"), method: :put, class: "btn btn-secondary link-btn" %><% end %></td>
             </li>
         </ul>
     <% end %>

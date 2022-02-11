@@ -4,9 +4,13 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   resources :people
+
+  get '/rooms/favourites', to: 'favourite_rooms#list', as: 'get_favourite_rooms'
+  put '/rooms/:id/favourite', to: 'favourite_rooms#favourite', as: 'put_favourite_rooms'
   resources :rooms do
     get 'calendar'
   end
+  
   resources :openingtimes
   resources :buildings
   resources :locations
@@ -22,9 +26,6 @@ Rails.application.routes.draw do
 
   # '/login'
   get '/login', to: 'welcome#login'
-
-  get '/rooms/favourites', to: 'favourite_rooms#favouriteroomlist', as: 'get_favourite_rooms'
-  put '/rooms/:id/favourite', to: 'favourite_rooms#favourite', as: 'put_favourite_rooms'
 
   # '/building/map'
   get '/building_map/route', to: 'building_map#route'

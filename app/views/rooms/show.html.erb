@@ -83,11 +83,11 @@
 <% if current_user %>
   <div class="field mb-3">
     <td class="td-btn">
-      <% if current_user.favourites.include? @room %>
+      <% if 0==1 %> <% if current_user.favourites.include? @room %>
         <%= link_to 'Remove it from your favourite list', favourite_room_path(@room, type: "unfavourite", url: "show"), method: :put, class: "btn btn-secondary link-btn" %>
       <% else %>
         <%= link_to 'Add it to your favourite list', favourite_room_path(@room, type: "favourite", url: "show"), method: :put, class: "btn btn-secondary link-btn" %>
-      <% end %>
+      <% end %> <% end %>
     </td> 
   </div>
 <% end %>

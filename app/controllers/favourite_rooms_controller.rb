@@ -13,7 +13,7 @@ class FavouriteRoomsController < ApplicationController
     end
   end
 
-  def favouriteroomlist
+  def list
     if current_user
       @favourite_rooms = current_user.favourite_rooms
     end
