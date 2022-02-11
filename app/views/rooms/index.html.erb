@@ -44,11 +44,9 @@
 </div>
 
 
-<<<<<<< HEAD
 <% if can? :create, Room %>
   <%= link_to 'New Room', new_room_path, class: "btn btn-primary link-btn" %>
 <% end %>
-=======
-<%= link_to 'New Room', new_room_path, class: "btn btn-primary link-btn" %>
-<% if current_user %><%= link_to 'Show Favourite Rooms', favouriteroomlist_path, class: "btn btn-primary link-btn" %><% end %>
->>>>>>> added an extra page for all favourite rooms
+<% if current_user %>
+  <%= link_to 'Show Favourite Rooms', favouriteroomlist_path, class: "btn btn-primary link-btn" %>
+<% end %>

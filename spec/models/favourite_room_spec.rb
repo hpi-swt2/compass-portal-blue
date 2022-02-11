@@ -19,5 +19,4 @@ RSpec.describe FavouriteRoom, type: :model do
     favourite_room = described_class.reflect_on_association(:user)
     expect(favourite_room.macro).to eq :belongs_to
   end
-
 end
