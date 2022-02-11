@@ -50,44 +50,39 @@ class SearchResultsController < ApplicationController
   end
 
   def search_for_entries_starting_with(query)
-    buildings = Building.where("LOWER(name) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%","#{query}")
-    
+    buildings = Building.where("LOWER(name) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", query.to_s)
     rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", "#{query}%")
-    
-    locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ?", "#{query}%", "#{query}%", "#{query}%","#{query}%")
-    
+    locations = Location.where(
+      "LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ?",
+      "#{query}%", "#{query}%", "#{query}%", "#{query}%"
+    )
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           OR LOWER(last_name) LIKE ?",
                           "#{query}%", "#{query}%")
     add_search_results(rooms, buildings, locations, people)
   end
 
-
   def search_for_entries_including(query)
-
-    buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? 
-                           OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
-
+    buildings = Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ?
+                           OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ",
+                               "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
     rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ?
-                        AND NOT LOWER(name) || LOWER(room_type) LIKE ? OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
-
-                        
+                        AND NOT LOWER(name) || LOWER(room_type) LIKE ?
+                        OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ",
+                       "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
     locations = Location.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? OR
                                 LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? OR
                                 LOWER(details_de) LIKE ? AND NOT LOWER(details_de) LIKE ? OR
-                                LOWER(details) LIKE ? AND NOT LOWER(details) LIKE ?", 
-                                "%#{query}%", "#{query}%","%#{query}%", "#{query}%",
-                                "%#{query}%", "#{query}%","%#{query}%", "#{query}%")
-    
+                                LOWER(details) LIKE ? AND NOT LOWER(details) LIKE ?",
+                               "%#{query}%", "#{query}%", "%#{query}%", "#{query}%",
+                               "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(last_name) LIKE ?",
                           "%#{query}%", "#{query}%", "#{query}%")
-    
-    
     add_search_results(rooms, buildings, locations, people)
   end
-  
+
   def add_rooms(rooms)
     rooms.each do |room|
       @search_results.append(SearchResult.new(

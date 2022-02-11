@@ -16,8 +16,9 @@ describe "location edit page", type: :feature do
     page.fill_in 'location[location_longitude]', with: 20.0
     find('input[type="submit"]').click
 
-    expect(Location.where(name: "Updated_name", name_de: "Updated_name_de", details: "Updated_details", details_de: "Updated_details_de", location_latitude: 14.0,
-                          location_longitude: 20.0)).to exist
+    expect(Location.where(name: "Updated_name", name_de: "Updated_name_de",
+                          details: "Updated_details", details_de: "Updated_details_de",
+                          location_latitude: 14.0, location_longitude: 20.0)).to exist
   end
 
   it "can update photo" do
