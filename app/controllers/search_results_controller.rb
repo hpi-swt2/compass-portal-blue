@@ -54,7 +54,7 @@ class SearchResultsController < ApplicationController
     
     rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", "#{query}%")
     
-    locations = Location.where("LOWER(name) || LOWER(details) LIKE ? OR LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ?", "#{query}%", "#{query}%","#{query}%")
+    locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ?", "#{query}%", "#{query}%", "#{query}%","#{query}%")
     
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           OR LOWER(last_name) LIKE ?",
@@ -72,14 +72,19 @@ class SearchResultsController < ApplicationController
                         AND NOT LOWER(name) || LOWER(room_type) LIKE ? OR LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
 
                         
-    locations = Location.where("(LOWER(name) || LOWER(details) LIKE ? AND NOT LOWER(name) || LOWER(details) LIKE ?) 
-                            OR (LOWER(name_de) || LOWER(details_de) LIKE ? AND NOT (LOWER(name_de) || LOWER(details_de) LIKE ?)) ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
-
-                              
+    locations = Location.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? OR
+                                LOWER(name_de) LIKE ? AND NOT LOWER(name_de) LIKE ? OR
+                                LOWER(details_de) LIKE ? AND NOT LOWER(details_de) LIKE ? OR
+                                LOWER(details) LIKE ? AND NOT LOWER(details) LIKE ?", 
+                                "%#{query}%", "#{query}%","%#{query}%", "#{query}%",
+                                "%#{query}%", "#{query}%","%#{query}%", "#{query}%")
+    
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?
                           AND NOT LOWER(last_name) LIKE ?",
                           "%#{query}%", "#{query}%", "#{query}%")
+    
+    
     add_search_results(rooms, buildings, locations, people)
   end
   
