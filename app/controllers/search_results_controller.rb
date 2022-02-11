@@ -65,7 +65,7 @@ class SearchResultsController < ApplicationController
   def add_rooms(rooms)
     rooms.each do |room|
       @search_results.append(SearchResult.new(id: @result_id, title: room.name, link: room_path(room),
-                                              description: "#{room.room_type} on floor #{room.floor} of 
+                                              description: "#{room.room_type} on floor #{room.floor} of
                                               #{room.building.name}", type: "room"))
       @result_id += 1
     end
@@ -74,8 +74,8 @@ class SearchResultsController < ApplicationController
   def add_buildings(buildings)
     buildings.each do |building|
       @search_results.append(SearchResult.new(id: @result_id, title: building.name,
-                               link: building_path(building), description: "Building",
-                               type: "building"))
+                                              link: building_path(building), description: "Building",
+                                              type: "building"))
       @result_id += 1
     end
   end
@@ -83,7 +83,7 @@ class SearchResultsController < ApplicationController
   def add_locations(locations)
     locations.each do |location|
       @search_results.append(SearchResult.new(id: @result_id, title: location.name, link: location_path(location),
-                               description: "Location", type: "location"))
+                                              description: "Location", type: "location"))
       @result_id += 1
     end
   end
