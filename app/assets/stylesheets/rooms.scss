@@ -105,3 +105,10 @@ collapse{
         font-size: small;
     }
   }
+.favourite {
+    background: red;
+}
+
+.favourite.selected {
+    background: blue;
+}
