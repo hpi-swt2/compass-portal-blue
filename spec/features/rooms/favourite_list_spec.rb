@@ -8,7 +8,7 @@ RSpec.describe "Favourite rooms list", type: :feature do
     @user.favourites << @room
   end
 
-  it "Delete button unfavourites room" do
+  it "Delete button unfavourites room", js: true do
     visit get_favourite_rooms_path(@room)
     page.find(".delbttn").click
     visit get_favourite_rooms_path(@room)
