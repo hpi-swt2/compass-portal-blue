@@ -91,7 +91,7 @@ describe "User Edit Page", type: :feature do
 
       expect(page).to have_css "img[alt='#{filename}']"
 
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
 
       visit edit_user_registration_path
       expect(page).to have_css "img[alt='#{filename}']"
@@ -110,7 +110,7 @@ describe "User Edit Page", type: :feature do
 
       visit edit_user_registration_path
       fill_in 'user[person_attributes][first_name]', with: new_first_name
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
 
       visit edit_user_registration_path
       expect(page).to have_field('user[person_attributes][first_name]', with: new_first_name)
@@ -130,7 +130,7 @@ describe "User Edit Page", type: :feature do
 
       visit edit_user_registration_path
       fill_in 'user[person_attributes][last_name]', with: new_last_name
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
 
       visit edit_user_registration_path
       expect(page).to have_field('user[person_attributes][last_name]', with: new_last_name)
@@ -150,7 +150,7 @@ describe "User Edit Page", type: :feature do
 
       visit edit_user_registration_path
       fill_in 'user[person_attributes][email]', with: new_email_address
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
 
       visit edit_user_registration_path
       expect(page).to have_field('user[person_attributes][email]', with: new_email_address)
@@ -170,7 +170,7 @@ describe "User Edit Page", type: :feature do
 
       visit edit_user_registration_path
       fill_in 'user[person_attributes][phone_number]', with: new_phone_number
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
 
       visit edit_user_registration_path
       expect(page).to have_field('user[person_attributes][phone_number]', with: new_phone_number)
@@ -182,7 +182,7 @@ describe "User Edit Page", type: :feature do
       invalid_phone_number = 'abcd'
       visit edit_user_registration_path
       fill_in 'user[person_attributes][phone_number]', with: invalid_phone_number
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
       expect(page).to have_text('error')
 
     end
@@ -202,7 +202,7 @@ describe "User Edit Page", type: :feature do
       visit edit_user_registration_path
       select room2.name, from: 'user[person_attributes][room_ids][]'
       unselect room1.name, from: 'user[person_attributes][room_ids][]'
-      page.find('input[type=submit][name=commit]').click
+      page.find('#update-user-account').click
       visit edit_user_registration_path
       expect(page).to have_select('user[person_attributes][room_ids][]', selected: [room2.name])
     end
