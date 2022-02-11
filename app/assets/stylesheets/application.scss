@@ -167,6 +167,7 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 
   #browse-outlet {
     width: 100%;
+    position: relative;
   }
 
   @media only screen and (max-width: $mobile-break-point) {

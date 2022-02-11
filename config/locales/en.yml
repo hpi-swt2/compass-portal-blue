@@ -46,3 +46,5 @@ en:
     username: 'User name'
     admin?: 'Admin?'
     user-roles: 'User roles'
+    favourite: 'Add favourite'
+    unfavourite: 'Remove favourite'
