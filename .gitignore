@@ -69,3 +69,5 @@ yarn-debug.log*
 
 # Node modules
 node_modules
+public/javascripts/i18n.js
+public/javascripts/translations.js

@@ -34,6 +34,19 @@ require Rails.root.join('spec/support/devise')
 Capybara.javascript_driver = :selenium_chrome_headless
 Capybara.ignore_hidden_elements = false
 
+# Automatically add the locale query param (e.g. `?locale=en`) to all requests
+# Same as in application_controller.rb
+# Has to be specified seperately in the test environment
+module ActionDispatch
+  module Integration
+    class Session
+      def default_url_options(options = {})
+        { locale: I18n.locale }.merge options
+      end
+    end
+  end
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

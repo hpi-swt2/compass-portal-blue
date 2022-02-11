@@ -34,6 +34,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 #
 # Additional core gems
 #
+gem 'i18n-js'
 
 # Use devise as an authentication solution
 gem 'devise' # https://github.com/plataformatec/devise
@@ -49,6 +50,13 @@ gem 'tod'
 #
 # Libraries
 #
+
+# ICalendar and Ice_cube for ics parsing and event processing
+gem 'icalendar'
+gem 'ice_cube'
+
+# gem for calendar
+gem "simple_calendar", "~> 2.4"
 
 #
 # Gems that are loaded depending on the environment (development/test/production)
@@ -115,7 +123,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "phonelib"
 
-# Provides the class `Concurrent::Hash` which is needed to keep user location data in a thread-safe way.
+# Provides
+# - the class `Concurrent::Hash` which is needed to keep user location data in a thread-safe way.
+# - the class `Concurrent::TimerTask` which is used to spawn a recurring task that cleans the aforementioned data.
 gem "concurrent-ruby", "~> 1.1"
 
 # Authentication for permission system
@@ -123,3 +133,6 @@ gem 'cancancan'
 
 # Easy working with HTTP Requests
 gem 'httparty'
+
+# Priority queue for Dijkstra (Indoor Routing)
+gem 'algorithms'
