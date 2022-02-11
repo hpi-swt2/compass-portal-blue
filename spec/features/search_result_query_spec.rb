@@ -10,9 +10,9 @@ RSpec.describe "Search result list page", type: :feature do
     @room_abc = create :room, name: "Room ABC", name_de: "Raum ABC", room_type: "Pool room"
     @abc_room = create :room, name: "ABC Room", name_de: "ABC Raum", room_type: "Lecture hall"
     @room_xyz = create :room, name: "Room X.YZ", room_type: "Conference room"
-    
-    @bank = create :location, name: "Bank", name_de:"BankDE", details: "bank-details-abc", details_de:"bank-details-abc-DE"
-    @pavillon = create :location, name: "Pavillon",  name_de:"PavillionDE", details: "pavillon-details-def", details_de: "pavillon-details-def-DE"
+
+    @bank = create :location, name: "Bank", name_de: "BankDE", details: "bank-details-abc", details_de: "bank-details-abc-DE"
+    @pavillon = create :location, name: "Pavillon", name_de: "PavillionDE", details: "pavillon-details-def", details_de: "pavillon-details-def-DE"
     @kocktail_bar = create :location, name: "Kocktail Bar", name_de: "Kocktail Bar DE", details: "kocktail bar-details-ghi", details_de: "kocktail bar-details-ghi-DE"
 
     @curie = create :person, first_name: "Marie", last_name: "Curie"
@@ -126,7 +126,6 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_link(@room_abc.name, href: room_path(@room_abc), count: 1)
     expect(page).to have_link(@room_xyz.name, href: room_path(@room_xyz), count: 1)
   end
-  
 
   it "does not show rooms whose name and type does not match the query" do
     visit search_results_path(query: "x.yz")
@@ -218,5 +217,4 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_css('div#no_results_message')
   end
 
-  
 end
