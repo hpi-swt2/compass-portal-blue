@@ -2,7 +2,7 @@ module IndoorGraph
   @indoor_graphs = {}
   @nodes = {}
   @entry_nodes = {}
-  BUILDINGS = %w[ABC HS H G].freeze
+  BUILDINGS = %w[ABC HS H G V-E].freeze
   MAX_INDOOR_DIST = 10
 
   # rubocop:disable Metrics/AbcSize
