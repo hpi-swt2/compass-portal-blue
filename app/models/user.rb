@@ -1,5 +1,8 @@
 require "date"
 
+CLEANER_TASK_INTERVAL = 5 * 60 # 5 minutes
+CLEANER_ENTRY_TIMEOUT_MINUTES = 10
+
 # The model representing a user who can log in
 class User < ApplicationRecord
   belongs_to :person, dependent: :destroy
@@ -52,12 +55,17 @@ class User < ApplicationRecord
   #   end
   # end
 
-  # FIXME: this should be cleaned every now and then
   # Maps from user ids to (location, timestamp) tuples
   @locations = Concurrent::Hash.new
 
+  unless Rails.env.test?
+    @cleaner_task = Concurrent::TimerTask.execute(execution_interval: CLEANER_TASK_INTERVAL) do
+      User.clean_outdated_locations
+    end
+  end
+
   class << self
-    attr_accessor :locations
+    attr_accessor :locations, :cleaner_task
   end
 
   def update_last_known_location(location)
@@ -74,6 +82,14 @@ class User < ApplicationRecord
 
   def delete_last_known_location
     self.class.locations.delete id
+  end
+
+  def self.clean_outdated_locations
+    logger.info "Cleaning `User.locations` ..."
+
+    locations.reject! do |_, (_, insertion_time)|
+      insertion_time < DateTime.now.advance(minutes: -CLEANER_ENTRY_TIMEOUT_MINUTES)
+    end
   end
 
   private
