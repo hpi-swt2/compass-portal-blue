@@ -105,4 +105,12 @@
        </div>`).insertBefore(target);
         ++opening_time_index
     }
+
+    $(`select[name='${fieldPrefix}[room_ids][]'] option`).on('pointerdown', function(e) {
+        e.preventDefault();
+        $(this).prop('selected', !$(this).prop('selected'));
+        $(this).parent().focus()
+        return false;
+    });
+
 </script>
