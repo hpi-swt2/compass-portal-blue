@@ -11,16 +11,17 @@ class SearchResultsController < ApplicationController
     return if query.match?(/^_*$/)
 
     search_for query
-    puts(current_user.last_known_location_with_timestamp[0]) 
     @search_results = @search_results.sort_by{|result| result.title}
-   
-    if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
-      puts(current_user.last_known_location_with_timestamp[0]) 
-      sort_by abs(result.location - current_user.last_known_location_with_timestamp[0])
-       
-       @search_results = @search_results.sort_by{|result| distance(current_user.last_known_location_with_timestamp[0], 
-        [result.location_latitude, result.location_longitude])}
-
+    @search_query = params[:query]
+    unless current_user.last_known_location_with_timestamp.nil?
+      if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
+        current_position = current_user.last_known_location_with_timestamp[0].split(',')
+        current_position[0] = current_position[0].to_f
+        current_position[1] = current_position[1].to_f
+        @search_results = @search_results.sort_by{|result| distance(current_position, 
+          [result.location_latitude, result.location_longitude])}
+      end
+    end
   end
 
   def create

@@ -8,7 +8,7 @@
       <div class="search-bar">
         <button type="button" class="btn" id="floating-back" onclick="ajaxBack()"><i class="fas fa-arrow-left"></i><span>Back</span></button>
           <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :autocomplete => :off %>
-        <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+            <button type="submit" class="btn" padding= 0><i class="fa fa-search"></i></button>
       </div>
       <button type="button" class="btn" id="toggle-overlay">
         <i class="fas fa-chevron-up"></i>
@@ -40,4 +40,8 @@ $('#toggle-overlay').click(function(event) {
 function ajaxBack() {
     history.back();
 }
+
+function toggle_sort() {
+    
+} 
 </script>
