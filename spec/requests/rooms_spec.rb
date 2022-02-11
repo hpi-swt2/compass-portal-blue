@@ -151,18 +151,4 @@ RSpec.describe "/rooms", type: :request do
       expect(response).to redirect_to(edit_user_registration_path)
     end
   end
-
-  describe "PUT /favourite" do
-    it "updates the rooms favoured by the user currently logged in" do
-      @user = create(:user)
-      sign_in(@user)
-      room = Room.create! valid_attributes
-      expect(@user.favourites).to eq([])
-      put favourite_room_url(room), params: { favourite: true }, as: :json
-      expect(@user.favourites).to include(-> (r) { r.id == room.id })
-      put favourite_room_url(room), params: { favourite: false }, as: :json
-      @user.reload
-      expect(@user.favourites).to eq([])
-    end
-  end
 end

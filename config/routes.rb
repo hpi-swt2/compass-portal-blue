@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :people
   resources :rooms do
     get 'calendar'
-    put :favourite, on: :member
   end
   resources :openingtimes
   resources :buildings
@@ -24,7 +23,8 @@ Rails.application.routes.draw do
   # '/login'
   get '/login', to: 'welcome#login'
 
-  get '/favouriteroomlist', to: 'rooms#favouriteroomlist'
+  get '/rooms/favourites', to: 'favourite_rooms#favouriteroomlist', as: 'get_favourite_rooms'
+  put '/rooms/:id/favourite', to: 'favourite_rooms#favourite', as: 'put_favourite_rooms'
 
   # '/building/map'
   get '/building_map/route', to: 'building_map#route'
