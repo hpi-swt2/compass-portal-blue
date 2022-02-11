@@ -10,7 +10,7 @@
 </div>
 
 <%= link_to map_path(path: "route", dest: @building.name), class: "btn btn-primary" do %>
-  <i class="fas fa-route"></i> Directions
+  <i class="fas fa-route"></i> <%= t("buildings.directions") %>
 <% end %>
 
 <script id="_latlonginfo" type="application/json">

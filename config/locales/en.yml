@@ -46,7 +46,11 @@ en:
     username: 'User name'
     admin?: 'Admin?'
     user-roles: 'User roles'
-    buildings: 
+    buildings:
+        category: "Buildings"
+        create_new: "New Building"
+        edit: "Edit Building"
         longitude: "Longitude"
         latitude: "Latitude"
+        directions: "Directions"
         

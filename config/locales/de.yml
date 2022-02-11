@@ -16,6 +16,10 @@ de:
     admin?: 'Administrator?'
     user-roles: 'Nutzerrollen'
     buildings: 
+        category: "Gebäude"
+        create_new: "Neues Gebäude"
+        edit: "Gebäude bearbeiten"
         longitude: "Längengrad"
         latitude: "Breitengrad"
+        directions: "Route"
         
