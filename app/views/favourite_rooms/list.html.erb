@@ -6,9 +6,9 @@
             <li>
                 <%= link_to favourite_room.room.name, room_path(favourite_room.room) %>
                 <td class="td-btn">
-                <%= link_to favourite_room_path(favourite_room.room, type: "unfavourite", url: "favouriteroomlist"), method: :put, class: "btn btn-secondary", title: title= t('unfavourite') do %>
-                <i class="fas fa-trash"></i>
-                <% end %>
+                <button class="delbttn btn btn-secondary" data-room-id="<%= favourite_room.room.id %>" title="<%= t('unfavourite') %>">
+                    <i class="fas fa-trash"></i>
+                </button>
                 </td>
             </li>
         </ul>
@@ -17,6 +17,29 @@
     <p> Login to see your favourite list. </p>
 <% end %>
 
-<br>
+<script defer>
+  $('.delbttn').each(function() {
+      $(this).click(async (e) => {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
 
-<%= link_to 'Back', rooms_path, class: "btn btn-secondary link-btn" %>
+        const body = JSON.stringify({
+        favourite: false
+        });
+        const response = await fetch(
+        `/rooms/${$(this).attr('data-room-id')}/favourite`,
+        {
+            method: "PUT",
+            body: body,
+            headers: {
+            "X-CSRF-TOKEN": csrfToken,
+            "Content-Type": "application/json",
+            },
+        }
+        );
+
+        console.assert(response.status === 204); // HTTP "No content"
+
+        $(this).parent('li').remove();
+    });
+  });
+</script>
