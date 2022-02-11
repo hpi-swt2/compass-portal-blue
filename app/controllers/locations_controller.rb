@@ -13,6 +13,8 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+    @latitude = params[:lat]
+    @longitude = params[:long]
   end
 
   # GET /locations/1/edit

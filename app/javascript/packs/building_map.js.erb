@@ -3,21 +3,19 @@ import {
   PIN_2_MAGIC_STRING,
   YOUR_LOCATION_MAGIC_STRING,
 } from "./constants";
-import { addAnyMarker, displayRoute, pins, setupMap } from './leafletMap';
-import { lazyInit, rateLimit } from "./utils.js";
-
-// FIXME: this should probably be in application.js or something similarly
-// global, but it didn't work when we put it there
-// The `lazyinit` is needed, because the `querySelector` seems to, somewhat
-// randomly, block the execution of the script in our tests. This is a
-// workaround, until a real solution is found.
-const csrfToken = lazyInit(() => document.querySelector('meta[name="csrf-token"]').getAttribute("content"));
+import {
+    addAnyMarker,
+    displayRoute,
+    pins,
+    pinFloors,
+    currentFloor,
+    setupMap,
+} from "./leafletMap";
+import { csrfToken, rateLimit, userSignedIn } from "./utils";
 
 let currentLocation;
 
 setupMap();
-const trackingSwitch = document.getElementById("trackingSwitch");
-trackingSwitch.addEventListener("click", trackingHandler);
 
 const mapElement = $("#map")[0];
 mapElement.addEventListener("click", () => {
@@ -49,20 +47,24 @@ $("#navigationForm")[0].addEventListener("submit", (event) => {
   event.preventDefault();
   event.stopPropagation();
   let coordinates = [startInputField.value, destInputField.value];
+  let floors = [0, 0]
   coordinates.forEach((routePoint, i) => {
     switch (routePoint) {
       case YOUR_LOCATION_MAGIC_STRING:
         coordinates[i] = currentLocation;
+        floors[i] = currentFloor;
         break;
       case PIN_1_MAGIC_STRING:
         coordinates[i] = pinCoordinatesString(pins[0]);
+        floors[i] = pinFloors[0];
         break;
       case PIN_2_MAGIC_STRING:
         coordinates[i] = pinCoordinatesString(pins[1]);
+        floors[i] = pinFloors[1];
         break;
     }
   });
-  displayRoute(coordinates[0], coordinates[1]);
+  displayRoute(coordinates[0], floors[0], coordinates[1], floors[1]);
 });
 
 function pinCoordinatesString(pin) {
@@ -134,6 +136,9 @@ function requestLocation(inputField) {
 }
 
 const syncUserPositionWithServerImpl = async (location) => {
+  if (!userSignedIn()) {
+    return;
+  }
   const body = new URLSearchParams({ location });
   const response = await fetch(
     "/users/geo_location",
@@ -145,31 +150,66 @@ const syncUserPositionWithServerImpl = async (location) => {
       },
     }
   );
-  console.assert(response.status === 204); // HTTP "No content"
+  console.assert(response.ok);
 };
 const syncUserPositionWithServer = rateLimit(syncUserPositionWithServerImpl, 10000);
 
-let watcherId;
+const clearUserPositionOnServer = async () => {
+  if (!userSignedIn()) {
+    return;
+  }
+  const response = await fetch(
+    "/users/geo_location",
+    {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-TOKEN": csrfToken(),
+      },
+    }
+  );
+  console.assert(response.ok || response.status === 404); // has been deleted or didn't exist at all
+};
+
+let watcherId = null;
 <% helpers = ActionController::Base.helpers %>
 const positionIcon = L.icon({ iconUrl: "<%= helpers.asset_path('current-location.svg') %>", iconSize: [30, 30], iconAnchor: [15, 15] });
 const positionMarker = L.marker([0, 0], { icon: positionIcon });
 positionMarker.bindPopup("Your position");
 
-function trackingHandler() {
-  if (trackingSwitch.checked) {
+const showPositionSwitch = document.getElementById("showPositionSwitch");
+const sharePositionSwitch = document.getElementById("sharePositionSwitch");
+
+showPositionSwitch.addEventListener("click", () => {
+  sharePositionSwitch.disabled = !(userSignedIn() && showPositionSwitch.checked);
+
+  if (showPositionSwitch.checked) {
     addAnyMarker(positionMarker);
+    console.assert(watcherId === null);
     watcherId = navigator.geolocation.watchPosition(
       (pos) => {
         currentLocation = String(pos.coords.latitude) + "," + String(pos.coords.longitude);
         positionMarker.setLatLng([pos.coords.latitude, pos.coords.longitude]);
-        syncUserPositionWithServer(currentLocation);
+        if (sharePositionSwitch.checked) {
+          syncUserPositionWithServer(currentLocation);
+        }
       },
-      (error) => {
+      (_error) => {
         alert("We cannot determine your location. Maybe you are not permitting your browser to determine your location.");
       }
     );
   } else {
+    sharePositionSwitch.checked = false;
+    sharePositionSwitch.dispatchEvent(new Event("input"));
+
     navigator.geolocation.clearWatch(watcherId);
+    watcherId = null;
+
     positionMarker.remove();
   }
-}
+});
+
+sharePositionSwitch.addEventListener("input", () => {
+  if (!sharePositionSwitch.checked) {
+    clearUserPositionOnServer();
+  }
+});
