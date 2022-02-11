@@ -46,7 +46,6 @@ global.ajaxCall = (
       $("#navigationForm #startInput")[0].dispatchEvent(new Event("change"));
     }
     if (pushToHistory) {
-      console.log(valuesToSubmit);
       history.pushState(
         {
           canGetBack,
