@@ -240,7 +240,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 2",
+                "name": "H-3-Stairwell",
                 "highway": "steps",
                 "level_name": "3"
             },
@@ -302,7 +302,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "3",
-                "name": "H-3.4 Büro"
+                "name": "H-3.4"
             },
             "geometry": {
                 "type": "Polygon",
@@ -459,7 +459,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.16 Technikraum",
+                "name": "H-3.16",
                 "level_name": "3"
             },
             "geometry": {
@@ -495,7 +495,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "H-3-Corridor",
                 "indoor": "corridor",
                 "level_name": "3"
             },
@@ -577,7 +577,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.8 Lager",
+                "name": "H-3.8",
                 "level_name": "3"
             },
             "geometry": {
@@ -628,7 +628,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.3 Besprechungsraum",
+                "name": "H-3.3",
                 "indoor": "room",
                 "level_name": "3"
             },
@@ -665,7 +665,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.6 Büro",
+                "name": "H-3.6",
                 "indoor": "room",
                 "level_name": "3"
             },
@@ -853,7 +853,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.7 Büro",
+                "name": "H-3.7",
                 "indoor": "room",
                 "level_name": "3"
             },
@@ -891,7 +891,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.31 Spülküche",
+                "name": "H-3.31",
                 "level_name": "3"
             },
             "geometry": {
@@ -932,7 +932,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.11 E-Technik",
+                "name": "H-3.11",
                 "level_name": "3"
             },
             "geometry": {
@@ -968,7 +968,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "H-3-Corridor",
                 "indoor": "corridor",
                 "level_name": "3"
             },
@@ -1166,7 +1166,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.10 Lager",
+                "name": "H-3.10",
                 "level_name": "3"
             },
             "geometry": {
@@ -1248,7 +1248,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.31 Seminar",
+                "name": "H-3.31",
                 "indoor": "room",
                 "level_name": "3"
             },
@@ -1290,7 +1290,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.28 E-Technik",
+                "name": "H-3.28",
                 "level_name": "3"
             },
             "geometry": {
@@ -1345,7 +1345,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.31 Lüfterzentrale: 1",
+                "name": "H-3.31",
                 "indoor": "room",
                 "level_name": "3"
             },
@@ -1414,7 +1414,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 1",
+                "name": "H-3-Stairwell",
                 "highway": "steps",
                 "level_name": "3"
             },
@@ -1475,7 +1475,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.15 Besprechungsraum",
+                "name": "H-3.15",
                 "level_name": "3"
             },
             "geometry": {
@@ -1590,7 +1590,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.14 Büro",
+                "name": "H-3.14",
                 "level_name": "3"
             },
             "geometry": {
@@ -1630,7 +1630,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.30 Lager",
+                "name": "H-3.30",
                 "indoor": "room",
                 "level_name": "3"
             },
@@ -1687,7 +1687,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-3.12 Lüfterzentrale: 2",
+                "name": "H-3.12",
                 "level_name": "3"
             },
             "geometry": {
@@ -1738,7 +1738,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-3.13 Büro",
+                "name": "H-3.13",
                 "indoor": "room",
                 "level_name": "3"
             },

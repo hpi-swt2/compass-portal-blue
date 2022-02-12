@@ -21,7 +21,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.36 Technikraum",
+                "name": "H-E.36",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -75,7 +75,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "H-E-Corridor",
                 "indoor": "corridor",
                 "level_name": "0"
             },
@@ -394,7 +394,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.15 Lager"
+                "name": "H-E.15"
             },
             "geometry": {
                 "type": "Polygon",
@@ -488,7 +488,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-E.21 Büro",
+                "name": "H-E.21",
                 "level_name": "0"
             },
             "geometry": {
@@ -526,7 +526,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.40 Aufenthaltsraum",
+                "name": "H-E.40",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -571,7 +571,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.7/6 Aufenthaltsraum"
+                "name": "H-E.6/7"
             },
             "geometry": {
                 "type": "Polygon",
@@ -706,7 +706,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.22 Büro",
+                "name": "H-E.22",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -775,7 +775,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.12/13 Aufenthaltsraum",
+                "name": "H-E.12/13",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -941,7 +941,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.20 Lüftungszentrale",
+                "name": "H-E.20",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -986,7 +986,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.32 Dusche"
+                "name": "H-E.32"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1039,7 +1039,7 @@
             "type": "Feature",
             "properties": {
                 "level_name": "0",
-                "name": "Treppenhaus 3",
+                "name": "H-E-Stairwell",
                 "highway": "steps"
             },
             "geometry": {
@@ -1085,7 +1085,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.?",
+                "name": "H-E.48",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -1175,7 +1175,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-E.31 Seminarraum",
+                "name": "H-E.31",
                 "level_name": "0"
             },
             "geometry": {
@@ -1359,7 +1359,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E. 39",
+                "name": "H-E.39",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -1415,7 +1415,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.17 Lager"
+                "name": "H-E.17"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1452,7 +1452,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.34 Büro",
+                "name": "H-E.34",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -1496,7 +1496,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-E.10 Teeküche",
+                "name": "H-E.10",
                 "level_name": "0"
             },
             "geometry": {
@@ -1647,7 +1647,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.25 Büro",
+                "name": "H-E.25",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -1845,7 +1845,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.35 Büro"
+                "name": "H-E.35"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1945,7 +1945,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.11 Aufenthaltsraum"
+                "name": "H-E.11"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1984,7 +1984,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.5 Aufenthaltsraum"
+                "name": "H-E.5"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2025,7 +2025,7 @@
                 "amenity": "toilets",
                 "indoor": "room",
                 "level_name": "0",
-                "name": " H-E.30"
+                "name": "H-E.30"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2079,7 +2079,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.26 Büro"
+                "name": "H-E.26"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2131,7 +2131,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.29 Dusche",
+                "name": "H-E.29",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -2185,7 +2185,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "H-E-Corridor",
                 "indoor": "corridor",
                 "level_name": "0"
             },
@@ -2270,7 +2270,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E. 43 Seminarraum"
+                "name": "H-E. 43"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2315,7 +2315,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 2",
+                "name": "H-E-Stairwell",
                 "level_name": "0",
                 "highway": "steps"
             },
@@ -2440,7 +2440,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.27 Büro"
+                "name": "H-E.27"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2522,7 +2522,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 1",
+                "name": "H-E-Stairwell",
                 "level_name": "0",
                 "highway": "steps"
             },
@@ -2573,7 +2573,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.16 Lager",
+                "name": "H-E.16",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -2618,7 +2618,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "H-E.32 Seminarraum"
+                "name": "H-E.32"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2689,7 +2689,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.28 Büro",
+                "name": "H-E.28",
                 "indoor": "room",
                 "level_name": "0"
             },
@@ -2728,7 +2728,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-E.33 Büro",
+                "name": "H-E.33",
                 "indoor": "room",
                 "level_name": "0"
             },
