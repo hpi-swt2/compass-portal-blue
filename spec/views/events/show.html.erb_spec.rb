@@ -20,7 +20,9 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to match(/A Description/)
     expect(rendered).to match(/Weekly on Mondays/)
     expect(rendered).to match(/No Room/)
-    expect(rendered).to include(@start_time.to_s)
-    expect(rendered).to include(@end_time.to_s)
+
+    # in_time_zone is needed to convert the time to a `ActiveSupport::TimeWithZone`-object to make it comparable
+    expect(rendered).to include(@start_time.in_time_zone(Time.now.zone).to_s) 
+    expect(rendered).to include(@end_time.in_time_zone(Time.now.zone).to_s)
   end
 end
