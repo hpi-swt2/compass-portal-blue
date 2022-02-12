@@ -34,8 +34,8 @@
           <% else %>
             <td><%= link_to event.room.name, room_path(event.room) %></td>
           <% end %>
-          <td><%= event.start_time %></td>
-          <td><%= event.end_time %></td>
+          <td><%= event.start_time.to_s %></td>
+          <td><%= event.end_time.to_s %></td>
           <td><%= event.rule %></td>
           <td><%= link_to 'Show', event %></td>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>

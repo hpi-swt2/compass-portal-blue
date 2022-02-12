@@ -23,7 +23,7 @@
     <strong>Start Date:</strong>
   </label>
   <p class="form-control-static">
-    <%= @event.start_time %>
+    <%= @event.start_time.to_s %>
   </p>
 </div>
 
@@ -32,7 +32,7 @@
     <strong>End Date:</strong>
   </label>
   <p class="form-control-static">
-    <%= @event.end_time %>
+    <%= @event.end_time.to_s %>
   </p>
 </div>
 
