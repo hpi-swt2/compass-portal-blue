@@ -107,7 +107,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
 
   config.after(:each, js: true) do
-    errors = page.driver.browser.manage.logs.get(:browser)
+    errors = page.driver.browser.logs.get(:browser)
     if errors.present?
       aggregate_failures 'javascript errrors' do
         errors.each do |error|
