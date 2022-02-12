@@ -15,7 +15,9 @@ import { csrfToken, rateLimit, userSignedIn } from "./utils";
 
 let currentLocation;
 
-setupMap();
+const mapLoaded = new CustomEvent('maploaded');
+let promise = setupMap();
+promise.then(document.dispatchEvent(mapLoaded));
 
 const mapElement = $("#map")[0];
 mapElement.addEventListener("click", () => {

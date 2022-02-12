@@ -28,7 +28,14 @@ const geoJsonLayerFiles = [
   "<%= helpers.asset_path('HS_-1.geojson') %>",
   "<%= helpers.asset_path('G_0.geojson') %>",
   "<%= helpers.asset_path('G_1.geojson') %>",
-  "<%= helpers.asset_path('G_-1.geojson') %>"
+  "<%= helpers.asset_path('G_-1.geojson') %>",
+  "<%= helpers.asset_path('E_-1.geojson') %>",
+  "<%= helpers.asset_path('E_0.geojson') %>",
+  "<%= helpers.asset_path('E_1.geojson') %>",
+  "<%= helpers.asset_path('E_2.geojson') %>",
+  "<%= helpers.asset_path('V_0.geojson') %>",
+  "<%= helpers.asset_path('V_1.geojson') %>",
+  "<%= helpers.asset_path('V_2.geojson') %>"
 ];
 
 export let pins = [];
@@ -52,7 +59,7 @@ export async function setupMap() {
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
-      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> | <a href='https://openstreetmap.org/fixthemap'>Contribute</a>",
     maxZoom: 22,
     maxNativeZoom: 19,
   }).addTo(map);
@@ -62,7 +69,7 @@ export async function setupMap() {
 
   // display indoor information eg. rooms, labels
   await Promise.all([
-    loadGeoJsonFile("/assets/buildings.geojson", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
+    loadGeoJsonFile("<%= helpers.asset_path('buildings.geojson') %>", setupGeoJsonFeatureOutdoor, getBuildingStyle, true),
     Promise.all(geoJsonLayerFiles.map((filename) => loadGeoJsonFile(filename, setupGeoJsonFeatureIndoor, getRoomStyle)))
   ]);
   map.on("zoomend", recalculateTooltipVisibility);
@@ -170,7 +177,7 @@ export function showTargetMarker(coordinates) {
   const marker = {
     latlng: coordinates,
     divIcon: {
-      html: "<img src='/assets/pin.png'>",
+      html: "<img src='<%= helpers.asset_path("pin.png") %>'>",
       className: "target-pin",
     },
   };

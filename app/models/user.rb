@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_and_belongs_to_many :owned_buildings, class_name: 'Building', join_table: 'building_owner'
   has_and_belongs_to_many :owned_rooms, class_name: 'Room', join_table: 'room_owner'
   has_and_belongs_to_many :owned_people, class_name: 'Person', join_table: 'person_owner'
+
+  accepts_nested_attributes_for :person, allow_destroy: true
+  after_find :sync_user_email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -27,6 +31,13 @@ class User < ApplicationRecord
       person.email = email
     end
     person.owners = [self]
+  end
+
+  def sync_user_email
+    return if provider.nil?
+
+    # Only sync if the user was registered via openid-connect
+    self.email = person.email
   end
 
   # Called from app/controllers/users/omniauth_callbacks_controller.rb
