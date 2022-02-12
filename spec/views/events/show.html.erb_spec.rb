@@ -3,8 +3,8 @@ require 'ice_cube'
 
 RSpec.describe "events/show", type: :view do
   before do
-    @start_time = Time.current
-    @end_time = 3.days.from_now
+    @start_time = Time.parse("2021-10-20 13:15:00")
+    @end_time = @start_time + 3.days
     @event = assign(:event, Event.create!(
                               name: "Name",
                               description: "A Description",
@@ -20,7 +20,7 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to match(/A Description/)
     expect(rendered).to match(/Weekly on Mondays/)
     expect(rendered).to match(/No Room/)
-    expect(rendered).to match(@start_time.to_s)
-    expect(rendered).to match(@end_time.to_s)
+    expect(rendered).to include(@start_time.to_s)
+    expect(rendered).to include(@end_time.to_s)
   end
 end
