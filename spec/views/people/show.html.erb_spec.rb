@@ -57,10 +57,6 @@ RSpec.describe "people/show", type: :view do
       @person.rooms.delete @room
     end
 
-    it "has a room" do
-      expect(@person.rooms).not_to be_empty
-    end
-
     it "shows the navigation to the owned room" do
       render
       expect(rendered).to have_link "Directions"
