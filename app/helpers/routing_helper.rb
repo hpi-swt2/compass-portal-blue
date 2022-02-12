@@ -36,7 +36,6 @@ module RoutingHelper
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
   def self.room_building(input, floor, max_indoor_dist)
     if valid_coordinates?(input) || BuildingMapHelper.location?(input)
       return room_building_from_coords(input, floor, max_indoor_dist)
@@ -49,7 +48,6 @@ module RoutingHelper
                                             IndoorGraph::BUILDINGS, max_indoor_dist, floor)
     { indoor: true, building: node[:building], node: node[:node] }
   end
-  # rubocop:enable Metrics/MethodLength
 
   def self.room_building_from_coords(input, floor, max_indoor_dist)
     coords = coordinates_from_string(resolve_coordinates(input))
