@@ -41,9 +41,6 @@ module RoutingHelper
     if valid_coordinates?(input) || BuildingMapHelper.location?(input)
       return room_building_from_coords(input, floor, max_indoor_dist)
     end
-    if BuildingMapHelper.building?(input) # in this case we only use outside routing
-      return { indoor: false, building: BuildingMapHelper.map_building_name_to_graph(input), node: nil }
-    end
     return { indoor: false, building: nil, node: nil } unless BuildingMapHelper.room?(input)
 
     room = Room.find_by(name: input)
