@@ -1,16 +1,27 @@
-<h2 class="mb-3 fw-light"><%= @building.name %></h2>
+<h2 class="mb-3 fw-light">
+  <%= if I18n.locale == :de
+        @building.name_de
+      elsif I18n.locale == :en
+        @building.name
+      end%>
+</h2>
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Name:</strong>
+    <strong>
+      <%=t("name")%>:
+    </strong>
   </label>
   <p class="form-control-static">
   <%= @building.name %>
   </p>
+  <p class="form-control-static">
+  <%= @building.name_de %>
+  </p>
 </div>
 
 <a class='btn btn-primary' href='/route?dest=<%= @building.name %>'>
-  <i class='fas fa-route'></i> Directions
+  <i class='fas fa-route'></i> <%= t("directions") %>
 </a>
 
 <script id="_latlonginfo" type="application/json">

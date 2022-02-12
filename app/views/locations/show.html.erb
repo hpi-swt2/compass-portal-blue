@@ -1,4 +1,10 @@
-<h2 class="mb-3 fw-light"><%= @location.name %></h2>
+<h2 class="mb-3 fw-light">
+  <%= if I18n.locale == :de
+        @location.name_de
+      elsif I18n.locale == :en
+        @location.name
+      end%>
+</h2>
 
 <div class='edit-location-photo'>
   <div class='location-photo-wrapper'>
@@ -11,12 +17,16 @@
     </div>
 
 <p>
-  <strong>Details:</strong>
-  <%= @location.details %>
+  <strong><%=t("details")%>:</strong>
+    <%= if I18n.locale == :de
+        @location.details_de
+      elsif I18n.locale == :en
+        @location.details
+      end%>
 </p>
 
 <p>
-  <strong>Opening Times:</strong>
+  <strong><%=t("openingtimes")%>:</strong>
   <br>
   <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
     <%= openingtime.day_as_string %>:
@@ -28,7 +38,7 @@
 </p>
 
 <a class="btn btn-primary" href="/route?dest=<%= @location.name %>">
-  <i class="fas fa-route"></i> Directions
+  <i class="fas fa-route"></i> <%= t("directions")%>
 </a>
 
 <script id="_latlonginfo" type="application/json">
