@@ -29,6 +29,12 @@ class Person < ApplicationRecord
     person
   end
 
+  def corresponding_user
+    # FIXME: This feels like Rails should have this built-in, but I couldn't
+    # find anything
+    User.find_by person: self
+  end
+
   private
 
   def normalize_phone_number
