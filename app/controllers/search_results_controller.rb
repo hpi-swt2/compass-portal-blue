@@ -48,15 +48,9 @@ class SearchResultsController < ApplicationController
   end
 
   def search_for_entries_starting_with(query)
-    # buildings = Building.where("LOWER(name) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", query.to_s)
-    # rooms = Room.where("LOWER(name) || LOWER(room_type) LIKE ? OR LOWER(name_de) LIKE ?", "#{query}%", "#{query}%")
-    # locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de)
-    #   LIKE ? OR LOWER(details_de) LIKE ?", "#{query}%", "#{query}%", "#{query}%", "#{query}%")
-    # people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?OR LOWER(last_name) LIKE ?",
-    #                       "#{query}%", "#{query}%")
-    add_search_results(starting_with_rooms(query), starting_with_buildings(query), starting_with_locations(query), 
-                      starting_with_people(query))
-    end
+    add_search_results(starting_with_rooms(query), starting_with_buildings(query), starting_with_locations(query),
+                       starting_with_people(query))
+  end
 
   def search_for_entries_including(query)
     add_search_results(including_rooms(query), including_buildings(query), including_locations(query),

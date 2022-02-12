@@ -1,7 +1,7 @@
 module SearchResultsHelper
   def starting_with_buildings(query)
-    Building.where("LOWER(name) LIKE ? OR LOWER(name_de) LIKE ?", 
-      "#{query}%", query.to_s)
+    Building.where("LOWER(name) LIKE ? OR LOWER(name_de) LIKE ?",
+                   "#{query}%", query.to_s)
   end
 
   def starting_with_rooms(query)
@@ -9,18 +9,18 @@ module SearchResultsHelper
   end
 
   def starting_with_locations(query)
-    locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de)
-      LIKE ? OR LOWER(details_de) LIKE ?", "#{query}%", "#{query}%", "#{query}%", "#{query}%")
+    Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ? OR LOWER(name_de) LIKE ? OR LOWER(details_de) LIKE ?",
+                   "#{query}%", "#{query}%", "#{query}%", "#{query}%")
   end
 
   def starting_with_people(query)
     Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?OR LOWER(last_name) LIKE ?",
-                          "#{query}%", "#{query}%")
+                 "#{query}%", "#{query}%")
   end
 
   def including_buildings(query)
     Building.where("LOWER(name) LIKE ? AND NOT LOWER(name) LIKE ? OR LOWER(name_de) LIKE ? AND NOT
-              LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
+                  LOWER(name_de) LIKE ? ", "%#{query}%", "#{query}%", "%#{query}%", "#{query}%")
   end
 
   def including_rooms(query)
