@@ -11,6 +11,6 @@ RSpec.describe "Favourite rooms", type: :feature do
     visit room_path(@room)
     page.find("#room-favourite").click
     visit room_path(@room)
-    expect(page.find("#room-favourite")).to have_css("selected")
+    expect(page.find("#room-favourite")).to have_class("selected")
   end
 end
