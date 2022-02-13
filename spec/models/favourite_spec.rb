@@ -4,7 +4,7 @@ RSpec.describe Favourite, type: :model do
   it "has user_id and favourable_id" do
     room = create :room
     user = create :user
-    favourite = Favourite.new({user: user, favourable: room})
+    favourite = described_class.new({ user: user, favourable: room })
 
     expect(favourite.favourable.name).to eq(room.name)
     expect(favourite.user.username).to eq(user.username)
