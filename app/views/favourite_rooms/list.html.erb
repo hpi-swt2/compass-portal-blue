@@ -4,7 +4,7 @@
     <% @favourite_rooms.each do |favourite_room| %>
         <ul>
             <li>
-                <%= link_to favourite_room.room.name, room_path(favourite_room.room) %>
+                <%= link_to favourite_room.room.name, room_path(favourite_room.room), style: "text-decoration: none;" %>
                 <td class="td-btn">
                 <button class="delbttn btn btn-secondary" data-room-id="<%= favourite_room.room.id %>" title="<%= t('unfavourite') %>">
                     <i class="fas fa-trash"></i>
