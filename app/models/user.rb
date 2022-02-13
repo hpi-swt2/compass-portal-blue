@@ -15,7 +15,6 @@ class User < ApplicationRecord
   after_find :sync_user_email
 
   has_many :favourites, dependent: :destroy
-  has_many :favourite_rooms, through: :favourites, source: :favourable, source_type: 'Room'
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
