@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get '/favourites', to: 'favourites#list', as: 'get_favourites'
   put '/rooms/:id/favourite', to: 'favourites#set_favourite_room', as: 'put_favourite_rooms'
   put '/buildings/:id/favourite', to: 'favourites#set_favourite_building', as: 'put_favourite_buildings'
-  put '/locations/:id/favourite', to: 'favourites#set_favourite_location', as: 'put_favourite_location'
-  put '/people/:id/favourite', to: 'favourites#set_favourite_person', as: 'put_favourite_person'
+  put '/locations/:id/favourite', to: 'favourites#set_favourite_location', as: 'put_favourite_locations'
+  put '/people/:id/favourite', to: 'favourites#set_favourite_person', as: 'put_favourite_people'
   resources :rooms do
     get 'calendar'
   end
