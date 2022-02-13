@@ -1,5 +1,5 @@
 <% if current_user %>
-    <h2 class="mb-3 fw-light"><%= 'These are your favourite rooms:' %></h2>
+    <h2 class="mb-3 fw-light"><%= 'These are your favourites:' %></h2>
 
     <% @favourites.each do |(favourite, path)| %>
         <% favourable = favourite.favourable %>
