@@ -4,9 +4,8 @@ class Room < ApplicationRecord
   belongs_to :building
   has_many :events, dependent: nil
   has_and_belongs_to_many :people
-  has_many :favourite_rooms, dependent: :destroy
-  has_many :favourited_by, through: :favourite_rooms, source: :user
 
+  include Favourable
   include Locateable
 
   validates :name, presence: true

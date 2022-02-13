@@ -1,17 +1,20 @@
 <% if current_user %>
     <h2 class="mb-3 fw-light"><%= 'These are your favourite rooms:' %></h2>
 
-    <% @favourite_rooms.each do |favourite_room| %>
-        <ul>
-            <li>
-                <%= link_to favourite_room.room.name, room_path(favourite_room.room), style: "text-decoration: none;" %>
-                <td class="td-btn">
-                <button class="delbttn btn btn-secondary" data-room-id="<%= favourite_room.room.id %>" title="<%= t('unfavourite') %>">
-                    <i class="fas fa-trash"></i>
-                </button>
-                </td>
-            </li>
-        </ul>
+    <% @favourites.each do |favourite| %>
+        <% if favourite.favourable_type == 'Room' %>
+            <% room = favourite.favourable %>
+            <ul>
+                <li>
+                    <%= link_to room.name, room_path(room), style: "text-decoration: none;" %>
+                    <td class="td-btn">
+                    <button class="delbttn btn btn-secondary" data-room-id="<%= room.id %>" title="<%= t('unfavourite') %>">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    </td>
+                </li>
+            </ul>
+        <% end %>
     <% end %>
 <% else %>
     <p class="alert alert-danger alert-dismissible fade show"> Login to see your favourite list.</p>

@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   end
   resources :people
 
-  get '/rooms/favourites', to: 'favourite_rooms#list', as: 'get_favourite_rooms'
-  put '/rooms/:id/favourite', to: 'favourite_rooms#favourite', as: 'put_favourite_rooms'
+  get '/favourites', to: 'favourites#list', as: 'get_favourites'
+  put '/rooms/:id/favourite', to: 'favourites#set_favourite_room', as: 'put_favourite_rooms'
   resources :rooms do
     get 'calendar'
   end
