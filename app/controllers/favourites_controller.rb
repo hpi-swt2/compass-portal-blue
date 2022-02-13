@@ -1,18 +1,18 @@
 class FavouritesController < ApplicationController
   def set_favourite_room
-    set_favourite(Room)
+    favourite_set(Room)
   end
 
   def set_favourite_building
-    set_favourite(Building)
+    favourite_set(Building)
   end
 
   def set_favourite_location
-    set_favourite(Location)
+    favourite_set(Location)
   end
 
   def set_favourite_person
-    set_favourite(Person)
+    favourite_set(Person)
   end
 
   def list
@@ -21,7 +21,7 @@ class FavouritesController < ApplicationController
 
   private
 
-  def set_favourite(model)
+  def favourite_set(model)
     instance = model.find(params[:id])
     is_favourite = params[:favourite]
 
@@ -37,17 +37,15 @@ class FavouritesController < ApplicationController
   end
 
   def show_path_for_favourite(favourite)
-    path = nil
     case favourite.favourable_type
     when 'Room'
-      path = rooms_path
+      rooms_path
     when 'Building'
-      path = buildings_path
+      buildings_path
     when 'Location'
-      path = locations_path
+      locations_path
     when 'Person'
-      path = people_path
+      people_path
     end
-    path
-    end
+  end
 end
