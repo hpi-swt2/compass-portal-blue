@@ -6,7 +6,7 @@ class FavouritesController < ApplicationController
   def set_favourite_building
     set_favourite(Building)
   end
-  
+
   def set_favourite_location
     set_favourite(Location)
   end
@@ -20,6 +20,7 @@ class FavouritesController < ApplicationController
   end
 
   private
+
   def set_favourite(model)
     instance = model.find(params[:id])
     is_favourite = params[:favourite]
@@ -32,23 +33,21 @@ class FavouritesController < ApplicationController
   end
 
   def make_favourite(instance)
-    if !instance.favourited_by.include? current_user
-      instance.favourited_by << current_user
-    end
+    instance.favourited_by << current_user unless instance.favourited_by.include? current_user
   end
 
   def show_path_for_favourite(favourite)
-      path = nil
-      case favourite.favourable_type
-      when 'Room'
-          path = rooms_path
-      when 'Building'
-          path = buildings_path
-      when 'Location'
-          path = locations_path
-      when 'Person'
-          path = people_path
-      end
-      path
+    path = nil
+    case favourite.favourable_type
+    when 'Room'
+      path = rooms_path
+    when 'Building'
+      path = buildings_path
+    when 'Location'
+      path = locations_path
+    when 'Person'
+      path = people_path
+    end
+    path
     end
 end
