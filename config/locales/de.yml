@@ -13,8 +13,15 @@ de:
     create_new_event: 'Erstelle neues Event'
     email: 'E-Mail'
     username: 'Benutzername'
+    name: 'Name'
     admin?: 'Administrator?'
     user-roles: 'Nutzerrollen'
+    details: 'Details'
+    error: 'Error'
+    back: 'Back'
+    show: 'Show'
+    photo: 'Photo'
+    destroy: 'Destroy'
     buildings: 
         category: "Gebäude"
         create_new: "Neues Gebäude"
@@ -31,5 +38,14 @@ de:
         type: "Raumtyp"
         create_new: "Neuer Raum"
         edit: "Raum bearbeiten"
-        
-        
+    locations:
+        location_error: 'Dieser Standort konnte nicht gespeichert werden:'
+        location_photo: 'Standortfoto'
+        location_latitude: 'Standort Breitengrad'
+        location_longitude: 'Standort Längengrad'
+        openingtimes: 'Öffnungszeiten'
+        add_opening_times: 'Füge Öffnungszeit hinzu'
+        edit: 'Standort anpassen'
+        confirm: 'Sind Sie sicher?'
+        new_location: 'Neuer Standort'
+        home: 'Home'

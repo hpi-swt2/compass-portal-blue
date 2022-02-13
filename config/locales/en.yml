@@ -44,8 +44,15 @@ en:
     create_new_event: 'Create new Event'
     email: 'E-Mail'
     username: 'User name'
+    name: 'Name'
     admin?: 'Admin?'
     user-roles: 'User roles'
+    details: 'Details'
+    error: 'Error'
+    back: 'Back'
+    show: 'Show'
+    photo: 'Photo'
+    destroy: 'Destroy'
     buildings:
         category: "Buildings"
         create_new: "New Building"
@@ -62,4 +69,14 @@ en:
         type: "Room Type"
         create_new: "New Room"
         edit: "Edit Room"
-        
+    locations:
+        location_error: 'prohibited this location from being saved:'
+        location_photo: 'Location Photo'
+        location_latitude: 'Location Latitude'
+        location_longitude: 'Location Longitude'
+        openingtimes: 'Opening times'
+        add_opening_times: 'Add opening time'
+        edit: 'Edit Location'
+        confirm: 'Are you sure?'
+        new_location: 'New Location'
+        home: 'Home'
