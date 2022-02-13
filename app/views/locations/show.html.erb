@@ -11,12 +11,12 @@
     </div>
 
 <p>
-  <strong><%= t(details) %></strong>
+  <strong><%= t(:details) %></strong>
   <%= @location.details %>
 </p>
 
 <p>
-  <strong><%= t(openingtimes): %></strong>
+  <strong><%= t(:openingtimes): %></strong>
   <br>
   <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
     <%= openingtime.day_as_string %>:
@@ -28,7 +28,7 @@
 </p>
 
 <%= link_to map_path(path: "route", dest: @location.name), class: "btn btn-primary" do %>
-  <i class="fas fa-route"></i> <%= t(directions) %>
+  <i class="fas fa-route"></i> <%= t('buildings.directions') %>
 <% end %>
 
 <script id="_latlonginfo" type="application/json">

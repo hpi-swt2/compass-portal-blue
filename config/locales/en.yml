@@ -31,7 +31,10 @@
 
 en:
     hello: 'Hello world'
-    people: 'People'
+    hpi_navigator: 'HPI Navigator'
+    welcome_message: 'Welcome to the HPI Compass Portal'
+    site_title: 'HPI Compass Portal'
+    position: 'Position'
     title-en: 'English'
     title-de: 'German'
     date:
@@ -43,8 +46,17 @@ en:
         next: 'Next'
     create_new_event: 'Create new Event'
     email: 'E-Mail'
+    user:
+        name: 'Username'
+        login: 'Login'
+        openid_login: 'HPI OpenID Log In'
+        local_login: 'Local Login'
+        local_signup: 'Local Sign Up'
+        logging_in: 'Logging in...'
+        forgot_password: 'Forgot your password?'
     username: 'User name'
     name: 'Name'
+    contribute_content: "Contribute Content"
     admin?: 'Admin?'
     user-roles: 'User roles'
     details: 'Details'
@@ -60,12 +72,15 @@ en:
     buildings:
         category: "Buildings"
         create_new: "New Building"
+        add_new: "Add new Building"
         edit: "Edit Building"
         longitude: "Longitude"
         latitude: "Latitude"
         directions: "Directions"
     rooms:
         rooms: "Rooms"
+        add_new: "Add new Room"
+        create: "Create Room"
         floor: "Floor"
         occupancy: "Occupancy"
         free: "free"
@@ -74,13 +89,28 @@ en:
         create_new: "New Room"
         edit: "Edit Room"
     locations:
-        location_error: 'prohibited this location from being saved:'
-        location_photo: 'Location Photo'
-        location_latitude: 'Location Latitude'
-        location_longitude: 'Location Longitude'
+        add_new: "Add new Location"
+        error: 'prohibited this location from being saved:'
+        photo: 'Location Photo'
+        latitude: 'Location Latitude'
+        longitude: 'Location Longitude'
         openingtimes: 'Opening times'
         add_opening_times: 'Add opening time'
         edit: 'Edit Location'
+        create: 'Create Location'
         confirm: 'Are you sure?'
         new_location: 'New Location'
-        home: 'Home'
+    people:
+        people: "people"
+        first_name: "first name"
+        last_name: "last name"
+        add_new: "Add new Person"
+    events:
+        add_new: "Add new Event"
+        import_ics: "Import Events from ICS"
+    cancel: "Cancel"
+    home: "Home"
+    back: "Back"
+    search: "Search"
+    show: "Show"
+    share: "Share"

@@ -1,16 +1,16 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h3 class="fw-light">Contribute Content</h3>
+    <h3 class="fw-light"><%= t('contribute_content') %></h3>
     <%= link_to t("home"), root_url, class: "btn btn-secondary link-btn" %>
 
     <div class="actions mt-3">
-      <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new room", new_room_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new event", new_event_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("people.add_new"), new_person_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("locations.add_new"), new_location_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("rooms.add_new"), new_room_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("buildings.add_new"), new_building_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("events.add_new"), new_event_path, class: 'btn btn-primary link-btn' %>
       <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-        <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
+        <%= button_tag t("events.import_ics"), class: 'btn btn-primary link-btn' %><br>
         <%= file_field_tag :file %>
       <% end %>
     </div>
@@ -26,14 +26,14 @@
       <h4 class="fw-light mt-4 mb-3">Login Details</h4>
 
       <div class="field mb-3">
-        <%= form.label :username, class: 'form-label' %>
+        <%= form.label t('user.name'), class: 'form-label' %>
         <%= form.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
       </div>
 
       <%# If provider is nil, i.e. not set to 'openid_connect', then it's an account with local pw %>
       <% if resource.provider.nil? %>
         <div class="field mb-3">
-          <%= form.label :email, class: 'form-label' %>
+          <%= form.label t('email'), class: 'form-label' %>
           <%= form.text_field :email, class: 'form-control', autocomplete: "email" %>
         </div>
 

@@ -40,23 +40,23 @@
       multiple: false, class: "form-control form-inline" %>
   </div>
 
-    <div>
-      <%= form.label :building_id, class: "form-label" %>
-        <%= form.select 'building_id',
-            options_from_collection_for_select(Building.all, :id, :name),
-            {},
-            multiple: false, class: "form-control" %>
-    </div>
+  <div>
+    <%= form.label :building_id, class: "form-label" %>
+      <%= form.select 'building_id',
+          options_from_collection_for_select(Building.all, :id, :name),
+          {},
+          multiple: false, class: "form-control" %>
+  </div>
 
-    <div>
-      <%= form.label t("people"), class: "form-label" %>
-        <%= form.select 'person_ids',
-            options_from_collection_for_select(Person.all, :id, :name, room.person_ids),
-            {},
-            multiple: true, class: "form-control" %>
-    </div>
+  <div>
+    <%= form.label t('people.people'), class: "form-label" %>
+      <%= form.select 'person_ids',
+          options_from_collection_for_select(Person.all, :id, :name, room.person_ids),
+          {},
+          multiple: true, class: "form-control" %>
+  </div>
 
   <div class="actions mt-3">
-    <%= form.submit class: "btn btn-primary" %>
+    <%= form.submit t('rooms.create'), class: "btn btn-primary" %>
   </div>
 <% end %>

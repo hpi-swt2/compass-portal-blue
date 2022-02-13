@@ -1,25 +1,36 @@
 de:
-    hello: 'Hallo Welt'
-    people: 'Personen'
-    title-en: 'Englisch'
-    title-de: 'Deutsch'
+    hello: "Hallo Welt"
+    hpi_navigator: "HPI Navigator"
+    welcome_message: "Willkommen beim HPI Compass Portal"
+    position: "Position"
+    title-en: "Englisch"
+    title-de: "Deutsch"
     date:
         abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
         month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
     simple_calendar:
-        week: 'Woche'
-        previous: 'Vorherige'
-        next: 'Nächste'
-    create_new_event: 'Erstelle neues Event'
-    email: 'E-Mail'
-    username: 'Benutzername'
-    name: 'Name'
-    admin?: 'Administrator?'
-    user-roles: 'Nutzerrollen'
-    details: 'Details'
-    error: 'Fehler'
-    photo: 'Foto'
-    destroy: 'Löschen'
+        week: "Woche"
+        previous: "Vorherige"
+        next: "Nächste"
+    create_new_event: "Erstelle neues Event"
+    email: "E-Mail"
+    user:
+        name: "Nutzername"
+        login: "Anmelden"
+        openid_login: "HPI OpenID Log In"
+        local_login: "Lokale Anmeldung"
+        local_signup: "Lokale Registrierung"
+        logging_in: "Anmelden..."
+        forgot_password: "Passwort vergessen?"
+    username: "Benutzername"
+    name: "Name"
+    contribute_content: "Inhalt beitragen"
+    admin?: "Administrator?"
+    user-roles: "Nutzerrollen"
+    details: "Details"
+    error: "Fehler"
+    photo: "Foto"
+    destroy: "Löschen"
     cancel: "Abbrechen"
     home: "Startseite"
     back: "Zurück"
@@ -29,12 +40,15 @@ de:
     buildings: 
         category: "Gebäude"
         create_new: "Neues Gebäude"
+        add_new: "Gebäude hinzufügen"
         edit: "Gebäude bearbeiten"
         longitude: "Längengrad"
         latitude: "Breitengrad"
         directions: "Route"
     rooms:
         rooms: "Räume"
+        add_new: "Raum hinzufügen"
+        create: "Raum erstellen"
         floor: "Stockwerk"
         occupancy: "Kapazität"
         free: "frei"
@@ -43,14 +57,28 @@ de:
         create_new: "Neuer Raum"
         edit: "Raum bearbeiten"
     locations:
-        location_error: 'Dieser Standort konnte nicht gespeichert werden:'
-        location_photo: 'Standortfoto'
-        location_latitude: 'Standort Breitengrad'
-        location_longitude: 'Standort Längengrad'
-        openingtimes: 'Öffnungszeiten'
-        add_opening_times: 'Füge Öffnungszeit hinzu'
-        edit: 'Standort anpassen'
-        confirm: 'Sind Sie sicher?'
-        new_location: 'Neuer Standort'
-        home: 'Home'
-    
+        add_new: "Standort hinzufügen"
+        error: "verhinderten das Speichern dieses Standortes:"
+        photo: "Standortfoto"
+        latitude: "Standort Breitengrad"
+        longitude: "Standort Längengrad"
+        openingtimes: "Öffnungszeiten"
+        add_opening_times: "Füge Öffnungszeit hinzu"
+        edit: "Standort anpassen"
+        create: 'Standort erstellen'
+        confirm: "Sind Sie sicher?"
+        new_location: "Neuer Standort"
+    people:
+        people: "Personen"
+        first_name: "Vorname"
+        last_name: "Nachname"
+        add_new: "Person hinzufügen"
+    events:
+        add_new: "Veranstaltung hinzufügen"
+        import_ics: "Veranstaltungen aus ICS importieren"
+    cancel: "Abbrechen"
+    home: "Startseite"
+    back: "Zurück"
+    search: "Suche"
+    show: "Anzeigen"
+    share: "Teilen"
