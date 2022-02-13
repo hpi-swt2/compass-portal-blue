@@ -2,6 +2,7 @@ de:
     hello: "Hallo Welt"
     hpi_navigator: "HPI Navigator"
     welcome_message: "Willkommen beim HPI Compass Portal"
+    site_title: 'HPI Compass Portal'
     position: "Position"
     title-en: "Englisch"
     title-de: "Deutsch"
