@@ -53,6 +53,10 @@ en:
     show: 'Show'
     photo: 'Photo'
     destroy: 'Destroy'
+    cancel: "Cancel"
+    home: "Home"
+    search: "Search"
+    share: "Share"
     buildings:
         category: "Buildings"
         create_new: "New Building"

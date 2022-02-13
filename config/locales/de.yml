@@ -17,11 +17,15 @@ de:
     admin?: 'Administrator?'
     user-roles: 'Nutzerrollen'
     details: 'Details'
-    error: 'Error'
-    back: 'Back'
-    show: 'Show'
-    photo: 'Photo'
-    destroy: 'Destroy'
+    error: 'Fehler'
+    photo: 'Foto'
+    destroy: 'Löschen'
+    cancel: "Abbrechen"
+    home: "Startseite"
+    back: "Zurück"
+    search: "Suche"
+    show: "Anzeigen"
+    share: "Teilen"
     buildings: 
         category: "Gebäude"
         create_new: "Neues Gebäude"
@@ -49,3 +53,4 @@ de:
         confirm: 'Sind Sie sicher?'
         new_location: 'Neuer Standort'
         home: 'Home'
+    
