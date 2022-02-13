@@ -9,7 +9,7 @@ RSpec.describe "Favourite rooms", type: :feature do
 
   it "Favourite button adds room to favourite", js: true do
     visit room_path(@room)
-    page.click("room-favourite")
+    page.find("#room-favourite").click
     visit room_path(@room)
     expect(page.find("#room-favourite")).to have_css("selected")
   end
