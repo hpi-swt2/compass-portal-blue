@@ -11,10 +11,10 @@ RSpec.describe Favourite, type: :model do
   end
 
   it "has a favourable" do
-    favourite = described_class.reflect_on_association(:favorable)
+    described_class.reflect_on_association(:favorable)
   end
 
   it "has a user" do
-    favourite = described_class.reflect_on_association(:user)
+    described_class.reflect_on_association(:user)
   end
 end
