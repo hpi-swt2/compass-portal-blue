@@ -4,7 +4,7 @@
 
     <%= render 'form', building: @building, latitude: @building.location_latitude, longitude: @building.location_longitude%>
 
-    <%= link_to 'Back', buildings_path, class: "btn btn-secondary link-btn" %>
-    <%= link_to 'Show', @building, class: "btn btn-secondary link-btn" %>
+    <%= link_to t("back"), buildings_path, class: "btn btn-secondary link-btn" %>
+    <%= link_to t("show"), @building, class: "btn btn-secondary link-btn" %>
   </div>
 </div>

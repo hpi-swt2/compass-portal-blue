@@ -62,4 +62,9 @@ en:
         type: "Room Type"
         create_new: "New Room"
         edit: "Edit Room"
-        
+    cancel: "Cancel"
+    home: "Home"
+    back: "Back"
+    search: "Search"
+    show: "Show"
+    share: "Share"

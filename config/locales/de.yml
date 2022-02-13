@@ -31,5 +31,9 @@ de:
         type: "Raumtyp"
         create_new: "Neuer Raum"
         edit: "Raum bearbeiten"
-        
-        
+    cancel: "Abbrechen"
+    home: "Startseite"
+    back: "Zurück"
+    search: "Suche"
+    show: "Anzeigen"
+    share: "Teilen"

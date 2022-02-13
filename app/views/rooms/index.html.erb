@@ -31,7 +31,7 @@
               <% end %>
             </td>
             <td class="td-btn"><%= link_to 'Calendar', room_calendar_path(room, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to t("show"), room, class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><% if can? :update, room %><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn"  %><%end%></td>
             <td class="td-btn"><% if can? :destroy, room %><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
           </tr>
