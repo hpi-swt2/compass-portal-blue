@@ -1,6 +1,6 @@
-<h2 class="mb-3 fw-light"><%= 'These are your favourite rooms:' %></h2>
-
 <% if current_user %>
+    <h2 class="mb-3 fw-light"><%= 'These are your favourite rooms:' %></h2>
+
     <% @favourite_rooms.each do |favourite_room| %>
         <ul>
             <li>
@@ -14,7 +14,7 @@
         </ul>
     <% end %>
 <% else %>
-    <p> Login to see your favourite list. </p>
+    <p class="alert alert-danger alert-dismissible fade show"> Login to see your favourite list.</p>
 <% end %>
 
 <script defer>
