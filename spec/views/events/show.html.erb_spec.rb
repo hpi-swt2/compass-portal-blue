@@ -3,7 +3,7 @@ require 'ice_cube'
 
 RSpec.describe "events/show", type: :view do
   before do
-    @start_time = Time.parse("2021-10-20 13:15:00")
+    @start_time = Time.zone.parse("2021-10-20 13:15:00")
     @end_time = @start_time + 3.days
     @event = assign(:event, Event.create!(
                               name: "Name",
@@ -22,7 +22,7 @@ RSpec.describe "events/show", type: :view do
     expect(rendered).to match(/No Room/)
 
     # in_time_zone is needed to convert the time to a `ActiveSupport::TimeWithZone`-object to make it comparable
-    expect(rendered).to include(@start_time.in_time_zone(Time.now.zone).to_s) 
+    expect(rendered).to include(@start_time.in_time_zone(Time.now.zone).to_s)
     expect(rendered).to include(@end_time.in_time_zone(Time.now.zone).to_s)
   end
 end
