@@ -94,7 +94,7 @@ class SearchResultsController < ApplicationController
     lat2_rad = loc2.map { |i| i * rad_per_deg }.first
     a = (Math.sin(((loc2[0] - loc1[0]) * rad_per_deg) / 2)**2) +
         (Math.cos(lat1_rad) * Math.cos(lat2_rad) *
-        (Math.sin((dlon_rad = (loc2[1] - loc1[1]) * rad_per_deg) / 2)**2))
+        (Math.sin(((loc2[1] - loc1[1]) * rad_per_deg) / 2)**2))
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     6_371_000 * c # Delta in meters
   end
@@ -114,6 +114,6 @@ class SearchResultsController < ApplicationController
 
     current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
     @search_results =
-      @search_results.sort_by { |r| distance(current_position, [r.location_latitude, r.location_longitude])}
+      @search_results.sort_by { |r| distance(current_position, [r.location_latitude, r.location_longitude]) }
   end
 end
