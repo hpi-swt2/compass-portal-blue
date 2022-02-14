@@ -16,7 +16,7 @@ class FavouritesController < ApplicationController
   end
 
   def list
-    @favourites = current_user.favourites.order('id DESC')
+    @favourites = current_user.favourites.order('id DESC') if current_user
   end
 
   private
