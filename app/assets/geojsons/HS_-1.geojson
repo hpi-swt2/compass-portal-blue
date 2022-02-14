@@ -122,7 +122,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "Treppe",
+                "name": "Staircase",
                 "level_name": "-1"
             },
             "geometry": {
