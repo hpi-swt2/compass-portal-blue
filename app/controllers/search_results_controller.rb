@@ -45,8 +45,7 @@ class SearchResultsController < ApplicationController
   def add_results(objects, type)
     objects.each do |object|
       result = SearchResult.new(
-        id: @result_id, title: object.name,
-        link: polymorphic_path(object),
+        id: @result_id, title: object.name, link: polymorphic_path(object),
         description: object.respond_to?(:search_description) ? object.search_description : "",
         location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
         location_longitude: object.instance_of?(Person) ? nil : object.location_longitude,
@@ -93,7 +92,7 @@ class SearchResultsController < ApplicationController
   def distance(loc1, loc2)
     rad_per_deg = Math::PI / 180 # PI / 180
     dlat_rad = (loc2[0] - loc1[0]) * rad_per_deg # Delta, converted to rad
-    dlon_rad = (loc2[1] - loc1[1]) * rad_per_d
+    dlon_rad = (loc2[1] - loc1[1]) * rad_per_deg
     lat1_rad = loc1.map { |i| i * rad_per_deg }.first
     lat2_rad = loc2.map { |i| i * rad_per_deg }.first
     a = (Math.sin(dlat_rad / 2)**2) + (Math.cos(lat1_rad) * Math.cos(lat2_rad) * (Math.sin(dlon_rad / 2)**2))
@@ -114,11 +113,10 @@ class SearchResultsController < ApplicationController
       return
     end
 
-    current_position = current_user.last_known_location_with_timestamp[0].split(',')
-    current_position.map(&:to_f)
-    @search_results = @search_results.sort_by { |result|
-      distance(current_position,
-               [result.location_latitude, result.location_longitude])
+    current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
+    @search_results = @search_results.sort_by 
+    { 
+      |result| distance(current_position, [result.location_latitude, result.location_longitude])
     }
   end
 end
