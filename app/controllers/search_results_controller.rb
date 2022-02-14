@@ -6,7 +6,7 @@ class SearchResultsController < ApplicationController
     @search_results ||= []
     @result_id = 1
     return if params[:query].nil?
-
+    
     query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
     return if query.match?(/^_*$/)
 
@@ -109,15 +109,16 @@ class SearchResultsController < ApplicationController
   end
 
   def sort_by_location
-    unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil? && (current_user.last_known_location_with_timestamp[1] >= 1.minute.ago)
+    unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil? && 
+      (current_user.last_known_location_with_timestamp[1] >= 1.minute.ago)
       return
     end
 
     current_position = current_user.last_known_location_with_timestamp[0].split(',')
-    current_position.map { |pos| pos.to_f}
-    @search_results = @search_results.sort_by { |result|
-      distance(current_position,
-               [result.location_latitude, result.location_longitude])
+    current_position.map(&:to_f)
+    @search_results = @search_results.sort_by { 
+      |result| distance(current_position,
+      [result.location_latitude, result.location_longitude])
     }
   end
 end
