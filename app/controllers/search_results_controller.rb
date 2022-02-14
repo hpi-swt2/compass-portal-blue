@@ -44,12 +44,13 @@ class SearchResultsController < ApplicationController
 
   def add_results(objects, type)
     objects.each do |object|
-      @search_results.append(SearchResult.new(id: @result_id, title: object.name,
-                                              link: polymorphic_path(object),
-                                              description: object.respond_to?(:search_description) ? object.search_description : "",
-                                              location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
-                                              location_longitude: object.instance_of?(Person) ? nil : object.location_longitude,
-                                              type: type))
+      result = SearchResult.new(id: @result_id, title: object.name,
+        link: polymorphic_path(object),
+        description: object.respond_to?(:search_description) ? object.search_description : "",
+        location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
+        location_longitude: object.instance_of?(Person) ? nil : object.location_longitude,
+        type: type)
+      @search_results.append(result)
       @result_id += 1
     end
   end
@@ -108,14 +109,15 @@ class SearchResultsController < ApplicationController
   end
 
   def sort_by_location
-    if !current_user.nil? && !current_user.last_known_location_with_timestamp.nil? && (current_user.last_known_location_with_timestamp[1] >= 1.minute.ago)
-      current_position = current_user.last_known_location_with_timestamp[0].split(',')
-      current_position[0] = current_position[0].to_f
-      current_position[1] = current_position[1].to_f
-      @search_results = @search_results.sort_by {|result|
-        distance(current_position,
-                 [result.location_latitude, result.location_longitude])
-      }
-      end
+    unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil? && (current_user.last_known_location_with_timestamp[1] >= 1.minute.ago)
+      return
+    end
+    current_position = current_user.last_known_location_with_timestamp[0].split(',')
+    current_position[0] = current_position[0].to_f
+    current_position[1] = current_position[1].to_f
+    @search_results = @search_results.sort_by { |result|
+      distance(current_position,
+                [result.location_latitude, result.location_longitude])
+    }
   end
 end
