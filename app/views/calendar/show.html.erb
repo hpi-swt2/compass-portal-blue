@@ -2,7 +2,7 @@
 <%= week_calendar(number_of_weeks: 1, events: @events) do |date, events| %>
   <%= date.day %>
   <% events.each do |event| %>
-      <div class="content <%= event.id == @highlighted_event_id ? "highlighted_event" : "" %>">
+      <div class="content <%= 'highlighted_event' if @highlighted_event_id == event.id %>">
         <%= event.start_hour_minute %>
         <%= event.name %>
       </div>
