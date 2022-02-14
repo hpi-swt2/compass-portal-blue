@@ -39,7 +39,7 @@
           <td><%= event.rule %></td>
           <td><%= link_to t("show"), event %></td>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>
-          <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: t(:confirm) } %></td>
         </tr>
       <% end %>
     </tbody>

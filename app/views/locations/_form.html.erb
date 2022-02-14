@@ -37,7 +37,7 @@
   </div>
 
   <div class="field mb-3 opening-times-container">
-    <%= form.label t('locations.openingtimes'), class: 'form-label' %>
+    <%= form.label t('locations.openingtime.other'), class: 'form-label' %>
     <%= form.fields_for :openingtimes do |o| %>
       <div class="field mb-3 input-group" id="opening-time-field-<%= o.object.id %>">
         <%= o.select 'day',
@@ -56,12 +56,12 @@
       </div>
     <% end %>
     <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);">
-      <i class="fas fa-plus"></i> <%= t('locations.add_opening_times') %>
+      <i class="fas fa-plus"></i> <%= t(:add_new, model: t('locations.openingtime.one')) %>
     </button>
   </div>
 
   <div class="actions mt-3">
-    <%= form.submit t('locations.create'), class: "btn btn-primary" %>
+    <%= form.submit t(:create_model, model: t('locations.one')), class: "btn btn-primary" %>
   </div>
 
   <script defer>

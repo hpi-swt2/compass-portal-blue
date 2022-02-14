@@ -13,6 +13,7 @@ de:
     create_new_event: "Erstelle neues Event"
     email: "E-Mail"
     user:
+        one: 'Nutzer'
         name: "Nutzername"
         login: "Anmelden"
         signup: "Registrieren"
@@ -39,37 +40,36 @@ de:
     show: "Anzeigen"
     share: "Teilen"
     add_new: "%{model} hinzufügen"
+    edit_model: "%{model} bearbeiten"
+    create_model: "%{model} erstellen"
+    confirm: "Sind Sie sicher?"
     buildings:
         one: "Gebäude"
-        category: "Gebäude"
-        create_new: "Neues Gebäude"
-        edit: "Gebäude bearbeiten"
+        other: "Gebäude"
+        new: "Neues Gebäude"
         longitude: "Längengrad"
         latitude: "Breitengrad"
         directions: "Route"
     rooms:
         one: "Raum"
-        rooms: "Räume"
-        create: "Raum erstellen"
+        other: "Räume"
+        new: "Neuer Raum"
         floor: "Stockwerk"
         occupancy: "Kapazität"
         free: "frei"
         occupied: "besetzt"
         type: "Raumtyp"
-        create_new: "Neuer Raum"
-        edit: "Raum bearbeiten"
     locations:
         one: "Standort"
+        other: "Standorte"
+        new: "Neuer Standort"
         error: "verhinderten das Speichern dieses Standortes:"
         photo: "Standortfoto"
         latitude: "Standort Breitengrad"
         longitude: "Standort Längengrad"
-        openingtimes: "Öffnungszeiten"
-        add_opening_times: 'Öffnungszeit hinzufügen'
-        edit: "Standort anpassen"
-        create: 'Standort erstellen'
-        confirm: "Sind Sie sicher?"
-        new_location: "Neuer Standort"
+        openingtime:
+            one: "Öffnungszeit"
+            other: "Öffnungszeiten"
     people:
         one: "Person"
         people: "Personen"

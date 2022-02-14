@@ -47,6 +47,7 @@ en:
     create_new_event: 'Create new Event'
     email: 'E-Mail'
     user:
+        one: 'User'
         name: 'Username'
         login: 'Login'
         signup: "Sign Up"
@@ -73,37 +74,36 @@ en:
     search: "Search"
     share: "Share"
     add_new: "Add new %{model}"
+    edit_model: "Edit %{model}"
+    create_model: "Create %{model}"
+    confirm: 'Are you sure?'
     buildings:
         one: "Building"
-        category: "Buildings"
-        create_new: "New Building"
-        edit: "Edit Building"
+        other: "Buildings"
+        new: "New Building"
         longitude: "Longitude"
         latitude: "Latitude"
         directions: "Directions"
     rooms:
         one: "Room"
-        rooms: "Rooms"
-        create: "Create Room"
+        other: "Rooms"
+        new: "New Room"
         floor: "Floor"
         occupancy: "Occupancy"
         free: "free"
         occupied: "occupied"
         type: "Room Type"
-        create_new: "New Room"
-        edit: "Edit Room"
     locations:
         one: "Location"
+        other: "Locations"
+        new: 'New Location'
         error: 'prohibited this location from being saved:'
         photo: 'Location Photo'
         latitude: 'Location Latitude'
         longitude: 'Location Longitude'
-        openingtimes: 'Opening times'
-        add_opening_times: 'Add opening time'
-        edit: 'Edit Location'
-        create: 'Create Location'
-        confirm: 'Are you sure?'
-        new_location: 'New Location'
+        openingtime: 
+            one: 'Opening time'
+            other: 'Opening times'
     people:
         one: "Person"
         people: "people"

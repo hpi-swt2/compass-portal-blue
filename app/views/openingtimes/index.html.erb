@@ -21,7 +21,7 @@
         <td><%= openingtime.day %></td>
         <td class="td-btn"><%= link_to t("show"), openingtime, class: "btn btn-secondary link-btn" %></td>
         <td class="td-btn"><%= link_to 'Edit', edit_openingtime_path(openingtime), class: "btn btn-secondary link-btn" %></td>
-        <td class="td-btn"><%= link_to 'Destroy', openingtime, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+        <td class="td-btn"><%= link_to 'Destroy', openingtime, method: :delete, data: { confirm: t(:confirm) }, class: "btn btn-secondary link-btn" %></td>
       </tr>
     <% end %>
   </tbody>

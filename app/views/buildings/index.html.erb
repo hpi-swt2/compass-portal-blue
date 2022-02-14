@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="fw-light"><%= t("buildings.category")%></h1>
+<h1 class="fw-light"><%= t("buildings.other")%></h1>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -21,7 +21,7 @@
           <td><%= building.location_longitude %></td>
           <td class="td-btn"><%= link_to t("show"), building, class: "btn btn-secondary link-btn" %></td>
           <td class="td-btn"><% if can? :update, building %><%= link_to 'Edit', edit_building_path(building), class: "btn btn-secondary link-btn" %><%end%></td>
-          <td class="td-btn"><% if can? :destroy, building %><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><% if can? :destroy, building %><%= link_to 'Destroy', building, method: :delete, data: { confirm: t(:confirm) }, class: "btn btn-secondary link-btn" %><%end%></td>
         </tr>
       <% end %>
     </tbody>
