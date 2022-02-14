@@ -33,14 +33,6 @@ class Person < ApplicationRecord
     "E-Mail: #{email}"
   end
 
-  def location_latitude
-    nil
-  end
-
-  def location_longitude
-    nil
-  end
-
   private
 
   def normalize_phone_number

@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-hausZ = Building.create!(name: "Zebragebäude", location_latitude: 0.1674, location_longitude: 0.2345)
 hsg = Building.create!(name: "Hörsaalgebäude", location_latitude: 0.5321, location_longitude: 0.8763)
 hptg = Building.create!(name: "Hauptgebäude", location_latitude: 0.1674, location_longitude: 0.2345)
 Room.create!(name: "Hörsaal1", floor: 0, room_type: "lecture-hall", building: hsg, location_latitude: 0.5322,
