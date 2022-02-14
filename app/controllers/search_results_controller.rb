@@ -45,11 +45,10 @@ class SearchResultsController < ApplicationController
   def add_results(objects, type)
     objects.each do |object|
       result = SearchResult.new(
-        id: @result_id, title: object.name, link: polymorphic_path(object),
+        id: @result_id, title: object.name, link: polymorphic_path(object), type: type,
         description: object.respond_to?(:search_description) ? object.search_description : "",
         location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
         location_longitude: object.instance_of?(Person) ? nil : object.location_longitude,
-        type: type
       )
       @search_results.append(result)
       @result_id += 1
