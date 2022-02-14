@@ -49,11 +49,14 @@ en:
     user:
         name: 'Username'
         login: 'Login'
-        openid_login: 'HPI OpenID Log In'
+        signup: "Sign Up"
+        openid_connect_login: 'HPI OpenID Log In'
         local_login: 'Local Login'
         local_signup: 'Local Sign Up'
         logging_in: 'Logging in...'
         forgot_password: 'Forgot your password?'
+        displayed_name: 'your displayed name'
+        password_min_characters: '%{minimum_password_length} characters minimum'
     username: 'User name'
     name: 'Name'
     contribute_content: "Contribute Content"
@@ -69,17 +72,18 @@ en:
     home: "Home"
     search: "Search"
     share: "Share"
+    add_new: "Add new %{model}"
     buildings:
+        one: "Building"
         category: "Buildings"
         create_new: "New Building"
-        add_new: "Add new Building"
         edit: "Edit Building"
         longitude: "Longitude"
         latitude: "Latitude"
         directions: "Directions"
     rooms:
+        one: "Room"
         rooms: "Rooms"
-        add_new: "Add new Room"
         create: "Create Room"
         floor: "Floor"
         occupancy: "Occupancy"
@@ -89,7 +93,7 @@ en:
         create_new: "New Room"
         edit: "Edit Room"
     locations:
-        add_new: "Add new Location"
+        one: "Location"
         error: 'prohibited this location from being saved:'
         photo: 'Location Photo'
         latitude: 'Location Latitude'
@@ -101,12 +105,12 @@ en:
         confirm: 'Are you sure?'
         new_location: 'New Location'
     people:
+        one: "Person"
         people: "people"
         first_name: "first name"
         last_name: "last name"
-        add_new: "Add new Person"
     events:
-        add_new: "Add new Event"
+        one: "Event"
         import_ics: "Import Events from ICS"
     cancel: "Cancel"
     home: "Home"

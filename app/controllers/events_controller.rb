@@ -78,7 +78,7 @@ class EventsController < ApplicationController
   def import_ics(file)
     if File.extname(file.path) == ".ics"
       Event.import(file)
-      redirect_to edit_user_registration_path, notice: "Imported Events from ICS"
+      redirect_to edit_user_registration_path, notice: "Events were successfully imported from ICS"
     else
       redirect_to edit_user_registration_path, alert: "Only ICS files can be imported"
     end

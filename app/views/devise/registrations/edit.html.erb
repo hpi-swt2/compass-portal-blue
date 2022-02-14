@@ -4,15 +4,18 @@
     <%= link_to t("home"), root_url, class: "btn btn-secondary link-btn" %>
 
     <div class="actions mt-3">
-      <%= link_to t("people.add_new"), new_person_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("locations.add_new"), new_location_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("rooms.add_new"), new_room_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("buildings.add_new"), new_building_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("events.add_new"), new_event_path, class: 'btn btn-primary link-btn' %>
-      <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-        <%= button_tag t("events.import_ics"), class: 'btn btn-primary link-btn' %><br>
-        <%= file_field_tag :file %>
-      <% end %>
+      <%= link_to t("add_new", model: t('people.one')), new_person_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("add_new", model: t('locations.one')), new_location_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("add_new", model: t('rooms.one')), new_room_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("add_new", model: t('buildings.one')), new_building_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("add_new", model: t('events.one')), new_event_path, class: 'btn btn-primary link-btn' %>
+      
+      <div class="field">
+        <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
+          <%= button_tag t("events.import_ics"), class: 'btn btn-primary link-btn' %><br>
+          <%= file_field :file, class: "form-control" %>
+        <% end %>
+      </div>
     </div>
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>

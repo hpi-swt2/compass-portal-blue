@@ -9,7 +9,7 @@
         disabled: user_signed_in?,
         # disable button after click: https://apidock.com/rails/ActionView/Helpers/UrlHelper/button_to
         data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> #{t('user.logging_in')}"}) do %>
-            <i class="fab fa-openid"></i> <%= t('user.openid_login') %>
+            <i class="fab fa-openid"></i> <%= t('user.openid_connect_login') %>
         <% end %>
         </p>
         <hr>
