@@ -170,9 +170,9 @@ RSpec.describe "Search result list page", type: :feature do
   it "sorts results alphabetically by default" do
     visit search_results_path(query: "Building")
     expect(page).to have_css('img[src*="sort_alphabetically"]')
-  end 
+  end
 
-  it "can sort results by location" do 
+  it "can sort results by location" do
     visit search_results_path(query: "Building", sort_location: "true")
     expect(page).to have_css('img[src*="sort_location"]')
   end

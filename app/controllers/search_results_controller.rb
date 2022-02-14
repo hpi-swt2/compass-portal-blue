@@ -11,16 +11,14 @@ class SearchResultsController < ApplicationController
     return if query.match?(/^_*$/)
 
     search_for query
-    if params[:sort_location].nil?
-      @sort_location = "false"
-    else
-      @sort_location = params[:sort_location]
-    end
+    @sort_location = if params[:sort_location].nil?
+                       "false"
+                     else
+                       params[:sort_location]
+                     end
     @search_query = params[:query]
-    @search_results = @search_results.sort_by{|result| result.title}
-    if @sort_location
-      sort_by_location
-    end
+    @search_results = @search_results.sort_by {|result| result.title}
+    sort_by_location if @sort_location
   end
 
   def create
@@ -66,14 +64,14 @@ class SearchResultsController < ApplicationController
     end
   end
 
-  def search_for query
+  def search_for(query)
     search_rooms_by_name_or_type query
     search_people_by_full_name query
     search_locations_by_name_or_details query
-    search_by_name query 
+    search_by_name query
   end
 
-  def search_by_name query
+  def search_by_name(query)
     # New Models that can be searched for by name can simply be added in this collection
     searchable_records = [Building]
 
@@ -84,52 +82,47 @@ class SearchResultsController < ApplicationController
     end
   end
 
-  def search_people_by_full_name query
+  def search_people_by_full_name(query)
     people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?", "%#{query}%")
     add_results(people, "person")
   end
 
-  def search_rooms_by_name_or_type query
+  def search_rooms_by_name_or_type(query)
     rooms = Room.where("LOWER(name) LIKE ? OR LOWER(room_type) LIKE ?", "%#{query}%", "%#{query}%")
     add_results(rooms, "room")
   end
 
-  def search_locations_by_name_or_details query
+  def search_locations_by_name_or_details(query)
     locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ?", "%#{query}%", "%#{query}%")
     add_results(locations, "location")
   end
 
-  
-  
   def distance(loc1, loc2)
-    rad_per_deg = Math::PI/180  # PI / 180
+    rad_per_deg = Math::PI / 180 # PI / 180
     rkm         = 6371          # Earth radius in kilometers
     rm          = rkm * 1000    # Radius in meters
 
-    dlat_rad    = (loc2[0]-loc1[0]) * rad_per_deg # Delta, converted to rad
-    dlon_rad    = (loc2[1]-loc1[1]) * rad_per_deg
+    dlat_rad    = (loc2[0] - loc1[0]) * rad_per_deg # Delta, converted to rad
+    dlon_rad    = (loc2[1] - loc1[1]) * rad_per_deg
 
     lat1_rad    = loc1.map {|i| i * rad_per_deg }.first
     lat2_rad    = loc2.map {|i| i * rad_per_deg }.first
 
-    a           = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
-    c           = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+    a           = (Math.sin(dlat_rad / 2)**2) + (Math.cos(lat1_rad) * Math.cos(lat2_rad) * (Math.sin(dlon_rad / 2)**2))
+    c           = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
     rm * c # Delta in meters
   end
 
   def sort_by_location
-    unless current_user.nil?
-      unless current_user.last_known_location_with_timestamp.nil?
-        if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
-          current_position = current_user.last_known_location_with_timestamp[0].split(',')
-          current_position[0] = current_position[0].to_f
-          current_position[1] = current_position[1].to_f
-          @search_results = @search_results.sort_by{|result| distance(current_position, 
-            [result.location_latitude, result.location_longitude])}
-        end
+    if !current_user.nil? && !current_user.last_known_location_with_timestamp.nil? && (current_user.last_known_location_with_timestamp[1] >= 1.minute.ago)
+      current_position = current_user.last_known_location_with_timestamp[0].split(',')
+      current_position[0] = current_position[0].to_f
+      current_position[1] = current_position[1].to_f
+      @search_results = @search_results.sort_by {|result|
+        distance(current_position,
+                 [result.location_latitude, result.location_longitude])
+      }
       end
-    end
   end
-
 end
