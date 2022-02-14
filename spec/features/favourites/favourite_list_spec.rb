@@ -36,17 +36,16 @@ RSpec.describe "Favourites list", type: :feature do
 
   it "Delete button unfavourites room", js: true do
     visit get_favourites_path
-    sleep(0.5)
     page.find(".delbttn[data-favourable-type='rooms']").click
     sleep(0.5)
     visit get_favourites_path
-    sleep(0.5)
     expect(page).not_to have_css(".delbttn[data-favourable-type='rooms']")
   end
 
   it "Delete button unfavourites building", js: true do
     visit get_favourites_path
     page.find(".delbttn[data-favourable-type='buildings']").click
+    sleep(0.5)
     visit get_favourites_path
     expect(page).not_to have_css(".delbttn[data-favourable-type='buildings']")
   end
@@ -54,6 +53,7 @@ RSpec.describe "Favourites list", type: :feature do
   it "Delete button unfavourites location", js: true do
     visit get_favourites_path
     page.find(".delbttn[data-favourable-type='locations']").click
+    sleep(0.5)
     visit get_favourites_path
     expect(page).not_to have_css(".delbttn[data-favourable-type='locations']")
   end
@@ -61,6 +61,7 @@ RSpec.describe "Favourites list", type: :feature do
   it "Delete button unfavourites person", js: true do
     visit get_favourites_path
     page.find(".delbttn[data-favourable-type='people']").click
+    sleep(0.5)
     visit get_favourites_path
     expect(page).not_to have_css(".delbttn[data-favourable-type='people']")
   end
