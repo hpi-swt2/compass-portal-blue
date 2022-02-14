@@ -1,3 +1,10 @@
+<% if current_user %>
+<button id="room-favourite" class="favourite <% if @room.favourited_by.include?(current_user) %> selected <% end %>" title="<%= t('favourite') %>">
+    <i class="far fa-heart"></i>
+    <i class="fas fa-heart"></i>
+</button>
+<% end %>
+
 <div class="row">
     <div class="col-md-4">
         <h2 class="mb-3 fw-light"><%= @room.name %></h2>
@@ -83,4 +90,34 @@
 
 <script id="_floorinfo" type="application/json">
 <%= @room.floor %>
+</script>
+
+<script defer>
+  $('#room-favourite').click(async function (e) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
+    let becomesFavourite = !e.currentTarget.classList.contains("selected");
+
+    const body = JSON.stringify({
+      favourite: becomesFavourite
+    });
+    const response = await fetch(
+      `/rooms/<%= @room.id %>/favourite`,
+      {
+        method: "PUT",
+        body: body,
+        headers: {
+          "X-CSRF-TOKEN": csrfToken,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.assert(response.status === 204); // HTTP "No content"
+
+    if(becomesFavourite) {
+      e.currentTarget.classList.add("selected")
+    } else {
+      e.currentTarget.classList.remove("selected")
+    }
+
+  })
 </script>
