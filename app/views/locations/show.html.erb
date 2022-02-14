@@ -1,3 +1,10 @@
+<% if current_user %>
+<button id="location-favourite" class="favourite <% if @location.favourited_by.include?(current_user) %> selected <% end %>" title="<%= t('favourite') %>">
+    <i class="far fa-heart"></i>
+    <i class="fas fa-heart"></i>
+</button>
+<% end %>
+
 <h2 class="mb-3 fw-light"><%= @location.name %></h2>
 
 <div class='edit-location-photo'>
@@ -33,4 +40,34 @@
 
 <script id="_latlonginfo" type="application/json">
 [<%= @location.location_latitude %>,<%= @location.location_longitude %>]
+</script>
+
+<script defer>
+  $('#location-favourite').click(async function (e) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
+    let becomesFavourite = !e.currentTarget.classList.contains("selected");
+
+    const body = JSON.stringify({
+      favourite: becomesFavourite
+    });
+    const response = await fetch(
+      `/locations/<%= @location.id %>/favourite`,
+      {
+        method: "PUT",
+        body: body,
+        headers: {
+          "X-CSRF-TOKEN": csrfToken,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.assert(response.status === 204); // HTTP "No content"
+
+    if(becomesFavourite) {
+      e.currentTarget.classList.add("selected")
+    } else {
+      e.currentTarget.classList.remove("selected")
+    }
+
+  })
 </script>
