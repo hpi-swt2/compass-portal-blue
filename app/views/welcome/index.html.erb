@@ -10,7 +10,12 @@
           <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :autocomplete => :off %>
         <button type="submit" class="btn"><i class="fa fa-search"></i></button>
       </div>
-      <button type="button" class="btn" id="toggle-overlay">
+      <% if current_user %>
+      <button type="button" class="btn f-bttn" id="favourite-list-button">
+        <i class="fas fa-th-list"></i>
+      </button>
+      <% end %>
+      <button type="button" class="btn f-bttn" id="toggle-overlay">
         <i class="fas fa-chevron-up"></i>
       </button>
     <% end %>
@@ -35,6 +40,13 @@ $('#toggle-overlay').click(function(event) {
     event.preventDefault();
     $("#_overlay").toggleClass('open');
     $("#toggle-overlay").toggleClass('open');
+});
+
+$('#favourite-list-button').click(function (event) {
+    $("#_overlay").addClass('open');
+    $("#toggle-overlay").addClass('visible');
+    $("#toggle-overlay").addClass('open');
+    ajaxCall(event, '/favourites');
 });
 
 function ajaxBack() {

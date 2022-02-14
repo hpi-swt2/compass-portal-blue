@@ -5,103 +5,152 @@
 @import "colors";
 
 .occupancy {
-    text-align: center;
-    border-radius: 5px;
-    padding: 0 5px 0 5px;
-    width: 100px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0 5px 0 5px;
+  width: 100px;
 }
 
 .occupancy.free {
-    background-color: $green;
+  background-color: $green;
 }
 
 .occupancy.occupied {
-    background-color: $pink;
+  background-color: $pink;
 }
 
 .name {
-    font-size: xx-large;
+  font-size: xx-large;
 }
-
-
 
 @import "simple_calendar";
 
 table.roomsList #roomName {
-    padding-left: 150px;
-    padding-right: 15px;
+  padding-left: 150px;
+  padding-right: 15px;
 }
 table.roomsList #normalRow {
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-header{
-    font-size: large;
+header {
+  font-size: large;
 }
 
-collapse{
-    height: auto;
+collapse {
+  height: auto;
 }
 
 .simple-calendar {
-    font-family: verdana, arial, helvetica, sans-serif;
-    font-size: medium;
-    .day {
-        font-family: helvetica;
-        font-size: small;
-    }
-    .content{
-        font-size: small;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: medium;
+  .day {
+    font-family: helvetica;
+    font-size: small;
+  }
+  .content {
+    font-size: small;
+  }
+
+  .wday-0 {
+    font-size: small;
+  }
+  .wday-1 {
+    font-size: small;
+  }
+  .wday-2 {
+    font-size: small;
+  }
+  .wday-3 {
+    font-size: small;
+  }
+  .wday-4 {
+    font-size: small;
+  }
+  .wday-5 {
+    font-size: small;
+  }
+  .wday-6 {
+    font-size: small;
+  }
+
+  .today {
+    background-color: cornflowerblue;
+  }
+  .past {
+    font-size: small;
+  }
+  .future {
+    font-size: small;
+  }
+
+  .start-date {
+    font-size: small;
+  }
+
+  .prev-month {
+    font-size: small;
+  }
+  .next-month {
+    font-size: small;
+  }
+  .current-month {
+    font-size: small;
+  }
+
+  .has-events {
+    font-size: small;
+  }
+}
+
+.favourite {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #a5a5a5;
+  outline: none !important;
+
+  svg[data-prefix="fas"] {
+    display: none;
+  }
+
+  svg[data-prefix="far"] {
+    display: block;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &.selected {
+    color: #cc3311;
+    animation: like-popup 1s;
+
+    svg[data-prefix="fas"] {
+      display: block;
     }
 
-    .wday-0 {
-        font-size: small;
+    svg[data-prefix="far"] {
+      display: none;
     }
-    .wday-1 {
-        font-size: small;
-    }
-    .wday-2 {
-        font-size: small;
-    }
-    .wday-3 {
-        font-size: small;
-    }
-    .wday-4 {
-        font-size: small;
-    }
-    .wday-5 {
-        font-size: small;
-    }
-    .wday-6 {
-        font-size: small;
-    }
-  
-    .today {
-        background-color: cornflowerblue;
-    }
-    .past {
-        font-size: small;
-    }
-    .future {
-        font-size: small;
-    }
-  
-    .start-date {
-        font-size: small;
-    }
-  
-    .prev-month {
-        font-size: small;
-    }
-    .next-month {
-        font-size: small;
-    }
-    .current-month {
-        font-size: small;
-    }
-  
-    .has-events {
-        font-size: small;
+
+    @keyframes like-popup {
+      0% {
+        transform: scale(1);
+      }
+      10% {
+        transform: scale(0.8);
+      }
+      60% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
   }
+}

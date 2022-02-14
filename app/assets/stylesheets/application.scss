@@ -82,7 +82,7 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
     flex-direction: row;
     align-items: center;
 
-    #toggle-overlay {
+    .f-bttn {
       margin-left: 0.4rem;
       align-items: center;
       justify-content: center;
@@ -90,8 +90,11 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
       height: 3rem;
       width: 3rem;
       border-radius: 1.5rem;
-      transition: transform 0.3s;
+    }
+
+    #toggle-overlay {
       display: none;
+      transition: transform 0.3s;
 
       &.visible {
         display: flex;
@@ -167,6 +170,7 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 
   #browse-outlet {
     width: 100%;
+    position: relative;
   }
 
   @media only screen and (max-width: $mobile-break-point) {
