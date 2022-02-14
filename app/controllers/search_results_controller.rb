@@ -114,8 +114,7 @@ class SearchResultsController < ApplicationController
     end
 
     current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
-    @search_results = @search_results.sort_by 
-    { 
+    @search_results = @search_results.sort_by { 
       |result| distance(current_position, [result.location_latitude, result.location_longitude])
     }
   end
