@@ -50,7 +50,8 @@ class SearchResultsController < ApplicationController
         description: object.respond_to?(:search_description) ? object.search_description : "",
         location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
         location_longitude: object.instance_of?(Person) ? nil : object.location_longitude,
-        type: type)
+        type: type
+      )
       @search_results.append(result)
       @result_id += 1
     end
@@ -97,7 +98,7 @@ class SearchResultsController < ApplicationController
     lat2_rad = loc2.map { |i| i * rad_per_deg }.first
     a = (Math.sin(dlat_rad / 2)**2) + (Math.cos(lat1_rad) * Math.cos(lat2_rad) * (Math.sin(dlon_rad / 2)**2))
     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    6371000 * c # Delta in meters
+    6_371_000 * c # Delta in meters
   end
 
   def sort_search_results
@@ -111,11 +112,12 @@ class SearchResultsController < ApplicationController
     unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil? && (current_user.last_known_location_with_timestamp[1] >= 1.minute.ago)
       return
     end
+
     current_position = current_user.last_known_location_with_timestamp[0].split(',')
     current_position.map { |pos| pos.to_f}
     @search_results = @search_results.sort_by { |result|
       distance(current_position,
-                [result.location_latitude, result.location_longitude])
+               [result.location_latitude, result.location_longitude])
     }
   end
 end
