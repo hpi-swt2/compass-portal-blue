@@ -166,4 +166,14 @@ RSpec.describe "Search result list page", type: :feature do
     visit search_results_path(query: "  \n. \t")
     expect(page).to have_css('div#no_results_message')
   end
+
+  it "sorts results alphabetically by default" do
+    visit search_results_path(query: "Building")
+    expect(page).to have_css('img[src*="sort_alphabetically"]')
+  end 
+
+  it "can sort results by location" do 
+    visit search_results_path(query: "Building", sort_location: "true")
+    expect(page).to have_css('img[src*="sort_location"]')
+  end
 end

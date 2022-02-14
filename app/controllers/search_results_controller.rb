@@ -19,17 +19,7 @@ class SearchResultsController < ApplicationController
     @search_query = params[:query]
     @search_results = @search_results.sort_by{|result| result.title}
     if @sort_location
-      unless current_user.nil?
-        unless current_user.last_known_location_with_timestamp.nil?
-          if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
-            current_position = current_user.last_known_location_with_timestamp[0].split(',')
-            current_position[0] = current_position[0].to_f
-            current_position[1] = current_position[1].to_f
-            @search_results = @search_results.sort_by{|result| distance(current_position, 
-              [result.location_latitude, result.location_longitude])}
-          end
-        end
-      end
+      sort_by_location
     end
   end
 
@@ -126,6 +116,20 @@ class SearchResultsController < ApplicationController
     c           = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
 
     rm * c # Delta in meters
+  end
+
+  def sort_by_location
+    unless current_user.nil?
+      unless current_user.last_known_location_with_timestamp.nil?
+        if current_user.last_known_location_with_timestamp[1] >= Time.zone.now - 1.minutes
+          current_position = current_user.last_known_location_with_timestamp[0].split(',')
+          current_position[0] = current_position[0].to_f
+          current_position[1] = current_position[1].to_f
+          @search_results = @search_results.sort_by{|result| distance(current_position, 
+            [result.location_latitude, result.location_longitude])}
+        end
+      end
+    end
   end
 
 end

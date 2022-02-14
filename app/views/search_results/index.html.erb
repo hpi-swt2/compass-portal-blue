@@ -11,11 +11,11 @@
     </div>
     <% if @sort_location == "true"  %>
     <div class="col-1">
-      <%= link_to image_tag("sort_location.png", height: '25', width: '25', :class => "sort_button"), search_results_path(sort_location: false, query: @search_query)%>
+      <%= link_to image_tag("sort_location.png", height: '25', width: '25', :class => "sort_button"), search_results_path(sort_location: "false", query: @search_query)%>
     </div>
     <% elsif @sort_location == "false" %>
     <div class="col-1">
-      <%= link_to image_tag("sort_alphabetically.png", height: '25', width: '25', :class => "sort_button"), search_results_path(sort_location: true, query: @search_query)%>
+      <%= link_to image_tag("sort_alphabetically.png", height: '25', width: '25', :class => "sort_button"), search_results_path(sort_location: "true", query: @search_query)%>
     </div>
     <% end %>
   </div> 
