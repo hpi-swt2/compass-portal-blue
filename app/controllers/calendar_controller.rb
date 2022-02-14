@@ -4,7 +4,7 @@ class CalendarController < ApplicationController
   # GET /calendar
   def show
     start_date = params[:start_date].to_date
-    @month = Date::MONTHNAMES[start_date.month]
+    @month = start_date.month
     @year = start_date.year
     @events = Event.generate_calendar_events(Event.all,
                                              start_date.beginning_of_month.beginning_of_week,
@@ -12,6 +12,6 @@ class CalendarController < ApplicationController
   end
 
   def set_highlighted_event
-    @highlighted_event_id = params[:event_id] if params.key?(:event_id)
+    @highlighted_event_id = params[:event_id].to_i if params.key?(:event_id)
   end
 end

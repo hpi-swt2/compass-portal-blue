@@ -1,8 +1,8 @@
-<h1><%= @month %> <%= @year %></h1>
+<h1><%= t('date.month_names')[@month] %> <%= @year %></h1>
 <%= week_calendar(number_of_weeks: 1, events: @events) do |date, events| %>
   <%= date.day %>
   <% events.each do |event| %>
-      <div class="content <%= event.id.to_s == @highlighted_event_id ? "highlighted_event" : "" %>">
+      <div class="content <%= event.id == @highlighted_event_id ? "highlighted_event" : "" %>">
         <%= event.start_hour_minute %>
         <%= event.name %>
       </div>
