@@ -35,17 +35,4 @@ class FavouritesController < ApplicationController
   def make_favourite(instance)
     instance.favourited_by << current_user unless instance.favourited_by.include? current_user
   end
-
-  def show_path_for_favourite(favourite)
-    case favourite.favourable_type
-    when 'Room'
-      rooms_path
-    when 'Building'
-      buildings_path
-    when 'Location'
-      locations_path
-    when 'Person'
-      people_path
-    end
-  end
 end
