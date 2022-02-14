@@ -31,6 +31,7 @@ RSpec.describe "calendar/show", type: :view do
 
   it "has events highlighted correctly" do
     render
+    p rendered
     expect(rendered).to have_css(".highlighted_event", text: @events.first.name)
     expect(rendered).not_to have_css(".highlighted_event", text: @events.second.name)
   end
