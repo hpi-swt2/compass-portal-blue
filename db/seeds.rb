@@ -18,16 +18,16 @@ buildings_json["features"].each do | building |
     building_obj = Building.create!(name: building["properties"]["name"], location_latitude: lat, location_longitude: long)
 
     Dir.foreach('app/assets/geojsons') do |filename|
-        next if filename == '.' or filename == '..' or !filename.start_with?("#{building["properties"]["letter"]}")
+        next if filename == '.' or filename == '..' or !filename.include?("#{building["properties"]["letter"]}")
         file = File.read("app/assets/geojsons/#{filename}")
         json = JSON.parse(file)
         json["features"].each do | feature |
-            if feature["properties"]["indoor"] === 'room' && feature["properties"]["name"]
+            if feature["properties"]["indoor"] === 'room' && feature["properties"]["name-en"] && feature["properties"]["building"] && building["properties"]["letter"] == feature["properties"]["building"]
                 long, lat = avg(feature["geometry"]["coordinates"][0])
                 Room.create!(
-                    name: feature["properties"]["name"],
+                    name: feature["properties"]["name-en"],
                     floor: Integer(feature["properties"]["level_name"]),
-                    room_type: "lecture-hall",
+                    room_type: feature["properties"]["type"],
                     building: building_obj,
                     location_latitude: lat,
                     location_longitude: long
