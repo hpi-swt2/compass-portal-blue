@@ -36,8 +36,11 @@ RSpec.describe "Favourites list", type: :feature do
 
   it "Delete button unfavourites room", js: true do
     visit get_favourites_path
+    sleep(0.5)
     page.find(".delbttn[data-favourable-type='rooms']").click
+    sleep(0.5)
     visit get_favourites_path
+    sleep(0.5)
     expect(page).not_to have_css(".delbttn[data-favourable-type='rooms']")
   end
 
