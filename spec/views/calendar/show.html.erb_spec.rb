@@ -9,7 +9,7 @@ RSpec.describe "calendar/show", type: :view do
                Event.create!(name: "Another Event", description: "PT", start_time: 1.hour.from_now,
                              end_time: 2.hours.from_now, recurring: "", room: (create :room))]
 
-    @highlighted_event_id = 2
+    @highlighted_event_id = @events.first.id
     @date = Time.zone.now
     @month = Time.zone.today.month
     @year = Time.zone.now.year
@@ -32,8 +32,8 @@ RSpec.describe "calendar/show", type: :view do
   it "has events highlighted correctly" do
     render
     $stderr.puts rendered
-    expect(rendered).to have_css(".highlighted_event", text: @events.second.name)
-    expect(rendered).not_to have_css(".highlighted_event", text: @events.first.name)
+    expect(rendered).to have_css(".highlighted_event", text: @events.first.name)
+    expect(rendered).not_to have_css(".highlighted_event", text: @events.second.name)
   end
 
 end
