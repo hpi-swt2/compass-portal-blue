@@ -18,7 +18,7 @@ RSpec.describe "/calendar", type: :request do
 
   describe "GET" do
     it "renders a successful response" do
-      event = Event.create! valid_attributes
+      Event.create! valid_attributes
       get calendar_path(start_date: "2021-10-24", event_id: 1)
       expect(response).to be_successful
     end
