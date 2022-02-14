@@ -6,8 +6,10 @@ class SearchResultsController < ApplicationController
     @search_results ||= []
     @result_id = 1
     return if params[:query].nil?
+
     query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
     return if query.match?(/^_*$/)
+
     search_for query
     sort_search_results
   end
@@ -43,12 +45,11 @@ class SearchResultsController < ApplicationController
   def add_results(objects, type)
     objects.each do |object|
       @search_results.append(SearchResult.new(id: @result_id, title: object.name,
-                               link: polymorphic_path(object),
-                               description: object.respond_to?(:search_description) ? object.search_description : "",
-                               location_latitude: object.class.name != "Person" ? object.location_latitude : nil,
-                               location_longitude: object.class.name != "Person" ? object.location_longitude : nil,
-                               type: type
-                             ))
+                                              link: polymorphic_path(object),
+                                              description: object.respond_to?(:search_description) ? object.search_description : "",
+                                              location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
+                                              location_longitude: object.instance_of?(Person) ? nil : object.location_longitude,
+                                              type: type))
       @result_id += 1
     end
   end
@@ -87,15 +88,15 @@ class SearchResultsController < ApplicationController
   end
 
   def distance(loc1, loc2)
-    rad_per_deg = Math::PI/180  # PI / 180
+    rad_per_deg = Math::PI / 180 # PI / 180
     rkm = 6371 # Earth radius in kilometers
     rm = rkm * 1000 # Radius in mete
-    dlat_rad = (loc2[0]-loc1[0]) * rad_per_deg # Delta, converted to rad
-    dlon_rad = (loc2[1]-loc1[1]) * rad_per_d
+    dlat_rad = (loc2[0] - loc1[0]) * rad_per_deg # Delta, converted to rad
+    dlon_rad = (loc2[1] - loc1[1]) * rad_per_d
     lat1_rad = loc1.map { |i| i * rad_per_deg }.first
     lat2_rad = loc2.map { |i| i * rad_per_deg }.first
-    a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
-    c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+    a = (Math.sin(dlat_rad / 2)**2) + (Math.cos(lat1_rad) * Math.cos(lat2_rad) * (Math.sin(dlon_rad / 2)**2))
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     rm * c # Delta in meters
   end
 
@@ -103,9 +104,7 @@ class SearchResultsController < ApplicationController
     @sort_location = params[:sort_location].nil? ? "false" : params[:sort_location]
     @search_query = params[:query]
     @search_results = @search_results.sort_by(&:title)
-    if @sort_location
-      sort_by_location
-    end
+    sort_by_location if @sort_location
   end
 
   def sort_by_location
