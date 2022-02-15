@@ -73,10 +73,15 @@ en:
     home: "Home"
     search: "Search"
     share: "Share"
-    add_new: "Add new %{model}"
-    edit_model: "Edit %{model}"
-    create_model: "Create %{model}"
     confirm: 'Are you sure?'
+    model:
+        add_new: "Add new %{model}"
+        edit: "Edit %{model}"
+        create: "Create %{model}"
+        success:
+            create: "%{model} was successfully created."
+            update: "%{model} was successfully updated." 
+            destroy: "%{model} was successfully destroyed."
     buildings:
         one: "Building"
         other: "Buildings"
@@ -112,6 +117,10 @@ en:
     events:
         one: "Event"
         import_ics: "Import Events from ICS"
+        import_success: "Events were successfully imported from ICS."
+        alert:
+            choose_file: "Please choose an ICS file to import"
+            ics_only: "Only ICS files can be imported"
     cancel: "Cancel"
     home: "Home"
     back: "Back"

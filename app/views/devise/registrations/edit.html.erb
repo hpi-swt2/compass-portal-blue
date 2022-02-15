@@ -4,21 +4,19 @@
     <%= link_to t("home"), root_url, class: "btn btn-secondary link-btn" %>
 
     <div class="actions mt-3">
-      <%= link_to t("add_new", model: t('people.one')), new_person_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("add_new", model: t('locations.one')), new_location_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("add_new", model: t('rooms.one')), new_room_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("add_new", model: t('buildings.one')), new_building_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to t("add_new", model: t('events.one')), new_event_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('people.one')), new_person_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('locations.one')), new_location_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('rooms.one')), new_room_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('buildings.one')), new_building_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('events.one')), new_event_path, class: 'btn btn-primary link-btn' %>
       
-      <div class="field">
-        <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-          <%= button_tag t("events.import_ics"), class: 'btn btn-primary link-btn' %><br>
-          <%= file_field :file, class: "form-control" %>
-        <% end %>
-      </div>
+      <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
+        <%= button_tag t('events.import_ics'), class: 'btn btn-primary mb-2' %>
+        <%= file_field_tag :file, class: "form-control" %>
+      <% end %>
     </div>
 
-    <h2 class="fw-light"><%= t(:edit_model, model: t("#{resource_name.to_s}.one")) %></h2>
+    <h2 class="fw-light"><%= t('model.edit', model: t("#{resource_name.to_s}.one")) %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |form| %>
       <%= render "devise/shared/error_messages", resource: resource %>

@@ -56,12 +56,12 @@
       </div>
     <% end %>
     <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);">
-      <i class="fas fa-plus"></i> <%= t(:add_new, model: t('locations.openingtime.one')) %>
+      <i class="fas fa-plus"></i> <%= t('model.add_new', model: t('locations.openingtime.one')) %>
     </button>
   </div>
 
   <div class="actions mt-3">
-    <%= form.submit t(:create_model, model: t('locations.one')), class: "btn btn-primary" %>
+    <%= form.submit t('model.create', model: t('locations.one')), class: "btn btn-primary" %>
   </div>
 
   <script defer>

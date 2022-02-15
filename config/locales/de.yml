@@ -39,10 +39,15 @@ de:
     search: "Suche"
     show: "Anzeigen"
     share: "Teilen"
-    add_new: "%{model} hinzufügen"
-    edit_model: "%{model} bearbeiten"
-    create_model: "%{model} erstellen"
     confirm: "Sind Sie sicher?"
+    model:
+        add_new: "%{model} hinzufügen"
+        edit: "%{model} bearbeiten"
+        create: "%{model} erstellen"
+        success:
+            create: "%{model} wurde erfolgreich erstellt."
+            update: "%{model} wurde erfolgreich aktualisiert." 
+            destroy: "%{model} wurde erfolgreich gelöscht."
     buildings:
         one: "Gebäude"
         other: "Gebäude"
@@ -78,12 +83,19 @@ de:
     events:
         one: "Veranstaltung"
         import_ics: "Veranstaltungen aus ICS importieren"
+        import_success: "Veranstaltungen wurden erfolgreich importiert."
+        alert:
+            choose_file: "Wählen Sie die zu importierende ICS-Datei"
+            ics_only: "Nur ICS-Dateien können importiert werden"
     cancel: "Abbrechen"
     home: "Startseite"
     back: "Zurück"
     search: "Suche"
     show: "Anzeigen"
     share: "Teilen"
+
+    # the english version of the following translations is given by rails and does not have to be added
+    # it can be viewed at https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en.yml
     activerecord:
         errors:
         messages:
