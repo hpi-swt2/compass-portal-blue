@@ -16,7 +16,8 @@ buildings_json["features"].each do |building|
   next if !(building["properties"]["name"]) || !(building["properties"]["letter"])
 
   long, lat = avg(building["geometry"]["coordinates"][0])
-  building_obj = Building.create!(name: building["properties"]["name"], location_latitude: lat, location_longitude: long)
+  building_obj = Building.create!(name: building["properties"]["name"], location_latitude: lat,
+                                  location_longitude: long)
 
   Dir.foreach('app/assets/geojsons') do |filename|
     next if (filename == '.') || (filename == '..') || filename.exclude?((building['properties']['letter']).to_s)
@@ -26,7 +27,7 @@ buildings_json["features"].each do |building|
     json["features"].each do |feature|
       unless feature["properties"]["indoor"] === 'room' && feature["properties"]["name-en"] && feature["properties"]["building"] && building["properties"]["letter"] == feature["properties"]["building"]
         next
-        end
+      end
 
       long, lat = avg(feature["geometry"]["coordinates"][0])
       Room.create!(
