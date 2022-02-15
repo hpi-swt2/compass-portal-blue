@@ -102,7 +102,7 @@ class SearchResultsController < ApplicationController
     rad_per_deg = Math::PI / 180
     Math.cos(loc1.map { |i| i * rad_per_deg }.first) * Math.cos(loc2.map { |i| i * rad_per_deg }.first)
   end
-  
+
   def delta_calc(a)
     6_371_000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   end
