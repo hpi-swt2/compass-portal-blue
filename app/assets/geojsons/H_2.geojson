@@ -269,7 +269,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.32 Büro",
+                "name": "H-2.32",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -324,7 +324,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.42 Büro",
+                "name": "H-2.42",
                 "level_name": "2"
             },
             "geometry": {
@@ -383,7 +383,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": "H-2.39/40/41 Seminarraum"
+                "name": "H-2.39/40/41"
             },
             "geometry": {
                 "type": "Polygon",
@@ -470,7 +470,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.46 Büro",
+                "name": "H-2.46",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -509,7 +509,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.56/57 Seminarraum",
+                "name": "H-2.56/57",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -619,7 +619,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": "H-2.8 Büro"
+                "name": "H-2.8"
             },
             "geometry": {
                 "type": "Polygon",
@@ -672,7 +672,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.2 Büro",
+                "name": "H-2.2",
                 "level_name": "2"
             },
             "geometry": {
@@ -733,7 +733,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.7 Büro",
+                "name": "H-2.7",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -787,7 +787,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.26 Büro",
+                "name": "H-2.26",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -826,7 +826,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.58 Seminarraum",
+                "name": "H-2.58",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -874,7 +874,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.43 Büro",
+                "name": "H-2.43",
                 "level_name": "2"
             },
             "geometry": {
@@ -962,7 +962,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.11 Kopierraum",
+                "name": "H-2.11",
                 "level_name": "2"
             },
             "geometry": {
@@ -1050,7 +1050,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.31 Büro",
+                "name": "H-2.31",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -1149,7 +1149,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 3",
+                "name": "H-2-Stairwell",
                 "highway": "steps",
                 "level_name": "2"
             },
@@ -1197,7 +1197,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.12 Teeküche",
+                "name": "H-2.12",
                 "level_name": "2"
             },
             "geometry": {
@@ -1292,7 +1292,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.3 Büro",
+                "name": "H-2.3",
                 "level_name": "2"
             },
             "geometry": {
@@ -1448,7 +1448,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.9 Büro",
+                "name": "H-2.9",
                 "level_name": "2"
             },
             "geometry": {
@@ -1628,7 +1628,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": "H-2.53/54 Technikraum"
+                "name": "H-2.53/54"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1685,7 +1685,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.47 Büro",
+                "name": "H-2.47",
                 "level_name": "2"
             },
             "geometry": {
@@ -1744,7 +1744,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": "H-2.25 Büro"
+                "name": "H-2.25"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1800,7 +1800,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.27 Büro",
+                "name": "H-2.27",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -1884,7 +1884,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.44 Büro",
+                "name": "H-2.44",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -2087,7 +2087,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.28 Büro",
+                "name": "H-2.28",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -2157,7 +2157,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.17 Kopierraum",
+                "name": "H-2.17",
                 "level_name": "2"
             },
             "geometry": {
@@ -2196,7 +2196,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.15 Büro",
+                "name": "H-2.15",
                 "level_name": "2"
             },
             "geometry": {
@@ -2285,7 +2285,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": "H-2.13 Büro"
+                "name": "H-2.13"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2322,7 +2322,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.16 Büro",
+                "name": "H-2.16",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -2366,7 +2366,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.33 Büro",
+                "name": "H-2.33",
                 "level_name": "2"
             },
             "geometry": {
@@ -2425,7 +2425,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": "H-2.45 Büro"
+                "name": "H-2.45"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2515,7 +2515,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.20 Lager",
+                "name": "H-2.20",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -2558,7 +2558,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 2",
+                "name": "H-2-Stairwell",
                 "highway": "steps",
                 "level_name": "2"
             },
@@ -2605,7 +2605,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "H-2-Corridor",
                 "indoor": "corridor",
                 "level_name": "2"
             },
@@ -2885,7 +2885,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.48 Büro",
+                "name": "H-2.48",
                 "level_name": "2"
             },
             "geometry": {
@@ -2972,7 +2972,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.22 Büro",
+                "name": "H-2.22",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -3041,7 +3041,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Treppenhaus 1",
+                "name": "H-2-Stairwell",
                 "highway": "steps",
                 "level_name": "2"
             },
@@ -3088,7 +3088,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.34 Büro",
+                "name": "H-2.34",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -3163,7 +3163,7 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "2",
-                "name": " H-2.24 Büro"
+                "name": " H-2.24"
             },
             "geometry": {
                 "type": "Polygon",
@@ -3231,7 +3231,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.1 Büro",
+                "name": "H-2.1",
                 "level_name": "2"
             },
             "geometry": {
@@ -3356,7 +3356,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "H-2-Corridor",
                 "indoor": "corridor",
                 "level_name": "2"
             },
@@ -3448,7 +3448,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.35 Technikraum",
+                "name": "H-2.35",
                 "level_name": "2"
             },
             "geometry": {
@@ -3501,7 +3501,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "H-2.5 Büro",
+                "name": "H-2.5",
                 "indoor": "room",
                 "level_name": "2"
             },
@@ -3571,7 +3571,7 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "H-2.21 Büro",
+                "name": "H-2.21",
                 "level_name": "2"
             },
             "geometry": {

@@ -15,3 +15,7 @@ de:
     username: 'Benutzername'
     admin?: 'Administrator?'
     user-roles: 'Nutzerrollen'
+    favourite: 'Als Favorit hinzufügen'
+    unfavourite: 'Favorit entfernen'
+    your-favourites: 'Das sind deine Favoriten:'
+    login-for-favourites: 'Melde dich an, um deine Favoritenliste zu sehen.'

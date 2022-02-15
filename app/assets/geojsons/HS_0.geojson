@@ -282,6 +282,22 @@
         {
             "type": "Feature",
             "properties": {
+                "access": "yes",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13248324611,
+                    52.39412002380
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Corridor",
                 "indoor": "room",
                 "level_name": "0",
                 "type": "corridor",

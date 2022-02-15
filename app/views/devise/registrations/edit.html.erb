@@ -10,59 +10,62 @@
       <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
       <%= link_to "Add new event", new_event_path, class: 'btn btn-primary link-btn' %>
       <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-      <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
-      <%= file_field_tag :file %>
+        <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
+        <%= file_field_tag :file %>
       <% end %>
     </div>
 
     <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |form| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="field mb-3">
-        <%= f.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
-        <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
-      </div>
-
-      <div class="field mb-3">
-        <%= f.label :email, class: 'form-label' %>
-        <%= f.text_field :email, class: 'form-control', autocomplete: "email" %>
-      </div>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <%= form.fields_for :person, resource.person do |person_subform| %>
+        <%= render 'people/form_fields', form: person_subform, person: resource.person %>
       <% end %>
+
+      <h4 class="fw-light mt-4 mb-3">Login Details</h4>
+
+      <div class="field mb-3">
+        <%= form.label :username, class: 'form-label' %>
+        <%= form.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
+      </div>
 
       <%# If provider is nil, i.e. not set to 'openid_connect', then it's an account with local pw %>
       <% if resource.provider.nil? %>
+        <div class="field mb-3">
+          <%= form.label :email, class: 'form-label' %>
+          <%= form.text_field :email, class: 'form-control', autocomplete: "email" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
         <h5 class="fw-light mt-3">Login Password</h5>
 
         <div class="field mb-1">
-          <%= f.label :password, class: 'form-label' %> <span class="text-muted">(leave blank if you don't want to change it)</span>
-          <%= f.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
+          <%= form.label :password, class: 'form-label' %> <span class="text-muted">(leave blank if you don't want to change it)</span>
+          <%= form.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
           <% if @minimum_password_length %>
             <div id="passwordHelp" class="form-text"><%= @minimum_password_length %> characters minimum</div>
           <% end %>
         </div>
 
         <div class="field mb-1">
-          <%= f.label :password_confirmation, class: 'form-label' %>
-          <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
+          <%= form.label :password_confirmation, class: 'form-label' %>
+          <%= form.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password" %>
         </div>
 
         <div class="field mb-1">
-          <%= f.label :current_password, class: 'form-label' %> <span class="text-muted">(we need your current password to confirm password changes)</span>
-          <%= f.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
+          <%= form.label :current_password, class: 'form-label' %> <span class="text-muted">(we need your current password to confirm password changes)</span>
+          <%= form.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
         </div>
       <% end %> <%# if resource.provider.nil? %>
 
       <div class="actions mt-3">
-        <%= f.submit "Update User Account", class: 'btn btn-primary' %>
+        <%= form.submit "Update User Account", class: 'btn btn-primary', id: 'update-user-account' %>
       </div>
     <% end %>
-
-    <%= link_to "Edit linked person", edit_person_path(resource.person), class: 'btn btn-secondary link-btn' %>
 
     <h3 class="fw-light mt-5">Logout Account</h3>
 

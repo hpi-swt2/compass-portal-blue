@@ -1,0 +1,47 @@
+<% if current_user %>
+    <h2 class="mb-3 fw-light"><%= t('your-favourites') %></h2>
+
+    <% @favourites.each do |(favourite, path)| %>
+        <% favourable = favourite.favourable %>
+        <% favourable_type = favourable.class.name.underscore.pluralize %>
+        <ul>
+            <li>
+                <a href="/<%= favourable_type %>/<%= favourable.id %>" style="text-decoration: none;"><%= favourable.name %></a>
+                <td class="td-btn">
+                <button class="delbttn btn btn-secondary" data-favourable-type="<%= favourable_type %>" data-favourable-id="<%= favourable.id %>" title="<%= t('unfavourite') %>">
+                    <i class="fas fa-trash"></i>
+                </button>
+                </td>
+            </li>
+        </ul>
+    <% end %>
+<% else %>
+    <p class="alert alert-danger alert-dismissible fade show"><%= t('login-for-favourites') %></p>
+<% end %>
+
+<script defer>
+  $('.delbttn').each(function() {
+      $(this).click(async (e) => {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
+
+        const body = JSON.stringify({
+            favourite: false
+        });
+        const response = await fetch(
+            `/${$(this).attr('data-favourable-type')}/${$(this).attr('data-favourable-id')}/favourite`,
+            {
+                method: "PUT",
+                body: body,
+                headers: {
+                "X-CSRF-TOKEN": csrfToken,
+                "Content-Type": "application/json",
+                },
+            }
+        );
+
+        console.assert(response.status === 204); // HTTP "No content"
+
+        $(this).parent('li').remove();
+    });
+  });
+</script>

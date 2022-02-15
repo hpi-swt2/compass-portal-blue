@@ -1,6 +1,7 @@
 # the model representing a person of interest
 class Person < ApplicationRecord
   include Timeable
+  include Favourable
 
   validates :phone_number, phone: true, allow_blank: true
   before_save :normalize_phone_number
