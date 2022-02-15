@@ -1,4 +1,3 @@
-
 {
     "type": "FeatureCollection",
     "generator": "JOSM",
@@ -58,7 +57,10 @@
                 "letter": "V",
                 "type": "hpi-building",
                 "name": "Haus V",
-                "letter_coordinate": "[13.1235078,52.3923204]"
+                "letter_coordinate": [
+                    13.1235078,
+                    52.3923204
+                ]
             },
             "geometry": {
                 "type": "Polygon",
@@ -141,7 +143,10 @@
             "properties": {
                 "type": "hpi-building",
                 "letter": "L",
-                "letter_coordinate": "[13.1248221,52.3924289]",
+                "letter_coordinate": [
+                    13.1248221,
+                    52.3924289
+                ],
                 "name": "Haus L"
             },
             "geometry": {
@@ -184,7 +189,10 @@
             "type": "Feature",
             "properties": {
                 "type": "hpi-building",
-                "letter_coordinate": "[13.132123,52.3934892]",
+                "letter_coordinate": [
+                    13.132123,
+                    52.3934892
+                ],
                 "name": "Haus C",
                 "letter": "C"
             },
@@ -256,7 +264,10 @@
             "type": "Feature",
             "properties": {
                 "type": "hpi-building",
-                "letter_coordinate": "[13.1239371,52.3922193]",
+                "letter_coordinate": [
+                    13.1239371,
+                    52.3922193
+                ],
                 "letter": "E",
                 "name": "Haus E"
             },
@@ -313,7 +324,10 @@
             "properties": {
                 "type": "hpi-building",
                 "name": "Haus B",
-                "letter_coordinate": "[13.1317085,52.3936223]",
+                "letter_coordinate": [
+                    13.1317085,
+                    52.3936223
+                ],
                 "letter": "B"
             },
             "geometry": {
@@ -381,7 +395,10 @@
             "properties": {
                 "type": "hpi-building",
                 "letter": "K",
-                "letter_coordinate": "[13.1300582,52.39364]",
+                "letter_coordinate": [
+                    13.1300582,
+                    52.39364
+                ],
                 "name": "Haus K"
             },
             "geometry": {
@@ -442,7 +459,10 @@
                 "type": "hpi-building",
                 "name": "Hörsaal",
                 "letter": "HS",
-                "letter_coordinate": "[13.1319832,52.394252]"
+                "letter_coordinate": [
+                    13.1319832,
+                    52.394252
+                ]
             },
             "geometry": {
                 "type": "Polygon",
@@ -500,7 +520,10 @@
             "type": "Feature",
             "properties": {
                 "type": "hpi-building",
-                "letter_coordinate": "[13.1311611,52.3934502]",
+                "letter_coordinate": [
+                    13.1311611,
+                    52.3934502
+                ],
                 "name": "Haus A",
                 "letter": "A"
             },
@@ -581,7 +604,10 @@
             "properties": {
                 "type": "hpi-building",
                 "name": "Haus D",
-                "letter_coordinate": "[13.1237636,52.3918618]",
+                "letter_coordinate": [
+                    13.1237636,
+                    52.3918618
+                ],
                 "letter": "D"
             },
             "geometry": {
@@ -622,7 +648,10 @@
                 "letter": "F",
                 "type": "hpi-building",
                 "name": "Haus F",
-                "letter_coordinate": "[13.1239734,52.3925689]"
+                "letter_coordinate": [
+                    13.1239734,
+                    52.3925689
+                ]
             },
             "geometry": {
                 "type": "Polygon",
@@ -662,7 +691,10 @@
                 "letter": "H",
                 "name": "Hauptgebäude",
                 "type": "hpi-building",
-                "letter_coordinate": "[13.1330726,52.3941746]"
+                "letter_coordinate": [
+                    13.1330726,
+                    52.3941746
+                ]
             },
             "geometry": {
                 "type": "Polygon",
@@ -968,7 +1000,10 @@
         {
             "type": "Feature",
             "properties": {
-                "letter_coordinate": "[13.1245168,52.3948646]",
+                "letter_coordinate": [
+                    13.1245168,
+                    52.3948646
+                ],
                 "letter": "G",
                 "type": "hpi-building",
                 "name": "Haus G"
@@ -1130,7 +1165,10 @@
             "properties": {
                 "name": "Haus J",
                 "type": "hpi-building",
-                "letter_coordinate": "[13.1190556,52.3847794]",
+                "letter_coordinate": [
+                    13.1190556,
+                    52.3847794
+                ],
                 "letter": "J"
             },
             "geometry": {
