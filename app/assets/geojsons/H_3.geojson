@@ -1798,8 +1798,8 @@
                 "level_name": "3"
             },
             "geometry": {
-                "type": "LineString",
-                "coordinates": [
+                "type": "Polygon",
+                "coordinates": [[
                     [
                         13.13341162965,
                         52.39409102768
@@ -1900,7 +1900,7 @@
                         13.13341162965,
                         52.39409102768
                     ]
-                ]
+                ]]
             }
         },
         {
