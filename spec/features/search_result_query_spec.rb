@@ -181,5 +181,5 @@ RSpec.describe "Search result list page", type: :feature do
     visit search_results_path(query: "Building", sort_location: "true")
     expect(page.body).to match(/ABC Building.*Building ABC.*Building XYZ/m)
   end
-  
+
 end
