@@ -107,10 +107,8 @@ class SearchResultsController < ApplicationController
   end
 
   def sort_by_location
-    unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil?  
-      return
-    end
-    
+    return unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil?
+
     current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
     @search_results =
       @search_results.sort_by { |r| distance(current_position, [r.location_latitude, r.location_longitude]) }
