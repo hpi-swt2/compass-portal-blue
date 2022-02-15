@@ -1911,7 +1911,7 @@
                 "type": "corridor",
                 "building": "H",
                 "name-en": "H-E-Corridor",
-                "name-de": "H-E-Flur"
+                "name-de": "H-E-Korridor"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2312,7 +2312,7 @@
                 "level_name": "0",
                 "type": "corridor",
                 "name-en": "H-E-Corridor",
-                "name-de": "H-E-Flur",
+                "name-de": "H-E-Korridor",
                 "building": "H"
             },
             "geometry": {
