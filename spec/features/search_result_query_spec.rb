@@ -172,8 +172,14 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_css('img[src*="sort_alphabetically"]')
   end
 
-  it "can sort results by location" do
+  it "shows button to order by location" do
     visit search_results_path(query: "Building", sort_location: "true")
     expect(page).to have_css('img[src*="sort_location"]')
   end
+
+  it "sort results correctly" do
+    visit search_results_path(query: "Building", sort_location: "true")
+    expect(page.body).to match(/ABC Building.*Building ABC.*Building XYZ/m)
+  end
+  
 end
