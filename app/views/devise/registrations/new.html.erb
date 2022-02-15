@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h2 class="fw-light"><%= t('user.local_signup') %></h2>
+    <h2 class="fw-light"><%= t('user.account.local_signup') %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -19,7 +19,7 @@
         <%= f.label :password, class: 'form-label' %>
         <%= f.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
         <% if @minimum_password_length %>
-          <div id="passwordHelp" class="form-text"><%= t('user.password_min_characters', minimum_password_length: @minimum_password_length) %></div>
+          <div id="passwordHelp" class="form-text"><%= t('user.account.password_min_characters', minimum_password_length: @minimum_password_length) %></div>
         <% end %>
       </div>
 
@@ -29,7 +29,7 @@
       </div>
 
       <div class="actions mb-3">
-        <%= f.submit t('user.signup'), class: 'btn btn-primary' %>
+        <%= f.submit t('user.account.signup'), class: 'btn btn-primary' %>
       </div>
     <% end %>
 

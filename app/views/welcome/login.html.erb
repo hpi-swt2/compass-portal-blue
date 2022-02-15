@@ -8,17 +8,17 @@
         # devise helper: https://github.com/heartcombo/devise#controller-filters-and-helpers
         disabled: user_signed_in?,
         # disable button after click: https://apidock.com/rails/ActionView/Helpers/UrlHelper/button_to
-        data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> #{t('user.logging_in')}"}) do %>
-            <i class="fab fa-openid"></i> <%= t('user.openid_connect_login') %>
+        data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> #{t('user.account.logging_in')}"}) do %>
+            <i class="fab fa-openid"></i> <%= t('user.account.openid_connect_login') %>
         <% end %>
         </p>
         <hr>
         <p>
         <%= link_to new_user_session_path, class: 'btn btn-outline-primary btn-sm', id: "signin" do %>
-        <i class="fas fa-sign-in-alt"></i> <%= t('user.local_login') %>
+        <i class="fas fa-sign-in-alt"></i> <%= t('user.account.local_login') %>
         <% end %>
         <%= link_to new_user_registration_path, class: 'btn btn-outline-secondary btn-sm', id: "signup" do %>
-        <i class="fas fa-user-plus"></i> <%= t('user.local_signup') %>
+        <i class="fas fa-user-plus"></i> <%= t('user.account.local_signup') %>
         <% end %>
         </p>
         <%= link_to t("home"), root_url, class: "btn btn-secondary link-btn" %>

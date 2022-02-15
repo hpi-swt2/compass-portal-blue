@@ -37,27 +37,8 @@ en:
     position: 'Position'
     title-en: 'English'
     title-de: 'German'
-    date:
-        abbr_day_names: [Su, Mo, Tu, We, Th, Fr, Sa]
-        month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
-    simple_calendar:
-        week: 'Week'
-        previous: 'Previous'
-        next: 'Next'
     create_new_event: 'Create new Event'
     email: 'E-Mail'
-    user:
-        one: 'User'
-        name: 'Username'
-        login: 'Login'
-        signup: "Sign Up"
-        openid_connect_login: 'HPI OpenID Log In'
-        local_login: 'Local Login'
-        local_signup: 'Local Sign Up'
-        logging_in: 'Logging in...'
-        forgot_password: 'Forgot your password?'
-        displayed_name: 'your displayed name'
-        password_min_characters: '%{minimum_password_length} characters minimum'
     username: 'User name'
     name: 'Name'
     contribute_content: "Contribute Content"
@@ -65,8 +46,6 @@ en:
     user-roles: 'User roles'
     details: 'Details'
     error: 'Error'
-    back: 'Back'
-    show: 'Show'
     photo: 'Photo'
     destroy: 'Destroy'
     cancel: "Cancel"
@@ -74,6 +53,8 @@ en:
     search: "Search"
     share: "Share"
     confirm: 'Are you sure?'
+    back: 'Back'
+    show: "Show"
     model:
         add_new: "Add new %{model}"
         edit: "Edit %{model}"
@@ -82,6 +63,19 @@ en:
             create: "%{model} was successfully created."
             update: "%{model} was successfully updated." 
             destroy: "%{model} was successfully destroyed."
+    user:
+        one: 'User'
+        name: 'Username'
+        displayed_name: 'your displayed name'
+        account:
+            login: 'Login'
+            signup: "Sign Up"
+            openid_connect_login: 'HPI OpenID Log In'
+            local_login: 'Local Login'
+            local_signup: 'Local Sign Up'
+            logging_in: 'Logging in...'
+            forgot_password: 'Forgot your password?'
+            password_min_characters: '%{minimum_password_length} characters minimum'
     buildings:
         one: "Building"
         other: "Buildings"
@@ -121,9 +115,7 @@ en:
         alert:
             choose_file: "Please choose an ICS file to import"
             ics_only: "Only ICS files can be imported"
-    cancel: "Cancel"
-    home: "Home"
-    back: "Back"
-    search: "Search"
-    show: "Show"
-    share: "Share"
+    simple_calendar:
+        week: 'Week'
+        previous: 'Previous'
+        next: 'Next'

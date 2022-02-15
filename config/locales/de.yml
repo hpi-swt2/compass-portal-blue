@@ -6,24 +6,8 @@ de:
     position: "Position"
     title-en: "Englisch"
     title-de: "Deutsch"
-    simple_calendar:
-        week: "Woche"
-        previous: "Vorherige"
-        next: "Nächste"
     create_new_event: "Erstelle neues Event"
     email: "E-Mail"
-    user:
-        one: 'Nutzer'
-        name: "Nutzername"
-        login: "Anmelden"
-        signup: "Registrieren"
-        openid_connect_login: "HPI OpenID Log In"
-        local_login: "Lokale Anmeldung"
-        local_signup: "Lokale Registrierung"
-        logging_in: "Anmelden..."
-        forgot_password: "Passwort vergessen?"
-        displayed_name: 'Ihr angezeigter Name'
-        password_min_characters: 'mindestens %{minimum_password_length} Zeichen'
     username: "Benutzername"
     name: "Name"
     contribute_content: "Inhalt beitragen"
@@ -35,11 +19,11 @@ de:
     destroy: "Löschen"
     cancel: "Abbrechen"
     home: "Startseite"
-    back: "Zurück"
     search: "Suche"
-    show: "Anzeigen"
     share: "Teilen"
     confirm: "Sind Sie sicher?"
+    back: "Zurück"
+    show: "Anzeigen"
     model:
         add_new: "%{model} hinzufügen"
         edit: "%{model} bearbeiten"
@@ -48,6 +32,19 @@ de:
             create: "%{model} wurde erfolgreich erstellt."
             update: "%{model} wurde erfolgreich aktualisiert." 
             destroy: "%{model} wurde erfolgreich gelöscht."
+    user:
+        one: 'Nutzer'
+        name: "Nutzername"
+        displayed_name: 'Ihr angezeigter Name'
+        account:
+            login: "Anmelden"
+            signup: "Registrieren"
+            openid_connect_login: "HPI OpenID Log In"
+            local_login: "Lokale Anmeldung"
+            local_signup: "Lokale Registrierung"
+            logging_in: "Anmelden..."
+            forgot_password: "Passwort vergessen?"
+            password_min_characters: 'mindestens %{minimum_password_length} Zeichen'
     buildings:
         one: "Gebäude"
         other: "Gebäude"
@@ -87,12 +84,10 @@ de:
         alert:
             choose_file: "Wählen Sie die zu importierende ICS-Datei"
             ics_only: "Nur ICS-Dateien können importiert werden"
-    cancel: "Abbrechen"
-    home: "Startseite"
-    back: "Zurück"
-    search: "Suche"
-    show: "Anzeigen"
-    share: "Teilen"
+    simple_calendar:
+        week: "Woche"
+        previous: "Vorherige"
+        next: "Nächste"
 
     # the english version of the following translations is given by rails and does not have to be added
     # it can be viewed at https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en.yml
