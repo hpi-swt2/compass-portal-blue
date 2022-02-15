@@ -24,6 +24,8 @@ de:
     confirm: "Sind Sie sicher?"
     back: "Zurück"
     show: "Anzeigen"
+    edit: "Bearbeiten"
+    destroy: "Löschen"
     model:
         add_new: "%{model} hinzufügen"
         edit: "%{model} bearbeiten"
@@ -75,8 +77,14 @@ de:
     people:
         one: "Person"
         people: "Personen"
+        new: "Neue Person"
         first_name: "Vorname"
         last_name: "Nachname"
+        phone_number: "Telefonnummer"
+        profile_picture: "Profilbild"
+        office_hour:
+            one: "Geschäftszeit"
+            other: "Geschäftszeiten"
     events:
         one: "Veranstaltung"
         import_ics: "Veranstaltungen aus ICS importieren"

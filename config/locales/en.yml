@@ -55,6 +55,8 @@ en:
     confirm: 'Are you sure?'
     back: 'Back'
     show: "Show"
+    edit: "Edit"
+    destroy: "Destroy"
     model:
         add_new: "Add new %{model}"
         edit: "Edit %{model}"
@@ -106,8 +108,14 @@ en:
     people:
         one: "Person"
         people: "people"
+        new: "New Person"
         first_name: "first name"
         last_name: "last name"
+        phone_number: "Phone number"
+        profile_picture: "Profile picture"
+        office_hour:
+            one: "Office hour"
+            other: "Office hours"
     events:
         one: "Event"
         import_ics: "Import Events from ICS"
