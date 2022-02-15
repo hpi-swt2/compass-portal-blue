@@ -25,7 +25,7 @@ buildings_json["features"].each do |building|
     file = File.read("app/assets/geojsons/#{filename}")
     json = JSON.parse(file)
     json["features"].each do |feature|
-      is_feature_in_building = feature["properties"]["building"] && building["properties"]["letter"] == feature["properties"]["building"]
+      is_feature_in_building = building["properties"]["letter"] == feature["properties"]["building"]
       unless feature["properties"]["indoor"] == 'room' && feature["properties"]["name-en"] && is_feature_in_building
         next
       end
