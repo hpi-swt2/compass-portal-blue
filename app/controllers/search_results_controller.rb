@@ -90,13 +90,10 @@ class SearchResultsController < ApplicationController
 
   def distance(loc1, loc2)
     rad_per_deg = Math::PI / 180 # PI / 180
-    lat1_rad = loc1.map { |i| i * rad_per_deg }.first
-    lat2_rad = loc2.map { |i| i * rad_per_deg }.first
     a = (Math.sin(((loc2[0] - loc1[0]) * rad_per_deg) / 2)**2) +
-        (Math.cos(lat1_rad) * Math.cos(lat2_rad) *
+        (Math.cos(loc1.map { |i| i * rad_per_deg }.first) * Math.cos(loc2.map { |i| i * rad_per_deg }.first) *
         (Math.sin(((loc2[1] - loc1[1]) * rad_per_deg) / 2)**2))
-    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    6_371_000 * c # Delta in meters
+    6_371_000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) # Delta in meters
   end
 
   def sort_search_results
