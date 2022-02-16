@@ -31,8 +31,8 @@ require 'rspec/rails'
 require Rails.root.join('spec/support/factory_bot')
 require Rails.root.join('spec/support/devise')
 
-#Capybara.javascript_driver = :selenium_chrome_headless
-#Capybara.ignore_hidden_elements = false
+# Capybara.javascript_driver = :selenium_chrome_headless
+# Capybara.ignore_hidden_elements = false
 
 # Automatically add the locale query param (e.g. `?locale=en`) to all requests
 # Same as in application_controller.rb
