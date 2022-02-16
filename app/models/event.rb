@@ -93,4 +93,8 @@ class Event < ApplicationRecord
            recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
            room: Room.find_by(name: event.location.to_s))
   end
+
+  def queried_occurence
+    schedule.next_occurrence || schedule.last
+  end
 end

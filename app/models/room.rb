@@ -4,7 +4,10 @@ class Room < ApplicationRecord
   belongs_to :building
   has_many :events, dependent: nil
   has_and_belongs_to_many :people
+
+  include Favourable
   include Locateable
+
   validates :name, presence: true
   validates :floor, presence: true, numericality: { only_integer: true }
 
@@ -32,5 +35,9 @@ class Room < ApplicationRecord
       'seminar-room' => 'Seminar room',
       'conference-room' => 'Conference room'
     }
+  end
+
+  def search_description
+    "In #{building.name}"
   end
 end

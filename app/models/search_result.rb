@@ -4,7 +4,7 @@ class SearchResult
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :id, :title, :description, :link, :resource, :type
+  attr_accessor :id, :title, :description, :link, :resource, :type, :location_longitude, :location_latitude
 
   validates :id, :title, :link, presence: true
 
@@ -16,5 +16,9 @@ class SearchResult
 
   def persisted?
     false
+  end
+
+  def position_set?
+    !(location_latitude.nil? || location_longitude.nil?)
   end
 end

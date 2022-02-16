@@ -1,6 +1,7 @@
 # the model representing a person of interest
 class Person < ApplicationRecord
   include Timeable
+  include Favourable
 
   validates :phone_number, phone: true, allow_blank: true
   before_save :normalize_phone_number
@@ -27,6 +28,10 @@ class Person < ApplicationRecord
     person.last_name = auth.info.last_name
     person.email = auth.info.email
     person
+  end
+
+  def search_description
+    "E-Mail: #{email}"
   end
 
   private

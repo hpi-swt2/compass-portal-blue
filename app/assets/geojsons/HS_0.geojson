@@ -238,7 +238,7 @@
             "properties": {
                 "level_name": "0",
                 "highway": "steps",
-                "name": "Treppe"
+                "name": "Staircase"
             },
             "geometry": {
                 "type": "Polygon",
@@ -419,7 +419,7 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "Flur",
+                "name": "Corridor",
                 "indoor": "room",
                 "level_name": "0"
             },

@@ -59,6 +59,11 @@ en:
     edit: Edit
     destroy: Destroy
     day: Day
+    calendar: Calendar
+    favourite: Add favourite
+    unfavourite: Remove favourite
+    your-favourites: "These are your favourites:"
+    login-for-favourites: Login to see your favourite list.
     model:
         add_new: "Add new %{model}"
         edit: "Edit %{model}"
@@ -189,3 +194,6 @@ en:
             header:
                 one: 1 error prohibited this %{model} from being saved
                 other: "%{count} errors prohibited this %{model} from being saved"
+        week: 'Week'
+        previous: 'Previous'
+        next: 'Next'

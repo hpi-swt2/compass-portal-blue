@@ -28,6 +28,11 @@ de:
     edit: Bearbeiten
     destroy: Löschen
     day: Tag
+    calendar: Kalender
+    favourite: Als Favorit hinzufügen
+    unfavourite: Favorit entfernen
+    your-favourites: "Das sind deine Favoriten:"
+    login-for-favourites: Melde dich an, um deine Favoritenliste zu sehen.
     model:
         add_new: "%{model} hinzufügen"
         edit: "%{model} bearbeiten"
@@ -342,3 +347,6 @@ de:
             long: "%A, %d. %B %Y, %H:%M Uhr"
             short: "%d. %B, %H:%M Uhr"
         pm: nachmittags
+        week: 'Woche'
+        previous: 'Vorherige'
+        next: 'Nächste'
