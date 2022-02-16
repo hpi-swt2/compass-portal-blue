@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   put '/users/geo_location', to: 'users/geo_locations#update'
   delete '/users/geo_location', to: 'users/geo_locations#delete'
 
+  # '/calendar'
+  get '/calendar', to: 'calendar#show'
+
   # '/'
   # Sets `root_url`, devise gem requires this to be set
   root to: "welcome#index"

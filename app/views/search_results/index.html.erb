@@ -33,6 +33,8 @@
             <%= image_tag "location.png", alt: "location_picture", height: "25", width: "25"%>
           <% elsif search_result.type == "room" %>
             <%= image_tag "room.png", alt: "room_picture", height: "25", width: "25"%>
+          <% elsif search_result.type == "event" %>
+            <%= image_tag "event.png", alt: "event_picture", height: "25", width: "25"%>
           <% end %>
           <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
             <% if !search_result.description.nil? %>
