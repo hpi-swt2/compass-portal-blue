@@ -67,10 +67,9 @@ de:
         one: "Standort"
         other: "Standorte"
         new: "Neuer Standort"
-        error: "verhinderten das Speichern dieses Standortes:"
         photo: "Standortfoto"
-        latitude: "Standort Breitengrad"
-        longitude: "Standort Längengrad"
+        latitude: "Standortbreitengrad"
+        longitude: "Standortlängengrad"
         openingtime:
             one: "Öffnungszeit"
             other: "Öffnungszeiten"

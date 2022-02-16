@@ -2,7 +2,7 @@
 <%= form_with(model: event) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <h2><%= t('errors.template.header', count: @event.errors.count, model: t('events.one')) %></h2>
 
       <ul>
         <% event.errors.each do |error| %>

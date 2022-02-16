@@ -1,7 +1,7 @@
 <%= form_with(model: location) do |form| %>
   <% if @location.errors.any? %>
     <div id="error_explanation">
-      <h2><%= "#{pluralize(@location.errors.count, "error")} #{t('locations.error')}" %></h2>
+      <h2><%= t('errors.template.header', count: @location.errors.count, model: t('locations.one')) %></h2>
 
       <ul>
         <% @location.errors.full_messages.each do |message| %>

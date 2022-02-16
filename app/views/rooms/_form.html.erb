@@ -1,7 +1,7 @@
 <%= form_with(model: room) do |form| %>
   <% if room.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+      <h2><%= t('errors.template.header', count: @room.errors.count, model: t('rooms.one')) %></h2>
 
       <ul>
         <% room.errors.each do |error| %>

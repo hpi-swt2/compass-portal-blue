@@ -1,7 +1,7 @@
 <%= form_with(model: openingtime) do |form| %>
   <% if openingtime.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(openingtime.errors.count, "error") %> prohibited this openingtime from being saved:</h2>
+      <h2><%= t('errors.template.header', count: @openingtime.errors.count, model: t('locations.openingtime.one')) %></h2>
 
       <ul>
         <% openingtime.errors.each do |error| %>

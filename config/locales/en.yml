@@ -93,12 +93,11 @@ en:
         occupancy: "Occupancy"
         free: "free"
         occupied: "occupied"
-        type: "Room type"
+        type: "Room Type"
     locations:
         one: "Location"
         other: "Locations"
         new: 'New Location'
-        error: 'prohibited this location from being saved:'
         photo: 'Location Photo'
         latitude: 'Location Latitude'
         longitude: 'Location Longitude'
@@ -107,7 +106,7 @@ en:
             other: 'Opening times'
     people:
         one: "Person"
-        other: "People"
+        people: "people"
         new: "New Person"
         first_name: "first name"
         last_name: "last name"
@@ -118,7 +117,6 @@ en:
             other: "Office hours"
     events:
         one: "Event"
-        other: "Events"
         import_ics: "Import Events from ICS"
         import_success: "Events were successfully imported from ICS."
         alert:
@@ -128,3 +126,42 @@ en:
         week: 'Week'
         previous: 'Previous'
         next: 'Next'
+    # taken from https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en.yml
+    errors:
+        format: "%{attribute} %{message}"
+        messages:
+            accepted: must be accepted
+            blank: can't be blank
+            confirmation: doesn't match %{attribute}
+            empty: can't be empty
+            equal_to: must be equal to %{count}
+            even: must be even
+            exclusion: is reserved
+            greater_than: must be greater than %{count}
+            greater_than_or_equal_to: must be greater than or equal to %{count}
+            inclusion: is not included in the list
+            invalid: is invalid
+            less_than: must be less than %{count}
+            less_than_or_equal_to: must be less than or equal to %{count}
+            model_invalid: 'Validation failed: %{errors}'
+            not_a_number: is not a number
+            not_an_integer: must be an integer
+            odd: must be odd
+            other_than: must be other than %{count}
+            present: must be blank
+            required: must exist
+            taken: has already been taken
+            too_long:
+                one: is too long (maximum is 1 character)
+                other: is too long (maximum is %{count} characters)
+            too_short:
+                one: is too short (minimum is 1 character)
+                other: is too short (minimum is %{count} characters)
+            wrong_length:
+                one: is the wrong length (should be 1 character)
+                other: is the wrong length (should be %{count} characters)
+        template:
+            body: 'There were problems with the following fields:'
+            header:
+                one: 1 error prohibited this %{model} from being saved
+                other: "%{count} errors prohibited this %{model} from being saved"
