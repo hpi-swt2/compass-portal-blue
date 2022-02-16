@@ -24,7 +24,7 @@
         <%= render 'people/form_fields', form: person_subform, person: resource.person %>
       <% end %>
 
-      <h4 class="fw-light mt-4 mb-3">Login Details</h4>
+      <h4 class="fw-light mt-4 mb-3"><%= t('user.account.login_details') %></h4>
 
       <div class="field mb-3">
         <%= form.label t('user.name'), class: 'form-label' %>
@@ -39,16 +39,16 @@
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <div><%= t('user.account.awaiting_confirmation') %><%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <h5 class="fw-light mt-3">Login Password</h5>
+        <h5 class="fw-light mt-3"><%= t('user.account.password.one') %></h5>
 
         <div class="field mb-1">
-          <%= form.label :password, class: 'form-label' %> <span class="text-muted">(leave blank if you don't want to change it)</span>
+          <%= form.label :password, class: 'form-label' %> <span class="text-muted"><%= t('user.account.password.leave_blank') %></span>
           <%= form.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
           <% if @minimum_password_length %>
-            <div id="passwordHelp" class="form-text"><%= @minimum_password_length %> characters minimum</div>
+            <div id="passwordHelp" class="form-text"><%= t('user.account.password_min_characters', minimum_password_length: @minimum_password_length) %></div>
           <% end %>
         </div>
 
@@ -58,26 +58,26 @@
         </div>
 
         <div class="field mb-1">
-          <%= form.label :current_password, class: 'form-label' %> <span class="text-muted">(we need your current password to confirm password changes)</span>
+          <%= form.label :current_password, class: 'form-label' %> <span class="text-muted"><%= t('user.account.password.current_needed') %></span>
           <%= form.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
         </div>
       <% end %> <%# if resource.provider.nil? %>
 
       <div class="actions mt-3">
-        <%= form.submit "Update User Account", class: 'btn btn-primary', id: 'update-user-account' %>
+        <%= form.button t('user.account.update'), class: 'btn btn-primary', id: 'update-user-account' %>
       </div>
     <% end %>
 
     <h3 class="fw-light mt-5">Logout Account</h3>
 
     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
-      <i class="fas fa-sign-out-alt"></i> Sign out
+      <i class="fas fa-sign-out-alt"></i><%= t('user.account.signout') %>
     <% end%>
 
     <h3 class="fw-light mt-5">Cancel Account</h3>
 
     <p>
-      <%= button_to "Cancel my account permanently",
+      <%= button_to t('user.account.cancel'),
         registration_path(resource_name),
         class: 'btn btn-outline-primary',
         data: { confirm: t(:confirm) },
