@@ -124,7 +124,7 @@ en:
             closes: Closes
     people:
         one: Person
-        people: people
+        people: People
         new: New Person
         first_name: first name
         last_name: last name
