@@ -14,5 +14,14 @@ RSpec.describe SearchResult, type: :model do
       expect(search_result.title).not_to be_blank
     end
 
+    it "is not persistent" do
+      expect(search_result.persisted?).to be false
+    end
+
+    it "responds correctly to a position query" do
+      expect(search_result.position_set?).to be false
+      search_result_with_location = build :search_result, location_longitude: 52.394163, location_latitude: 13.132283
+      expect(search_result_with_location.position_set?).to be true
+    end
   end
 end
