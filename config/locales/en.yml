@@ -150,6 +150,9 @@ en:
         end_date: End date
         recurrence_rule: Recurrence rule
         no_room: No Room
+    search_results:
+        one: Search Result
+        other: Search Results
     simple_calendar:
         week: Week
         previous: Previous

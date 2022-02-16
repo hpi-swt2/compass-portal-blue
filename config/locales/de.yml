@@ -120,6 +120,9 @@ de:
         end_date: Enddatum
         recurrence_rule: Wiederholungsregel
         no_room: Kein Raum
+    search_results:
+        one: Suchergebnis
+        other: Suchergebnisse
     simple_calendar:
         week: Woche
         previous: Vorherige
