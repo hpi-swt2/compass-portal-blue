@@ -16,7 +16,7 @@
 </p>
 
 <p>
-  <strong><%= t(:openingtimes): %></strong>
+  <strong><%= t('locations.opening_times.other') %></strong>
   <br>
   <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
     <%= openingtime.day_as_string %>:

@@ -93,7 +93,7 @@ en:
         occupancy: "Occupancy"
         free: "free"
         occupied: "occupied"
-        type: "Room Type"
+        type: "Room type"
     locations:
         one: "Location"
         other: "Locations"
@@ -107,7 +107,7 @@ en:
             other: 'Opening times'
     people:
         one: "Person"
-        people: "people"
+        other: "People"
         new: "New Person"
         first_name: "first name"
         last_name: "last name"
@@ -118,6 +118,7 @@ en:
             other: "Office hours"
     events:
         one: "Event"
+        other: "Events"
         import_ics: "Import Events from ICS"
         import_success: "Events were successfully imported from ICS."
         alert:

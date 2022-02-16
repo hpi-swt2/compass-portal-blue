@@ -22,8 +22,8 @@
             <%= image_tag("default-location-photo.png", alt: "default-location-photo", height: "30") %>
           <% end %></td>
           <td class="td-btn"><%= link_to t(:show), location, class: "btn btn-secondary link-btn" %></td>
-          <td class="td-btn"><% if can? :update, location %><td class="td-btn"><%= link_to t(edit), edit_location_path(location), class: "btn btn-secondary link-btn" %><%end%></td>
-          <td class="td-btn"><% if can? :destroy, location %><td class="td-btn"><%= link_to t(destroy), location, method: :delete, data: { confirm: t(confirm) }, class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><% if can? :update, location %><td class="td-btn"><%= link_to t(:edit), edit_location_path(location), class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><% if can? :destroy, location %><td class="td-btn"><%= link_to t(:destroy), location, method: :delete, data: { confirm: t(:confirm) }, class: "btn btn-secondary link-btn" %><%end%></td>
         </tr>
       <% end %>
     </tbody>

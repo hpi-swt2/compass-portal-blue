@@ -49,7 +49,7 @@
   </div>
 
   <div>
-    <%= form.label t('people.people'), class: "form-label" %>
+    <%= form.label t('people.other'), class: "form-label" %>
       <%= form.select 'person_ids',
           options_from_collection_for_select(Person.all, :id, :name, room.person_ids),
           {},
