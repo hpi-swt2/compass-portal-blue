@@ -20,7 +20,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong><%= "#{t(':name')}:" %></strong>
+    <strong><%= "#{t(:name)}:" %></strong>
   </label>
   <p class="form-control-static">
     <%= @room.name %>
@@ -81,7 +81,7 @@
 <div class="td-btn"><%= link_to 'Calendar', room_calendar_path(@room, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></div>
 
 <a class="btn btn-primary" href="/route?dest=<%= @room.name %>">
-  <i class="fas fa-route"></i> Directions
+  <i class="fas fa-route"></i> <%= t("buildings.directions") %>
 </a>
 
 <script id="_latlonginfo" type="application/json">

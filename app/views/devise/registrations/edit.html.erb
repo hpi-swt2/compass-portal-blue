@@ -68,13 +68,9 @@
       </div>
     <% end %>
 
-    <h3 class="fw-light mt-5">Logout Account</h3>
-
     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
       <i class="fas fa-sign-out-alt"></i><%= t('user.account.signout') %>
     <% end%>
-
-    <h3 class="fw-light mt-5">Cancel Account</h3>
 
     <p>
       <%= button_to t('user.account.cancel'),

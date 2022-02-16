@@ -72,7 +72,7 @@ de:
         new: Neues Gebäude
         longitude: Längengrad
         latitude: Breitengrad
-        directions: Route
+        directions: "Route"
     rooms:
         one: Raum
         other: Räume
