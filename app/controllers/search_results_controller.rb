@@ -98,7 +98,7 @@ class SearchResultsController < ApplicationController
   # See https://en.wikipedia.org/wiki/Great-circle_distance
   def distance(location1, location2)
     earth_radius = 6_371_000
-    earth_radius * calculate_central_angle(location1[:lat], location1[:long], location2[:lat], location2[:long])
+    earth_radius * calculate_central_angle(location1[:long], location2[:long], location1[:lat], location2[:lat])
   end
 
   def calculate_central_angle(phi1, phi2, lambda1, lambda2)
