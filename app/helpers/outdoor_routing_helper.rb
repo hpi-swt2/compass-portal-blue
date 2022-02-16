@@ -17,6 +17,9 @@ module OutdoorRoutingHelper
 
   def self.route_outdoor(start, dest, map_data)
     result = calculate_route(start, dest)
+    # Hint: If you are getting 500ish errors here, it may be because you tried
+    # to test routing from or to the coordinates "0,0", which OSM rejects,
+    # pointing out that you sent a meaningless query - `result` is `nil` then.
     map_data[:polylines].concat([
                                   {
                                     floor: 0,
