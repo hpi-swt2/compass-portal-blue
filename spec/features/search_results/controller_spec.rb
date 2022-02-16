@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Search result list page", type: :feature do
 
-  before do
+  before(:each) do
     @user = User.new
     @controller = SearchResultsController.new
     allow(@controller).to receive(:current_user) { @user }
@@ -19,16 +19,14 @@ RSpec.describe "Search result list page", type: :feature do
     expect(distance).to be_within(20.0).of(1252.0)
   end
 
-  it "fails if no location is present" do
+  it "correctly parses the user location" do
     @user.delete_last_known_location
     no_location = @controller.send(:valid_user_location)
     expect(no_location).to be nil
-  end
-
-  it "correctly parses the user location" do
     @user.update_last_known_location("52.3925591,13.1303072")
     location = @controller.send(:valid_user_location)
     expect(location[0]).to be_within(0.1).of(52.3925591)
     expect(location[1]).to be_within(0.1).of(13.1303072)
+    @user.delete_last_known_location
   end
 end
