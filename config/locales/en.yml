@@ -28,7 +28,6 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
 en:
     hello: Hello world
     hpi_navigator: HPI Navigator
@@ -69,7 +68,7 @@ en:
         create: "Create %{model}"
         success:
             create: "%{model} was successfully created."
-            update: "%{model} was successfully updated." 
+            update: "%{model} was successfully updated."
             destroy: "%{model} was successfully destroyed."
     user:
         one: User
@@ -120,7 +119,7 @@ en:
         photo: Location Photo
         latitude: Location Latitude
         longitude: Location Longitude
-        openingtime: 
+        openingtime:
             one: Opening time
             other: Opening times
             new: New Opening time
