@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   load_and_authorize_resource
   before_action :set_room, only: %i[show edit update destroy]
+  before_action :add_room, only: %i[create]
 
   # GET /rooms or /rooms.json
   def index
@@ -34,7 +35,6 @@ class RoomsController < ApplicationController
   # POST /rooms or /rooms.json
   # rubocop:disable Metrics/MethodLength
   def create
-    @room = Room.new(room_params)
     @room.owners = [current_user]
     respond_to do |format|
       if @room.save
@@ -43,8 +43,7 @@ class RoomsController < ApplicationController
         end
         format.json { render :edit, status: :created, location: @room }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -59,8 +58,7 @@ class RoomsController < ApplicationController
         end
         format.json { render :edit, status: :ok, location: @room }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -79,6 +77,15 @@ class RoomsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_room
     @room = Room.find(params[:id])
+  end
+
+  def add_room
+    @room = Room.new(room_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @room.errors, status: :unprocessable_entity }
   end
 
   # Only allow a list of trusted parameters through.

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
+  before_action :add_event, only: %i[create]
 
   # GET /events or /events.json
   def index
@@ -27,8 +28,6 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = Event.new(event_params)
-
     respond_to do |format|
       if @event.save
         format.html do
@@ -36,8 +35,7 @@ class EventsController < ApplicationController
         end
         format.json { render :show, status: :created, location: @event }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -51,8 +49,7 @@ class EventsController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @event }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -74,6 +71,15 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def add_event
+    @event = Event.new(event_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @event.errors, status: :unprocessable_entity }
   end
 
   # Only allow a list of trusted parameters through.

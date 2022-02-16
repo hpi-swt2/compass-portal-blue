@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[show edit update destroy]
+  before_action :add_person, only: %i[create]
+
   load_and_authorize_resource
   # GET /people or /people.json
   def index
@@ -20,7 +22,6 @@ class PeopleController < ApplicationController
   # POST /people or /people.json
   # rubocop:disable Metrics/MethodLength
   def create
-    @person = Person.new(person_params)
     @person.owners = [current_user]
     respond_to do |format|
       if @person.save
@@ -29,8 +30,7 @@ class PeopleController < ApplicationController
         end
         format.json { render :edit, status: :created, location: @person }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -45,8 +45,7 @@ class PeopleController < ApplicationController
         end
         format.json { render :edit, status: :ok, location: @person }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -69,9 +68,18 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
   end
 
+  def add_person
+    @person = Person.new(person_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @person.errors, status: :unprocessable_entity }
+  end
+
   # Only allow a list of trusted parameters through.
   def person_params
     params.require(:person).permit(:phone_number, :first_name, :last_name, :email, { room_ids: [] }, :profile_picture,
-                                   { openingtimes_attributes: [:id, :day, :opens, :closes] })
+                                   { persons_attributes: [:id, :day, :opens, :closes] })
   end
 end
