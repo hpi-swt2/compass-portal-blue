@@ -27,7 +27,9 @@ class LocationsController < ApplicationController
     @location.owners = [current_user]
     respond_to do |format|
       if @location.save
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('locations.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('locations.one'))
+        end
         format.json { render :edit, status: :created, location: @location }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +43,9 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('locations.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('locations.one'))
+        end
         format.json { render :edit, status: :ok, location: @location }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +58,9 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('locations.one')) }
+      format.html do
+        redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('locations.one'))
+      end
       format.json { head :no_content }
     end
   end

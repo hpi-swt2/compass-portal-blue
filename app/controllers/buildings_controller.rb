@@ -27,7 +27,9 @@ class BuildingsController < ApplicationController
     @building.owners = [current_user]
     respond_to do |format|
       if @building.save
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('buildings.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('buildings.one'))
+        end
         format.json { render :edit, status: :created, location: @building }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +43,9 @@ class BuildingsController < ApplicationController
   def update
     respond_to do |format|
       if @building.update(building_params)
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('buildings.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('buildings.one'))
+        end
         format.json { render :edit, status: :ok, location: @building }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +58,9 @@ class BuildingsController < ApplicationController
   def destroy
     @building.destroy
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('buildings.one')) }
+      format.html do
+        redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('buildings.one'))
+      end
       format.json { head :no_content }
     end
   end

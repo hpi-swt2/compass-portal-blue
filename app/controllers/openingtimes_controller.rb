@@ -26,7 +26,10 @@ class OpeningtimesController < ApplicationController
 
     respond_to do |format|
       if @openingtime.save
-        format.html { redirect_to edit_openingtime_path(@openingtime), notice: t('model.success.create', model: t('locations.openingtime.one')) }
+        format.html do
+          redirect_to edit_openingtime_path(@openingtime),
+                      notice: t('model.success.create', model: t('locations.openingtime.one'))
+        end
         format.json { render :edit, status: :created, location: @openingtime }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +42,10 @@ class OpeningtimesController < ApplicationController
   def update
     respond_to do |format|
       if @openingtime.update(openingtime_params)
-        format.html { redirect_to edit_openingtime_path(@openingtime), notice: t('model.success.update', model: t('locations.openingtimes.one')) }
+        format.html do
+          redirect_to edit_openingtime_path(@openingtime),
+                      notice: t('model.success.update', model: t('locations.openingtimes.one'))
+        end
         format.json { render :edit, status: :ok, location: @openingtime }
       else
         format.html { render :edit, status: :unprocessable_entity }

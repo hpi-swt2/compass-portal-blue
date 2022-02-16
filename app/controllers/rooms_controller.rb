@@ -38,7 +38,9 @@ class RoomsController < ApplicationController
     @room.owners = [current_user]
     respond_to do |format|
       if @room.save
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('rooms.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('rooms.one'))
+        end
         format.json { render :edit, status: :created, location: @room }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +54,9 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('rooms.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('rooms.one'))
+        end
         format.json { render :edit, status: :ok, location: @room }
       else
         format.html { render :edit, status: :unprocessable_entity }

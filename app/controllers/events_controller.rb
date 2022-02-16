@@ -31,7 +31,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('events.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('events.one'))
+        end
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +46,9 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('events.one')) }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('events.one'))
+        end
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +62,9 @@ class EventsController < ApplicationController
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('events.one')) }
+      format.html do
+        redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('events.one'))
+      end
       format.json { head :no_content }
     end
   end
