@@ -11,7 +11,7 @@ RSpec.describe "Search result list page", type: :feature do
   it "calculates polar coordinate distance correctly" do
     location1 = [52.393907, 13.133006] # tree in front of the main building
     location2 = [52.384291, 13.119056] # j building
-    
+
     location1_radians = @controller.send(:location_to_radians, location1)
     location2_radians = @controller.send(:location_to_radians, location2)
 
