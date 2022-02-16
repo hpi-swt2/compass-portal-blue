@@ -153,6 +153,7 @@ en:
     search_results:
         one: Search Result
         other: Search Results
+        not_found: Your search did not match any pages
     simple_calendar:
         week: Week
         previous: Previous

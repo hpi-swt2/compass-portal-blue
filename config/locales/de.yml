@@ -123,6 +123,7 @@ de:
     search_results:
         one: Suchergebnis
         other: Suchergebnisse
+        not_found: Es konnte keine Seite gefunden werden, die der Suche entspricht
     simple_calendar:
         week: Woche
         previous: Vorherige
