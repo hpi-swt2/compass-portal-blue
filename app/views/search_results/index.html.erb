@@ -4,8 +4,23 @@
     <h1>Your search did not match any pages</h1>
   </div>
 <% else %>
-<h1>Search Results</h1>
 
+  <div class="row">
+    <div class="col-10">
+      <h1>Search Results</h1>
+    </div>
+    <% if @sort_location == "true"  %>
+    <div class="col-1">
+      <%= link_to image_tag("sort_location.png", height: '25', width: '25', :class => "sort_button"), search_results_path(sort_location: "false", query: @search_query)%>
+    </div>
+    <% elsif @sort_location == "false" %>
+    <div class="col-1">
+      <%= link_to image_tag("sort_alphabetically.png", height: '25', width: '25', :class => "sort_button"), search_results_path(sort_location: "true", query: @search_query)%>
+    </div>
+    <% end %>
+  </div> 
+
+  
   <tbody>
     <% @search_results.each do |search_result| %>
       <tr>

@@ -36,4 +36,8 @@ class Room < ApplicationRecord
       'conference-room' => 'Conference room'
     }
   end
+
+  def search_description
+    "In #{building.name}"
+  end
 end
