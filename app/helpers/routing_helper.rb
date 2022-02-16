@@ -46,6 +46,9 @@ module RoutingHelper
     floor = room.floor
     node = IndoorRoutingHelper.closest_node([room.location_latitude, room.location_longitude],
                                             IndoorGraph::BUILDINGS, max_indoor_dist, floor)
+    # FIXME: This is currently the case for "Hörsaal1" and "Hörsaal2", at least
+    raise "No indoor node close enough to room named #{input}" if node.nil?
+
     { indoor: true, building: node[:building], node: node[:node] }
   end
 
