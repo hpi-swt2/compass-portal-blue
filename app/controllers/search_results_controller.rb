@@ -56,7 +56,7 @@ class SearchResultsController < ApplicationController
     add_search_results(including_rooms(query), including_buildings(query), including_locations(query),
                        including_people(query))
   end
-  
+
   def add_results(objects, type)
     objects.each do |object|
       result = SearchResult.new(
