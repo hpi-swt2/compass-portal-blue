@@ -112,6 +112,7 @@ en:
         free: free
         occupied: occupied
         type: Room type
+        search_description: "%{type} on floor %{floor} of %{building}"
     locations:
         one: Location
         other: Locations

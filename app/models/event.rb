@@ -41,6 +41,10 @@ class Event < ApplicationRecord
     schedule
   end
 
+  def search_description
+    description
+  end
+
   def calendar_events(start_date, end_date)
     if recurring.blank?
       [self] if (start_date..end_date).cover?(start_time) || (start_date..end_date).cover?(end_time)

@@ -82,6 +82,7 @@ de:
         free: frei
         occupied: besetzt
         type: Raumtyp
+        search_description: "%{type} auf der %{floor}. Etage im %{building}"
     locations:
         one: Standort
         other: Standorte
