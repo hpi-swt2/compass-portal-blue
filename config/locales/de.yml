@@ -2,14 +2,15 @@ de:
     hello: "Hallo Welt"
     hpi_navigator: "HPI Navigator"
     welcome_message: "Willkommen beim HPI Compass Portal"
-    site_title: "HPI Compass Portal"
+    site_title: 'HPI Compass Portal'
     position: "Position"
     title-en: "Englisch"
     title-de: "Deutsch"
     create_new_event: "Erstelle neues Event"
-    email: E-Mail
+    email: "E-Mail"
     username: "Benutzername"
     name: "Name"
+    description: "Beschreibung"
     contribute_content: "Inhalt beitragen"
     admin?: "Administrator?"
     user-roles: "Nutzerrollen"
@@ -26,6 +27,7 @@ de:
     show: "Anzeigen"
     edit: "Bearbeiten"
     destroy: "Löschen"
+    day: "Tag"
     model:
         add_new: "%{model} hinzufügen"
         edit: "%{model} bearbeiten"
@@ -35,9 +37,9 @@ de:
             update: "%{model} wurde erfolgreich aktualisiert." 
             destroy: "%{model} wurde erfolgreich gelöscht."
     user:
-        one: "Nutzer"
+        one: 'Nutzer'
         name: "Nutzername"
-        displayed_name: "Ihr angezeigter Name"
+        displayed_name: 'Ihr angezeigter Name'
         account:
             login: "Anmelden"
             signup: "Registrieren"
@@ -52,11 +54,14 @@ de:
             password:
                 one: "Passwort"
                 other: "Passwörter"
+                new: "Neues Passwort"
                 leave_blank: "(frei lassen um das aktuelle Passwort beizubehalten)"
                 current_needed: "(wir brauchen Ihr aktuelles Passwort zur Bestätigung der Änderung)"
-            forgot_password: "Passwort vergessen?"
-            password_min_characters: "mindestens %{minimum_password_length} Zeichen"
-            awaiting_confirmation: "Es wird auf Bestätigung gewartet für: "
+                confirm: "Neues Passwort bestätigen"
+                change: "Passwort wechseln"
+                forgot: "Passwort vergessen?"
+                min_characters: 'mindestens %{minimum_password_length} Zeichen'
+            resend_confirmation: "Bestätigungsanweisung erneut senden" 
     buildings:
         one: "Gebäude"
         other: "Gebäude"
@@ -83,6 +88,9 @@ de:
         openingtime:
             one: "Öffnungszeit"
             other: "Öffnungszeiten"
+            new: Neue Öffnungszeit
+            opens: Öffnet
+            closes: Schließt
     people:
         one: "Person"
         people: "Personen"
@@ -96,15 +104,17 @@ de:
             other: "Geschäftszeiten"
     events:
         one: "Veranstaltung"
+        other: "Veranstaltungen"
+        new: "Neue Veranstaltung"
         import_ics: "Veranstaltungen aus ICS importieren"
         import_success: "Veranstaltungen wurden erfolgreich importiert."
         alert:
             choose_file: "Wählen Sie die zu importierende ICS-Datei"
             ics_only: "Nur ICS-Dateien können importiert werden"
-    search_results:
-        one: Suchergebnis
-        other: Suchergebnisse
-        not_found: Eine solche Seite konnte nicht gefunden werden
+        start_date: "Anfangsdatum"
+        end_date: "Enddatum"
+        recurrence_rule: "Wiederholungsregel"
+        no_room: "Kein Raum"
     simple_calendar:
         week: "Woche"
         previous: "Vorherige"
@@ -115,7 +125,7 @@ de:
     activerecord:
         errors:
         messages:
-            record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
+            record_invalid: 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
             restrict_dependent_destroy:
             has_one: Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz
                 existiert.
@@ -235,7 +245,7 @@ de:
             invalid: ist nicht gültig
             less_than: muss kleiner als %{count} sein
             less_than_or_equal_to: muss kleiner oder gleich %{count} sein
-            model_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
+            model_invalid: 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
             not_a_number: ist keine Zahl
             not_an_integer: muss ganzzahlig sein
             odd: muss ungerade sein
@@ -253,10 +263,10 @@ de:
                 one: hat die falsche Länge (muss genau 1 Zeichen haben)
                 other: hat die falsche Länge (muss genau %{count} Zeichen haben)
         template:
-            body: "Bitte überprüfen Sie die folgenden Felder:"
+            body: 'Bitte überprüfen Sie die folgenden Felder:'
             header:
-                one: "Konnte %{model} nicht speichern: ein Fehler."
-                other: "Konnte %{model} nicht speichern: %{count} Fehler."
+                one: 'Konnte %{model} nicht speichern: ein Fehler.'
+                other: 'Konnte %{model} nicht speichern: %{count} Fehler.'
     helpers:
         select:
             prompt: Bitte wählen
@@ -297,9 +307,9 @@ de:
                     trillion:
                         one: Billion
                         other: Billionen
-                unit: ""
+                unit: ''
             format:
-                delimiter: ""
+                delimiter: ''
                 precision: 3
                 significant: true
                 strip_insignificant_zeros: true
@@ -315,11 +325,11 @@ de:
                     tb: TB
         percentage:
             format:
-                delimiter: ""
+                delimiter: ''
                 format: "%n %"
         precision:
             format:
-                delimiter: ""
+                delimiter: ''
     support:
         array:
             last_word_connector: " und "

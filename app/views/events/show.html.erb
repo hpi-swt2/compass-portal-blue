@@ -2,7 +2,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Name:</strong>
+    <strong><%= "#{t(:name)}:" %></strong>
   </label>
   <p class="form-control-static">
     <%= @event.name %>
@@ -11,7 +11,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Description:</strong>
+    <strong><%= "#{t(:description)}:" %></strong>
   </label>
   <p class="form-control-static">
     <%= @event.description %>
@@ -20,7 +20,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Start Date:</strong>
+    <strong><%= "#{t('events.start_date')}:"%></strong>
   </label>
   <p class="form-control-static">
     <%= @event.start_time %>
@@ -29,7 +29,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>End Date:</strong>
+    <strong><%= "#{t('events.end_date')}:"%></strong>
   </label>
   <p class="form-control-static">
     <%= @event.end_time %>
@@ -38,7 +38,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Room:</strong>
+    <strong><%= "#{t('rooms.one')}:"%></strong>
   </label>
   <p class="form-control-static">
     <% if @event.room.nil? then %>
@@ -51,7 +51,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Recurring:</strong>
+    <strong><%= "#{t('events.start_date')}:"%></strong>
   </label>
   <p class="form-control-static">
     <%= @event.rule %>

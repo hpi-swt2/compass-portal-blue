@@ -4,11 +4,11 @@
 #
 # To use the locales, use `I18n.t`:
 #
-#     I18n.t "hello"
+#     I18n.t 'hello'
 #
 # In views, this is aliased to just `t`:
 #
-#     <%= t("hello") %>
+#     <%= t('hello') %>
 #
 # To use a different locale, set it with `I18n.locale`:
 #
@@ -24,39 +24,41 @@
 # Instead, surround them with single quotes.
 #
 # en:
-#   "true": "foo"
+#   'true': 'foo'
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-    hello: "Hello world"
-    hpi_navigator: "HPI Navigator"
-    welcome_message: "Welcome to the HPI Compass Portal"
-    site_title: "HPI Compass Portal"
-    position: "Position"
-    title-en: "English"
-    title-de: "German"
-    create_new_event: "Create new Event"
-    email: E-Mail
-    username: "User name"
-    name: "Name"
+    hello: 'Hello world'
+    hpi_navigator: 'HPI Navigator'
+    welcome_message: 'Welcome to the HPI Compass Portal'
+    site_title: 'HPI Compass Portal'
+    position: 'Position'
+    title-en: 'English'
+    title-de: 'German'
+    create_new_event: 'Create new Event'
+    email: 'E-Mail'
+    username: 'User name'
+    name: 'Name'
+    description: "Description"
     contribute_content: "Contribute Content"
-    admin?: "Admin?"
-    user-roles: "User roles"
-    details: "Details"
-    error: "Error"
-    photo: "Photo"
-    destroy: "Destroy"
+    admin?: 'Admin?'
+    user-roles: 'User roles'
+    details: 'Details'
+    error: 'Error'
+    photo: 'Photo'
+    destroy: 'Destroy'
     cancel: "Cancel"
     home: "Home"
     search: "Search"
     share: "Share"
-    confirm: "Are you sure?"
-    back: "Back"
+    confirm: 'Are you sure?'
+    back: 'Back'
     show: "Show"
     edit: "Edit"
     destroy: "Destroy"
+    day: "Day"
     model:
         add_new: "Add new %{model}"
         edit: "Edit %{model}"
@@ -66,28 +68,31 @@ en:
             update: "%{model} was successfully updated." 
             destroy: "%{model} was successfully destroyed."
     user:
-        one: "User"
-        name: "Username"
-        displayed_name: "your displayed name"
+        one: 'User'
+        name: 'Username'
+        displayed_name: 'your displayed name'
         account:
-            login: "Login"
+            login: 'Login'
             signup: "Sign Up"
             signout: "Sign out"
             update: "Update User Account"
             cancel: "Cancel my account permanently"
             login_details: "Login Details"
-            openid_connect_login: "HPI OpenID Log In"
-            local_login: "Local Login"
-            local_signup: "Local Sign Up"
-            logging_in: "Logging in..."
+            openid_connect_login: 'HPI OpenID Log In'
+            local_login: 'Local Login'
+            local_signup: 'Local Sign Up'
+            logging_in: 'Logging in...'
             password:
                 one: "Password"
                 other: "Passwords"
-                leave_blank: "(leave blank if you don"t want to change it)"
+                new: "New password"
+                leave_blank: "(leave blank if you don't want to change it)"
                 current_needed: "(we need your current password to confirm password changes)"
-            forgot_password: "Forgot your password?"
-            password_min_characters: "%{minimum_password_length} characters minimum"
-            awaiting_confirmation: "Currently waiting confirmation for: "
+                confirm: "Confirm new password"
+                change: "Change Password"
+                forgot: 'Forgot your password?'
+                min_characters: '%{minimum_password_length} characters minimum'
+            resend_confirmation: "Resend confirmation instructions"
     buildings:
         one: "Building"
         other: "Buildings"
@@ -103,17 +108,20 @@ en:
         occupancy: "Occupancy"
         free: "free"
         occupied: "occupied"
-        type: "Room type"
+        type: "Room Type"
     locations:
         one: "Location"
         other: "Locations"
-        new: "New Location"
-        photo: "Location Photo"
-        latitude: "Location Latitude"
-        longitude: "Location Longitude"
+        new: 'New Location'
+        photo: 'Location Photo'
+        latitude: 'Location Latitude'
+        longitude: 'Location Longitude'
         openingtime: 
-            one: "Opening time"
-            other: "Opening times"
+            one: 'Opening time'
+            other: 'Opening times'
+            new: New Opening time
+            opens: Opens
+            closes: Closes
     people:
         one: "Person"
         people: "people"
@@ -127,27 +135,29 @@ en:
             other: "Office hours"
     events:
         one: "Event"
+        other: "Events"
+        new: "New Event"
         import_ics: "Import Events from ICS"
         import_success: "Events were successfully imported from ICS."
         alert:
             choose_file: "Please choose an ICS file to import"
             ics_only: "Only ICS files can be imported"
-    search_results:
-        one: Search Result
-        other: Search Results
-        not_found: Your search did not match any pages
+        start_date: "Start date"
+        end_date: "End date"
+        recurrence_rule: "Recurrence rule"
+        no_room: "No room"
     simple_calendar:
-        week: "Week"
-        previous: "Previous"
-        next: "Next"
+        week: 'Week'
+        previous: 'Previous'
+        next: 'Next'
     # taken from https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en.yml
     errors:
         format: "%{attribute} %{message}"
         messages:
             accepted: must be accepted
-            blank: can"t be blank
-            confirmation: doesn"t match %{attribute}
-            empty: can"t be empty
+            blank: can't be blank
+            confirmation: doesn't match %{attribute}
+            empty: can't be empty
             equal_to: must be equal to %{count}
             even: must be even
             exclusion: is reserved
@@ -157,7 +167,7 @@ en:
             invalid: is invalid
             less_than: must be less than %{count}
             less_than_or_equal_to: must be less than or equal to %{count}
-            model_invalid: "Validation failed: %{errors}"
+            model_invalid: 'Validation failed: %{errors}'
             not_a_number: is not a number
             not_an_integer: must be an integer
             odd: must be odd
@@ -175,7 +185,7 @@ en:
                 one: is the wrong length (should be 1 character)
                 other: is the wrong length (should be %{count} characters)
         template:
-            body: "There were problems with the following fields:"
+            body: 'There were problems with the following fields:'
             header:
                 one: 1 error prohibited this %{model} from being saved
                 other: "%{count} errors prohibited this %{model} from being saved"

@@ -48,7 +48,7 @@
           <%= form.label :password, class: 'form-label' %> <span class="text-muted"><%= t('user.account.password.leave_blank') %></span>
           <%= form.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
           <% if @minimum_password_length %>
-            <div id="passwordHelp" class="form-text"><%= t('user.account.password_min_characters', minimum_password_length: @minimum_password_length) %></div>
+            <div id="passwordHelp" class="form-text"><%= t('user.account.password.min_characters', minimum_password_length: @minimum_password_length) %></div>
           <% end %>
         </div>
 

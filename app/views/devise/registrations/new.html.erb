@@ -19,7 +19,7 @@
         <%= f.label :password, class: 'form-label' %>
         <%= f.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
         <% if @minimum_password_length %>
-          <div id="passwordHelp" class="form-text"><%= t('user.account.password_min_characters', minimum_password_length: @minimum_password_length) %></div>
+          <div id="passwordHelp" class="form-text"><%= t('user.account.password.min_characters', minimum_password_length: @minimum_password_length) %></div>
         <% end %>
       </div>
 
