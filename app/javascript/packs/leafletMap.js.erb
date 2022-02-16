@@ -314,7 +314,7 @@ function setupGeoJsonFeatureIndoor(feature, layer) {
   const label = L.circleMarker(
     { lat: markerPosition[1], lng: markerPosition[0] },
     { opacity: 0, radius: 0, fill: false }
-  ).bindTooltip(feature.properties.name, {
+  ).bindTooltip(feature.properties["name-en"], {
     permanent: true,
     direction: "center",
     className: "indoor-label",
