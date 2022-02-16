@@ -71,8 +71,8 @@ class SearchResultsController < ApplicationController
   end
 
   def search_for(query)
-    search_for_entries_including(query)
     search_for_entries_starting_with(query)
+    search_for_entries_including(query)
   end
 
   def distance(loc1, loc2)
