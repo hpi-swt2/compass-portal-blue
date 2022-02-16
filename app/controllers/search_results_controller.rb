@@ -11,8 +11,8 @@ class SearchResultsController < ApplicationController
     query = params[:query].squish.downcase.gsub(/[[:punct:]]|[[:space:]]/, "_")
     return if query.match?(/^_*$/)
 
-    search_for_entries_starting_with query
-    search_for_entries_including query
+    search_for query
+    sort_search_results
   end
 
   def create
@@ -41,10 +41,10 @@ class SearchResultsController < ApplicationController
   end
 
   def add_search_results(rooms, buildings, locations, people)
-    add_buildings(buildings)
-    add_rooms(rooms)
-    add_locations(locations)
-    add_people(people)
+    add_results(buildings, "building")
+    add_results(rooms, "room")
+    add_results(locations, "location")
+    add_results(people, "person")
   end
 
   def search_for_entries_starting_with(query)
@@ -56,38 +56,56 @@ class SearchResultsController < ApplicationController
     add_search_results(including_rooms(query), including_buildings(query), including_locations(query),
                        including_people(query))
   end
-
-  def add_rooms(rooms)
-    rooms.each do |room|
-      @search_results.append(SearchResult.new(id: @result_id, title: room.name, link: room_path(room),
-                                              description: "#{room.room_type} on floor #{room.floor} of
-                                              #{room.building.name}", type: "room"))
+  
+  def add_results(objects, type)
+    objects.each do |object|
+      result = SearchResult.new(
+        id: @result_id, title: object.name, link: polymorphic_path(object), type: type,
+        description: object.respond_to?(:search_description) ? object.search_description : "",
+        location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
+        location_longitude: object.instance_of?(Person) ? nil : object.location_longitude
+      )
+      @search_results.append(result)
       @result_id += 1
     end
   end
 
-  def add_buildings(buildings)
-    buildings.each do |building|
-      @search_results.append(SearchResult.new(id: @result_id, title: building.name,
-                                              link: building_path(building), description: "Building",
-                                              type: "building"))
-      @result_id += 1
-    end
+  def search_for(query)
+    search_for_entries_including(query)
+    search_for_entries_starting_with(query)
   end
 
-  def add_locations(locations)
-    locations.each do |location|
-      @search_results.append(SearchResult.new(id: @result_id, title: location.name, link: location_path(location),
-                                              description: "Location", type: "location"))
-      @result_id += 1
-    end
+  def distance(loc1, loc2)
+    a = sinus_calc(loc1[0], loc2[0]) + (cos_calc(loc1, loc2) * cos_calc(loc1, loc2) * sinus_calc(loc2[1] - loc1[1]))
+    delta_calc(a)
   end
 
-  def add_people(people)
-    people.each do |person|
-      @search_results.append(SearchResult.new(id: @result_id, title: person.name, link: person_path(person),
-                                              description: "Person, E-Mail: #{person.email}", type: "person"))
-      @result_id += 1
-    end
+  def sinus_calc(loc1, loc2)
+    rad_per_deg = Math::PI / 180
+    Math.sin(((loc2 - loc1) * rad_per_deg) / 2)**2
+  end
+
+  def cos_calc(loc1, loc2)
+    rad_per_deg = Math::PI / 180
+    Math.cos(loc1.map { |i| i * rad_per_deg }.first) * Math.cos(loc2.map { |i| i * rad_per_deg }.first)
+  end
+
+  def delta_calc(calc_res)
+    6_371_000 * 2 * Math.atan2(Math.sqrt(calc_res), Math.sqrt(1 - calc_res))
+  end
+
+  def sort_search_results
+    @sort_location = params[:sort_location].nil? ? "false" : params[:sort_location]
+    @search_query = params[:query]
+    @search_results = @search_results.sort_by(&:title)
+    sort_by_location if @sort_location == "true"
+  end
+
+  def sort_by_location
+    return unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil?
+
+    current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
+    @search_results =
+      @search_results.sort_by { |r| distance(current_position, [r.location_latitude, r.location_longitude]) }
   end
 end

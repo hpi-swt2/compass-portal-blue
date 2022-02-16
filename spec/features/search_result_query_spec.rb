@@ -151,14 +151,6 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).not_to have_link(href: room_path(@room_xyz, locale: I18n.locale))
   end
 
-  it "lists rooms starting with the query before other found rooms" do
-    visit search_results_path(query: "ABC")
-    expect(page.body.index(@abc_room.name)).to be < page.body.index(@room_abc.name)
-
-    visit search_results_path(query: "room")
-    expect(page.body.index(@room_abc.name)).to be < page.body.index(@abc_room.name)
-  end
-
   it "shows people whose first name matches the query" do
     visit search_results_path(query: "marie")
     expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale), count: 1)
@@ -195,14 +187,6 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).not_to have_link(href: person_path(@curie, locale: I18n.locale))
   end
 
-  it "lists people whose full name or last name starts with the query before other found people" do
-    visit search_results_path(query: "rie")
-    expect(page.body.index(@riemann.name)).to be < page.body.index(@curie.name)
-
-    visit search_results_path(query: "ma")
-    expect(page.body.index(@curie.name)).to be < page.body.index(@riemann.name)
-  end
-
   it "ignores excessive spaces in the query" do
     visit search_results_path(query: "  Marie \t  \nCurie   ")
     expect(page).to have_link(@curie.name, href: person_path(@curie, locale: I18n.locale), count: 1)
@@ -221,6 +205,21 @@ RSpec.describe "Search result list page", type: :feature do
   it "does not find results if query consists only of spaces and punctuation" do
     visit search_results_path(query: "  \n. \t")
     expect(page).to have_css('div#no_results_message')
+  end
+
+  it "sorts results alphabetically by default" do
+    visit search_results_path(query: "Building")
+    expect(page).to have_css('img[src*="sort_alphabetically"]')
+  end
+
+  it "shows button to order by location" do
+    visit search_results_path(query: "Building", sort_location: "true")
+    expect(page).to have_css('img[src*="sort_location"]')
+  end
+
+  it "sort results correctly" do
+    visit search_results_path(query: "Building", sort_location: "true")
+    expect(page.body).to match(/ABC Building.*Building ABC.*Building XYZ/m)
   end
 
 end

@@ -57,3 +57,7 @@ en:
     openingtimes: 'Opening times'
     back: 'Back'
     show: 'Show'
+    favourite: 'Add favourite'
+    unfavourite: 'Remove favourite'
+    your-favourites: 'These are your favourites:'
+    login-for-favourites: 'Login to see your favourite list.'

@@ -1,41 +1,51 @@
 @import "colors";
 
-.topbar-custom {
+.topbar-with-settings-area, .topbar-custom {
   padding: 0.5rem 2rem;
   flex-wrap: nowrap !important;
   position: fixed !important;
   top: 0;
   right: 0;
   z-index: 401;
-  height: 5rem;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+}
+
+.topbar-with-settings-area {
+  height: 11rem;
+  flex-direction: column;
+
+  .settings-area {
+    height: 6rem;
+    color: $hpi-blue;
+  }
+}
+
+.user-area, .settings-area {
+  padding: 0.2rem;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 2.5rem;
+  background-color: white;
+}
+
+.topbar-custom {
+  height: 5rem;
+  flex-direction: row;
 
   .navbar-brand {
     color: $hpi-blue;
     text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
 
-    @media only screen and (max-width: 350px) {
+    @media only screen and (max-width: 400px) {
       & > span {
         display: none;
       }
     }
   }
 
-  .user-area, .settings-area {
-    background-color: white;
-    padding: 0.2rem;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 2.5rem;
-  }
-
-  .settings-area {
-    margin-right: 1rem;
-  }
-
   .user-area {
+
     &:hover {
       transform: scale(1.02);
       transform-origin: center;

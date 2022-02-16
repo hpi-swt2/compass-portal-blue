@@ -105,4 +105,19 @@ RSpec.configure do |config|
 
   # This allows us to use `sign_in` in `:request` specs.
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.after(:each, js: true) do
+    errors = page.driver.browser.logs.get(:browser)
+    if errors.present?
+      aggregate_failures 'javascript errrors' do
+        errors.each do |error|
+          expect(error.level).not_to eq('SEVERE'), error.message
+          next unless error.level == 'WARNING'
+
+          warn 'WARN: javascript warning'
+          warn error.message
+        end
+      end
+    end
+  end
 end
