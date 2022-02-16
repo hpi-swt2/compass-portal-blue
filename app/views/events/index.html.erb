@@ -1,4 +1,4 @@
-<h1 class="fw-light">Events</h1>
+<h1 class="fw-light"><%= t('events.other') %></h1>
 
 <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
   <div class="form-group mb-2">
@@ -14,12 +14,12 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Room</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Recurring</th>
+        <th><%= t(:name)%></th>
+        <th><%= t(:description)%></th>
+        <th><%= t('rooms.one')%></th>
+        <th><%= t('events.start_date')%></th>
+        <th><%= t('events.end_date')%></th>
+        <th><%= t('events.recurrence_rule')%></th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -30,16 +30,16 @@
           <td><%= event.name %></td>
           <td><%= event.description %></td>
           <% if event.room.nil? then %>
-            <td><%= "No Room" %></td>
+            <td><%= t('events.no_room') %></td>
           <% else %>
             <td><%= link_to event.room.name, room_path(event.room) %></td>
           <% end %>
           <td><%= event.start_time.to_s %></td>
           <td><%= event.end_time.to_s %></td>
           <td><%= event.rule %></td>
-          <td><%= link_to 'Show', event %></td>
-          <td><%= link_to 'Edit', edit_event_path(event) %></td>
-          <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to t("show"), event %></td>
+          <td><%= link_to t('edit'), edit_event_path(event) %></td>
+          <td><%= link_to t('destroy'), event, method: :delete, data: { confirm: t(:confirm) } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -48,4 +48,4 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+<%= link_to t('model.add_new', model: t('events.one')), new_event_path %>

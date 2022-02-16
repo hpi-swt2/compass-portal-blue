@@ -130,7 +130,7 @@ RSpec.describe "/events", type: :request do
       end
 
       it "shows a notice that events from the file have been imported" do
-        expect(flash[:notice]).to eq("Imported Events from ICS")
+        expect(flash[:notice]).to eq("Events were successfully imported from ICS.")
       end
 
       it "creates events from the imported calendar" do

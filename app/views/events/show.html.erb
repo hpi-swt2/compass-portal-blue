@@ -1,10 +1,10 @@
 <h2 class="mb-3 fw-light"><%= @event.name %></h2>
 
-<div class="td-btn"><%= link_to 'Calendar', calendar_path(event_id: @event.id, start_date: @event.queried_occurence), class: "btn btn-secondary link-btn" %></div>
+<div class="td-btn"><%= link_to t('calendar'), calendar_path(event_id: @event.id, start_date: @event.queried_occurence), class: "btn btn-secondary link-btn" %></div>
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Description:</strong>
+    <strong><%= "#{t(:description)}:" %></strong>
   </label>
   <p class="form-control-static">
     <%= @event.description %>
@@ -13,7 +13,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Start Date:</strong>
+    <strong><%= "#{t('events.start_date')}:"%></strong>
   </label>
   <p class="form-control-static">
     <%= @event.start_time.to_s %>
@@ -22,7 +22,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>End Date:</strong>
+    <strong><%= "#{t('events.end_date')}:"%></strong>
   </label>
   <p class="form-control-static">
     <%= @event.end_time.to_s %>
@@ -31,7 +31,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Room:</strong>
+    <strong><%= "#{t('rooms.one')}:"%></strong>
   </label>
   <p class="form-control-static">
     <% if @event.room.nil? then %>
@@ -44,7 +44,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Recurring:</strong>
+    <strong><%= "#{t('events.start_date')}:"%></strong>
   </label>
   <p class="form-control-static">
     <%= @event.rule %>

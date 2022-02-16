@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 <% if @search_results.empty? %>
   <div id="no_results_message">
-    <h1>Your search did not match any pages</h1>
+    <h1><%= t('search_results.not_found') %></h1>
   </div>
 <% else %>
 
   <div class="row">
     <div class="col-10">
-      <h1>Search Results</h1>
+      <h1><%= t('search_results.other') %></h1>
     </div>
     <% if @sort_location == "true"  %>
     <div class="col-1">

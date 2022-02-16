@@ -31,7 +31,7 @@ class Person < ApplicationRecord
   end
 
   def search_description
-    "E-Mail: #{email}"
+    "#{I18n.t(:email)}: #{email}"
   end
 
   private

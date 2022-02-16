@@ -28,25 +28,175 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-    hello: 'Hello world'
-    people: 'People'
-    title-en: 'English'
-    title-de: 'German'
-    date:
-        abbr_day_names: [Su, Mo, Tu, We, Th, Fr, Sa]
-        month_names: [~, January, February, March, April, May, June, July, August, September, October, November, December]
+    hello: Hello world
+    hpi_navigator: HPI Navigator
+    welcome_message: Welcome to the HPI Compass Portal
+    site_title: HPI Compass Portal
+    position: Position
+    title-en: English
+    title-de: German
+    create_new_event: Create new Event
+    email: E-Mail
+    username: User name
+    name: Name
+    description: Description
+    contribute_content: Contribute Content
+    admin?: Admin?
+    user-roles: User roles
+    details: Details
+    error: Error
+    photo: Photo
+    cancel: Cancel
+    home: Home
+    search: Search
+    share: Share
+    confirm: Are you sure?
+    back: Back
+    show: Show
+    edit: Edit
+    destroy: Destroy
+    day: Day
+    calendar: Calendar
+    favourite: Add favourite
+    unfavourite: Remove favourite
+    your-favourites: "These are your favourites:"
+    login-for-favourites: Login to see your favourite list.
+    model:
+        add_new: "Add new %{model}"
+        edit: "Edit %{model}"
+        create: "Create %{model}"
+        success:
+            create: "%{model} was successfully created."
+            update: "%{model} was successfully updated."
+            destroy: "%{model} was successfully destroyed."
+    user:
+        one: User
+        name: Username
+        displayed_name: your displayed name
+        account:
+            login: Login
+            signup: Sign Up
+            signout: Sign out
+            update: Update User Account
+            cancel: Cancel my account permanently
+            login_details: Login Details
+            openid_connect_login: HPI OpenID Log In
+            local_login: Local Login
+            local_signup: Local Sign Up
+            logging_in: Logging in...
+            password:
+                one: Password
+                other: Passwords
+                new: New password
+                leave_blank: (leave blank if you don't want to change it)
+                current_needed: (we need your current password to confirm password changes)
+                confirm: Confirm new password
+                change: Change Password
+                forgot: Forgot your password?
+                min_characters: "%{minimum_password_length} characters minimum"
+            resend_confirmation: Resend confirmation instructions
+    buildings:
+        one: Building
+        other: Buildings
+        new: New Building
+        longitude: Longitude
+        latitude: Latitude
+        directions: "Directions"
+    rooms:
+        one: Room
+        other: Rooms
+        new: New Room
+        floor: Floor
+        occupancy: Occupancy
+        free: free
+        occupied: occupied
+        type: Room type
+        search_description: "%{type} on floor %{floor} of %{building}"
+    locations:
+        one: Location
+        other: Locations
+        new: New Location
+        photo: Location Photo
+        latitude: Location Latitude
+        longitude: Location Longitude
+        openingtime:
+            one: Opening time
+            other: Opening times
+            new: New Opening time
+            opens: Opens
+            closes: Closes
+    people:
+        one: Person
+        other: People
+        new: New Person
+        first_name: first name
+        last_name: last name
+        phone_number: Phone number
+        profile_picture: Profile picture
+        office_hour:
+            one: Office hour
+            other: Office hours
+    events:
+        one: Event
+        other: Events
+        new: New Event
+        import_ics: Import Events from ICS
+        import_success: Events were successfully imported from ICS.
+        alert:
+            choose_file: Please choose an ICS file to import
+            ics_only: Only ICS files can be imported
+        start_date: Start date
+        end_date: End date
+        recurrence_rule: Recurrence rule
+        no_room: No Room
+    search_results:
+        one: Search Result
+        other: Search Results
+        not_found: Your search did not match any pages
     simple_calendar:
+        week: Week
+        previous: Previous
+        next: Next
+    # taken from https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en.yml
+    errors:
+        format: "%{attribute} %{message}"
+        messages:
+            accepted: must be accepted
+            blank: can't be blank
+            confirmation: doesn't match %{attribute}
+            empty: can't be empty
+            equal_to: must be equal to %{count}
+            even: must be even
+            exclusion: is reserved
+            greater_than: must be greater than %{count}
+            greater_than_or_equal_to: must be greater than or equal to %{count}
+            inclusion: is not included in the list
+            invalid: is invalid
+            less_than: must be less than %{count}
+            less_than_or_equal_to: must be less than or equal to %{count}
+            model_invalid: 'Validation failed: %{errors}'
+            not_a_number: is not a number
+            not_an_integer: must be an integer
+            odd: must be odd
+            other_than: must be other than %{count}
+            present: must be blank
+            required: must exist
+            taken: has already been taken
+            too_long:
+                one: is too long (maximum is 1 character)
+                other: is too long (maximum is %{count} characters)
+            too_short:
+                one: is too short (minimum is 1 character)
+                other: is too short (minimum is %{count} characters)
+            wrong_length:
+                one: is the wrong length (should be 1 character)
+                other: is the wrong length (should be %{count} characters)
+        template:
+            body: 'There were problems with the following fields:'
+            header:
+                one: 1 error prohibited this %{model} from being saved
+                other: "%{count} errors prohibited this %{model} from being saved"
         week: 'Week'
         previous: 'Previous'
         next: 'Next'
-    create_new_event: 'Create new Event'
-    email: 'E-Mail'
-    username: 'User name'
-    admin?: 'Admin?'
-    user-roles: 'User roles'
-    favourite: 'Add favourite'
-    unfavourite: 'Remove favourite'
-    your-favourites: 'These are your favourites:'
-    login-for-favourites: 'Login to see your favourite list.'

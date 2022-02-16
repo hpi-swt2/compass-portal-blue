@@ -1,6 +1,6 @@
-<h1>New Room</h1>
+<h1><%= t('rooms.new') %></h1>
 
 <%= render 'form', room: @room, longitude: @longitude, latitude: @latitude %>
 
-<%= link_to "Home", root_url, class: "btn btn-secondary link-btn" %>
-<%= link_to 'Cancel', edit_user_registration_path, class: "btn btn-secondary link-btn" %>
+<%= link_to t("home"), root_url, class: "btn btn-secondary link-btn" %>
+<%= link_to t("cancel"), edit_user_registration_path, class: "btn btn-secondary link-btn" %>

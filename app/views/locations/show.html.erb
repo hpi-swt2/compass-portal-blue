@@ -18,12 +18,12 @@
     </div>
 
 <p>
-  <strong>Details:</strong>
+  <strong><%= t(:details) %></strong>
   <%= @location.details %>
 </p>
 
 <p>
-  <strong>Opening Times:</strong>
+  <strong><%= t('locations.opening_times.other') %></strong>
   <br>
   <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
     <%= openingtime.day_as_string %>:
@@ -35,7 +35,7 @@
 </p>
 
 <a class="btn btn-primary" href="/route?dest=<%= @location.name %>">
-  <i class="fas fa-route"></i> Directions
+  <i class="fas fa-route"></i> <%= t('buildings.directions') %>
 </a>
 
 <script id="_latlonginfo" type="application/json">

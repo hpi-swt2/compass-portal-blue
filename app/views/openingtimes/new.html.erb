@@ -1,5 +1,5 @@
-<h1>New Openingtime</h1>
+<h1><%= t('locations.openingtime.new') %></h1>
 
 <%= render 'form', openingtime: @openingtime %>
 
-<%= link_to 'Back', openingtimes_path, class: "btn btn-secondary link-btn" %>
+<%= link_to t("back"), openingtimes_path, class: "btn btn-secondary link-btn" %>

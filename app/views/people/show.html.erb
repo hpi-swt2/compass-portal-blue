@@ -23,17 +23,17 @@
 </div>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= "#{t(:email)}:" %></strong>
   <%= mail_to @person.email %>
 </p>
 
 <p>
-  <strong>Phone number:</strong>
+  <strong><%= "#{t('people.phone_number')}:" %></strong>
   <%= tel_to @person.phone_number %>
 </p>
 
 <p>
-  <strong>Rooms:</strong>
+  <strong><%= "#{t('rooms.other')}:" %></strong>
   <ul>
       <% @person.rooms.each do | room | %>
         <li>
@@ -44,7 +44,7 @@
 </p>
 
 <p>
-  <strong>Office hours:</strong>
+  <strong><%= "#{t('people.office_hour.other')}:" %></strong>
   <ul>
     <% @person.openingtimes.each do | opening_time | %>
       <li>
