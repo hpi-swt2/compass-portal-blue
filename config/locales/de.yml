@@ -1,33 +1,33 @@
 de:
-    hello: "Hallo Welt"
-    hpi_navigator: "HPI Navigator"
-    welcome_message: "Willkommen beim HPI Compass Portal"
-    site_title: 'HPI Compass Portal'
-    position: "Position"
-    title-en: "Englisch"
-    title-de: "Deutsch"
-    create_new_event: "Erstelle neues Event"
-    email: "E-Mail"
-    username: "Benutzername"
-    name: "Name"
-    description: "Beschreibung"
-    contribute_content: "Inhalt beitragen"
-    admin?: "Administrator?"
-    user-roles: "Nutzerrollen"
-    details: "Details"
-    error: "Fehler"
-    photo: "Foto"
-    destroy: "Löschen"
-    cancel: "Abbrechen"
-    home: "Startseite"
-    search: "Suche"
-    share: "Teilen"
-    confirm: "Sind Sie sicher?"
-    back: "Zurück"
-    show: "Anzeigen"
-    edit: "Bearbeiten"
-    destroy: "Löschen"
-    day: "Tag"
+    hello: Hallo Welt
+    hpi_navigator: HPI Navigator
+    welcome_message: Willkommen beim HPI Compass Portal
+    site_title: HPI Compass Portal
+    position: Position
+    title-en: Englisch
+    title-de: Deutsch
+    create_new_event: Erstelle neues Event
+    email: E-Mail
+    username: Benutzername
+    name: Name
+    description: Beschreibung
+    contribute_content: Inhalt beitragen
+    admin?: Administrator?
+    user-roles: Nutzerrollen
+    details: Details
+    error: Fehler
+    photo: Foto
+    destroy: Löschen
+    cancel: Abbrechen
+    home: Startseite
+    search: Suche
+    share: Teilen
+    confirm: Sind Sie sicher?
+    back: Zurück
+    show: Anzeigen
+    edit: Bearbeiten
+    destroy: Löschen
+    day: Tag
     model:
         add_new: "%{model} hinzufügen"
         edit: "%{model} bearbeiten"
@@ -37,99 +37,99 @@ de:
             update: "%{model} wurde erfolgreich aktualisiert." 
             destroy: "%{model} wurde erfolgreich gelöscht."
     user:
-        one: 'Nutzer'
-        name: "Nutzername"
-        displayed_name: 'Ihr angezeigter Name'
+        one: Nutzer
+        name: Nutzername
+        displayed_name: Ihr angezeigter Name
         account:
-            login: "Anmelden"
-            signup: "Registrieren"
-            signout: "Abmelden"
-            update: "Nutzeraccount aktualisieren"
-            cancel: "Account dauerhaft löschen"
-            login_details: "Zugangsdaten"
-            openid_connect_login: "HPI OpenID Log In"
-            local_login: "Lokale Anmeldung"
-            local_signup: "Lokale Registrierung"
-            logging_in: "Anmelden..."
+            login: Anmelden
+            signup: Registrieren
+            signout: Abmelden
+            update: Nutzeraccount aktualisieren
+            cancel: Account dauerhaft löschen
+            login_details: Zugangsdaten
+            openid_connect_login: HPI OpenID Log In
+            local_login: Lokale Anmeldung
+            local_signup: Lokale Registrierung
+            logging_in: Anmelden...
             password:
-                one: "Passwort"
-                other: "Passwörter"
-                new: "Neues Passwort"
-                leave_blank: "(frei lassen um das aktuelle Passwort beizubehalten)"
-                current_needed: "(wir brauchen Ihr aktuelles Passwort zur Bestätigung der Änderung)"
-                confirm: "Neues Passwort bestätigen"
-                change: "Passwort wechseln"
-                forgot: "Passwort vergessen?"
-                min_characters: 'mindestens %{minimum_password_length} Zeichen'
-            resend_confirmation: "Bestätigungsanweisung erneut senden" 
+                one: Passwort
+                other: Passwörter
+                new: Neues Passwort
+                leave_blank: (frei lassen um das aktuelle Passwort beizubehalten)
+                current_needed: (wir brauchen Ihr aktuelles Passwort zur Bestätigung der Änderung)
+                confirm: Neues Passwort bestätigen
+                change: Passwort wechseln
+                forgot: Passwort vergessen?
+                min_characters: "mindestens %{minimum_password_length} Zeichen"
+            resend_confirmation: Bestätigungsanweisung erneut senden
     buildings:
-        one: "Gebäude"
-        other: "Gebäude"
-        new: "Neues Gebäude"
-        longitude: "Längengrad"
-        latitude: "Breitengrad"
-        directions: "Route"
+        one: Gebäude
+        other: Gebäude
+        new: Neues Gebäude
+        longitude: Längengrad
+        latitude: Breitengrad
+        directions: Route
     rooms:
-        one: "Raum"
-        other: "Räume"
-        new: "Neuer Raum"
-        floor: "Stockwerk"
-        occupancy: "Kapazität"
-        free: "frei"
-        occupied: "besetzt"
-        type: "Raumtyp"
+        one: Raum
+        other: Räume
+        new: Neuer Raum
+        floor: Stockwerk
+        occupancy: Kapazität
+        free: frei
+        occupied: besetzt
+        type: Raumtyp
     locations:
-        one: "Standort"
-        other: "Standorte"
-        new: "Neuer Standort"
-        photo: "Standortfoto"
-        latitude: "Standortbreitengrad"
-        longitude: "Standortlängengrad"
+        one: Standort
+        other: Standorte
+        new: Neuer Standort
+        photo: Standortfoto
+        latitude: Standortbreitengrad
+        longitude: Standortlängengrad
         openingtime:
-            one: "Öffnungszeit"
-            other: "Öffnungszeiten"
+            one: Öffnungszeit
+            other: Öffnungszeiten
             new: Neue Öffnungszeit
             opens: Öffnet
             closes: Schließt
     people:
-        one: "Person"
-        people: "Personen"
-        new: "Neue Person"
-        first_name: "Vorname"
-        last_name: "Nachname"
-        phone_number: "Telefonnummer"
-        profile_picture: "Profilbild"
+        one: Person
+        people: Personen
+        new: Neue Person
+        first_name: Vorname
+        last_name: Nachname
+        phone_number: Telefonnummer
+        profile_picture: Profilbild
         office_hour:
-            one: "Geschäftszeit"
-            other: "Geschäftszeiten"
+            one: Geschäftszeit
+            other: Geschäftszeiten
     events:
-        one: "Veranstaltung"
-        other: "Veranstaltungen"
-        new: "Neue Veranstaltung"
-        import_ics: "Veranstaltungen aus ICS importieren"
-        import_success: "Veranstaltungen wurden erfolgreich importiert."
+        one: Veranstaltung
+        other: Veranstaltungen
+        new: Neue Veranstaltung
+        import_ics: Veranstaltungen aus ICS importieren
+        import_success: Veranstaltungen wurden erfolgreich importiert.
         alert:
-            choose_file: "Wählen Sie die zu importierende ICS-Datei"
-            ics_only: "Nur ICS-Dateien können importiert werden"
-        start_date: "Anfangsdatum"
-        end_date: "Enddatum"
-        recurrence_rule: "Wiederholungsregel"
-        no_room: "Kein Raum"
+            choose_file: Wählen Sie die zu importierende ICS-Datei
+            ics_only: Nur ICS-Dateien können importiert werden
+        start_date: Anfangsdatum
+        end_date: Enddatum
+        recurrence_rule: Wiederholungsregel
+        no_room: Kein Raum
     simple_calendar:
-        week: "Woche"
-        previous: "Vorherige"
-        next: "Nächste"
+        week: Woche
+        previous: Vorherige
+        next: Nächste
 
     # the english version of the following translations is given by rails and does not have to be added
     # it can be viewed at https://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/en.yml
     activerecord:
         errors:
         messages:
-            record_invalid: 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
+            record_invalid: "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}"
             restrict_dependent_destroy:
-            has_one: Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz
-                existiert.
-            has_many: Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren.
+            has_one: "Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz
+                existiert."
+            has_many: "Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren."
     date:
         abbr_day_names:
         - So
