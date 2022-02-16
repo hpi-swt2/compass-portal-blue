@@ -93,7 +93,7 @@ de:
             closes: Schließt
     people:
         one: Person
-        people: Personen
+        other: Personen
         new: Neue Person
         first_name: Vorname
         last_name: Nachname
