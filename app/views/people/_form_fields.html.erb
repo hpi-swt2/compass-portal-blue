@@ -1,6 +1,6 @@
 <% if person.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+    <h2><%= t('errors.template.header', count: person.errors.count, model: t('people.one')) %></h2>
 
     <ul>
       <% person.errors.each do |error| %>
@@ -11,7 +11,7 @@
 <% end %>
 
 <div class="field mb-3 profile-picture edit-profile-picture">
-  <%= form.label :profile_picture, class: 'form-label' %>
+  <%= form.label t('people.profile_picture'), class: 'form-label' %>
   <div class='profile-picture-wrapper'>
     <div class='profile-picture-container'>
       <% if person.profile_picture.attached? %>
@@ -26,27 +26,27 @@
 </div>
 
 <div class="field mb-3">
-  <%= form.label :first_name, class: 'form-label' %>
+  <%= form.label t('people.first_name'), class: 'form-label' %>
   <%= form.text_field :first_name, class: 'form-control' %>
 </div>
 
 <div class="field mb-3">
-  <%= form.label :last_name, class: 'form-label' %>
+  <%= form.label  t('people.last_name'), class: 'form-label' %>
   <%= form.text_field :last_name, class: 'form-control' %>
 </div>
 
 <div class="field mb-3">
-  <%= form.label :phone_number, class: 'form-label' %>
+  <%= form.label  t('people.phone_number'), class: 'form-label' %>
   <%= form.text_field :phone_number, class: 'form-control' %>
 </div>
 
 <div class="field mb-3">
-  <%= form.label :email, class: 'form-label' %>
+  <%= form.label t(:email), class: 'form-label' %>
   <%= form.text_field :email, class: 'form-control' %>
 </div>
 
 <div class="field mb-3">
-  <%= form.label :rooms, class: 'form-label' %><br/>
+  <%= form.label t('rooms.other'), class: 'form-label' %><br/>
   <%= form.select 'room_ids',
                   options_from_collection_for_select(Room.all, :id, :name, person.room_ids),
                   {},
@@ -54,7 +54,7 @@
 </div>
 
 <div class="field mb-3 opening-times-container">
-  <%= form.label :office_hours, class: 'form-label' %>
+  <%= form.label t('people.office_hour.other'), class: 'form-label' %>
   <%= form.fields_for :openingtimes do |o| %>
     <div class="field mb-3 input-group" id="opening-time-field-<%= o.object.id %>">
       <%= o.select 'day',
@@ -72,7 +72,9 @@
       <% end %>
     </div>
   <% end %>
-  <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" ><i class="fas fa-plus"></i> Add office hour</button>
+  <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);" >
+    <i class="fas fa-plus"></i><%= " #{t('model.add_new', model: t('people.office_hour.one'))}" %>
+  </button>
 </div>
 
 <script defer>

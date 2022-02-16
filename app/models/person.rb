@@ -1,6 +1,7 @@
 # the model representing a person of interest
 class Person < ApplicationRecord
   include Timeable
+  include Favourable
 
   validates :phone_number, phone: true, allow_blank: true
   before_save :normalize_phone_number
@@ -33,6 +34,10 @@ class Person < ApplicationRecord
     # FIXME: This feels like Rails should have this built-in, but I couldn't
     # find anything
     User.find_by person: self
+  end
+
+  def search_description
+    "#{I18n.t(:email)}: #{email}"
   end
 
   private

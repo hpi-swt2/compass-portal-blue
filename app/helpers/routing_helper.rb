@@ -115,6 +115,7 @@ module RoutingHelper
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
+    # This Regex is shared with `isValidCoordinates` in `building_map.js.erb`
     regex = /^-?\d{1,2}(\.\d+)?,-?\d{1,2}(\.\d+)?$/
     coordinates.match(regex)
   end

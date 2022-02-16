@@ -78,8 +78,11 @@ function pinCoordinatesString(pin) {
 }
 
 function validatePlaceInput(inputId, optionsId) {
-  const input = $(`#${inputId}`)[0];
-  const options = $(`#${optionsId}`)[0].options;
+  const input = document.getElementById(inputId);
+  if (isValidCoordinates(input.value)) {
+    return true;
+  }
+  const options = document.getElementById(optionsId).options;
   return Array.from(options).some((o) => o.value === input.value);
 }
 
@@ -89,6 +92,11 @@ function resolveMagicPinStrings(inputField) {
   } else if (inputField.value === PIN_2_MAGIC_STRING) {
     checkPinExistence(1, inputField);
   }
+}
+
+function isValidCoordinates(coordinatesString) {
+  // This Regex is shared with `RoutingHelper.valid_coordinates?`
+  return /^-?\d{1,2}(\.\d+)?,-?\d{1,2}(\.\d+)?$/.test(coordinatesString);
 }
 
 function resolveMagicStrings(inputField) {

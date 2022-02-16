@@ -1,10 +1,10 @@
 <div class="row pb-1">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h2 class="fw-light">Edit Location</h2>
+    <h2 class="fw-light"><%= t('model.edit', model: t('locations.one')) %></h2>
 
     <%= render 'form', location: @location, latitude: @location.location_latitude, longitude: @location.location_longitude %>
 
-    <%= link_to 'Back', locations_path, class: "btn btn-secondary link-btn" %>
-    <%= link_to 'Show', @location, class: "btn btn-secondary link-btn" %>
+    <%= link_to t('home'), root_url, class: "btn btn-secondary link-btn" %>
+    <%= link_to t('cancel'), edit_user_registration_path, class: "btn btn-secondary link-btn" %>
   </div>
 </div>

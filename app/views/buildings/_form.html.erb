@@ -1,7 +1,7 @@
 <%= form_with(model: building) do |form| %>
   <% if building.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(building.errors.count, "error") %> prohibited this building from being saved:</h2>
+      <h2><%= t('errors.template.header', count: @building.errors.count, model: t('buildings.one')) %></h2>
 
       <ul>
         <% building.errors.each do |error| %>
@@ -17,16 +17,16 @@
   </div>
 
   <div class="field">
-    <%= form.label :location_latitude, class: "form-label" %>
+    <%= form.label t("buildings.latitude"), class: "form-label" %>
     <%= form.text_field :location_latitude, class: "form-control", value: latitude %>
   </div>
 
   <div class="field">
-    <%= form.label :location_longitude, class: "form-label" %>
+    <%= form.label t("buildings.longitude"), class: "form-label" %>
     <%= form.text_field :location_longitude, class: "form-control", value: longitude %>
   </div>
 
   <div class="actions mt-3">
-    <%= form.submit class: "btn btn-primary" %>
+    <%= form.submit t('model.create', model: t('buildings.one')), class: "btn btn-primary" %>
   </div>
 <% end %>

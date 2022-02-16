@@ -6,11 +6,16 @@
   <div class="app-overlay-bottom" id="_overlay">
     <%= form_with url: search_results_path, method: :get, :id => 'search-form' do |form| %>
       <div class="search-bar">
-        <button type="button" class="btn" id="floating-back" onclick="ajaxBack()"><i class="fas fa-arrow-left"></i><span>Back</span></button>
-          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :autocomplete => :off %>
-        <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+        <button type="button" class="btn" id="floating-back" onclick="ajaxBack()"><i class="fas fa-arrow-left"></i><span><%= t("back")%></span></button>
+        <%= form.text_field :query, class: "form-control", :placeholder => t("search"), id: "search", :autocomplete => :off %>
+        <button type="submit" class="btn" padding=0><i class="fa fa-search"></i></button>
       </div>
-      <button type="button" class="btn" id="toggle-overlay">
+      <% if current_user %>
+      <button type="button" class="btn f-bttn" id="favourite-list-button">
+        <i class="fas fa-th-list"></i>
+      </button>
+      <% end %>
+      <button type="button" class="btn f-bttn" id="toggle-overlay">
         <i class="fas fa-chevron-up"></i>
       </button>
     <% end %>
@@ -37,7 +42,18 @@ $('#toggle-overlay').click(function(event) {
     $("#toggle-overlay").toggleClass('open');
 });
 
+$('#favourite-list-button').click(function (event) {
+    $("#_overlay").addClass('open');
+    $("#toggle-overlay").addClass('visible');
+    $("#toggle-overlay").addClass('open');
+    ajaxCall(event, '/favourites');
+});
+
 function ajaxBack() {
     history.back();
 }
+
+function toggle_sort() {
+    
+} 
 </script>
