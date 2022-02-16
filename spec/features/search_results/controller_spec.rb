@@ -19,9 +19,13 @@ RSpec.describe "Search result list page", type: :feature do
     expect(distance).to be_within(20.0).of(1252.0)
   end
 
-  it "correctly parses the user location" do
+  it "fails if no location is present" do
     @user.delete_last_known_location
-    expect(@controller.send(:valid_user_location)).to be nil
+    no_location = @controller.send(:valid_user_location)
+    expect(no_location).to be nil
+  end
+
+  it "correctly parses the user location" do
     @user.update_last_known_location("52.3925591,13.1303072")
     location = @controller.send(:valid_user_location)
     expect(location[0]).to be_within(0.1).of(52.3925591)
