@@ -52,14 +52,6 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).to have_link(@building_abc.name, href: building_path(@building_abc, locale: I18n.locale), count: 1)
   end
 
-  it "lists buildings starting with the query before other found buildings" do
-    visit search_results_path(query: "ABC")
-    expect(page.body.index(@abc_building.name)).to be < page.body.index(@building_abc.name)
-
-    visit search_results_path(query: "build")
-    expect(page.body.index(@building_abc.name)).to be < page.body.index(@abc_building.name)
-  end
-
   it "shows locations whose name matches the query" do
     visit search_results_path(query: "vill")
     expect(page).to have_link(@pavillon.name, href: location_path(@pavillon, locale: I18n.locale), count: 1)
@@ -100,14 +92,6 @@ RSpec.describe "Search result list page", type: :feature do
 
     visit search_results_path(query: "bank-details-abc-DE")
     expect(page).to have_link(@bank.name, href: location_path(@bank, locale: I18n.locale), count: 1)
-  end
-
-  it "lists locations starting with the query before other found locations" do
-    visit search_results_path(query: "ba")
-    expect(page.body.index(@bank.name)).to be < page.body.index(@kocktail_bar.name)
-
-    visit search_results_path(query: "k")
-    expect(page.body.index(@kocktail_bar.name)).to be < page.body.index(@bank.name)
   end
 
   it "shows rooms whose name matches the query" do
