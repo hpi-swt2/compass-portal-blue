@@ -17,4 +17,8 @@ class SearchResult
   def persisted?
     false
   end
+
+  def position_set?
+    !(location_latitude.nil? || location_longitude.nil?)
+  end
 end

@@ -1,13 +1,6 @@
 <h2 class="mb-3 fw-light"><%= @event.name %></h2>
 
-<div class="field mb-3">
-  <label class="form-label">
-    <strong>Name:</strong>
-  </label>
-  <p class="form-control-static">
-    <%= @event.name %>
-  </p>
-</div>
+<div class="td-btn"><%= link_to 'Calendar', calendar_path(event_id: @event.id, start_date: @event.queried_occurence), class: "btn btn-secondary link-btn" %></div>
 
 <div class="field mb-3">
   <label class="form-label">

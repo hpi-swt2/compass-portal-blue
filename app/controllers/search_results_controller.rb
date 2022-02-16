@@ -1,5 +1,3 @@
-include Math
-
 class SearchResultsController < ApplicationController
   before_action :set_search_result, only: %i[show edit update destroy]
 
@@ -61,8 +59,8 @@ class SearchResultsController < ApplicationController
     search_rooms_by_name_or_type query
     search_people_by_full_name query
     search_locations_by_name_or_details query
-    search_by_name query
     search_events_by_name_or_description query
+    search_by_name query
   end
 
   def search_by_name(query)
@@ -92,23 +90,23 @@ class SearchResultsController < ApplicationController
   end
 
   def search_events_by_name_or_description(query)
-    events = Event.where("LOWER(name) || ' ' || LOWER(description) LIKE ?", "%#{query}%")
+    events = Event.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{query}%", "%#{query}%")
     add_results(events, "event")
   end
 
+  include Math
   # See https://en.wikipedia.org/wiki/Great-circle_distance
   def distance(location1, location2)
-    phi_1 = to_degrees(location1[0])
-    phi_2 = to_degrees(location1[1])
-    lambda_1 = to_degrees(location2[0])
-    lambda_2 = to_degrees(location2[1])
-    centra_angle = acos( sin(phi_1) * sin(phi_2) + cos(phi_1) * cos(phi_2) * cos((lambda_1-lambda_2).abs) )
     earth_radius = 6_371_000
-    centra_angle * earth_radius
+    earth_radius * calculate_central_angle(location1[:lat], location1[:long], location2[:lat], location2[:long])
   end
 
-  def to_degrees(radians)
-    radians * (PI / 180)
+  def calculate_central_angle(phi1, phi2, lambda1, lambda2)
+    acos((sin(phi1) * sin(phi2)) + (cos(phi1) * cos(phi2) * cos((lambda1 - lambda2).abs)))
+  end
+
+  def location_to_radians(location)
+    { lat: location[0] * (PI / 180), long: location[0] * (PI / 180) }
   end
 
   def sort_search_results
@@ -118,10 +116,23 @@ class SearchResultsController < ApplicationController
     sort_by_location if @sort_location == "true"
   end
 
-  def sort_by_location
-    return unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil?
+  def valid_user_location
+    return nil if current_user.nil? || current_user.last_known_location_with_timestamp.nil?
 
-    current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
-    @search_results.sort_by! { |r| r.position_set? ? distance(current_position, [r.location_latitude, r.location_longitude]) : 10**6 }
+    current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
+  end
+
+  def sort_by_location
+    current_position = valid_user_location
+    return unless current_position
+
+    @search_results = @search_results.sort_by do |r|
+      if r.position_set?
+        distance(location_to_radians(current_position),
+                 location_to_radians([r.location_latitude, r.location_longitude]))
+      else
+        r.id * (10**6) # keep search results in order if no location is provided
+      end
+    end
   end
 end

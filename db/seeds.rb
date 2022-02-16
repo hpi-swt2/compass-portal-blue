@@ -7,14 +7,14 @@ require 'ice_cube'
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-hsg = Building.create!(name: "Hörsaalgebäude", location_latitude: 0.5321, location_longitude: 0.8763)
-hptg = Building.create!(name: "Hauptgebäude", location_latitude: 0.1674, location_longitude: 0.2345)
-hs1 = Room.create!(name: "Hörsaal1", floor: 0, room_type: "lecture-hall", building: hsg, location_latitude: 0.5322,
-                   location_longitude: 0.8764)
-hs2 = Room.create!(name: "Hörsaal2", floor: 0, room_type: "lecture-hall", building: hsg, location_latitude: 0.5522,
-                   location_longitude: 0.9764)
-h257 = Room.create!(name: "H.257", floor: 2, room_type: "seminar-room", building: hptg, location_latitude: 0.5122,
-                    location_longitude: 0.8754)
+hsg = Building.create!(name: "Hörsaalgebäude", location_latitude: 52.394084, location_longitude: 13.132397)
+hptg = Building.create!(name: "Hauptgebäude", location_latitude: 52.393889, location_longitude: 13.133515)
+hs1 = Room.create!(name: "Hörsaal1", floor: 0, room_type: "lecture-hall", building: hsg, location_latitude: 52.394058,
+                   location_longitude: 13.132626)
+hs2 = Room.create!(name: "Hörsaal2", floor: 0, room_type: "lecture-hall", building: hsg, location_latitude: 52.394163,
+                   location_longitude: 13.132283)
+h257 = Room.create!(name: "H.257", floor: 2, room_type: "seminar-room", building: hptg, location_latitude: 52.394042,
+                    location_longitude: 13.133324)
 Event.create!(name: "Mathe 1", description: "Mathe 1 Vorlesung bei Meinel", start_time: "2022-01-23 10:58:13",
               end_time: "2022-01-23 11:58:13", recurring: "", room: hs1)
 Event.create!(name: "Betriebssysteme", description: "BS", start_time: "2022-01-03 08:00:13",

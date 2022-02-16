@@ -151,48 +151,40 @@ RSpec.describe "Search result list page", type: :feature do
     expect(page).not_to have_link(href: person_path(@curie, locale: I18n.locale))
   end
 
-  it "lists people whose full name or last name starts with the query before other found people" do
-    visit search_results_path(query: "rie")
-    expect(page.body.index(@riemann.name)).to be < page.body.index(@curie.name)
-
-    visit search_results_path(query: "ma")
-    expect(page.body.index(@curie.name)).to be < page.body.index(@riemann.name)
-  end
-
   it "shows events whose name matches the query" do
     visit search_results_path(query: "xyz")
-    expect(page).to have_link(@event_xyz.name, href: %r{/calendar\?event_id=#{@event_xyz.id}}, count: 1)
+    expect(page).to have_link(@event_xyz.name, href: event_path(@event_xyz, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "AB")
-    expect(page).to have_link(@event_abc.name, href: %r{/calendar\?event_id=#{@event_abc.id}}, count: 1)
-    expect(page).to have_link(@abc_event.name, href: %r{/calendar\?event_id=#{@abc_event.id}}, count: 1)
+    expect(page).to have_link(@event_abc.name, href: event_path(@event_abc, locale: I18n.locale), count: 1)
+    expect(page).to have_link(@abc_event.name, href: event_path(@abc_event, locale: I18n.locale), count: 1)
   end
 
   it "shows events whose description matches the query" do
     visit search_results_path(query: "thingy")
-    expect(page).to have_link(@abc_event.name, href: %r{/calendar\?event_id=#{@abc_event.id}}, count: 1)
+    expect(page).to have_link(@abc_event.name, href: event_path(@abc_event, locale: I18n.locale), count: 1)
 
     visit search_results_path(query: "test")
-    expect(page).to have_link(@event_abc.name, href: %r{/calendar\?event_id=#{@event_abc.id}}, count: 1)
-    expect(page).to have_link(@event_xyz.name, href: %r{/calendar\?event_id=#{@event_xyz.id}}, count: 1)
+    expect(page).to have_link(@event_abc.name, href: event_path(@event_abc, locale: I18n.locale), count: 1)
+    expect(page).to have_link(@event_xyz.name, href: event_path(@event_xyz, locale: I18n.locale), count: 1)
   end
 
   it "does not show events whose name and type does not match the query" do
     visit search_results_path(query: "xyz")
     expect(page).not_to have_text(@event_abc.name)
-    expect(page).not_to have_link(href: %r{/calendar\?event_id=#{@event_abc.id}})
+    expect(page).not_to have_link(href: event_path(@event_abc, locale: I18n.locale))
     expect(page).not_to have_text(@abc_event.name)
-    expect(page).not_to have_link(href: %r{/calendar\?event_id=#{@abc_event.id}})
+    expect(page).not_to have_link(href: event_path(@abc_event, locale: I18n.locale))
 
     visit search_results_path(query: "AB")
     expect(page).not_to have_text(@event_xyz.name)
-    expect(page).not_to have_link(href: %r{/calendar\?event_id=#{@event_xyz.id}})
+    expect(page).not_to have_link(href: event_path(@event_xyz, locale: I18n.locale))
 
     visit search_results_path(query: "weird")
     expect(page).not_to have_text(@event_abc.name)
-    expect(page).not_to have_link(href: %r{/calendar\?event_id=#{@event_abc.id}})
+    expect(page).not_to have_link(href: event_path(@event_abc, locale: I18n.locale))
     expect(page).not_to have_text(@event_xyz.name)
-    expect(page).not_to have_link(href: %r{/calendar\?event_id=#{@event_xyz.id}})
+    expect(page).not_to have_link(href: event_path(@event_xyz, locale: I18n.locale))
   end
 
   it "ignores excessive spaces in the query" do
