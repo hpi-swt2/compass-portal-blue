@@ -1,5 +1,6 @@
 class OpeningtimesController < ApplicationController
   before_action :set_openingtime, only: %i[show edit update destroy]
+  before_action :add_openingtime, only: %i[create]
 
   # GET /openingtimes or /openingtimes.json
   def index
@@ -22,15 +23,11 @@ class OpeningtimesController < ApplicationController
 
   # POST /openingtimes or /openingtimes.json
   def create
-    @openingtime = Openingtime.new(openingtime_params)
-
     respond_to do |format|
       if @openingtime.save
-        format.html { redirect_to edit_openingtime_path(@openingtime), notice: "Openingtime was successfully created." }
-        format.json { render :edit, status: :created, location: @openingtime }
+        render_success format, 'model.success.create', :created
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @openingtime.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -39,11 +36,9 @@ class OpeningtimesController < ApplicationController
   def update
     respond_to do |format|
       if @openingtime.update(openingtime_params)
-        format.html { redirect_to edit_openingtime_path(@openingtime), notice: "Openingtime was successfully updated." }
-        format.json { render :edit, status: :ok, location: @openingtime }
+        render_success format, 'model.success.update', :ok
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @openingtime.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -58,6 +53,23 @@ class OpeningtimesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_openingtime
     @openingtime = Openingtime.find(params[:id])
+  end
+
+  def add_openingtime
+    @openingtime = Openingtime.new(openingtime_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @openingtime.errors, status: :unprocessable_entity }
+  end
+
+  def render_success(format, method, status)
+    format.html do
+      redirect_to edit_openingtime_path(@openingtime),
+                  notice: t(method, model: t('locations.openingtimes.one'))
+    end
+    format.json { render :edit, status: status, location: @openingtime }
   end
 
   # Only allow a list of trusted parameters through.

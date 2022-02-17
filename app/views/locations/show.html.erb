@@ -1,11 +1,16 @@
+<h2 class="mb-3 fw-light">
+  <%= if I18n.locale == :de
+        @location.name_de
+      elsif I18n.locale == :en
+        @location.name
+      end%>
+</h2>
 <% if current_user %>
 <button id="location-favourite" class="favourite <% if @location.favourited_by.include?(current_user) %> selected <% end %>" title="<%= t('favourite') %>">
     <i class="far fa-heart"></i>
     <i class="fas fa-heart"></i>
 </button>
 <% end %>
-
-<h2 class="mb-3 fw-light"><%= @location.name %></h2>
 
 <div class='edit-location-photo'>
   <div class='location-photo-wrapper'>
@@ -18,12 +23,17 @@
     </div>
 
 <p>
-  <strong>Details:</strong>
-  <%= @location.details %>
+  <strong><%=t(:details)%>:</strong>
+    <%= if I18n.locale == :de
+        @location.details_de
+      elsif I18n.locale == :en
+        @location.details
+      end%>
 </p>
 
 <p>
-  <strong>Opening Times:</strong>
+
+  <strong><%= t('locations.opening_times.other') %></strong>
   <br>
   <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
     <%= openingtime.day_as_string %>:
@@ -35,7 +45,7 @@
 </p>
 
 <a class="btn btn-primary" href="/route?dest=<%= @location.name %>">
-  <i class="fas fa-route"></i> Directions
+  <i class="fas fa-route"></i> <%= t('buildings.directions') %>
 </a>
 
 <script id="_latlonginfo" type="application/json">

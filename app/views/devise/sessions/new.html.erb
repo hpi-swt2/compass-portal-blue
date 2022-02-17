@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
 
-    <h2 class="fw-light">Log in</h2>
+    <h2 class="fw-light"><%= t('user.account.local_login') %></h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field mb-3">
@@ -22,7 +22,7 @@
       <% end %>
 
       <div class="actions mb-3">
-        <%= f.submit "Log in", class: 'btn btn-primary' %>
+        <%= f.submit t('user.account.login'), class: 'btn btn-primary' %>
       </div>
     <% end %>
 

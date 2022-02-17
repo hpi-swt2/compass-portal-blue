@@ -2,7 +2,7 @@
 <%= form_with(model: event) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <h2><%= t('errors.template.header', count: @event.errors.count, model: t('events.one')) %></h2>
 
       <ul>
         <% event.errors.each do |error| %>
@@ -13,17 +13,17 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, class: "form-label" %>
+    <%= form.label t(:name), class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :description, class: "form-label" %>
+    <%= form.label t(:description), class: "form-label" %>
     <%= form.text_area :description, class: "form-control" %>
   </div>
 
     <div>
-      <%= form.label :room, class: "form-label" %>
+      <%= form.label t('rooms.one'), class: "form-label" %>
       <%= form.select 'room_id',
           options_from_collection_for_select(
             Room.all, :id, :name, event.room.nil? ? 1 : event.room.id) + options_for_select([["No Room", nil]]),
@@ -32,21 +32,21 @@
     </div>
 
   <div class="field">
-    <%= form.label "Start Date", class: "form-label" %>
+    <%= form.label t('events.start_date'), class: "form-label" %>
     <%= form.datetime_select :start_time, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label "End Date", class: "form-label" %>
+    <%= form.label t('events.end_date'), class: "form-label" %>
     <%= form.datetime_select :end_time, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :recurring, class: "form-label" %>
+    <%= form.label t('events.recurrence_rule'), class: "form-label" %>
     <%= form.text_area :recurring, class: "form-control" %>
   </div>
 
   <div class="actions mt-3">
-    <%= form.submit class: "btn btn-primary" %>
+    <%= form.submit t('model.create', model: t('events.one')), class: "btn btn-primary" %>
   </div>
 <% end %>

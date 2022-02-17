@@ -34,25 +34,25 @@ describe "User Edit Page", type: :feature do
     it "includes a link-button to add a new person" do
       sign_in @user
       visit edit_user_registration_path
-      expect(page).to have_link 'Add new person', href: new_person_path(locale: I18n.locale)
+      expect(page).to have_link 'Add new Person', href: new_person_path(locale: I18n.locale)
     end
 
-    it "includes a link-button to add a new location" do
+    it "includes a link-button to add a new Location" do
       sign_in @user
       visit edit_user_registration_path
-      expect(page).to have_link 'Add new location', href: new_location_path(locale: I18n.locale)
+      expect(page).to have_link 'Add new Location', href: new_location_path(locale: I18n.locale)
     end
 
     it "includes a link-button to add a new room" do
       sign_in @user
       visit edit_user_registration_path
-      expect(page).to have_link 'Add new room', href: new_room_path(locale: I18n.locale)
+      expect(page).to have_link 'Add new Room', href: new_room_path(locale: I18n.locale)
     end
 
     it "includes a link-button to add a new building" do
       sign_in @user
       visit edit_user_registration_path
-      expect(page).to have_link 'Add new building', href: new_building_path(locale: I18n.locale)
+      expect(page).to have_link 'Add new Building', href: new_building_path(locale: I18n.locale)
     end
   end
 

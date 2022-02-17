@@ -12,7 +12,11 @@ RSpec.describe "locations/edit", type: :view do
 
       assert_select "input[name=?]", "location[name]"
 
+      assert_select "input[name=?]", "location[name_de]"
+
       assert_select "input[name=?]", "location[details]"
+
+      assert_select "input[name=?]", "location[details_de]"
 
       assert_select "input[name=?]", "location[location_photo]"
 

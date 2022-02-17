@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 @import "colors";
+@import "bootstrap/scss/bootstrap";
 
 .occupancy {
   text-align: center;
@@ -35,11 +36,11 @@ table.roomsList #normalRow {
 }
 
 header {
-  font-size: large;
+    font-size: large;
 }
 
 collapse {
-  height: auto;
+    height: auto;
 }
 
 .simple-calendar {
@@ -50,7 +51,14 @@ collapse {
     font-size: small;
   }
   .content {
+    padding: 3px 5px 3px 5px;
+    background-color: $yellow;
+    border-radius: 3px;
     font-size: small;
+  }
+
+  .highlighted_event {
+    background-color: $hpi-yellow;
   }
 
   .wday-0 {
@@ -151,6 +159,26 @@ collapse {
       100% {
         transform: scale(1);
       }
+    }
+
+    .calendar-heading {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .calendar-heading a {
+        @extend .btn;
+        @extend .btn-secondary;
+        background-color: $hpi-blue;
+        border-color: $hpi-blue;
+        border-radius: 2px;
+        font-size: small;
+    }
+
+    .calendar-heading a:hover {
+        background-color: $uni-potsdam-blue;
+        border-color: $uni-potsdam-blue;
+        font-size: small;
     }
   }
 }

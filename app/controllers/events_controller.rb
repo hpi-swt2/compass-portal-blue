@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
+  before_action :add_event, only: %i[create]
 
   # GET /events or /events.json
   def index
@@ -8,7 +9,7 @@ class EventsController < ApplicationController
 
   def import
     if params[:file].nil?
-      redirect_to edit_user_registration_path, alert: "Please choose an ICS file to import"
+      redirect_to edit_user_registration_path, alert: t('events.alert.choose_file')
     else
       import_ics(params[:file].tempfile)
     end
@@ -27,15 +28,14 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = Event.new(event_params)
-
     respond_to do |format|
       if @event.save
-        format.html { redirect_to edit_user_registration_path, notice: "Event was successfully created." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('events.one'))
+        end
         format.json { render :show, status: :created, location: @event }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -44,11 +44,12 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to edit_user_registration_path, notice: "Event was successfully updated." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('events.one'))
+        end
         format.json { render :show, status: :ok, location: @event }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -58,7 +59,9 @@ class EventsController < ApplicationController
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: "Event was successfully destroyed." }
+      format.html do
+        redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('events.one'))
+      end
       format.json { head :no_content }
     end
   end
@@ -70,6 +73,15 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def add_event
+    @event = Event.new(event_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @event.errors, status: :unprocessable_entity }
+  end
+
   # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:name, :description, :start_time, :end_time, :recurring, :room_id)
@@ -78,9 +90,9 @@ class EventsController < ApplicationController
   def import_ics(file)
     if File.extname(file.path) == ".ics"
       Event.import(file)
-      redirect_to edit_user_registration_path, notice: "Imported Events from ICS"
+      redirect_to edit_user_registration_path, notice: t('events.import_success')
     else
-      redirect_to edit_user_registration_path, alert: "Only ICS files can be imported"
+      redirect_to edit_user_registration_path, alert: t('events.alert.ics_only')
     end
     file.close!
   end

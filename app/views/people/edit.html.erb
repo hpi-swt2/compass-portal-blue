@@ -1,10 +1,10 @@
 <div class="row pb-1">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h2 class="fw-light">Edit Person</h2>
+    <h2 class="fw-light"><%= t('model.edit', model: t('people.one')) %></h2>
 
     <%= render 'form', person: @person %>
 
-    <%= link_to 'Back', people_path, class: "btn btn-secondary link-btn" %>
-    <%= link_to 'Show', @person, class: "btn btn-secondary link-btn" %>
+    <%= link_to t("back"), people_path, class: "btn btn-secondary link-btn" %>
+    <%= link_to t("show"), @person, class: "btn btn-secondary link-btn" %>
   </div>
 </div>

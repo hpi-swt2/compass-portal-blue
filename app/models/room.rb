@@ -36,4 +36,8 @@ class Room < ApplicationRecord
       'conference-room' => 'Conference room'
     }
   end
+
+  def search_description
+    I18n.t('rooms.search_description', type: room_type, floor: floor, building: building.name)
+  end
 end

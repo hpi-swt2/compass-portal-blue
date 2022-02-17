@@ -8,4 +8,8 @@ class Location < ApplicationRecord
   validates :name, presence: true
   has_one_attached :location_photo
   accepts_nested_attributes_for :openingtimes, allow_destroy: true
+
+  def search_description
+    details
+  end
 end

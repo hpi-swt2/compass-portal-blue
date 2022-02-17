@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="fw-light">Locations</h1>
+<h1 class="fw-light"><%= t('locations.other') %></h1>
 
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Photo</th>
+        <th><%= t(:name) %></th>
+        <th><%= t('locations.photo') %></th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -21,9 +21,9 @@
           <% else %>
             <%= image_tag("default-location-photo.png", alt: "default-location-photo", height: "30") %>
           <% end %></td>
-          <td class="td-btn"><%= link_to 'Show', location, class: "btn btn-secondary link-btn" %></td>
-          <td class="td-btn"><% if can? :update, location %><td class="td-btn"><%= link_to 'Edit', edit_location_path(location), class: "btn btn-secondary link-btn" %><%end%></td>
-          <td class="td-btn"><% if can? :destroy, location %><td class="td-btn"><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><%= link_to t(:show), location, class: "btn btn-secondary link-btn" %></td>
+          <td class="td-btn"><% if can? :update, location %><td class="td-btn"><%= link_to t(:edit), edit_location_path(location), class: "btn btn-secondary link-btn" %><%end%></td>
+          <td class="td-btn"><% if can? :destroy, location %><td class="td-btn"><%= link_to t(:destroy), location, method: :delete, data: { confirm: t(:confirm) }, class: "btn btn-secondary link-btn" %><%end%></td>
         </tr>
       <% end %>
     </tbody>
@@ -33,5 +33,5 @@
 <br>
 
 <% if can? :create, Location %>
-  <%= link_to 'New Location', new_location_path, class: "btn btn-primary link-btn" %>
+  <%= link_to t('locations.new'), new_location_path, class: "btn btn-primary link-btn" %>
 <% end %>
