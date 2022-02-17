@@ -40,6 +40,7 @@ module SearchResultsHelper
     Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ? AND NOT LOWER(first_name) || ' ' ||
             LOWER(last_name) LIKE ? AND NOT LOWER(last_name) LIKE ?", "%#{query}%", "#{query}%", "#{query}%")
   end
+
   def search_events_by_name_or_description(query)
     events = Event.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{query}%", "%#{query}%")
     add_results(events, "event")
