@@ -62,6 +62,7 @@ en:
     unfavourite: Remove favourite
     your-favourites: "These are your favourites:"
     login-for-favourites: Login to see your favourite list.
+    go: Go
     model:
         add_new: "Add new %{model}"
         edit: "Edit %{model}"
