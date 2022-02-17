@@ -1,3 +1,10 @@
+<% if current_user %>
+<button id="person-favourite" class="favourite <% if @person.favourited_by.include?(current_user) %> selected <% end %>" title="<%= t('favourite') %>">
+    <i class="far fa-heart"></i>
+    <i class="fas fa-heart"></i>
+</button>
+<% end %>
+
 <h2 class="mb-3 fw-light">
   <%= @person.first_name %>
   <%= @person.last_name %>
@@ -16,28 +23,45 @@
 </div>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= "#{t(:email)}:" %></strong>
   <%= mail_to @person.email %>
 </p>
 
 <p>
-  <strong>Phone number:</strong>
+  <strong><%= "#{t('people.phone_number')}:" %></strong>
   <%= tel_to @person.phone_number %>
 </p>
 
+<% person_loc = @person.corresponding_user&.last_known_location %>
+<% if not person_loc.nil? %>
+  <p>
+    <strong><%= "#{t('people.last_known_location')}:" %></strong>
+    <a href="/route?dest=<%= person_loc %>">
+      <%= person_loc %>
+    </a>
+  </p>
+<% end %>
+
 <p>
-  <strong>Rooms:</strong>
-  <ul>
+  <strong><%= "#{t('rooms.other')}:" %></strong>
+  <ul class="container">
       <% @person.rooms.each do | room | %>
-        <li>
-          <%= link_to room.name, room_path(room) %>
+        <li class="row">
+          <span class="col">
+            <%= link_to room.name, room_path(room) %>
+          </span>
+          <span class="col-auto ms-auto">
+            <a class="btn btn-outline-primary btn-sm" href="/route?dest=<%= room.name %>">
+              <i class="fas fa-route"></i> <%= t("buildings.directions") %>
+            </a>
+          </span>
         </li>
       <% end %>
   </ul>
 </p>
 
 <p>
-  <strong>Office hours:</strong>
+  <strong><%= "#{t('people.office_hour.other')}:" %></strong>
   <ul>
     <% @person.openingtimes.each do | opening_time | %>
       <li>
@@ -46,3 +70,33 @@
     <% end %>
   </ul>
 </p>
+
+<script defer>
+  $('#person-favourite').click(async function (e) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
+    let becomesFavourite = !e.currentTarget.classList.contains("selected");
+
+    const body = JSON.stringify({
+      favourite: becomesFavourite
+    });
+    const response = await fetch(
+      `/people/<%= @person.id %>/favourite`,
+      {
+        method: "PUT",
+        body: body,
+        headers: {
+          "X-CSRF-TOKEN": csrfToken,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.assert(response.status === 204); // HTTP "No content"
+
+    if(becomesFavourite) {
+      e.currentTarget.classList.add("selected")
+    } else {
+      e.currentTarget.classList.remove("selected")
+    }
+
+  })
+</script>

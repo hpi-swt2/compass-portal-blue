@@ -36,13 +36,9 @@ module RoutingHelper
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
   def self.room_building(input, floor, max_indoor_dist)
     if valid_coordinates?(input) || BuildingMapHelper.location?(input)
       return room_building_from_coords(input, floor, max_indoor_dist)
-    end
-    if BuildingMapHelper.building?(input) # in this case we only use outside routing
-      return { indoor: false, building: BuildingMapHelper.map_building_name_to_graph(input), node: nil }
     end
     return { indoor: false, building: nil, node: nil } unless BuildingMapHelper.room?(input)
 
@@ -50,9 +46,11 @@ module RoutingHelper
     floor = room.floor
     node = IndoorRoutingHelper.closest_node([room.location_latitude, room.location_longitude],
                                             IndoorGraph::BUILDINGS, max_indoor_dist, floor)
+    # FIXME: This is currently the case for "Hörsaal1" and "Hörsaal2", at least
+    raise "No indoor node close enough to room named #{input}" if node.nil?
+
     { indoor: true, building: node[:building], node: node[:node] }
   end
-  # rubocop:enable Metrics/MethodLength
 
   def self.room_building_from_coords(input, floor, max_indoor_dist)
     coords = coordinates_from_string(resolve_coordinates(input))
@@ -120,6 +118,7 @@ module RoutingHelper
   def self.valid_coordinates?(coordinates)
     return false if coordinates.blank?
 
+    # This Regex is shared with `isValidCoordinates` in `building_map.js.erb`
     regex = /^-?\d{1,2}(\.\d+)?,-?\d{1,2}(\.\d+)?$/
     coordinates.match(regex)
   end

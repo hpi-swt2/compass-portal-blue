@@ -6,9 +6,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Opens</th>
-      <th>Closes</th>
-      <th>Day</th>
+      <th><%= t('locations.openingtime.opens') %></th>
+      <th><%= t('locations.openingtime.closes') %></th>
+      <th><%= t(:day) %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,9 +19,9 @@
         <td><%= openingtime.opens %></td>
         <td><%= openingtime.closes %></td>
         <td><%= openingtime.day %></td>
-        <td class="td-btn"><%= link_to 'Show', openingtime, class: "btn btn-secondary link-btn" %></td>
+        <td class="td-btn"><%= link_to t("show"), openingtime, class: "btn btn-secondary link-btn" %></td>
         <td class="td-btn"><%= link_to 'Edit', edit_openingtime_path(openingtime), class: "btn btn-secondary link-btn" %></td>
-        <td class="td-btn"><%= link_to 'Destroy', openingtime, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %></td>
+        <td class="td-btn"><%= link_to 'Destroy', openingtime, method: :delete, data: { confirm: t(:confirm) }, class: "btn btn-secondary link-btn" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,5 +31,5 @@
 <br>
 
 <% if can? :create, Openingtime %>
-  <%= link_to 'New Openingtime', new_openingtime_path, class: "btn btn-primary link-btn" %>
+  <%= link_to t('model.add_new', model: t('locations.openingtime.one')), new_openingtime_path, class: "btn btn-primary link-btn" %>
 <% end %>

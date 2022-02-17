@@ -28,14 +28,6 @@ module BuildingMapHelper
     end
   end
 
-  def self.map_building_name_to_graph(name)
-    case name
-    when 'Haus A', 'Haus B', 'Haus C'
-      return 'ABC'
-    end
-    name
-  end
-
   def self.building?(building)
     buildings.key?(building)
   end

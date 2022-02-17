@@ -28,7 +28,14 @@ const geoJsonLayerFiles = [
   "<%= helpers.asset_path('HS_-1.geojson') %>",
   "<%= helpers.asset_path('G_0.geojson') %>",
   "<%= helpers.asset_path('G_1.geojson') %>",
-  "<%= helpers.asset_path('G_-1.geojson') %>"
+  "<%= helpers.asset_path('G_-1.geojson') %>",
+  "<%= helpers.asset_path('E_-1.geojson') %>",
+  "<%= helpers.asset_path('E_0.geojson') %>",
+  "<%= helpers.asset_path('E_1.geojson') %>",
+  "<%= helpers.asset_path('E_2.geojson') %>",
+  "<%= helpers.asset_path('V_0.geojson') %>",
+  "<%= helpers.asset_path('V_1.geojson') %>",
+  "<%= helpers.asset_path('V_2.geojson') %>"
 ];
 
 export let pins = [];
@@ -48,11 +55,11 @@ export async function setupMap() {
   global.map = L.map("map");
   layerControl = L.control.layers({}, {}, { position: "topleft", sortLayers: true }).addTo(map);
   // add a title to the leaflet layer control
-  $("<h6>Floors</h6>").insertBefore("div.leaflet-control-layers-base");
+  $("<h6>" + I18n.t('rooms.floor') + "</h6>").insertBefore("div.leaflet-control-layers-base");
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
-      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>",
+      "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> | <a href='https://openstreetmap.org/fixthemap'>Contribute</a>",
     maxZoom: 22,
     maxNativeZoom: 19,
   }).addTo(map);
@@ -307,7 +314,7 @@ function setupGeoJsonFeatureIndoor(feature, layer) {
   const label = L.circleMarker(
     { lat: markerPosition[1], lng: markerPosition[0] },
     { opacity: 0, radius: 0, fill: false }
-  ).bindTooltip(feature.properties.name, {
+  ).bindTooltip(feature.properties["name-en"], {
     permanent: true,
     direction: "center",
     className: "indoor-label",
