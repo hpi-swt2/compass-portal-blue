@@ -6,76 +6,40 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12476452476,
-                    52.39466224512
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-3.E.15/16"
+                "building": "yes",
+                "type": "office",
+                "name-de": "G-1.E.10",
+                "name-en": "G-1.E.10"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12452079511,
-                            52.39479323057
+                            13.12510105617,
+                            52.39501279873
                         ],
                         [
-                            13.12461396968,
-                            52.39479516296
+                            13.12510436639,
+                            52.39495395532
                         ],
                         [
-                            13.12462752086,
-                            52.39479544400
+                            13.12507355070,
+                            52.39495330982
                         ],
                         [
-                            13.12464855398,
-                            52.39479588022
+                            13.12503489862,
+                            52.39495250017
                         ],
                         [
-                            13.12465193334,
-                            52.39473492483
+                            13.12503158841,
+                            52.39501134358
                         ],
                         [
-                            13.12465260000,
-                            52.39472290000
-                        ],
-                        [
-                            13.12465261891,
-                            52.39472256220
-                        ],
-                        [
-                            13.12465053855,
-                            52.39472251884
-                        ],
-                        [
-                            13.12461721179,
-                            52.39472182417
-                        ],
-                        [
-                            13.12456800080,
-                            52.39472079840
-                        ],
-                        [
-                            13.12452490000,
-                            52.39471990000
-                        ],
-                        [
-                            13.12452079511,
-                            52.39479323057
+                            13.12510105617,
+                            52.39501279873
                         ]
                     ]
                 ]
@@ -84,9 +48,242 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-1.E.11",
+                "type": "office",
+                "building": "G",
+                "name-en": "G-1.E.11"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12503158841,
+                            52.39501134358
+                        ],
+                        [
+                            13.12495650000,
+                            52.39500980000
+                        ],
+                        [
+                            13.12495974862,
+                            52.39495095532
+                        ],
+                        [
+                            13.12500664488,
+                            52.39495191936
+                        ],
+                        [
+                            13.12502625177,
+                            52.39495232242
+                        ],
+                        [
+                            13.12503489862,
+                            52.39495250017
+                        ],
+                        [
+                            13.12503158841,
+                            52.39501134358
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-2.E.32",
+                "type": "office",
+                "name-en": "G-2.E.32"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12514339416,
+                            52.39466255497
+                        ],
+                        [
+                            13.12514655960,
+                            52.39460636838
+                        ],
+                        [
+                            13.12508932363,
+                            52.39460517638
+                        ],
+                        [
+                            13.12508615868,
+                            52.39466135426
+                        ],
+                        [
+                            13.12511971305,
+                            52.39466205818
+                        ],
+                        [
+                            13.12514339416,
+                            52.39466255497
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12463732486,
+                    52.39466794082
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "corridor",
+                "level_name": "0",
+                "type": "stairwell",
+                "name-de": "G-3.E.01",
+                "building": "G",
+                "name-en": "G-3.E.01"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12464460000,
+                            52.39486720000
+                        ],
+                        [
+                            13.12464182152,
+                            52.39491706451
+                        ],
+                        [
+                            13.12464139241,
+                            52.39492476566
+                        ],
+                        [
+                            13.12465712676,
+                            52.39492509198
+                        ],
+                        [
+                            13.12468766741,
+                            52.39492572538
+                        ],
+                        [
+                            13.12468814833,
+                            52.39491716719
+                        ],
+                        [
+                            13.12469090000,
+                            52.39486820000
+                        ],
+                        [
+                            13.12464460000,
+                            52.39486720000
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "office",
+                "name-de": "G-2.E.25",
+                "name-en": "G-2.E.25"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12496879593,
+                            52.39472982970
+                        ],
+                        [
+                            13.12497188722,
+                            52.39467495942
+                        ],
+                        [
+                            13.12494804988,
+                            52.39467445935
+                        ],
+                        [
+                            13.12491524486,
+                            52.39467377115
+                        ],
+                        [
+                            13.12491249609,
+                            52.39473042776
+                        ],
+                        [
+                            13.12492030000,
+                            52.39473060000
+                        ],
+                        [
+                            13.12492040000,
+                            52.39472880000
+                        ],
+                        [
+                            13.12496879593,
+                            52.39472982970
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12460958745,
+                    52.39487520238
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12504395981,
+                    52.39490848304
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
@@ -99,230 +296,245 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "G-1.E.13/14",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12504576431,
-                            52.39487640560
-                        ],
-                        [
-                            13.12504680172,
-                            52.39485737328
-                        ],
-                        [
-                            13.12504876336,
-                            52.39482138491
-                        ],
-                        [
-                            13.12504967231,
-                            52.39480470922
-                        ],
-                        [
-                            13.12514313558,
-                            52.39480660622
-                        ],
-                        [
-                            13.12513910000,
-                            52.39487830000
-                        ],
-                        [
-                            13.12510889526,
-                            52.39487768695
-                        ],
-                        [
-                            13.12504576431,
-                            52.39487640560
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12456590426,
-                    52.39465044014
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12484495971,
-                    52.39461763462
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12462280154,
-                    52.39465163375
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12505826328,
-                    52.39471709995
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "corridor",
-                "level_name": "0",
-                "name": "G-2.E.01"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12481170406,
-                            52.39465559663
-                        ],
-                        [
-                            13.12477959826,
-                            52.39465492310
-                        ],
-                        [
-                            13.12476495458,
-                            52.39465461590
-                        ],
-                        [
-                            13.12476815800,
-                            52.39459695425
-                        ],
-                        [
-                            13.12476100000,
-                            52.39459680000
-                        ],
-                        [
-                            13.12476190000,
-                            52.39458070000
-                        ],
-                        [
-                            13.12481575583,
-                            52.39458180108
-                        ],
-                        [
-                            13.12481405656,
-                            52.39461275020
-                        ],
-                        [
-                            13.12481332298,
-                            52.39462611110
-                        ],
-                        [
-                            13.12481233594,
-                            52.39464408822
-                        ],
-                        [
-                            13.12481170406,
-                            52.39465559663
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-3.E.04",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12460893854,
-                            52.39488685326
-                        ],
-                        [
-                            13.12460958745,
-                            52.39487520238
-                        ],
-                        [
-                            13.12461007228,
-                            52.39486649756
-                        ],
-                        [
-                            13.12454896917,
-                            52.39486525446
-                        ],
-                        [
-                            13.12454783959,
-                            52.39488558610
-                        ],
-                        [
-                            13.12460893854,
-                            52.39488685326
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12507806273,
-                    52.39467718682
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-1.E.07",
                 "indoor": "room",
                 "level_name": "0",
-                "building": "yes"
+                "name-de": "G-2.E.06/07",
+                "type": "toilet-male",
+                "building": "G",
+                "name-en": "G-2.E.06/07"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12487805573,
+                            52.39463383483
+                        ],
+                        [
+                            13.12491744942,
+                            52.39463464024
+                        ],
+                        [
+                            13.12491930883,
+                            52.39460163566
+                        ],
+                        [
+                            13.12492720000,
+                            52.39460180000
+                        ],
+                        [
+                            13.12492820000,
+                            52.39458410000
+                        ],
+                        [
+                            13.12488083960,
+                            52.39458313172
+                        ],
+                        [
+                            13.12487914033,
+                            52.39461408084
+                        ],
+                        [
+                            13.12487857895,
+                            52.39462430533
+                        ],
+                        [
+                            13.12487805573,
+                            52.39463383483
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12503774389,
+                    52.39487624281
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "office",
+                "name-de": "G-2.E.35",
+                "building": "G",
+                "name-en": "G-2.E.35"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12491614534,
+                            52.39465778765
+                        ],
+                        [
+                            13.12494766809,
+                            52.39465844895
+                        ],
+                        [
+                            13.12497319931,
+                            52.39465898455
+                        ],
+                        [
+                            13.12497636328,
+                            52.39460282387
+                        ],
+                        [
+                            13.12492720000,
+                            52.39460180000
+                        ],
+                        [
+                            13.12491930883,
+                            52.39460163566
+                        ],
+                        [
+                            13.12491744942,
+                            52.39463464024
+                        ],
+                        [
+                            13.12491614534,
+                            52.39465778765
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12477959826,
+                    52.39465492310
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12461801548,
+                    52.39470755870
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "mechanical-room",
+                "name-de": "G-2.E.29",
+                "name-en": "G-2.E.29"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12505744082,
+                            52.39473169863
+                        ],
+                        [
+                            13.12505826328,
+                            52.39471709995
+                        ],
+                        [
+                            13.12505907284,
+                            52.39470273028
+                        ],
+                        [
+                            13.12510628712,
+                            52.39470372076
+                        ],
+                        [
+                            13.12510450603,
+                            52.39473267899
+                        ],
+                        [
+                            13.12505744082,
+                            52.39473169863
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "yes",
+                "name-de": "G-1.E.09",
+                "type": "office",
+                "name-en": "G-1.E.09"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12517750000,
+                            52.39501440000
+                        ],
+                        [
+                            13.12518081022,
+                            52.39495555659
+                        ],
+                        [
+                            13.12512913061,
+                            52.39495447406
+                        ],
+                        [
+                            13.12510436639,
+                            52.39495395532
+                        ],
+                        [
+                            13.12510105617,
+                            52.39501279873
+                        ],
+                        [
+                            13.12517750000,
+                            52.39501440000
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "tea-kitchen",
+                "name-de": "G-1.E.07",
+                "name-en": "G-1.E.07"
             },
             "geometry": {
                 "type": "Polygon",
@@ -359,185 +571,27 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12501846338,
-                    52.39474228059
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
                 "level_name": "0",
-                "name": "G-3.E.13/14"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12451680000,
-                            52.39486460000
-                        ],
-                        [
-                            13.12454896917,
-                            52.39486525446
-                        ],
-                        [
-                            13.12461007228,
-                            52.39486649756
-                        ],
-                        [
-                            13.12461107261,
-                            52.39484818835
-                        ],
-                        [
-                            13.12461303341,
-                            52.39481229961
-                        ],
-                        [
-                            13.12461396968,
-                            52.39479516296
-                        ],
-                        [
-                            13.12452079511,
-                            52.39479323057
-                        ],
-                        [
-                            13.12451680000,
-                            52.39486460000
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12512913061,
-                    52.39495447406
+                    13.12458081366,
+                    52.39494173715
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12452446093,
-                    52.39494056927
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "G-2.E.05"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12487678593,
-                            52.39465696195
-                        ],
-                        [
-                            13.12491614534,
-                            52.39465778765
-                        ],
-                        [
-                            13.12491744942,
-                            52.39463464024
-                        ],
-                        [
-                            13.12487805573,
-                            52.39463383483
-                        ],
-                        [
-                            13.12487746128,
-                            52.39464466168
-                        ],
-                        [
-                            13.12487678593,
-                            52.39465696195
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12504680172,
-                    52.39485737328
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12458588600,
-                    52.39492361449
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12500818408,
-                    52.39492498168
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-3.E.03",
                 "indoor": "corridor",
-                "level_name": "0"
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-3.E.03",
+                "type": "corridor",
+                "name-en": "G-3.E.03"
             },
             "geometry": {
                 "type": "Polygon",
@@ -638,9 +692,712 @@
         {
             "type": "Feature",
             "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12487099709,
+                    52.39461391833
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12512913061,
+                    52.39495447406
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12501846338,
+                    52.39474228059
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "office",
+                "name-de": "G-1.E.13/14",
+                "name-en": "G-1.E.13/14"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12504576431,
+                            52.39487640560
+                        ],
+                        [
+                            13.12504680172,
+                            52.39485737328
+                        ],
+                        [
+                            13.12504876336,
+                            52.39482138491
+                        ],
+                        [
+                            13.12504967231,
+                            52.39480470922
+                        ],
+                        [
+                            13.12514313558,
+                            52.39480660622
+                        ],
+                        [
+                            13.12513910000,
+                            52.39487830000
+                        ],
+                        [
+                            13.12510889526,
+                            52.39487768695
+                        ],
+                        [
+                            13.12504576431,
+                            52.39487640560
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12487746128,
+                    52.39464466168
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "office",
+                "name-de": "G-2.E.12",
+                "building": "G",
+                "name-en": "G-2.E.12"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12465172132,
+                            52.39465224044
+                        ],
+                        [
+                            13.12468065279,
+                            52.39465284738
+                        ],
+                        [
+                            13.12470810825,
+                            52.39465342335
+                        ],
+                        [
+                            13.12471131075,
+                            52.39459577824
+                        ],
+                        [
+                            13.12465492291,
+                            52.39459461174
+                        ],
+                        [
+                            13.12465172132,
+                            52.39465224044
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-3.E.02",
+                "type": "elevator",
+                "name-en": "G-3.E.02"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12464037791,
+                            52.39494297248
+                        ],
+                        [
+                            13.12468665934,
+                            52.39494393233
+                        ],
+                        [
+                            13.12468766741,
+                            52.39492572538
+                        ],
+                        [
+                            13.12465712676,
+                            52.39492509198
+                        ],
+                        [
+                            13.12464139241,
+                            52.39492476566
+                        ],
+                        [
+                            13.12464037791,
+                            52.39494297248
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12468065279,
+                    52.39465284738
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12489452742,
+                    52.39467333653
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "office",
+                "name-de": "G-3.E.11",
+                "building": "G",
+                "name-en": "G-3.E.11"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12454148123,
+                            52.39499985669
+                        ],
+                        [
+                            13.12454475338,
+                            52.39494098928
+                        ],
+                        [
+                            13.12452446093,
+                            52.39494056927
+                        ],
+                        [
+                            13.12446490719,
+                            52.39493933665
+                        ],
+                        [
+                            13.12446160000,
+                            52.39499820000
+                        ],
+                        [
+                            13.12454148123,
+                            52.39499985669
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12520689525,
+                    52.39467168425
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "office",
+                "name-de": "G-2.E.33",
+                "building": "G",
+                "name-en": "G-2.E.33"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12508932363,
+                            52.39460517638
+                        ],
+                        [
+                            13.12503294949,
+                            52.39460400234
+                        ],
+                        [
+                            13.12502978503,
+                            52.39466017163
+                        ],
+                        [
+                            13.12506222841,
+                            52.39466085224
+                        ],
+                        [
+                            13.12508615868,
+                            52.39466135426
+                        ],
+                        [
+                            13.12508932363,
+                            52.39460517638
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-2.E.16",
+                "type": "conference-room",
+                "building": "G",
+                "name-en": "G-2.E.16"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12446840000,
+                            52.39471870000
+                        ],
+                        [
+                            13.12452490000,
+                            52.39471990000
+                        ],
+                        [
+                            13.12456800080,
+                            52.39472079840
+                        ],
+                        [
+                            13.12456967472,
+                            52.39469121286
+                        ],
+                        [
+                            13.12457107007,
+                            52.39466655091
+                        ],
+                        [
+                            13.12455612278,
+                            52.39466623734
+                        ],
+                        [
+                            13.12447141332,
+                            52.39466446027
+                        ],
+                        [
+                            13.12446840000,
+                            52.39471870000
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-2.E.24",
+                "type": "other",
+                "building": "G",
+                "name-en": "G-2.E.24"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12491524486,
+                            52.39467377115
+                        ],
+                        [
+                            13.12489452742,
+                            52.39467333653
+                        ],
+                        [
+                            13.12487040363,
+                            52.39467283044
+                        ],
+                        [
+                            13.12486721499,
+                            52.39472942834
+                        ],
+                        [
+                            13.12491249609,
+                            52.39473042776
+                        ],
+                        [
+                            13.12491524486,
+                            52.39467377115
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12504876336,
+                    52.39482138491
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12447188773,
+                    52.39465592097
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-3.E.07",
+                "type": "tea-kitchen",
+                "name-en": "G-3.E.07"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12454576787,
+                            52.39492278247
+                        ],
+                        [
+                            13.12458588600,
+                            52.39492361449
+                        ],
+                        [
+                            13.12460686682,
+                            52.39492404962
+                        ],
+                        [
+                            13.12460805221,
+                            52.39490276683
+                        ],
+                        [
+                            13.12454695325,
+                            52.39490149967
+                        ],
+                        [
+                            13.12454576787,
+                            52.39492278247
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12517727876,
+                    52.39466326582
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-2.E.13",
+                "type": "office",
+                "name-en": "G-2.E.13"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12459509834,
+                            52.39465105258
+                        ],
+                        [
+                            13.12462280154,
+                            52.39465163375
+                        ],
+                        [
+                            13.12465172132,
+                            52.39465224044
+                        ],
+                        [
+                            13.12465492291,
+                            52.39459461174
+                        ],
+                        [
+                            13.12459829901,
+                            52.39459344036
+                        ],
+                        [
+                            13.12459509834,
+                            52.39465105258
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12484495971,
+                    52.39461763462
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12462472261,
+                    52.39486679561
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
                 "indoor": "corridor",
                 "level_name": "0",
-                "name": "G-1.E.12"
+                "name-de": "G-2.E.22",
+                "type": "corridor",
+                "building": "G",
+                "name-en": "G-2.E.22"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12481110000,
+                            52.39472800000
+                        ],
+                        [
+                            13.12483838857,
+                            52.39472870527
+                        ],
+                        [
+                            13.12486140000,
+                            52.39472930000
+                        ],
+                        [
+                            13.12486030000,
+                            52.39474930000
+                        ],
+                        [
+                            13.12483735663,
+                            52.39474879826
+                        ],
+                        [
+                            13.12481000000,
+                            52.39474820000
+                        ],
+                        [
+                            13.12481110000,
+                            52.39472800000
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12494766809,
+                    52.39465844895
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "office",
+                "name-de": "G-2.E.21",
+                "name-en": "G-2.E.21"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12470413559,
+                            52.39472393798
+                        ],
+                        [
+                            13.12475190000,
+                            52.39472490000
+                        ],
+                        [
+                            13.12475180000,
+                            52.39472680000
+                        ],
+                        [
+                            13.12476087751,
+                            52.39472698369
+                        ],
+                        [
+                            13.12476405410,
+                            52.39467059940
+                        ],
+                        [
+                            13.12473681554,
+                            52.39467002798
+                        ],
+                        [
+                            13.12470720777,
+                            52.39466940686
+                        ],
+                        [
+                            13.12470413559,
+                            52.39472393798
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12465193334,
+                    52.39473492483
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "corridor",
+                "level_name": "0",
+                "name-de": "G-1.E.12",
+                "type": "corridor",
+                "building": "G",
+                "name-en": "G-1.E.12"
             },
             "geometry": {
                 "type": "Polygon",
@@ -689,56 +1446,105 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12447188773,
-                    52.39465592097
+                    13.12513007857,
+                    52.39493585869
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "indoor": "room",
+                "access": "private",
                 "level_name": "0",
-                "name": "G-3.E.09"
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12455612278,
+                    52.39466623734
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12506939115,
+                    52.39493458747
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "corridor",
+                "level_name": "0",
+                "building": "G",
+                "type": "stairwell",
+                "name-de": "G-2.E.01",
+                "name-en": "G-2.E.01"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12468665934,
-                            52.39494393233
+                            13.12481170406,
+                            52.39465559663
                         ],
                         [
-                            13.12468340000,
-                            52.39500280000
+                            13.12477959826,
+                            52.39465492310
                         ],
                         [
-                            13.12461105168,
-                            52.39500129954
+                            13.12476495458,
+                            52.39465461590
                         ],
                         [
-                            13.12461430063,
-                            52.39494243165
+                            13.12476815800,
+                            52.39459695425
                         ],
                         [
-                            13.12462736003,
-                            52.39494270250
+                            13.12476100000,
+                            52.39459680000
                         ],
                         [
-                            13.12464037791,
-                            52.39494297248
+                            13.12476190000,
+                            52.39458070000
                         ],
                         [
-                            13.12468665934,
-                            52.39494393233
+                            13.12481575583,
+                            52.39458180108
+                        ],
+                        [
+                            13.12481405656,
+                            52.39461275020
+                        ],
+                        [
+                            13.12481332298,
+                            52.39462611110
+                        ],
+                        [
+                            13.12481233594,
+                            52.39464408822
+                        ],
+                        [
+                            13.12481170406,
+                            52.39465559663
                         ]
                     ]
                 ]
@@ -747,30 +1553,15 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12504395981,
-                    52.39490848304
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12487746128,
-                    52.39464466168
+                    13.12460626395,
+                    52.39466728922
                 ]
             }
         },
@@ -779,35 +1570,99 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.31"
+                "building": "G",
+                "type": "toilet-female",
+                "name-de": "G-2.E.08/09",
+                "name-en": "G-2.E.08/09"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12520733401,
-                            52.39466389633
+                            13.12481405656,
+                            52.39461275020
                         ],
                         [
-                            13.12521050000,
-                            52.39460770000
+                            13.12481575583,
+                            52.39458180108
                         ],
                         [
-                            13.12514655960,
-                            52.39460636838
+                            13.12488083960,
+                            52.39458313172
                         ],
                         [
-                            13.12514339416,
-                            52.39466255497
+                            13.12487914033,
+                            52.39461408084
                         ],
                         [
-                            13.12517727876,
-                            52.39466326582
+                            13.12487099709,
+                            52.39461391833
                         ],
                         [
-                            13.12520733401,
-                            52.39466389633
+                            13.12484519808,
+                            52.39461340350
+                        ],
+                        [
+                            13.12481405656,
+                            52.39461275020
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12507355070,
+                    52.39495330982
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-2.E.28",
+                "type": "electrical-room",
+                "building": "G",
+                "name-en": "G-2.E.28"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12510628712,
+                            52.39470372076
+                        ],
+                        [
+                            13.12510759745,
+                            52.39467780641
+                        ],
+                        [
+                            13.12507806273,
+                            52.39467718682
+                        ],
+                        [
+                            13.12506053263,
+                            52.39467681906
+                        ],
+                        [
+                            13.12505907284,
+                            52.39470273028
+                        ],
+                        [
+                            13.12510628712,
+                            52.39470372076
                         ]
                     ]
                 ]
@@ -818,7 +1673,406 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.17"
+                "type": "toilet-female",
+                "name-de": "G-3.E.05",
+                "building": "G",
+                "name-en": "G-3.E.05"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12460805221,
+                            52.39490276683
+                        ],
+                        [
+                            13.12460824347,
+                            52.39489933281
+                        ],
+                        [
+                            13.12460893854,
+                            52.39488685326
+                        ],
+                        [
+                            13.12454783959,
+                            52.39488558610
+                        ],
+                        [
+                            13.12454695325,
+                            52.39490149967
+                        ],
+                        [
+                            13.12460805221,
+                            52.39490276683
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "elevator",
+                "name-de": "G-2.E.02",
+                "name-en": "G-2.E.02"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12481170406,
+                            52.39465559663
+                        ],
+                        [
+                            13.12484631426,
+                            52.39465632270
+                        ],
+                        [
+                            13.12484797537,
+                            52.39462683805
+                        ],
+                        [
+                            13.12484444537,
+                            52.39462676400
+                        ],
+                        [
+                            13.12481332298,
+                            52.39462611110
+                        ],
+                        [
+                            13.12481233594,
+                            52.39464408822
+                        ],
+                        [
+                            13.12481170406,
+                            52.39465559663
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "toilet-male",
+                "name-de": "G-1.E.04",
+                "name-en": "G-1.E.04"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12510775675,
+                            52.39489792562
+                        ],
+                        [
+                            13.12504462810,
+                            52.39489660326
+                        ],
+                        [
+                            13.12504526298,
+                            52.39488531744
+                        ],
+                        [
+                            13.12504576431,
+                            52.39487640560
+                        ],
+                        [
+                            13.12510889526,
+                            52.39487768695
+                        ],
+                        [
+                            13.12510775675,
+                            52.39489792562
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12483735663,
+                    52.39474879826
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-2.E.34",
+                "type": "office",
+                "name-en": "G-2.E.34"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12497319931,
+                            52.39465898455
+                        ],
+                        [
+                            13.12500439010,
+                            52.39465963888
+                        ],
+                        [
+                            13.12502978503,
+                            52.39466017163
+                        ],
+                        [
+                            13.12503294949,
+                            52.39460400234
+                        ],
+                        [
+                            13.12497636328,
+                            52.39460282387
+                        ],
+                        [
+                            13.12497319931,
+                            52.39465898455
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12483838857,
+                    52.39472870527
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12504680172,
+                    52.39485737328
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "tea-kitchen",
+                "name-de": "G-2.E.27",
+                "name-en": "G-2.E.27"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12502525329,
+                            52.39467607896
+                        ],
+                        [
+                            13.12502216118,
+                            52.39473096376
+                        ],
+                        [
+                            13.12505744082,
+                            52.39473169863
+                        ],
+                        [
+                            13.12505826328,
+                            52.39471709995
+                        ],
+                        [
+                            13.12505907284,
+                            52.39470273028
+                        ],
+                        [
+                            13.12506053263,
+                            52.39467681906
+                        ],
+                        [
+                            13.12504660598,
+                            52.39467652690
+                        ],
+                        [
+                            13.12502525329,
+                            52.39467607896
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "type": "elevator",
+                "name-de": "G-1.E.02",
+                "name-en": "G-1.E.02"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12495974862,
+                            52.39495095532
+                        ],
+                        [
+                            13.12500664488,
+                            52.39495191936
+                        ],
+                        [
+                            13.12500770307,
+                            52.39493339983
+                        ],
+                        [
+                            13.12499808322,
+                            52.39493320207
+                        ],
+                        [
+                            13.12496077106,
+                            52.39493243505
+                        ],
+                        [
+                            13.12495974862,
+                            52.39495095532
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12487857895,
+                    52.39462430533
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-2.E.15",
+                "type": "office",
+                "name-en": "G-2.E.15"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12447230131,
+                            52.39464847649
+                        ],
+                        [
+                            13.12450921461,
+                            52.39464925088
+                        ],
+                        [
+                            13.12453829693,
+                            52.39464986098
+                        ],
+                        [
+                            13.12454149668,
+                            52.39459226528
+                        ],
+                        [
+                            13.12447550000,
+                            52.39459090000
+                        ],
+                        [
+                            13.12447230131,
+                            52.39464847649
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12456590426,
+                    52.39465044014
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12494804988,
+                    52.39467445935
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-2.E.17",
+                "type": "mechanical-room",
+                "building": "G",
+                "name-en": "G-2.E.17"
             },
             "geometry": {
                 "type": "Polygon",
@@ -855,175 +2109,15 @@
         {
             "type": "Feature",
             "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "G-2.E.19"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12461721179,
-                            52.39472182417
-                        ],
-                        [
-                            13.12465053855,
-                            52.39472251884
-                        ],
-                        [
-                            13.12465359414,
-                            52.39466828213
-                        ],
-                        [
-                            13.12463732486,
-                            52.39466794082
-                        ],
-                        [
-                            13.12462026763,
-                            52.39466758299
-                        ],
-                        [
-                            13.12461887823,
-                            52.39469224506
-                        ],
-                        [
-                            13.12461801548,
-                            52.39470755870
-                        ],
-                        [
-                            13.12461721179,
-                            52.39472182417
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-1.E.09",
-                "indoor": "room",
-                "level_name": "0",
-                "building": "yes"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12517750000,
-                            52.39501440000
-                        ],
-                        [
-                            13.12518081022,
-                            52.39495555659
-                        ],
-                        [
-                            13.12512913061,
-                            52.39495447406
-                        ],
-                        [
-                            13.12510436639,
-                            52.39495395532
-                        ],
-                        [
-                            13.12510105617,
-                            52.39501279873
-                        ],
-                        [
-                            13.12517750000,
-                            52.39501440000
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12468065279,
-                    52.39465284738
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "corridor",
-                "level_name": "0",
-                "name": "G-2.E.22"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12481110000,
-                            52.39472800000
-                        ],
-                        [
-                            13.12483838857,
-                            52.39472870527
-                        ],
-                        [
-                            13.12486140000,
-                            52.39472930000
-                        ],
-                        [
-                            13.12486030000,
-                            52.39474930000
-                        ],
-                        [
-                            13.12483735663,
-                            52.39474879826
-                        ],
-                        [
-                            13.12481000000,
-                            52.39474820000
-                        ],
-                        [
-                            13.12481110000,
-                            52.39472800000
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12491570561,
-                    52.39466559276
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12473681554,
-                    52.39467002798
+                    13.12504526298,
+                    52.39488531744
                 ]
             }
         },
@@ -1032,178 +2126,10 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-3.E.08"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12454576787,
-                            52.39492278247
-                        ],
-                        [
-                            13.12454695325,
-                            52.39490149967
-                        ],
-                        [
-                            13.12454783959,
-                            52.39488558610
-                        ],
-                        [
-                            13.12454896917,
-                            52.39486525446
-                        ],
-                        [
-                            13.12451680000,
-                            52.39486460000
-                        ],
-                        [
-                            13.12446910000,
-                            52.39486360000
-                        ],
-                        [
-                            13.12446591524,
-                            52.39492112783
-                        ],
-                        [
-                            13.12452540539,
-                            52.39492236054
-                        ],
-                        [
-                            13.12454576787,
-                            52.39492278247
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12500439010,
-                    52.39465963888
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.26",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12502216118,
-                            52.39473096376
-                        ],
-                        [
-                            13.12502525329,
-                            52.39467607896
-                        ],
-                        [
-                            13.12500420079,
-                            52.39467563731
-                        ],
-                        [
-                            13.12497188722,
-                            52.39467495942
-                        ],
-                        [
-                            13.12496879593,
-                            52.39472982970
-                        ],
-                        [
-                            13.12501910000,
-                            52.39473090000
-                        ],
-                        [
-                            13.12502216118,
-                            52.39473096376
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "G-2.E.21"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12470413559,
-                            52.39472393798
-                        ],
-                        [
-                            13.12475190000,
-                            52.39472490000
-                        ],
-                        [
-                            13.12475180000,
-                            52.39472680000
-                        ],
-                        [
-                            13.12476087751,
-                            52.39472698369
-                        ],
-                        [
-                            13.12476405410,
-                            52.39467059940
-                        ],
-                        [
-                            13.12473681554,
-                            52.39467002798
-                        ],
-                        [
-                            13.12470720777,
-                            52.39466940686
-                        ],
-                        [
-                            13.12470413559,
-                            52.39472393798
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12504660598,
-                    52.39467652690
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-1.E.15/16",
-                "indoor": "room",
-                "level_name": "0"
+                "name-de": "G-1.E.15/16",
+                "type": "seminar-room",
+                "building": "G",
+                "name-en": "G-1.E.15/16"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1264,210 +2190,48 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12517727876,
-                    52.39466326582
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.35",
                 "indoor": "room",
-                "level_name": "0"
+                "level_name": "0",
+                "type": "office",
+                "name-de": "G-3.E.13/14",
+                "building": "G",
+                "name-en": "G-3.E.13/14"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12491614534,
-                            52.39465778765
+                            13.12451680000,
+                            52.39486460000
                         ],
                         [
-                            13.12494766809,
-                            52.39465844895
+                            13.12454896917,
+                            52.39486525446
                         ],
-                        [
-                            13.12497319931,
-                            52.39465898455
-                        ],
-                        [
-                            13.12497636328,
-                            52.39460282387
-                        ],
-                        [
-                            13.12492720000,
-                            52.39460180000
-                        ],
-                        [
-                            13.12491930883,
-                            52.39460163566
-                        ],
-                        [
-                            13.12491744942,
-                            52.39463464024
-                        ],
-                        [
-                            13.12491614534,
-                            52.39465778765
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12468814833,
-                    52.39491716719
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12504245999,
-                    52.39480452761
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12462472261,
-                    52.39486679561
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-3.E.07",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12454576787,
-                            52.39492278247
-                        ],
-                        [
-                            13.12458588600,
-                            52.39492361449
-                        ],
-                        [
-                            13.12460686682,
-                            52.39492404962
-                        ],
-                        [
-                            13.12460805221,
-                            52.39490276683
-                        ],
-                        [
-                            13.12454695325,
-                            52.39490149967
-                        ],
-                        [
-                            13.12454576787,
-                            52.39492278247
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12477959826,
-                    52.39465492310
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-3.E.12",
-                "indoor": "corridor",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
                         [
                             13.12461007228,
                             52.39486649756
-                        ],
-                        [
-                            13.12462472261,
-                            52.39486679561
-                        ],
-                        [
-                            13.12464460000,
-                            52.39486720000
-                        ],
-                        [
-                            13.12464855398,
-                            52.39479588022
-                        ],
-                        [
-                            13.12462752086,
-                            52.39479544400
-                        ],
-                        [
-                            13.12461396968,
-                            52.39479516296
-                        ],
-                        [
-                            13.12461303341,
-                            52.39481229961
                         ],
                         [
                             13.12461107261,
                             52.39484818835
                         ],
                         [
-                            13.12461007228,
-                            52.39486649756
+                            13.12461303341,
+                            52.39481229961
+                        ],
+                        [
+                            13.12461396968,
+                            52.39479516296
+                        ],
+                        [
+                            13.12452079511,
+                            52.39479323057
+                        ],
+                        [
+                            13.12451680000,
+                            52.39486460000
                         ]
                     ]
                 ]
@@ -1476,45 +2240,182 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12462752086,
-                    52.39479544400
+                    13.12485384309,
+                    52.39465648064
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12455612278,
-                    52.39466623734
+                    13.12499808322,
+                    52.39493320207
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12487099709,
-                    52.39461391833
+                    13.12464182152,
+                    52.39491706451
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12461107261,
+                    52.39484818835
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12500818408,
+                    52.39492498168
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-3.E.10",
+                "type": "office",
+                "name-en": "G-3.E.10"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12461105168,
+                            52.39500129954
+                        ],
+                        [
+                            13.12461430063,
+                            52.39494243165
+                        ],
+                        [
+                            13.12458081366,
+                            52.39494173715
+                        ],
+                        [
+                            13.12454475338,
+                            52.39494098928
+                        ],
+                        [
+                            13.12454148123,
+                            52.39499985669
+                        ],
+                        [
+                            13.12461105168,
+                            52.39500129954
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-2.E.20",
+                "type": "office",
+                "building": "G",
+                "name-en": "G-2.E.20"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12470720777,
+                            52.39466940686
+                        ],
+                        [
+                            13.12467936011,
+                            52.39466882266
+                        ],
+                        [
+                            13.12465359414,
+                            52.39466828213
+                        ],
+                        [
+                            13.12465053855,
+                            52.39472251884
+                        ],
+                        [
+                            13.12465261891,
+                            52.39472256220
+                        ],
+                        [
+                            13.12465260000,
+                            52.39472290000
+                        ],
+                        [
+                            13.12470413559,
+                            52.39472393798
+                        ],
+                        [
+                            13.12470720777,
+                            52.39466940686
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12512781786,
+                    52.39467823060
                 ]
             }
         },
@@ -1523,19 +2424,82 @@
             "properties": {
                 "indoor": "corridor",
                 "level_name": "0",
-                "name": "G-1.E.01"
+                "type": "corridor",
+                "name-de": "G-1.E.03",
+                "building": "G",
+                "name-en": "G-1.E.03"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12496077106,
-                            52.39493243505
+                            13.12504576431,
+                            52.39487640560
                         ],
                         [
-                            13.12499808322,
-                            52.39493320207
+                            13.12504526298,
+                            52.39488531744
+                        ],
+                        [
+                            13.12504462810,
+                            52.39489660326
+                        ],
+                        [
+                            13.12504395981,
+                            52.39490848304
+                        ],
+                        [
+                            13.12504374066,
+                            52.39491237864
+                        ],
+                        [
+                            13.12504252298,
+                            52.39493402466
+                        ],
+                        [
+                            13.12506939115,
+                            52.39493458747
+                        ],
+                        [
+                            13.12510565162,
+                            52.39493534702
+                        ],
+                        [
+                            13.12513007857,
+                            52.39493585869
+                        ],
+                        [
+                            13.12518185730,
+                            52.39493694331
+                        ],
+                        [
+                            13.12518081022,
+                            52.39495555659
+                        ],
+                        [
+                            13.12512913061,
+                            52.39495447406
+                        ],
+                        [
+                            13.12510436639,
+                            52.39495395532
+                        ],
+                        [
+                            13.12507355070,
+                            52.39495330982
+                        ],
+                        [
+                            13.12503489862,
+                            52.39495250017
+                        ],
+                        [
+                            13.12502625177,
+                            52.39495232242
+                        ],
+                        [
+                            13.12500664488,
+                            52.39495191936
                         ],
                         [
                             13.12500770307,
@@ -1550,16 +2514,12 @@
                             52.39487570000
                         ],
                         [
-                            13.12496400000,
-                            52.39487470000
+                            13.12503774389,
+                            52.39487624281
                         ],
                         [
-                            13.12496124868,
-                            52.39492389500
-                        ],
-                        [
-                            13.12496077106,
-                            52.39493243505
+                            13.12504576431,
+                            52.39487640560
                         ]
                     ]
                 ]
@@ -1568,204 +2528,15 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12461801548,
-                    52.39470755870
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12485384309,
-                    52.39465648064
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.13",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12459509834,
-                            52.39465105258
-                        ],
-                        [
-                            13.12462280154,
-                            52.39465163375
-                        ],
-                        [
-                            13.12465172132,
-                            52.39465224044
-                        ],
-                        [
-                            13.12465492291,
-                            52.39459461174
-                        ],
-                        [
-                            13.12459829901,
-                            52.39459344036
-                        ],
-                        [
-                            13.12459509834,
-                            52.39465105258
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12467936011,
-                    52.39466882266
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12502625177,
-                    52.39495232242
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.15",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12447230131,
-                            52.39464847649
-                        ],
-                        [
-                            13.12450921461,
-                            52.39464925088
-                        ],
-                        [
-                            13.12453829693,
-                            52.39464986098
-                        ],
-                        [
-                            13.12454149668,
-                            52.39459226528
-                        ],
-                        [
-                            13.12447550000,
-                            52.39459090000
-                        ],
-                        [
-                            13.12447230131,
-                            52.39464847649
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12511971305,
-                    52.39466205818
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-1.E.08",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12510565162,
-                            52.39493534702
-                        ],
-                        [
-                            13.12513007857,
-                            52.39493585869
-                        ],
-                        [
-                            13.12518185730,
-                            52.39493694331
-                        ],
-                        [
-                            13.12518510000,
-                            52.39487930000
-                        ],
-                        [
-                            13.12513910000,
-                            52.39487830000
-                        ],
-                        [
-                            13.12510889526,
-                            52.39487768695
-                        ],
-                        [
-                            13.12510775675,
-                            52.39489792562
-                        ],
-                        [
-                            13.12510686931,
-                            52.39491370101
-                        ],
-                        [
-                            13.12510565162,
-                            52.39493534702
-                        ]
-                    ]
+                    13.12473681554,
+                    52.39467002798
                 ]
             }
         },
@@ -1773,36 +2544,51 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "G-2.E.29",
-                "level_name": "0"
+                "level_name": "0",
+                "name-de": "G-2.E.30",
+                "type": "conference-room",
+                "building": "G",
+                "name-en": "G-2.E.30"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12505744082,
-                            52.39473169863
+                            13.12520330000,
+                            52.39473550000
                         ],
                         [
-                            13.12505826328,
-                            52.39471709995
+                            13.12514720000,
+                            52.39473440000
                         ],
                         [
-                            13.12505907284,
-                            52.39470273028
-                        ],
-                        [
-                            13.12510628712,
-                            52.39470372076
+                            13.12514724676,
+                            52.39473356928
                         ],
                         [
                             13.12510450603,
                             52.39473267899
                         ],
                         [
-                            13.12505744082,
-                            52.39473169863
+                            13.12510628712,
+                            52.39470372076
+                        ],
+                        [
+                            13.12510759745,
+                            52.39467780641
+                        ],
+                        [
+                            13.12512781786,
+                            52.39467823060
+                        ],
+                        [
+                            13.12520643353,
+                            52.39467987983
+                        ],
+                        [
+                            13.12520330000,
+                            52.39473550000
                         ]
                     ]
                 ]
@@ -1813,7 +2599,10 @@
             "properties": {
                 "indoor": "corridor",
                 "level_name": "0",
-                "name": "G-2.E.04"
+                "name-de": "G-2.E.04",
+                "type": "corridor",
+                "building": "G",
+                "name-en": "G-2.E.04"
             },
             "geometry": {
                 "type": "Polygon",
@@ -1878,440 +2667,15 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12458081366,
-                    52.39494173715
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12499808322,
-                    52.39493320207
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12465712676,
-                    52.39492509198
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12504526298,
-                    52.39488531744
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.24",
-                "indoor": "corridor",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12510759745,
-                            52.39467780641
-                        ],
-                        [
-                            13.12507806273,
-                            52.39467718682
-                        ],
-                        [
-                            13.12506053263,
-                            52.39467681906
-                        ],
-                        [
-                            13.12504660598,
-                            52.39467652690
-                        ],
-                        [
-                            13.12502525329,
-                            52.39467607896
-                        ],
-                        [
-                            13.12500420079,
-                            52.39467563731
-                        ],
-                        [
-                            13.12497188722,
-                            52.39467495942
-                        ],
-                        [
-                            13.12494804988,
-                            52.39467445935
-                        ],
-                        [
-                            13.12491524486,
-                            52.39467377115
-                        ],
-                        [
-                            13.12491570561,
-                            52.39466559276
-                        ],
-                        [
-                            13.12491614534,
-                            52.39465778765
-                        ],
-                        [
-                            13.12494766809,
-                            52.39465844895
-                        ],
-                        [
-                            13.12497319931,
-                            52.39465898455
-                        ],
-                        [
-                            13.12500439010,
-                            52.39465963888
-                        ],
-                        [
-                            13.12502978503,
-                            52.39466017163
-                        ],
-                        [
-                            13.12506222841,
-                            52.39466085224
-                        ],
-                        [
-                            13.12508615868,
-                            52.39466135426
-                        ],
-                        [
-                            13.12511971305,
-                            52.39466205818
-                        ],
-                        [
-                            13.12514339416,
-                            52.39466255497
-                        ],
-                        [
-                            13.12517727876,
-                            52.39466326582
-                        ],
-                        [
-                            13.12520733401,
-                            52.39466389633
-                        ],
-                        [
-                            13.12520689525,
-                            52.39467168425
-                        ],
-                        [
-                            13.12520643353,
-                            52.39467987983
-                        ],
-                        [
-                            13.12512781786,
-                            52.39467823060
-                        ],
-                        [
-                            13.12510759745,
-                            52.39467780641
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12460824347,
-                    52.39489933281
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.24"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12491524486,
-                            52.39467377115
-                        ],
-                        [
-                            13.12489452742,
-                            52.39467333653
-                        ],
-                        [
-                            13.12487040363,
-                            52.39467283044
-                        ],
-                        [
-                            13.12486721499,
-                            52.39472942834
-                        ],
-                        [
-                            13.12491249609,
-                            52.39473042776
-                        ],
-                        [
-                            13.12491524486,
-                            52.39467377115
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.27",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12502525329,
-                            52.39467607896
-                        ],
-                        [
-                            13.12502216118,
-                            52.39473096376
-                        ],
-                        [
-                            13.12505744082,
-                            52.39473169863
-                        ],
-                        [
-                            13.12505826328,
-                            52.39471709995
-                        ],
-                        [
-                            13.12505907284,
-                            52.39470273028
-                        ],
-                        [
-                            13.12506053263,
-                            52.39467681906
-                        ],
-                        [
-                            13.12504660598,
-                            52.39467652690
-                        ],
-                        [
-                            13.12502525329,
-                            52.39467607896
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.11",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12470810825,
-                            52.39465342335
-                        ],
-                        [
-                            13.12473795883,
-                            52.39465404957
-                        ],
-                        [
-                            13.12476495458,
-                            52.39465461590
-                        ],
-                        [
-                            13.12476815800,
-                            52.39459695425
-                        ],
-                        [
-                            13.12476100000,
-                            52.39459680000
-                        ],
-                        [
-                            13.12471131075,
-                            52.39459577824
-                        ],
-                        [
-                            13.12470810825,
-                            52.39465342335
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12506939115,
-                    52.39493458747
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "G-2.E.06/07"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12487805573,
-                            52.39463383483
-                        ],
-                        [
-                            13.12491744942,
-                            52.39463464024
-                        ],
-                        [
-                            13.12491930883,
-                            52.39460163566
-                        ],
-                        [
-                            13.12492720000,
-                            52.39460180000
-                        ],
-                        [
-                            13.12492820000,
-                            52.39458410000
-                        ],
-                        [
-                            13.12488083960,
-                            52.39458313172
-                        ],
-                        [
-                            13.12487914033,
-                            52.39461408084
-                        ],
-                        [
-                            13.12487857895,
-                            52.39462430533
-                        ],
-                        [
-                            13.12487805573,
-                            52.39463383483
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12483838857,
-                    52.39472870527
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "name": "G-1.E.02",
-                "level_name": "0",
-                "building": "yes"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12495974862,
-                            52.39495095532
-                        ],
-                        [
-                            13.12500664488,
-                            52.39495191936
-                        ],
-                        [
-                            13.12500770307,
-                            52.39493339983
-                        ],
-                        [
-                            13.12499808322,
-                            52.39493320207
-                        ],
-                        [
-                            13.12496077106,
-                            52.39493243505
-                        ],
-                        [
-                            13.12495974862,
-                            52.39495095532
-                        ]
-                    ]
+                    13.12473795883,
+                    52.39465404957
                 ]
             }
         },
@@ -2320,7 +2684,10 @@
             "properties": {
                 "indoor": "corridor",
                 "level_name": "0",
-                "name": "G-2.E.23"
+                "building": "G",
+                "type": "foyer",
+                "name-de": "G-2.E.23",
+                "name-en": "G-2.E.23"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2409,37 +2776,52 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "G-2.E.33",
-                "indoor": "room",
-                "level_name": "0"
+                "indoor": "corridor",
+                "level_name": "0",
+                "type": "corridor",
+                "name-de": "G-3.E.12",
+                "building": "G",
+                "name-en": "G-3.E.12"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12508932363,
-                            52.39460517638
+                            13.12461007228,
+                            52.39486649756
                         ],
                         [
-                            13.12503294949,
-                            52.39460400234
+                            13.12462472261,
+                            52.39486679561
                         ],
                         [
-                            13.12502978503,
-                            52.39466017163
+                            13.12464460000,
+                            52.39486720000
                         ],
                         [
-                            13.12506222841,
-                            52.39466085224
+                            13.12464855398,
+                            52.39479588022
                         ],
                         [
-                            13.12508615868,
-                            52.39466135426
+                            13.12462752086,
+                            52.39479544400
                         ],
                         [
-                            13.12508932363,
-                            52.39460517638
+                            13.12461396968,
+                            52.39479516296
+                        ],
+                        [
+                            13.12461303341,
+                            52.39481229961
+                        ],
+                        [
+                            13.12461107261,
+                            52.39484818835
+                        ],
+                        [
+                            13.12461007228,
+                            52.39486649756
                         ]
                     ]
                 ]
@@ -2448,30 +2830,15 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12450921461,
-                    52.39464925088
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12494766809,
-                    52.39465844895
+                    13.12505826328,
+                    52.39471709995
                 ]
             }
         },
@@ -2480,93 +2847,46 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.02"
+                "building": "G",
+                "type": "tea-kitchen",
+                "name-de": "G-2.E.19",
+                "name-en": "G-2.E.19"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12481170406,
-                            52.39465559663
+                            13.12461721179,
+                            52.39472182417
                         ],
                         [
-                            13.12484631426,
-                            52.39465632270
+                            13.12465053855,
+                            52.39472251884
                         ],
                         [
-                            13.12484797537,
-                            52.39462683805
+                            13.12465359414,
+                            52.39466828213
                         ],
                         [
-                            13.12484444537,
-                            52.39462676400
-                        ],
-                        [
-                            13.12481332298,
-                            52.39462611110
-                        ],
-                        [
-                            13.12481233594,
-                            52.39464408822
-                        ],
-                        [
-                            13.12481170406,
-                            52.39465559663
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12483735663,
-                    52.39474879826
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "G-2.E.18"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12456967472,
-                            52.39469121286
-                        ],
-                        [
-                            13.12461887823,
-                            52.39469224506
+                            13.12463732486,
+                            52.39466794082
                         ],
                         [
                             13.12462026763,
                             52.39466758299
                         ],
                         [
-                            13.12460626395,
-                            52.39466728922
+                            13.12461887823,
+                            52.39469224506
                         ],
                         [
-                            13.12457107007,
-                            52.39466655091
+                            13.12461801548,
+                            52.39470755870
                         ],
                         [
-                            13.12456967472,
-                            52.39469121286
+                            13.12461721179,
+                            52.39472182417
                         ]
                     ]
                 ]
@@ -2575,101 +2895,30 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "G-3.E.01",
-                "indoor": "corridor",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12464460000,
-                            52.39486720000
-                        ],
-                        [
-                            13.12464182152,
-                            52.39491706451
-                        ],
-                        [
-                            13.12464139241,
-                            52.39492476566
-                        ],
-                        [
-                            13.12465712676,
-                            52.39492509198
-                        ],
-                        [
-                            13.12468766741,
-                            52.39492572538
-                        ],
-                        [
-                            13.12468814833,
-                            52.39491716719
-                        ],
-                        [
-                            13.12469090000,
-                            52.39486820000
-                        ],
-                        [
-                            13.12464460000,
-                            52.39486720000
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12500420079,
-                    52.39467563731
+                    13.12460824347,
+                    52.39489933281
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "name": "G-2.E.34",
-                "indoor": "room",
-                "level_name": "0"
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
-                "type": "Polygon",
+                "type": "Point",
                 "coordinates": [
-                    [
-                        [
-                            13.12497319931,
-                            52.39465898455
-                        ],
-                        [
-                            13.12500439010,
-                            52.39465963888
-                        ],
-                        [
-                            13.12502978503,
-                            52.39466017163
-                        ],
-                        [
-                            13.12503294949,
-                            52.39460400234
-                        ],
-                        [
-                            13.12497636328,
-                            52.39460282387
-                        ],
-                        [
-                            13.12497319931,
-                            52.39465898455
-                        ]
-                    ]
+                    13.12465712676,
+                    52.39492509198
                 ]
             }
         },
@@ -2678,47 +2927,50 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.30"
+                "type": "office",
+                "name-de": "G-3.E.08",
+                "building": "G",
+                "name-en": "G-3.E.08"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12520330000,
-                            52.39473550000
+                            13.12454576787,
+                            52.39492278247
                         ],
                         [
-                            13.12514720000,
-                            52.39473440000
+                            13.12454695325,
+                            52.39490149967
                         ],
                         [
-                            13.12514724676,
-                            52.39473356928
+                            13.12454783959,
+                            52.39488558610
                         ],
                         [
-                            13.12510450603,
-                            52.39473267899
+                            13.12454896917,
+                            52.39486525446
                         ],
                         [
-                            13.12510628712,
-                            52.39470372076
+                            13.12451680000,
+                            52.39486460000
                         ],
                         [
-                            13.12510759745,
-                            52.39467780641
+                            13.12446910000,
+                            52.39486360000
                         ],
                         [
-                            13.12512781786,
-                            52.39467823060
+                            13.12446591524,
+                            52.39492112783
                         ],
                         [
-                            13.12520643353,
-                            52.39467987983
+                            13.12452540539,
+                            52.39492236054
                         ],
                         [
-                            13.12520330000,
-                            52.39473550000
+                            13.12454576787,
+                            52.39492278247
                         ]
                     ]
                 ]
@@ -2727,60 +2979,55 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12506222841,
-                    52.39466085224
+                    13.12502625177,
+                    52.39495232242
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "name": "G-2.E.25",
                 "indoor": "room",
-                "level_name": "0"
+                "level_name": "0",
+                "building": "G",
+                "type": "toilet-disabled",
+                "name-de": "G-2.E.05",
+                "name-en": "G-2.E.05"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12496879593,
-                            52.39472982970
+                            13.12487678593,
+                            52.39465696195
                         ],
                         [
-                            13.12497188722,
-                            52.39467495942
+                            13.12491614534,
+                            52.39465778765
                         ],
                         [
-                            13.12494804988,
-                            52.39467445935
+                            13.12491744942,
+                            52.39463464024
                         ],
                         [
-                            13.12491524486,
-                            52.39467377115
+                            13.12487805573,
+                            52.39463383483
                         ],
                         [
-                            13.12491249609,
-                            52.39473042776
+                            13.12487746128,
+                            52.39464466168
                         ],
                         [
-                            13.12492030000,
-                            52.39473060000
-                        ],
-                        [
-                            13.12492040000,
-                            52.39472880000
-                        ],
-                        [
-                            13.12496879593,
-                            52.39472982970
+                            13.12487678593,
+                            52.39465696195
                         ]
                     ]
                 ]
@@ -2789,131 +3036,9 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12520689525,
-                    52.39467168425
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.16",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12446840000,
-                            52.39471870000
-                        ],
-                        [
-                            13.12452490000,
-                            52.39471990000
-                        ],
-                        [
-                            13.12456800080,
-                            52.39472079840
-                        ],
-                        [
-                            13.12456967472,
-                            52.39469121286
-                        ],
-                        [
-                            13.12457107007,
-                            52.39466655091
-                        ],
-                        [
-                            13.12455612278,
-                            52.39466623734
-                        ],
-                        [
-                            13.12447141332,
-                            52.39466446027
-                        ],
-                        [
-                            13.12446840000,
-                            52.39471870000
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12507355070,
-                    52.39495330982
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12452540539,
-                    52.39492236054
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12504876336,
-                    52.39482138491
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12461107261,
-                    52.39484818835
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
@@ -2926,45 +3051,131 @@
         {
             "type": "Feature",
             "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12462736003,
+                    52.39494270250
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.20"
+                "type": "office",
+                "name-de": "G-3.E.09",
+                "building": "G",
+                "name-en": "G-3.E.09"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12470720777,
-                            52.39466940686
+                            13.12468665934,
+                            52.39494393233
                         ],
                         [
-                            13.12467936011,
-                            52.39466882266
+                            13.12468340000,
+                            52.39500280000
                         ],
                         [
-                            13.12465359414,
-                            52.39466828213
+                            13.12461105168,
+                            52.39500129954
                         ],
                         [
-                            13.12465053855,
-                            52.39472251884
+                            13.12461430063,
+                            52.39494243165
                         ],
                         [
-                            13.12465261891,
-                            52.39472256220
+                            13.12462736003,
+                            52.39494270250
                         ],
                         [
-                            13.12465260000,
-                            52.39472290000
+                            13.12464037791,
+                            52.39494297248
                         ],
                         [
-                            13.12470413559,
-                            52.39472393798
+                            13.12468665934,
+                            52.39494393233
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12511971305,
+                    52.39466205818
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12468814833,
+                    52.39491716719
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "office",
+                "name-de": "G-2.E.14",
+                "building": "G",
+                "name-en": "G-2.E.14"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12453829693,
+                            52.39464986098
                         ],
                         [
-                            13.12470720777,
-                            52.39466940686
+                            13.12456590426,
+                            52.39465044014
+                        ],
+                        [
+                            13.12459509834,
+                            52.39465105258
+                        ],
+                        [
+                            13.12459829901,
+                            52.39459344036
+                        ],
+                        [
+                            13.12454149668,
+                            52.39459226528
+                        ],
+                        [
+                            13.12453829693,
+                            52.39464986098
                         ]
                     ]
                 ]
@@ -2974,9 +3185,164 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "G-1.E.05",
                 "level_name": "0",
-                "building": "yes"
+                "building": "G",
+                "name-de": "G-3.E.15/16",
+                "type": "seminar-room",
+                "name-en": "G-3.E.15/16"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12452079511,
+                            52.39479323057
+                        ],
+                        [
+                            13.12461396968,
+                            52.39479516296
+                        ],
+                        [
+                            13.12462752086,
+                            52.39479544400
+                        ],
+                        [
+                            13.12464855398,
+                            52.39479588022
+                        ],
+                        [
+                            13.12465193334,
+                            52.39473492483
+                        ],
+                        [
+                            13.12465260000,
+                            52.39472290000
+                        ],
+                        [
+                            13.12465261891,
+                            52.39472256220
+                        ],
+                        [
+                            13.12465053855,
+                            52.39472251884
+                        ],
+                        [
+                            13.12461721179,
+                            52.39472182417
+                        ],
+                        [
+                            13.12456800080,
+                            52.39472079840
+                        ],
+                        [
+                            13.12452490000,
+                            52.39471990000
+                        ],
+                        [
+                            13.12452079511,
+                            52.39479323057
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12500439010,
+                    52.39465963888
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12504660598,
+                    52.39467652690
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "name-de": "G-2.E.10",
+                "type": "cleaning-room",
+                "building": "G",
+                "name-en": "G-2.E.10"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12481332298,
+                            52.39462611110
+                        ],
+                        [
+                            13.12484444537,
+                            52.39462676400
+                        ],
+                        [
+                            13.12484495971,
+                            52.39461763462
+                        ],
+                        [
+                            13.12484519808,
+                            52.39461340350
+                        ],
+                        [
+                            13.12481405656,
+                            52.39461275020
+                        ],
+                        [
+                            13.12481332298,
+                            52.39462611110
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12481233594,
+                    52.39464408822
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-1.E.05",
+                "type": "toilet-female",
+                "name-en": "G-1.E.05"
             },
             "geometry": {
                 "type": "Polygon",
@@ -3013,132 +3379,12 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12481233594,
-                    52.39464408822
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-3.E.11",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12454148123,
-                            52.39499985669
-                        ],
-                        [
-                            13.12454475338,
-                            52.39494098928
-                        ],
-                        [
-                            13.12452446093,
-                            52.39494056927
-                        ],
-                        [
-                            13.12446490719,
-                            52.39493933665
-                        ],
-                        [
-                            13.12446160000,
-                            52.39499820000
-                        ],
-                        [
-                            13.12454148123,
-                            52.39499985669
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12465193334,
-                    52.39473492483
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-3.E.05",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12460805221,
-                            52.39490276683
-                        ],
-                        [
-                            13.12460824347,
-                            52.39489933281
-                        ],
-                        [
-                            13.12460893854,
-                            52.39488685326
-                        ],
-                        [
-                            13.12454783959,
-                            52.39488558610
-                        ],
-                        [
-                            13.12454695325,
-                            52.39490149967
-                        ],
-                        [
-                            13.12460805221,
-                            52.39490276683
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12460626395,
-                    52.39466728922
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
                 "indoor": "corridor",
                 "level_name": "0",
-                "name": "G-2.E.03"
+                "building": "G",
+                "type": "corridor",
+                "name-de": "G-2.E.03",
+                "name-en": "G-2.E.03"
             },
             "geometry": {
                 "type": "Polygon",
@@ -3251,40 +3497,167 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12487857895,
-                    52.39462430533
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.32",
                 "indoor": "room",
-                "level_name": "0"
+                "level_name": "0",
+                "building": "G",
+                "type": "electrical-room",
+                "name-de": "G-2.E.18",
+                "name-en": "G-2.E.18"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12514339416,
-                            52.39466255497
+                            13.12456967472,
+                            52.39469121286
                         ],
                         [
-                            13.12514655960,
-                            52.39460636838
+                            13.12461887823,
+                            52.39469224506
                         ],
                         [
-                            13.12508932363,
-                            52.39460517638
+                            13.12462026763,
+                            52.39466758299
+                        ],
+                        [
+                            13.12460626395,
+                            52.39466728922
+                        ],
+                        [
+                            13.12457107007,
+                            52.39466655091
+                        ],
+                        [
+                            13.12456967472,
+                            52.39469121286
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12491570561,
+                    52.39466559276
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12507806273,
+                    52.39467718682
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12506222841,
+                    52.39466085224
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "corridor",
+                "level_name": "0",
+                "name-de": "G-2.E.24",
+                "type": "corridor",
+                "building": "G",
+                "name-en": "G-2.E.24"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.12510759745,
+                            52.39467780641
+                        ],
+                        [
+                            13.12507806273,
+                            52.39467718682
+                        ],
+                        [
+                            13.12506053263,
+                            52.39467681906
+                        ],
+                        [
+                            13.12504660598,
+                            52.39467652690
+                        ],
+                        [
+                            13.12502525329,
+                            52.39467607896
+                        ],
+                        [
+                            13.12500420079,
+                            52.39467563731
+                        ],
+                        [
+                            13.12497188722,
+                            52.39467495942
+                        ],
+                        [
+                            13.12494804988,
+                            52.39467445935
+                        ],
+                        [
+                            13.12491524486,
+                            52.39467377115
+                        ],
+                        [
+                            13.12491570561,
+                            52.39466559276
+                        ],
+                        [
+                            13.12491614534,
+                            52.39465778765
+                        ],
+                        [
+                            13.12494766809,
+                            52.39465844895
+                        ],
+                        [
+                            13.12497319931,
+                            52.39465898455
+                        ],
+                        [
+                            13.12500439010,
+                            52.39465963888
+                        ],
+                        [
+                            13.12502978503,
+                            52.39466017163
+                        ],
+                        [
+                            13.12506222841,
+                            52.39466085224
                         ],
                         [
                             13.12508615868,
@@ -3297,38 +3670,32 @@
                         [
                             13.12514339416,
                             52.39466255497
+                        ],
+                        [
+                            13.12517727876,
+                            52.39466326582
+                        ],
+                        [
+                            13.12520733401,
+                            52.39466389633
+                        ],
+                        [
+                            13.12520689525,
+                            52.39467168425
+                        ],
+                        [
+                            13.12520643353,
+                            52.39467987983
+                        ],
+                        [
+                            13.12512781786,
+                            52.39467823060
+                        ],
+                        [
+                            13.12510759745,
+                            52.39467780641
                         ]
                     ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12463732486,
-                    52.39466794082
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12489452742,
-                    52.39467333653
                 ]
             }
         },
@@ -3336,36 +3703,43 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "G-1.E.04",
-                "level_name": "0"
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-2.E.11",
+                "type": "office",
+                "name-en": "G-2.E.11"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12510775675,
-                            52.39489792562
+                            13.12470810825,
+                            52.39465342335
                         ],
                         [
-                            13.12504462810,
-                            52.39489660326
+                            13.12473795883,
+                            52.39465404957
                         ],
                         [
-                            13.12504526298,
-                            52.39488531744
+                            13.12476495458,
+                            52.39465461590
                         ],
                         [
-                            13.12504576431,
-                            52.39487640560
+                            13.12476815800,
+                            52.39459695425
                         ],
                         [
-                            13.12510889526,
-                            52.39487768695
+                            13.12476100000,
+                            52.39459680000
                         ],
                         [
-                            13.12510775675,
-                            52.39489792562
+                            13.12471131075,
+                            52.39459577824
+                        ],
+                        [
+                            13.12470810825,
+                            52.39465342335
                         ]
                     ]
                 ]
@@ -3374,81 +3748,39 @@
         {
             "type": "Feature",
             "properties": {
+                "access": "private",
                 "level_name": "0",
-                "name": "G-1.E.03",
-                "indoor": "corridor"
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12504245999,
+                    52.39480452761
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "corridor",
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-1.E.01",
+                "type": "stairwell",
+                "name-en": "G-1.E.01"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12504576431,
-                            52.39487640560
+                            13.12496077106,
+                            52.39493243505
                         ],
                         [
-                            13.12504526298,
-                            52.39488531744
-                        ],
-                        [
-                            13.12504462810,
-                            52.39489660326
-                        ],
-                        [
-                            13.12504395981,
-                            52.39490848304
-                        ],
-                        [
-                            13.12504374066,
-                            52.39491237864
-                        ],
-                        [
-                            13.12504252298,
-                            52.39493402466
-                        ],
-                        [
-                            13.12506939115,
-                            52.39493458747
-                        ],
-                        [
-                            13.12510565162,
-                            52.39493534702
-                        ],
-                        [
-                            13.12513007857,
-                            52.39493585869
-                        ],
-                        [
-                            13.12518185730,
-                            52.39493694331
-                        ],
-                        [
-                            13.12518081022,
-                            52.39495555659
-                        ],
-                        [
-                            13.12512913061,
-                            52.39495447406
-                        ],
-                        [
-                            13.12510436639,
-                            52.39495395532
-                        ],
-                        [
-                            13.12507355070,
-                            52.39495330982
-                        ],
-                        [
-                            13.12503489862,
-                            52.39495250017
-                        ],
-                        [
-                            13.12502625177,
-                            52.39495232242
-                        ],
-                        [
-                            13.12500664488,
-                            52.39495191936
+                            13.12499808322,
+                            52.39493320207
                         ],
                         [
                             13.12500770307,
@@ -3463,12 +3795,16 @@
                             52.39487570000
                         ],
                         [
-                            13.12503774389,
-                            52.39487624281
+                            13.12496400000,
+                            52.39487470000
                         ],
                         [
-                            13.12504576431,
-                            52.39487640560
+                            13.12496124868,
+                            52.39492389500
+                        ],
+                        [
+                            13.12496077106,
+                            52.39493243505
                         ]
                     ]
                 ]
@@ -3477,52 +3813,82 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12473795883,
-                    52.39465404957
+                    13.12462280154,
+                    52.39465163375
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "name": "G-2.E.12",
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12476452476,
+                    52.39466224512
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
                 "indoor": "room",
-                "level_name": "0"
+                "level_name": "0",
+                "building": "G",
+                "name-de": "G-1.E.08",
+                "type": "office",
+                "name-en": "G-1.E.08"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12465172132,
-                            52.39465224044
+                            13.12510565162,
+                            52.39493534702
                         ],
                         [
-                            13.12468065279,
-                            52.39465284738
+                            13.12513007857,
+                            52.39493585869
                         ],
                         [
-                            13.12470810825,
-                            52.39465342335
+                            13.12518185730,
+                            52.39493694331
                         ],
                         [
-                            13.12471131075,
-                            52.39459577824
+                            13.12518510000,
+                            52.39487930000
                         ],
                         [
-                            13.12465492291,
-                            52.39459461174
+                            13.12513910000,
+                            52.39487830000
                         ],
                         [
-                            13.12465172132,
-                            52.39465224044
+                            13.12510889526,
+                            52.39487768695
+                        ],
+                        [
+                            13.12510775675,
+                            52.39489792562
+                        ],
+                        [
+                            13.12510686931,
+                            52.39491370101
+                        ],
+                        [
+                            13.12510565162,
+                            52.39493534702
                         ]
                     ]
                 ]
@@ -3533,39 +3899,42 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.08/09"
+                "name-de": "G-2.E.26",
+                "type": "office",
+                "building": "G",
+                "name-en": "G-2.E.26"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12481405656,
-                            52.39461275020
+                            13.12502216118,
+                            52.39473096376
                         ],
                         [
-                            13.12481575583,
-                            52.39458180108
+                            13.12502525329,
+                            52.39467607896
                         ],
                         [
-                            13.12488083960,
-                            52.39458313172
+                            13.12500420079,
+                            52.39467563731
                         ],
                         [
-                            13.12487914033,
-                            52.39461408084
+                            13.12497188722,
+                            52.39467495942
                         ],
                         [
-                            13.12487099709,
-                            52.39461391833
+                            13.12496879593,
+                            52.39472982970
                         ],
                         [
-                            13.12484519808,
-                            52.39461340350
+                            13.12501910000,
+                            52.39473090000
                         ],
                         [
-                            13.12481405656,
-                            52.39461275020
+                            13.12502216118,
+                            52.39473096376
                         ]
                     ]
                 ]
@@ -3574,15 +3943,30 @@
         {
             "type": "Feature",
             "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12494804988,
-                    52.39467445935
+                    13.12467936011,
+                    52.39466882266
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12452540539,
+                    52.39492236054
                 ]
             }
         },
@@ -3591,37 +3975,55 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-2.E.10"
+                "building": "G",
+                "name-de": "G-3.E.04",
+                "type": "toilet-male",
+                "name-en": "G-3.E.04"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12481332298,
-                            52.39462611110
+                            13.12460893854,
+                            52.39488685326
                         ],
                         [
-                            13.12484444537,
-                            52.39462676400
+                            13.12460958745,
+                            52.39487520238
                         ],
                         [
-                            13.12484495971,
-                            52.39461763462
+                            13.12461007228,
+                            52.39486649756
                         ],
                         [
-                            13.12484519808,
-                            52.39461340350
+                            13.12454896917,
+                            52.39486525446
                         ],
                         [
-                            13.12481405656,
-                            52.39461275020
+                            13.12454783959,
+                            52.39488558610
                         ],
                         [
-                            13.12481332298,
-                            52.39462611110
+                            13.12460893854,
+                            52.39488685326
                         ]
                     ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12462752086,
+                    52.39479544400
                 ]
             }
         },
@@ -3630,36 +4032,38 @@
             "properties": {
                 "indoor": "room",
                 "level_name": "0",
-                "name": "G-1.E.10",
-                "building": "yes"
+                "type": "office",
+                "name-de": "G-2.E.31",
+                "building": "G",
+                "name-en": "G-2.E.31"
             },
             "geometry": {
                 "type": "Polygon",
                 "coordinates": [
                     [
                         [
-                            13.12510105617,
-                            52.39501279873
+                            13.12520733401,
+                            52.39466389633
                         ],
                         [
-                            13.12510436639,
-                            52.39495395532
+                            13.12521050000,
+                            52.39460770000
                         ],
                         [
-                            13.12507355070,
-                            52.39495330982
+                            13.12514655960,
+                            52.39460636838
                         ],
                         [
-                            13.12503489862,
-                            52.39495250017
+                            13.12514339416,
+                            52.39466255497
                         ],
                         [
-                            13.12503158841,
-                            52.39501134358
+                            13.12517727876,
+                            52.39466326582
                         ],
                         [
-                            13.12510105617,
-                            52.39501279873
+                            13.12520733401,
+                            52.39466389633
                         ]
                     ]
                 ]
@@ -3668,289 +4072,60 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "G-2.E.28",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12510628712,
-                            52.39470372076
-                        ],
-                        [
-                            13.12510759745,
-                            52.39467780641
-                        ],
-                        [
-                            13.12507806273,
-                            52.39467718682
-                        ],
-                        [
-                            13.12506053263,
-                            52.39467681906
-                        ],
-                        [
-                            13.12505907284,
-                            52.39470273028
-                        ],
-                        [
-                            13.12510628712,
-                            52.39470372076
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12462736003,
-                    52.39494270250
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "name": "G-3.E.10",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12461105168,
-                            52.39500129954
-                        ],
-                        [
-                            13.12461430063,
-                            52.39494243165
-                        ],
-                        [
-                            13.12458081366,
-                            52.39494173715
-                        ],
-                        [
-                            13.12454475338,
-                            52.39494098928
-                        ],
-                        [
-                            13.12454148123,
-                            52.39499985669
-                        ],
-                        [
-                            13.12461105168,
-                            52.39500129954
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12512781786,
-                    52.39467823060
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12464182152,
-                    52.39491706451
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.12503774389,
-                    52.39487624281
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
                 "level_name": "0",
-                "name": "G-1.E.11"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12503158841,
-                            52.39501134358
-                        ],
-                        [
-                            13.12495650000,
-                            52.39500980000
-                        ],
-                        [
-                            13.12495974862,
-                            52.39495095532
-                        ],
-                        [
-                            13.12500664488,
-                            52.39495191936
-                        ],
-                        [
-                            13.12502625177,
-                            52.39495232242
-                        ],
-                        [
-                            13.12503489862,
-                            52.39495250017
-                        ],
-                        [
-                            13.12503158841,
-                            52.39501134358
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
-                "access": "private",
-                "level_name": "0"
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12460958745,
-                    52.39487520238
+                    13.12452446093,
+                    52.39494056927
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "name": "G-3.E.02",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12464037791,
-                            52.39494297248
-                        ],
-                        [
-                            13.12468665934,
-                            52.39494393233
-                        ],
-                        [
-                            13.12468766741,
-                            52.39492572538
-                        ],
-                        [
-                            13.12465712676,
-                            52.39492509198
-                        ],
-                        [
-                            13.12464139241,
-                            52.39492476566
-                        ],
-                        [
-                            13.12464037791,
-                            52.39494297248
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "G-2.E.14",
-                "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.12453829693,
-                            52.39464986098
-                        ],
-                        [
-                            13.12456590426,
-                            52.39465044014
-                        ],
-                        [
-                            13.12459509834,
-                            52.39465105258
-                        ],
-                        [
-                            13.12459829901,
-                            52.39459344036
-                        ],
-                        [
-                            13.12454149668,
-                            52.39459226528
-                        ],
-                        [
-                            13.12453829693,
-                            52.39464986098
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "door": "yes",
                 "access": "private",
-                "level_name": "0"
+                "level_name": "0",
+                "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.12513007857,
-                    52.39493585869
+                    13.12450921461,
+                    52.39464925088
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12500420079,
+                    52.39467563731
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.12458588600,
+                    52.39492361449
                 ]
             }
         }

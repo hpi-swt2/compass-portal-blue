@@ -6,16 +6,15 @@
         {
             "type": "Feature",
             "properties": {
-                "name": "HS Nebeneingang",
-                "access": "private",
+                "access": "yes",
                 "level_name": "0",
                 "door": "yes"
             },
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.13243181846,
-                    52.39416190018
+                    13.13248324611,
+                    52.39412002380
                 ]
             }
         },
@@ -38,8 +37,319 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "HE 1",
-                "level_name": "0"
+                "level_name": "0",
+                "name-de": "HE 2",
+                "building": "HS",
+                "type": "other",
+                "name-en": "HE 2"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13215067347,
+                            52.39405755630
+                        ],
+                        [
+                            13.13215432160,
+                            52.39402197053
+                        ],
+                        [
+                            13.13215584655,
+                            52.39400709539
+                        ],
+                        [
+                            13.13214206754,
+                            52.39400656938
+                        ],
+                        [
+                            13.13204738745,
+                            52.39400295497
+                        ],
+                        [
+                            13.13204221437,
+                            52.39405341589
+                        ],
+                        [
+                            13.13213788169,
+                            52.39405706798
+                        ],
+                        [
+                            13.13215067347,
+                            52.39405755630
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "yes",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13249548331,
+                    52.39400065578
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "HS",
+                "name-de": "HE 4",
+                "type": "electrical-room",
+                "name-en": "HE 4"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13214776357,
+                            52.39408594098
+                        ],
+                        [
+                            13.13215067347,
+                            52.39405755630
+                        ],
+                        [
+                            13.13213788169,
+                            52.39405706798
+                        ],
+                        [
+                            13.13204221437,
+                            52.39405341589
+                        ],
+                        [
+                            13.13203930447,
+                            52.39408180057
+                        ],
+                        [
+                            13.13214776357,
+                            52.39408594098
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "yes",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13223280048,
+                    52.39408918725
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "building": "HS",
+                "name-de": "HS 1",
+                "type": "lecture-hall",
+                "name-en": "HS 1"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13279171820,
+                            52.39415037070
+                        ],
+                        [
+                            13.13280735288,
+                            52.39399786197
+                        ],
+                        [
+                            13.13249698437,
+                            52.39398601368
+                        ],
+                        [
+                            13.13249548331,
+                            52.39400065578
+                        ],
+                        [
+                            13.13248324611,
+                            52.39412002380
+                        ],
+                        [
+                            13.13248134969,
+                            52.39413852245
+                        ],
+                        [
+                            13.13277249927,
+                            52.39414963702
+                        ],
+                        [
+                            13.13279171820,
+                            52.39415037070
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "name": "HS Nebeneingang",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13243181846,
+                    52.39416190018
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "lecture-hall",
+                "name-de": "HS 2",
+                "building": "HS",
+                "name-en": "HS 2"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13219788886,
+                            52.39426065329
+                        ],
+                        [
+                            13.13238494349,
+                            52.39426779405
+                        ],
+                        [
+                            13.13239593982,
+                            52.39416053052
+                        ],
+                        [
+                            13.13240258922,
+                            52.39409566890
+                        ],
+                        [
+                            13.13237753103,
+                            52.39409471231
+                        ],
+                        [
+                            13.13225053403,
+                            52.39408986422
+                        ],
+                        [
+                            13.13223280048,
+                            52.39408918725
+                        ],
+                        [
+                            13.13221553459,
+                            52.39408852812
+                        ],
+                        [
+                            13.13219897566,
+                            52.39425005208
+                        ],
+                        [
+                            13.13219788886,
+                            52.39426065329
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "yes",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13248324611,
+                    52.39412002380
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Corridor",
+                "indoor": "room",
+                "level_name": "0",
+                "type": "corridor",
+                "building": "HS",
+                "name-de": "Korridor",
+                "name-en": "Corridor"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13248134969,
+                            52.39413852245
+                        ],
+                        [
+                            13.13248009184,
+                            52.39415079220
+                        ],
+                        [
+                            13.13247876934,
+                            52.39416369252
+                        ],
+                        [
+                            13.13278913784,
+                            52.39417554077
+                        ],
+                        [
+                            13.13279171820,
+                            52.39415037070
+                        ],
+                        [
+                            13.13277249927,
+                            52.39414963702
+                        ],
+                        [
+                            13.13248134969,
+                            52.39413852245
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "0",
+                "type": "other",
+                "building": "HS",
+                "name-de": "HE 1",
+                "name-en": "HE 1"
             },
             "geometry": {
                 "type": "Polygon",
@@ -83,32 +393,20 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.13219897566,
-                    52.39425005208
+                    13.13248009184,
+                    52.39415079220
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "access": "yes",
                 "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13216553049,
-                    52.39408661923
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Foyer",
-                "level_name": "0",
-                "highway": "steps"
+                "highway": "steps",
+                "name-de": "Foyer",
+                "building": "HS",
+                "type": "area",
+                "name-en": "Foyer"
             },
             "geometry": {
                 "type": "Polygon",
@@ -221,189 +519,6 @@
         {
             "type": "Feature",
             "properties": {
-                "access": "private",
-                "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13214206754,
-                    52.39400656938
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "level_name": "0",
-                "highway": "steps",
-                "name": "Staircase"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13225053403,
-                            52.39408986422
-                        ],
-                        [
-                            13.13225393424,
-                            52.39405669681
-                        ],
-                        [
-                            13.13238093124,
-                            52.39406154490
-                        ],
-                        [
-                            13.13237753103,
-                            52.39409471231
-                        ],
-                        [
-                            13.13225053403,
-                            52.39408986422
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "private",
-                "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13213788169,
-                    52.39405706798
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "name": "HE 2",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13215067347,
-                            52.39405755630
-                        ],
-                        [
-                            13.13215432160,
-                            52.39402197053
-                        ],
-                        [
-                            13.13215584655,
-                            52.39400709539
-                        ],
-                        [
-                            13.13214206754,
-                            52.39400656938
-                        ],
-                        [
-                            13.13204738745,
-                            52.39400295497
-                        ],
-                        [
-                            13.13204221437,
-                            52.39405341589
-                        ],
-                        [
-                            13.13213788169,
-                            52.39405706798
-                        ],
-                        [
-                            13.13215067347,
-                            52.39405755630
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "private",
-                "name": "HS Haupteingang",
-                "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13232043600,
-                    52.39397927396
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "HS 2"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13219788886,
-                            52.39426065329
-                        ],
-                        [
-                            13.13238494349,
-                            52.39426779405
-                        ],
-                        [
-                            13.13239593982,
-                            52.39416053052
-                        ],
-                        [
-                            13.13240258922,
-                            52.39409566890
-                        ],
-                        [
-                            13.13237753103,
-                            52.39409471231
-                        ],
-                        [
-                            13.13225053403,
-                            52.39408986422
-                        ],
-                        [
-                            13.13223280048,
-                            52.39408918725
-                        ],
-                        [
-                            13.13221553459,
-                            52.39408852812
-                        ],
-                        [
-                            13.13219897566,
-                            52.39425005208
-                        ],
-                        [
-                            13.13219788886,
-                            52.39426065329
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
                 "access": "yes",
                 "level_name": "0",
                 "door": "yes"
@@ -411,75 +526,20 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.13248324611,
-                    52.39412002380
+                    13.13216654412,
+                    52.39424922453
                 ]
             }
         },
         {
             "type": "Feature",
             "properties": {
-                "name": "Corridor",
                 "indoor": "room",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13248134969,
-                            52.39413852245
-                        ],
-                        [
-                            13.13248009184,
-                            52.39415079220
-                        ],
-                        [
-                            13.13247876934,
-                            52.39416369252
-                        ],
-                        [
-                            13.13278913784,
-                            52.39417554077
-                        ],
-                        [
-                            13.13279171820,
-                            52.39415037070
-                        ],
-                        [
-                            13.13277249927,
-                            52.39414963702
-                        ],
-                        [
-                            13.13248134969,
-                            52.39413852245
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "yes",
                 "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13248009184,
-                    52.39415079220
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "HE5",
-                "indoor": "room",
-                "level_name": "0"
+                "type": "corridor",
+                "name-de": "HE 5",
+                "building": "HS",
+                "name-en": "HE 5"
             },
             "geometry": {
                 "type": "Polygon",
@@ -531,8 +591,122 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.13249548331,
-                    52.39400065578
+                    13.13219897566,
+                    52.39425005208
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "name": "HS Haupteingang",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13232043600,
+                    52.39397927396
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "level_name": "0",
+                "highway": "steps",
+                "name-de": "Treppe",
+                "building": "HS",
+                "type": "staircase",
+                "name-en": "Staircase"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13225053403,
+                            52.39408986422
+                        ],
+                        [
+                            13.13225393424,
+                            52.39405669681
+                        ],
+                        [
+                            13.13238093124,
+                            52.39406154490
+                        ],
+                        [
+                            13.13237753103,
+                            52.39409471231
+                        ],
+                        [
+                            13.13225053403,
+                            52.39408986422
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13213788169,
+                    52.39405706798
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "yes",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13277249927,
+                    52.39414963702
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13214206754,
+                    52.39400656938
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "private",
+                "level_name": "0",
+                "door": "yes"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13215432160,
+                    52.39402197053
                 ]
             }
         },
@@ -540,8 +714,11 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "HS 3",
-                "level_name": "0"
+                "level_name": "0",
+                "building": "HS",
+                "name-de": "HS 3",
+                "name-en": "HS 3",
+                "type": "lecture-hall"
             },
             "geometry": {
                 "type": "Polygon",
@@ -597,139 +774,8 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    13.13223280048,
-                    52.39408918725
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "private",
-                "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13215432160,
-                    52.39402197053
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "name": "HE 4",
-                "level_name": "0"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13214776357,
-                            52.39408594098
-                        ],
-                        [
-                            13.13215067347,
-                            52.39405755630
-                        ],
-                        [
-                            13.13213788169,
-                            52.39405706798
-                        ],
-                        [
-                            13.13204221437,
-                            52.39405341589
-                        ],
-                        [
-                            13.13203930447,
-                            52.39408180057
-                        ],
-                        [
-                            13.13214776357,
-                            52.39408594098
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "yes",
-                "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13277249927,
-                    52.39414963702
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "level_name": "0",
-                "name": "HS 1"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13279171820,
-                            52.39415037070
-                        ],
-                        [
-                            13.13280735288,
-                            52.39399786197
-                        ],
-                        [
-                            13.13249698437,
-                            52.39398601368
-                        ],
-                        [
-                            13.13249548331,
-                            52.39400065578
-                        ],
-                        [
-                            13.13248324611,
-                            52.39412002380
-                        ],
-                        [
-                            13.13248134969,
-                            52.39413852245
-                        ],
-                        [
-                            13.13277249927,
-                            52.39414963702
-                        ],
-                        [
-                            13.13279171820,
-                            52.39415037070
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "yes",
-                "level_name": "0",
-                "door": "yes"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13216654412,
-                    52.39424922453
+                    13.13216553049,
+                    52.39408661923
                 ]
             }
         }

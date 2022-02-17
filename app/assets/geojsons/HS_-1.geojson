@@ -6,11 +6,84 @@
         {
             "type": "Feature",
             "properties": {
-                "male": "yes",
-                "indoor": "room",
-                "amenity": "toilets",
-                "name": "WC-H",
+                "access": "yes",
+                "door": "yes",
                 "level_name": "-1"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13218683498,
+                    52.39403621223
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "access": "yes",
+                "door": "yes",
+                "level_name": "-1"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.13219039206,
+                    52.39401088823
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "-1",
+                "name-de": "HU 2",
+                "building": "HS",
+                "type": "toilet-female",
+                "name-en": "HU 2"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13207924232,
+                            52.39402146549
+                        ],
+                        [
+                            13.13207656011,
+                            52.39406893147
+                        ],
+                        [
+                            13.13218310619,
+                            52.39407312483
+                        ],
+                        [
+                            13.13218683498,
+                            52.39403621223
+                        ],
+                        [
+                            13.13218842279,
+                            52.39402490812
+                        ],
+                        [
+                            13.13207924232,
+                            52.39402146549
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "-1",
+                "type": "toilet-male",
+                "building": "HS",
+                "name-de": "HU 1",
+                "name-en": "HU 1"
             },
             "geometry": {
                 "type": "Polygon",
@@ -48,8 +121,49 @@
             "type": "Feature",
             "properties": {
                 "indoor": "room",
-                "name": "Garderobe",
-                "level_name": "-1"
+                "level_name": "-1",
+                "type": "staircase",
+                "building": "HS",
+                "name-de": "Treppe",
+                "name-en": "Staircase"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            13.13225074452,
+                            52.39409016565
+                        ],
+                        [
+                            13.13225369637,
+                            52.39405666253
+                        ],
+                        [
+                            13.13238100188,
+                            52.39406157280
+                        ],
+                        [
+                            13.13237747271,
+                            52.39409456432
+                        ],
+                        [
+                            13.13225074452,
+                            52.39409016565
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "indoor": "room",
+                "level_name": "-1",
+                "name-de": "Garderobe",
+                "building": "HS",
+                "type": "area",
+                "name-en": "Cloakroom"
             },
             "geometry": {
                 "type": "Polygon",
@@ -100,112 +214,6 @@
                             52.39406157280
                         ]
                     ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "yes",
-                "door": "yes",
-                "level_name": "-1"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13219039206,
-                    52.39401088823
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "name": "Staircase",
-                "level_name": "-1"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13225074452,
-                            52.39409016565
-                        ],
-                        [
-                            13.13225369637,
-                            52.39405666253
-                        ],
-                        [
-                            13.13238100188,
-                            52.39406157280
-                        ],
-                        [
-                            13.13237747271,
-                            52.39409456432
-                        ],
-                        [
-                            13.13225074452,
-                            52.39409016565
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "indoor": "room",
-                "amenity": "toilets",
-                "female": "yes",
-                "name": "WC-D",
-                "level_name": "-1"
-            },
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": [
-                    [
-                        [
-                            13.13207924232,
-                            52.39402146549
-                        ],
-                        [
-                            13.13207656011,
-                            52.39406893147
-                        ],
-                        [
-                            13.13218310619,
-                            52.39407312483
-                        ],
-                        [
-                            13.13218683498,
-                            52.39403621223
-                        ],
-                        [
-                            13.13218842279,
-                            52.39402490812
-                        ],
-                        [
-                            13.13207924232,
-                            52.39402146549
-                        ]
-                    ]
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "access": "yes",
-                "door": "yes",
-                "level_name": "-1"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    13.13218683498,
-                    52.39403621223
                 ]
             }
         }
