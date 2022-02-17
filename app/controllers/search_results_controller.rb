@@ -57,6 +57,11 @@ class SearchResultsController < ApplicationController
                        including_people(query))
   end
 
+  def search_events_by_name_or_description(query)
+    events = Event.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{query}%", "%#{query}%")
+    add_results(events, "event")
+  end
+
   def add_results(objects, type)
     objects.each do |object|
       result = SearchResult.new(
@@ -73,7 +78,7 @@ class SearchResultsController < ApplicationController
   def search_for(query)
     search_for_entries_starting_with(query)
     search_for_entries_including(query)
-    search_events_by_name_or_description query
+    search_events_by_name_or_description(query)
   end
 
   def search_by_name(query)
