@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   load_and_authorize_resource
   before_action :set_location, only: %i[show edit update destroy]
+  before_action :add_location, only: %i[create]
 
   # GET /locations or /locations.json
   def index
@@ -23,15 +24,15 @@ class LocationsController < ApplicationController
   # POST /locations or /locations.json
   # rubocop:disable Metrics/MethodLength
   def create
-    @location = Location.new(location_params)
     @location.owners = [current_user]
     respond_to do |format|
       if @location.save
-        format.html { redirect_to edit_user_registration_path, notice: "location was successfully created." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('locations.one'))
+        end
         format.json { render :edit, status: :created, location: @location }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -41,11 +42,12 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to edit_user_registration_path, notice: "location was successfully updated." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('locations.one'))
+        end
         format.json { render :edit, status: :ok, location: @location }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -54,7 +56,9 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: "Location was successfully destroyed." }
+      format.html do
+        redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('locations.one'))
+      end
       format.json { head :no_content }
     end
   end
@@ -64,6 +68,15 @@ class LocationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_location
     @location = Location.find(params[:id])
+  end
+
+  def add_location
+    @location = Location.new(location_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @location.errors, status: :unprocessable_entity }
   end
 
   # Only allow a list of trusted parameters through.

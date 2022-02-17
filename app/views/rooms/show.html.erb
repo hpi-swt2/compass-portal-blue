@@ -16,16 +16,25 @@
     </div>
     <div class="col-md-8 align-self-center">
         <% if @room.free? %>
-          <p class="occupancy free"> <%=t("free")%></p>
+          <p class="occupancy free"><%= t("rooms.free") %></p>
         <% else %>
-          <p class="occupancy occupied"> <%=t("occupied")%></p>
+          <p class="occupancy occupied"><%= t("rooms.occupied") %></p>
         <% end %>
     </div>
 </div>
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong> <%=t("floor")%>:</strong>
+    <strong><%= "#{t(:name)}:" %></strong>
+  </label>
+  <p class="form-control-static">
+    <%= @room.name %>
+  </p>
+</div>
+
+<div class="field mb-3">
+  <label class="form-label">
+    <strong><%= t("rooms.floor")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= @room.floor %>
@@ -34,7 +43,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Longitude:</strong>
+    <strong><%= t("buildings.longitude")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= @room.location_longitude %>
@@ -43,7 +52,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Latitude:</strong>
+    <strong><%= t("buildings.latitude")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= @room.location_latitude %>
@@ -52,7 +61,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    <strong>Room type:</strong>
+    <strong><%= t("rooms.type")%>:</strong>
   </label>
   <p class="form-control-static">
     <%= Room.room_type_to_external_mapping[@room.room_type] %>
@@ -61,7 +70,7 @@
 
 <div class="field mb-3">
   <label class="form-label">
-    </label><strong><%= t('people') %>:</strong>
+    </label><strong><%= t('people.other') %>:</strong>
   </label>
   <ul>
     <p class="form-control-static">
@@ -74,14 +83,14 @@
   </ul>
 </div>
 
-<div class="td-btn"><%= link_to t("calender"), room_calendar_path(@room, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></div>
+<div class="td-btn"><%= link_to t('calendar'), room_calendar_path(@room, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></div>
 
 <a class="btn btn-primary" href="/route?dest=<%= @room.name %>">
-  <i class="fas fa-route"></i> <%= t("directions")%>
+  <i class="fas fa-route"></i> <%= t("buildings.directions") %>
 </a>
 
 <script id="_latlonginfo" type="application/json">
-[<%= @room.building.location_latitude %>,<%= @room.building.location_longitude %>]
+[<%= @room.location_latitude %>,<%= @room.location_longitude %>]
 </script>
 
 <script id="_floorinfo" type="application/json">

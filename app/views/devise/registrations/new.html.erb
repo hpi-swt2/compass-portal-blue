@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h2 class="fw-light">Sign up</h2>
+    <h2 class="fw-light"><%= t('user.account.local_signup') %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field mb-3">
-          <%= f.label :username, class: 'form-label' %> <span class="text-muted">(your displayed name)</span>
+          <%= f.label t('user.name'), class: 'form-label' %> <span class="text-muted"><%= "(#{t('user.displayed_name')})" %></span>
           <%= f.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
         </div>
 
@@ -19,7 +19,7 @@
         <%= f.label :password, class: 'form-label' %>
         <%= f.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
         <% if @minimum_password_length %>
-          <div id="passwordHelp" class="form-text"><%= @minimum_password_length %> characters minimum</div>
+          <div id="passwordHelp" class="form-text"><%= t('user.account.password.min_characters', minimum_password_length: @minimum_password_length) %></div>
         <% end %>
       </div>
 
@@ -29,7 +29,7 @@
       </div>
 
       <div class="actions mb-3">
-        <%= f.submit "Sign up", class: 'btn btn-primary' %>
+        <%= f.submit t('user.account.signup'), class: 'btn btn-primary' %>
       </div>
     <% end %>
 

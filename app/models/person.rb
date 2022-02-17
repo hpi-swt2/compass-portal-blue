@@ -30,8 +30,14 @@ class Person < ApplicationRecord
     person
   end
 
+  def corresponding_user
+    # FIXME: This feels like Rails should have this built-in, but I couldn't
+    # find anything
+    User.find_by person: self
+  end
+
   def search_description
-    "E-Mail: #{email}"
+    "#{I18n.t(:email)}: #{email}"
   end
 
   private

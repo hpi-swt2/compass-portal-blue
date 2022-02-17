@@ -38,6 +38,6 @@ class Room < ApplicationRecord
   end
 
   def search_description
-    "In #{building.name}"
+    I18n.t('rooms.search_description', type: room_type, floor: floor, building: building.name)
   end
 end

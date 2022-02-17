@@ -25,7 +25,7 @@
     </div>
 
 <p>
-  <strong><%=t("details")%>:</strong>
+  <strong><%=t(:details)%>:</strong>
     <%= if I18n.locale == :de
         @location.details_de
       elsif I18n.locale == :en
@@ -34,7 +34,8 @@
 </p>
 
 <p>
-  <strong><%=t("openingtimes")%>:</strong>
+
+  <strong><%= t('locations.opening_times.other') %></strong>
   <br>
   <% @location.openingtimes.sort_by{|openingtime| openingtime.day}.each do |openingtime| %>
     <%= openingtime.day_as_string %>:
@@ -46,7 +47,7 @@
 </p>
 
 <a class="btn btn-primary" href="/route?dest=<%= @location.name %>">
-  <i class="fas fa-route"></i> <%= t("directions")%>
+  <i class="fas fa-route"></i> <%= t('buildings.directions') %>
 </a>
 
 <script id="_latlonginfo" type="application/json">

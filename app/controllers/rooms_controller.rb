@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   load_and_authorize_resource
   before_action :set_room, only: %i[show edit update destroy]
+  before_action :add_room, only: %i[create]
 
   # GET /rooms or /rooms.json
   def index
@@ -34,15 +35,15 @@ class RoomsController < ApplicationController
   # POST /rooms or /rooms.json
   # rubocop:disable Metrics/MethodLength
   def create
-    @room = Room.new(room_params)
     @room.owners = [current_user]
     respond_to do |format|
       if @room.save
-        format.html { redirect_to edit_user_registration_path, notice: "Room was successfully created." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('rooms.one'))
+        end
         format.json { render :edit, status: :created, location: @room }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -52,11 +53,12 @@ class RoomsController < ApplicationController
   def update
     respond_to do |format|
       if @room.update(room_params)
-        format.html { redirect_to edit_user_registration_path, notice: "Room was successfully updated." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('rooms.one'))
+        end
         format.json { render :edit, status: :ok, location: @room }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -65,7 +67,7 @@ class RoomsController < ApplicationController
   def destroy
     @room.destroy
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: "Room was successfully destroyed." }
+      format.html { redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('rooms.one')) }
       format.json { head :no_content }
     end
   end
@@ -75,6 +77,15 @@ class RoomsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_room
     @room = Room.find(params[:id])
+  end
+
+  def add_room
+    @room = Room.new(room_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @room.errors, status: :unprocessable_entity }
   end
 
   # Only allow a list of trusted parameters through.

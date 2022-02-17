@@ -19,6 +19,7 @@
     <strong>
       <%=t("name")%>:
     </strong>
+    <strong><%= "#{t(:name)}:" %></strong>
   </label>
   <p class="form-control-static">
   <%= @building.name %>
@@ -29,7 +30,7 @@
 </div>
 
 <a class='btn btn-primary' href='/route?dest=<%= @building.name %>'>
-  <i class='fas fa-route'></i> <%= t("directions") %>
+  <i class='fas fa-route'></i> <%= t("buildings.directions") %>
 </a>
 
 <script id="_latlonginfo" type="application/json">

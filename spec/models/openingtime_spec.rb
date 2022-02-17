@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Openingtime, type: :model do
 
   before do
-    @openingtime = create(:openingtime)
+    @openingtime = create :openingtime
   end
 
   it "does not fail when created with factory bot" do

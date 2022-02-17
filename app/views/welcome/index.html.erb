@@ -6,9 +6,9 @@
   <div class="app-overlay-bottom" id="_overlay">
     <%= form_with url: search_results_path, method: :get, :id => 'search-form' do |form| %>
       <div class="search-bar">
-        <button type="button" class="btn" id="floating-back" onclick="ajaxBack()"><i class="fas fa-arrow-left"></i><span>Back</span></button>
-          <%= form.text_field :query, class: "form-control", :placeholder => "Search...", id: "search", :autocomplete => :off %>
-            <button type="submit" class="btn" padding= 0><i class="fa fa-search"></i></button>
+        <button type="button" class="btn" id="floating-back" onclick="ajaxBack()"><i class="fas fa-arrow-left"></i><span><%= t("back")%></span></button>
+        <%= form.text_field :query, class: "form-control", :placeholder => t("search"), id: "search", :autocomplete => :off %>
+        <button type="submit" class="btn" padding=0><i class="fa fa-search"></i></button>
       </div>
       <% if current_user %>
       <button type="button" class="btn f-bttn" id="favourite-list-button">

@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="fw-light">Rooms</h1>
+<h1 class="fw-light"><%= t("rooms.other")%></h1>
 
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Floor</th>
-        <th>Occupancy</th>
+        <th><%= t(:name) %></th>
+        <th><%= t("rooms.floor") %></th>
+        <th><%= t("rooms.occupancy")%></th>
         <th colspan="4"></th>
       </tr>
     </thead>
@@ -25,15 +25,15 @@
             <td><%= room.floor %></td>
             <td>
               <% if room.free? %>
-                <p class="occupancy free">free</p>
+                <p class="occupancy free"><%= t("rooms.free")%></p>
               <% else %>
-                <p class="occupancy occupied">occupied</p>
+                <p class="occupancy occupied"><%= t("rooms.occupied")%></p>
               <% end %>
             </td>
             <td class="td-btn"><%= link_to 'Calendar', room_calendar_path(room, start_date: Time.zone.today.beginning_of_week.to_s), class: "btn btn-secondary link-btn" %></td>
-            <td class="td-btn"><%= link_to 'Show', room, class: "btn btn-secondary link-btn" %></td>
+            <td class="td-btn"><%= link_to t("show"), room, class: "btn btn-secondary link-btn" %></td>
             <td class="td-btn"><% if can? :update, room %><%= link_to 'Edit', edit_room_path(room), class: "btn btn-secondary link-btn"  %><%end%></td>
-            <td class="td-btn"><% if can? :destroy, room %><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-secondary link-btn" %><%end%></td>
+            <td class="td-btn"><% if can? :destroy, room %><%= link_to 'Destroy', room, method: :delete, data: { confirm: t(:confirm) }, class: "btn btn-secondary link-btn" %><%end%></td>
           </tr>
         <% end %>
       <% end %>

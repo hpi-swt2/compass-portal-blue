@@ -1,7 +1,7 @@
 <div class="topbar-with-settings-area">
   <div class='topbar-custom'>
       <%# devise helper: https://github.com/heartcombo/devise#controller-filters-and-helpers %>
-      <span class="navbar-brand"><i class="fas fa-compass"></i><span>HPI Navigator</span></span>
+      <span class="navbar-brand"><i class="fas fa-compass"></i><span><%= t('hpi_navigator') %></span></span>
       <div class='user-area'>
           <% if user_signed_in? %>
                   <%= link_to edit_user_registration_path do %>
@@ -15,7 +15,7 @@
                   <% end %>
           <% else %>
               <%= link_to login_path, class: 'btn' do %>
-                  <span>Login</span><i class="fas fa-sign-in-alt"></i>
+                  <span><%= t('user.account.login') %></span><i class="fas fa-sign-in-alt"></i>
               <% end %>
           <% end %> <%# user_signed_in?%>
       </div>
@@ -23,7 +23,7 @@
   </div>
   <div class="settings-area">
     <div class="d-flex flex-column ms-2 me-2">
-      <span class="m-1 d-flex align-items-center"><b>Position</b></span>
+      <span class="m-1 d-flex align-items-center"><b><%= t('position') %></b></span>
       <div class="m-1">
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" role="switch" id="showPositionSwitch" autocomplete="off"/>

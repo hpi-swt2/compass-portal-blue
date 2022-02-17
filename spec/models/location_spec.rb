@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Location, type: :model do
   before do
     @location = create :location
-    @openingtime = create(:openingtime, timeable: @location)
+    @openingtime = create :openingtime, timeable: @location
   end
 
   it "has name, details, location_latitude, location_longitude" do
