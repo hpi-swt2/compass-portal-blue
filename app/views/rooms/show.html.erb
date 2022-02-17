@@ -7,7 +7,12 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2 class="mb-3 fw-light"><%= @room.name %></h2>
+        <h2 class="mb-3 fw-light"> 
+        <%= if I18n.locale == :de
+              @room.name_de
+            elsif I18n.locale == :en
+              @room.name
+            end%></h2>
     </div>
     <div class="col-md-8 align-self-center">
         <% if @room.free? %>

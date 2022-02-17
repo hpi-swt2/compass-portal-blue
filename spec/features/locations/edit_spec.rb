@@ -9,13 +9,16 @@ describe "location edit page", type: :feature do
   it "exists at 'edit_author_path' and render without error" do
     visit edit_location_url(@location)
     page.fill_in 'location[name]', with: 'Updated_name'
+    page.fill_in 'location[name_de]', with: 'Updated_name_de'
     page.fill_in 'location[details]', with: 'Updated_details'
+    page.fill_in 'location[details_de]', with: 'Updated_details_de'
     page.fill_in 'location[location_latitude]', with: 14.0
     page.fill_in 'location[location_longitude]', with: 20.0
     find('input[type="submit"]').click
 
-    expect(Location.where(name: "Updated_name", details: "Updated_details", location_latitude: 14.0,
-                          location_longitude: 20.0)).to exist
+    expect(Location.where(name: "Updated_name", name_de: "Updated_name_de",
+                          details: "Updated_details", details_de: "Updated_details_de",
+                          location_latitude: 14.0, location_longitude: 20.0)).to exist
   end
 
   it "can update photo" do

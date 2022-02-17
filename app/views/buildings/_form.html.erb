@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :name_de, class: "form-label" %>
+    <%= form.text_field :name_de, class: "form-control"%>
+  </div>
+
+  <div class="field">
     <%= form.label t("buildings.latitude"), class: "form-label" %>
     <%= form.text_field :location_latitude, class: "form-control", value: latitude %>
   </div>

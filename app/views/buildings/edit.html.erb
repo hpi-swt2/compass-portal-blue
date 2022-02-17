@@ -1,5 +1,7 @@
 <div class="row pb-1">
   <div class="col-lg-6 col-md-6 mx-auto">
+  
+    <h2 class="fw-light"> <%= t("edit_building")%> </h2>
     <h2 class="fw-light"><%= t('model.edit', model: t('buildings.one')) %></h2>
 
     <%= render 'form', building: @building, latitude: @building.location_latitude, longitude: @building.location_longitude%>

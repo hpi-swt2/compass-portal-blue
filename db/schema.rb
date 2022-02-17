@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2022_02_13_145922) do
     t.float "location_longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name_de"
   end
 
   create_table "events", force: :cascade do |t|
@@ -86,6 +87,8 @@ ActiveRecord::Schema.define(version: 2022_02_13_145922) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "location_latitude"
     t.float "location_longitude"
+    t.string "name_de"
+    t.text "details_de"
   end
 
   create_table "openingtimes", force: :cascade do |t|
@@ -133,6 +136,7 @@ ActiveRecord::Schema.define(version: 2022_02_13_145922) do
     t.integer "user_id"
     t.float "location_latitude"
     t.float "location_longitude"
+    t.string "name_de"
     t.index ["building_id"], name: "index_rooms_on_building_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end

@@ -1,4 +1,5 @@
 class SearchResultsController < ApplicationController
+  include SearchResultsHelper
   before_action :set_search_result, only: %i[show edit update destroy]
 
   # GET /search_results
@@ -20,13 +21,10 @@ class SearchResultsController < ApplicationController
 
   # There is no need to display one singular SearchResult.
   def show; end
-
   # SearchResults are currently not stored a database so no need to edit one.
   def edit; end
-
   # SearchResults are currently not stored a database so no need to update one.
   def update; end
-
   # All SearchResult objects will be destroyed after they are no longer used.
   def destroy; end
 
@@ -40,6 +38,23 @@ class SearchResultsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def search_result_params
     params.require(:title, :link).permit(:description, :resource)
+  end
+
+  def add_search_results(rooms, buildings, locations, people)
+    add_results(buildings, "building")
+    add_results(rooms, "room")
+    add_results(locations, "location")
+    add_results(people, "person")
+  end
+
+  def search_for_entries_starting_with(query)
+    add_search_results(starting_with_rooms(query), starting_with_buildings(query), starting_with_locations(query),
+                       starting_with_people(query))
+  end
+
+  def search_for_entries_including(query)
+    add_search_results(including_rooms(query), including_buildings(query), including_locations(query),
+                       including_people(query))
   end
 
   def add_results(objects, type)
@@ -56,11 +71,9 @@ class SearchResultsController < ApplicationController
   end
 
   def search_for(query)
-    search_rooms_by_name_or_type query
-    search_people_by_full_name query
-    search_locations_by_name_or_details query
-    search_events_by_name_or_description query
-    search_by_name query
+    search_for_entries_starting_with(query)
+    search_for_entries_including(query)
+    search_events_by_name_or_description(query)
   end
 
   def search_by_name(query)
@@ -72,26 +85,6 @@ class SearchResultsController < ApplicationController
       found_objects = record.where("LOWER(name) LIKE ?", "%#{query}%")
       add_results(found_objects, type)
     end
-  end
-
-  def search_people_by_full_name(query)
-    people = Person.where("LOWER(first_name) || ' ' || LOWER(last_name) LIKE ?", "%#{query}%")
-    add_results(people, "person")
-  end
-
-  def search_rooms_by_name_or_type(query)
-    rooms = Room.where("LOWER(name) LIKE ? OR LOWER(room_type) LIKE ?", "%#{query}%", "%#{query}%")
-    add_results(rooms, "room")
-  end
-
-  def search_locations_by_name_or_details(query)
-    locations = Location.where("LOWER(name) LIKE ? OR LOWER(details) LIKE ?", "%#{query}%", "%#{query}%")
-    add_results(locations, "location")
-  end
-
-  def search_events_by_name_or_description(query)
-    events = Event.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{query}%", "%#{query}%")
-    add_results(events, "event")
   end
 
   include Math

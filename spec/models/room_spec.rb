@@ -7,8 +7,10 @@ RSpec.describe Room, type: :model do
     person = create :person
 
     expect(room.name).to eq('C.2.4')
+    expect(room.name_de).to eq('C.2.4 de')
     expect(room.floor).to eq(2)
     expect(room.building.name).to eq(building.name)
+    expect(room.building.name_de).to eq(building.name_de)
     expect(room.location_latitude).to eq(1.5)
     expect(room.location_longitude).to eq(3.5)
     expect(room.room_type).to eq('Bachelorproject office')
