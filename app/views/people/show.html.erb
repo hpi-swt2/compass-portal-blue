@@ -35,7 +35,7 @@
 <% person_loc = @person.corresponding_user&.last_known_location %>
 <% if not person_loc.nil? %>
   <p>
-    <strong>Last known location:</strong>
+    <strong><%= "#{t('people.last_known_location')}:" %></strong>
     <a href="/route?dest=<%= person_loc %>">
       <%= person_loc %>
     </a>
@@ -52,7 +52,7 @@
           </span>
           <span class="col-auto ms-auto">
             <a class="btn btn-outline-primary btn-sm" href="/route?dest=<%= room.name %>">
-              <i class="fas fa-route"></i> Directions
+              <i class="fas fa-route"></i> <%= t("buildings.directions") %>
             </a>
           </span>
         </li>

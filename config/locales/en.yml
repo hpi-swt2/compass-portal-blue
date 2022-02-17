@@ -133,6 +133,7 @@ en:
         first_name: first name
         last_name: last name
         phone_number: Phone number
+        last_known_location: Last known location
         profile_picture: Profile picture
         office_hour:
             one: Office hour
