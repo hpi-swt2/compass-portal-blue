@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 <% if @search_results.empty? %>
   <div id="no_results_message">
-    <h1>Your search did not match any pages</h1>
+    <h1><%= t('search_results.not_found') %></h1>
   </div>
 <% else %>
 
   <div class="row">
     <div class="col-10">
-      <h1>Search Results</h1>
+      <h1><%= t('search_results.other') %></h1>
     </div>
     <% if @sort_location == "true"  %>
     <div class="col-1">
@@ -33,6 +33,8 @@
             <%= image_tag "location.png", alt: "location_picture", height: "25", width: "25"%>
           <% elsif search_result.type == "room" %>
             <%= image_tag "room.png", alt: "room_picture", height: "25", width: "25"%>
+          <% elsif search_result.type == "event" %>
+            <%= image_tag "event.png", alt: "event_picture", height: "25", width: "25"%>
           <% end %>
           <%= link_to search_result.title, search_result.link, class: "search_result_title" %>
             <% if !search_result.description.nil? %>

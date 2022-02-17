@@ -47,8 +47,8 @@ class SearchResultsController < ApplicationController
       result = SearchResult.new(
         id: @result_id, title: object.name, link: polymorphic_path(object), type: type,
         description: object.respond_to?(:search_description) ? object.search_description : "",
-        location_latitude: object.instance_of?(Person) ? nil : object.location_latitude,
-        location_longitude: object.instance_of?(Person) ? nil : object.location_longitude
+        location_latitude: object.respond_to?(:location_longitude) ? object.location_latitude : nil,
+        location_longitude: object.respond_to?(:location_longitude) ? object.location_longitude : nil
       )
       @search_results.append(result)
       @result_id += 1
@@ -59,6 +59,7 @@ class SearchResultsController < ApplicationController
     search_rooms_by_name_or_type query
     search_people_by_full_name query
     search_locations_by_name_or_details query
+    search_events_by_name_or_description query
     search_by_name query
   end
 
@@ -88,23 +89,24 @@ class SearchResultsController < ApplicationController
     add_results(locations, "location")
   end
 
-  def distance(loc1, loc2)
-    a = sinus_calc(loc1[0], loc2[0]) + (cos_calc(loc1, loc2) * cos_calc(loc1, loc2) * sinus_calc(loc2[1] - loc1[1]))
-    delta_calc(a)
+  def search_events_by_name_or_description(query)
+    events = Event.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{query}%", "%#{query}%")
+    add_results(events, "event")
   end
 
-  def sinus_calc(loc1, loc2)
-    rad_per_deg = Math::PI / 180
-    Math.sin(((loc2 - loc1) * rad_per_deg) / 2)**2
+  include Math
+  # See https://en.wikipedia.org/wiki/Great-circle_distance
+  def distance(location1, location2)
+    earth_radius = 6_371_000
+    earth_radius * calculate_central_angle(location1[:long], location2[:long], location1[:lat], location2[:lat])
   end
 
-  def cos_calc(loc1, loc2)
-    rad_per_deg = Math::PI / 180
-    Math.cos(loc1.map { |i| i * rad_per_deg }.first) * Math.cos(loc2.map { |i| i * rad_per_deg }.first)
+  def calculate_central_angle(phi1, phi2, lambda1, lambda2)
+    acos((sin(phi1) * sin(phi2)) + (cos(phi1) * cos(phi2) * cos((lambda1 - lambda2).abs)))
   end
 
-  def delta_calc(calc_res)
-    6_371_000 * 2 * Math.atan2(Math.sqrt(calc_res), Math.sqrt(1 - calc_res))
+  def location_to_radians(location)
+    { lat: location[0] * (PI / 180), long: location[0] * (PI / 180) }
   end
 
   def sort_search_results
@@ -114,11 +116,23 @@ class SearchResultsController < ApplicationController
     sort_by_location if @sort_location == "true"
   end
 
-  def sort_by_location
-    return unless !current_user.nil? && !current_user.last_known_location_with_timestamp.nil?
+  def valid_user_location
+    return nil if current_user.nil? || current_user.last_known_location_with_timestamp.nil?
 
-    current_position = current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
-    @search_results =
-      @search_results.sort_by { |r| distance(current_position, [r.location_latitude, r.location_longitude]) }
+    current_user.last_known_location_with_timestamp[0].split(',').map(&:to_f)
+  end
+
+  def sort_by_location
+    current_position = valid_user_location
+    return unless current_position
+
+    @search_results = @search_results.sort_by do |r|
+      if r.position_set?
+        distance(location_to_radians(current_position),
+                 location_to_radians([r.location_latitude, r.location_longitude]))
+      else
+        r.id * (10**6) # keep search results in order if no location is provided
+      end
+    end
   end
 end

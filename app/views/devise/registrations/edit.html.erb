@@ -1,21 +1,22 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h3 class="fw-light">Contribute Content</h3>
-    <%= link_to "Home", root_url, class: "btn btn-secondary link-btn" %>
+    <h3 class="fw-light"><%= t('contribute_content') %></h3>
+    <%= link_to t("home"), root_url, class: "btn btn-secondary link-btn" %>
 
     <div class="actions mt-3">
-      <%= link_to "Add new person", new_person_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new location", new_location_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new room", new_room_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new building", new_building_path, class: 'btn btn-primary link-btn' %>
-      <%= link_to "Add new event", new_event_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('people.one')), new_person_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('locations.one')), new_location_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('rooms.one')), new_room_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('buildings.one')), new_building_path, class: 'btn btn-primary link-btn' %>
+      <%= link_to t("model.add_new", model: t('events.one')), new_event_path, class: 'btn btn-primary link-btn' %>
+      
       <%= form_tag import_events_path, multipart: true, class: 'form-inline' do %>
-        <%= submit_tag "Import Events from ICS", class: 'btn btn-primary mb-2' %>
-        <%= file_field_tag :file %>
+        <%= button_tag t('events.import_ics'), class: 'btn btn-primary mb-2' %>
+        <%= file_field_tag :file, class: "form-control" %>
       <% end %>
     </div>
 
-    <h2 class="fw-light">Edit <%= resource_name.to_s.humanize %></h2>
+    <h2 class="fw-light"><%= t('model.edit', model: t("#{resource_name.to_s}.one")) %></h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |form| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -23,31 +24,31 @@
         <%= render 'people/form_fields', form: person_subform, person: resource.person %>
       <% end %>
 
-      <h4 class="fw-light mt-4 mb-3">Login Details</h4>
+      <h4 class="fw-light mt-4 mb-3"><%= t('user.account.login_details') %></h4>
 
       <div class="field mb-3">
-        <%= form.label :username, class: 'form-label' %>
+        <%= form.label t('user.name'), class: 'form-label' %>
         <%= form.text_field :username, class: 'form-control', autofocus: true, autocomplete: "username", id: 'username' %>
       </div>
 
       <%# If provider is nil, i.e. not set to 'openid_connect', then it's an account with local pw %>
       <% if resource.provider.nil? %>
         <div class="field mb-3">
-          <%= form.label :email, class: 'form-label' %>
+          <%= form.label t('email'), class: 'form-label' %>
           <%= form.text_field :email, class: 'form-control', autocomplete: "email" %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <div><%= t('user.account.awaiting_confirmation') %><%= resource.unconfirmed_email %></div>
         <% end %>
 
-        <h5 class="fw-light mt-3">Login Password</h5>
+        <h5 class="fw-light mt-3"><%= t('user.account.password.one') %></h5>
 
         <div class="field mb-1">
-          <%= form.label :password, class: 'form-label' %> <span class="text-muted">(leave blank if you don't want to change it)</span>
+          <%= form.label :password, class: 'form-label' %> <span class="text-muted"><%= t('user.account.password.leave_blank') %></span>
           <%= form.password_field :password, class: 'form-control', aria: { describedby: 'passwordHelp' }, autocomplete: "new-password" %>
           <% if @minimum_password_length %>
-            <div id="passwordHelp" class="form-text"><%= @minimum_password_length %> characters minimum</div>
+            <div id="passwordHelp" class="form-text"><%= t('user.account.password.min_characters', minimum_password_length: @minimum_password_length) %></div>
           <% end %>
         </div>
 
@@ -57,29 +58,25 @@
         </div>
 
         <div class="field mb-1">
-          <%= form.label :current_password, class: 'form-label' %> <span class="text-muted">(we need your current password to confirm password changes)</span>
+          <%= form.label :current_password, class: 'form-label' %> <span class="text-muted"><%= t('user.account.password.current_needed') %></span>
           <%= form.password_field :current_password, class: 'form-control', autocomplete: "current-password" %>
         </div>
       <% end %> <%# if resource.provider.nil? %>
 
       <div class="actions mt-3">
-        <%= form.submit "Update User Account", class: 'btn btn-primary', id: 'update-user-account' %>
+        <%= form.button t('user.account.update'), class: 'btn btn-primary', id: 'update-user-account' %>
       </div>
     <% end %>
 
-    <h3 class="fw-light mt-5">Logout Account</h3>
-
     <%= button_to destroy_user_session_path, class: 'btn btn-outline-primary', method: :delete do %>
-      <i class="fas fa-sign-out-alt"></i> Sign out
+      <i class="fas fa-sign-out-alt"></i><%= t('user.account.signout') %>
     <% end%>
 
-    <h3 class="fw-light mt-5">Cancel Account</h3>
-
     <p>
-      <%= button_to "Cancel my account permanently",
+      <%= button_to t('user.account.cancel'),
         registration_path(resource_name),
         class: 'btn btn-outline-primary',
-        data: { confirm: "Are you sure?" },
+        data: { confirm: t(:confirm) },
         method: :delete %>
     </p>
 

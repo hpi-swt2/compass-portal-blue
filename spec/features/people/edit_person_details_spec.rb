@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Person edit details page", type: :feature do
   before do
-    @person = create(:person)
+    @person = create :person
 
     @person.profile_picture.attach(
       io: File.open('app/assets/images/default-profile-picture.png'),

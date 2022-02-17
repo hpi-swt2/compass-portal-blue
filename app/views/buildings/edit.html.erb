@@ -1,10 +1,10 @@
 <div class="row pb-1">
   <div class="col-lg-6 col-md-6 mx-auto">
-    <h2 class="fw-light">Edit Building</h2>
+    <h2 class="fw-light"><%= t('model.edit', model: t('buildings.one')) %></h2>
 
     <%= render 'form', building: @building, latitude: @building.location_latitude, longitude: @building.location_longitude%>
 
-    <%= link_to 'Back', buildings_path, class: "btn btn-secondary link-btn" %>
-    <%= link_to 'Show', @building, class: "btn btn-secondary link-btn" %>
+    <%= link_to t("back"), buildings_path, class: "btn btn-secondary link-btn" %>
+    <%= link_to t("show"), @building, class: "btn btn-secondary link-btn" %>
   </div>
 </div>

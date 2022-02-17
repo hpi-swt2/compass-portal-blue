@@ -41,6 +41,10 @@ class Event < ApplicationRecord
     schedule
   end
 
+  def search_description
+    description
+  end
+
   def calendar_events(start_date, end_date)
     if recurring.blank?
       [self] if (start_date..end_date).cover?(start_time) || (start_date..end_date).cover?(end_time)
@@ -92,5 +96,9 @@ class Event < ApplicationRecord
            description: event.description.nil? ? "" : event.description,
            recurring: ical_rule_to_ice_cube_yaml(event.rrule.first),
            room: Room.find_by(name: event.location.to_s))
+  end
+
+  def queried_occurence
+    schedule.next_occurrence || schedule.last
   end
 end

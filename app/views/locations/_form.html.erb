@@ -1,7 +1,7 @@
 <%= form_with(model: location) do |form| %>
   <% if @location.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+      <h2><%= t('errors.template.header', count: @location.errors.count, model: t('locations.one')) %></h2>
 
       <ul>
         <% @location.errors.full_messages.each do |message| %>
@@ -12,32 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, class: "form-label" %>
+    <%= form.label t(:name), class: "form-label" %>
     <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :details, class: "form-label" %>
+    <%= form.label t(:details), class: "form-label" %>
     <%= form.text_field :details, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :location_photo, class: "form-label" %>
+    <%= form.label t('locations.photo'), class: "form-label" %>
     <%= form.file_field :location_photo, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :location_latitude, class: "form-label" %>
+    <%= form.label t('locations.latitude'), class: "form-label" %>
     <%= form.number_field :location_latitude, step: :any, class: "form-control", value: latitude %>
   </div>
 
   <div class="field">
-    <%= form.label :location_longitude, class: "form-label" %>
+    <%= form.label t('locations.longitude'), class: "form-label" %>
     <%= form.number_field :location_longitude, step: :any, class: "form-control", value: longitude %>
   </div>
 
   <div class="field mb-3 opening-times-container">
-    <%= form.label :openingtimes, class: 'form-label' %>
+    <%= form.label t('locations.openingtime.other'), class: 'form-label' %>
     <%= form.fields_for :openingtimes do |o| %>
       <div class="field mb-3 input-group" id="opening-time-field-<%= o.object.id %>">
         <%= o.select 'day',
@@ -56,12 +56,12 @@
       </div>
     <% end %>
     <button class="btn" onclick="event.preventDefault(); addNewOpeningTime(this);">
-      <i class="fas fa-plus"></i> Add opening time
+      <i class="fas fa-plus"></i> <%= t('model.add_new', model: t('locations.openingtime.one')) %>
     </button>
   </div>
 
   <div class="actions mt-3">
-    <%= form.submit class: "btn btn-primary" %>
+    <%= form.submit t('model.create', model: t('locations.one')), class: "btn btn-primary" %>
   </div>
 
   <script defer>

@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: %i[show edit update destroy]
+  before_action :add_person, only: %i[create]
+
   load_and_authorize_resource
   # GET /people or /people.json
   def index
@@ -20,15 +22,15 @@ class PeopleController < ApplicationController
   # POST /people or /people.json
   # rubocop:disable Metrics/MethodLength
   def create
-    @person = Person.new(person_params)
     @person.owners = [current_user]
     respond_to do |format|
       if @person.save
-        format.html { redirect_to edit_user_registration_path, notice: "Person was successfully created." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.create', model: t('people.one'))
+        end
         format.json { render :edit, status: :created, location: @person }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        render_errors format, :new
       end
     end
   end
@@ -38,11 +40,12 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to edit_user_registration_path, notice: "Person was successfully updated." }
+        format.html do
+          redirect_to edit_user_registration_path, notice: t('model.success.update', model: t('people.one'))
+        end
         format.json { render :edit, status: :ok, location: @person }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
+        render_errors format, :edit
       end
     end
   end
@@ -51,7 +54,9 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     respond_to do |format|
-      format.html { redirect_to edit_user_registration_path, notice: "Person was successfully destroyed." }
+      format.html do
+        redirect_to edit_user_registration_path, notice: t('model.success.destroy', model: t('people.one'))
+      end
       format.json { head :no_content }
     end
   end
@@ -61,6 +66,15 @@ class PeopleController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_person
     @person = Person.find(params[:id])
+  end
+
+  def add_person
+    @person = Person.new(person_params)
+  end
+
+  def render_errors(format, route)
+    format.html { render route, status: :unprocessable_entity }
+    format.json { render json: @person.errors, status: :unprocessable_entity }
   end
 
   # Only allow a list of trusted parameters through.
