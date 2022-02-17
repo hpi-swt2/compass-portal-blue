@@ -32,6 +32,7 @@ de:
     unfavourite: Favorit entfernen
     your-favourites: "Das sind deine Favoriten:"
     login-for-favourites: Melde dich an, um deine Favoritenliste zu sehen.
+    go: Start
     model:
         add_new: "%{model} hinzufügen"
         edit: "%{model} bearbeiten"

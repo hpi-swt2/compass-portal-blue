@@ -46,7 +46,7 @@ $('#favourite-list-button').click(function (event) {
     $("#_overlay").addClass('open');
     $("#toggle-overlay").addClass('visible');
     $("#toggle-overlay").addClass('open');
-    ajaxCall(event, '/favourites');
+    ajaxCall(event, '/favourites', location.search.slice(1));
 });
 
 function ajaxBack() {
