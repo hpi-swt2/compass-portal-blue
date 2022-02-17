@@ -1,6 +1,6 @@
 <h2 class="mb-3 fw-light">
   <%= if I18n.locale == :de
-        @location.name_de
+        @location.name_de.empty? || @location.name_de.nil? ? @location.name : @location.name_de
       elsif I18n.locale == :en
         @location.name
       end%>
@@ -25,7 +25,7 @@
 <p>
   <strong><%=t(:details)%>:</strong>
     <%= if I18n.locale == :de
-        @location.details_de
+        @location.details_de.nil? || @location.details_de.empty? ? @location.details : @location.details_de
       elsif I18n.locale == :en
         @location.details
       end%>
